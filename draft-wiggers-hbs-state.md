@@ -9,8 +9,8 @@ number:
 date:
 consensus: true
 v: 3
-area: "Security"
-workgroup: "secdispatch"
+# area: "Security"
+# workgroup: "secdispatch"
 keyword:
  - stateful hash-based signatures
  - XMSS
