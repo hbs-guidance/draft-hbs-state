@@ -26,9 +26,9 @@ keyword:
 
 author:
  -
-    fullname: Your Name Here
+    fullname: "Stavros Kousidis"
     organization: Your Organization Here
-    email: your.email@example.com
+    email: "fluppe2@users.noreply.github.com"
 
 normative:
 
