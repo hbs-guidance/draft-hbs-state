@@ -5,14 +5,14 @@
 Network Working Group                                         T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 11 August 2024                                              BSI
+Expires: 22 August 2024                                              BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                         8 February 2024
+                                                        19 February 2024
 
 
            Hash-based Signatures: State and Backup Management
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 11 August 2024.
+   This Internet-Draft will expire on 22 August 2024.
 
 Copyright Notice
 
@@ -662,7 +662,7 @@ Table of Contents
    by using this information to bring online a new device in the next
    time window.  This approach MAY also be used as a recovery mechanism
    in the case of (suspected) state consistency problems during a time
-   window.  However, the operator MUST not allow new signatures to be
+   window.  However, the operator MUST NOT allow new signatures to be
    produced before the new time window starts, unless they know the
    exact state at which the previous device became unavailable and are
    able to set up the new device accordingly.  Waiting until the start
