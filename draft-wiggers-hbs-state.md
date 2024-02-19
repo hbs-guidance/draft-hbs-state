@@ -7,7 +7,7 @@ docname: draft-wiggers-hbs-state-latest
 submissiontype: IETF  # also: "independent", "editorial", "IAB", or "IRTF"
 number:
 date:
-consensus: true
+consensus: false
 v: 3
 # area: "Security"
 # workgroup: "secdispatch"
@@ -673,7 +673,7 @@ the configuration of the time windows. In case of loss of a signing device, a
 time-based state management system can be recovered by using this information
 to bring online a new device in the next time window. This approach MAY also be
 used as a recovery mechanism in the case of (suspected) state consistency
-problems during a time window. However, the operator MUST not allow new
+problems during a time window. However, the operator MUST NOT allow new
 signatures to be produced before the new time window starts, unless they know
 the exact state at which the previous device became unavailable and are able to
 set up the new device accordingly. Waiting until the start of the next time
@@ -800,7 +800,7 @@ Cryptography Summit 2023.
 
 We gratefully acknowledge Melissa Azouaoui for her input to this document.
 
-The abstract and the introduction are based on the introduction in [HBSX509].
+The abstract and the introduction are based on the introduction in {{HBSX509}}.
 Thanks go to the authors of this document. "Copying always makes things easier
 and less error-prone" - {{?RFC8411}}.
 
