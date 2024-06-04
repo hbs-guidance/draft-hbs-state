@@ -1,0 +1,115 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2024-06-04T00:29:08.994040+00:00",
+  "repo": "hbs-guidance/draft-hbs-state",
+  "labels": [
+    {
+      "name": "bug",
+      "description": "Something isn't working",
+      "color": "d73a4a"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "good first issue",
+      "description": "Good for newcomers",
+      "color": "7057ff"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "invalid",
+      "description": "This doesn't seem right",
+      "color": "e4e669"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    },
+    {
+      "name": "wontfix",
+      "description": "This will not be worked on",
+      "color": "ffffff"
+    }
+  ],
+  "issues": [
+    {
+      "number": 2,
+      "id": "I_kwDOLPgbFM6BMyU3",
+      "title": "Consider section on acceptable usage scenarios?",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/2",
+      "state": "OPEN",
+      "author": "cipherboy",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "The introduction currently contains broad language around the desirable properties of these category of algorithms:\r\n\r\n> Their theoretic security is well understood and depends only on the security of the underlying hash function.  As such, they can serve as an important building block for quantum-resistant information and communication technology.\r\n\r\nI think it'd benefit the broader community (especially, protocol authors looking at adding PQC into their protocols) if some of this latter phrase (\"_important building block_\") could be expanded upon, perhaps enumerating some scenarios in which these trade offs are acceptable.\r\n\r\nE.g., perhaps in the scenario where potential theoretical weakness in the design of SLH-DSA or ML-DSA are an unacceptable risk to an organization (but still desires PQC security), S-HBS schemes could be considered?",
+      "createdAt": "2024-03-04T19:43:46Z",
+      "updatedAt": "2024-03-04T21:31:55Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This is something that we should have a discussion about. I think that it might make sense that we recommend some evaluation criteria even, i.e., S-HBS might be appropriate IF you can't use SLH-DSA, ML-DSA, can predict the number of signatures before hand, ...\r\n\r\n>E.g., perhaps in the scenario where potential theoretical weakness in the design of SLH-DSA \r\n\r\nJust quickly noting that SPHINCS+ is basically an improved XMSS (in more ways than state) (in fact, XMSS even included in the SPHINCS+ specification!), so any attack that applies to SLH-DSA will likely apply to XMSS.\r\n",
+          "createdAt": "2024-03-04T19:48:38Z",
+          "updatedAt": "2024-03-04T19:48:38Z"
+        },
+        {
+          "author": "cipherboy",
+          "authorAssociation": "NONE",
+          "body": "> Just quickly noting that SPHINCS+ is basically an improved XMSS (in more ways than state) (in fact, XMSS even included in the SPHINCS+ specification!), so any attack that applies to SLH-DSA will likely apply to XMSS.\r\n\r\nAhhh, yes, this is true. I think that then strengthens the question, in what scenarios _would_ you prefer this set of algorithms? :-) \r\n\r\nE.g., in what scenario would you be able to use S-HBS, if you can't use SLH-DSA? The parties had the former available but not the latter due to (artificially) constrained supply of algorithms? \r\n\r\nEphemeral signing keys (like with [sigstore](https://docs.sigstore.dev/signing/overview/)) would perhaps be one valid use case under that scenario (artificially restricted algorithms)... _with the caveat_ that ML-DSA would likely still be more performant and overall better, assuming resources to support both were present.",
+          "createdAt": "2024-03-04T19:59:30Z",
+          "updatedAt": "2024-03-04T21:31:55Z"
+        }
+      ]
+    }
+  ],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOLPgbFM5nRaAu",
+      "title": "idnits tool comments",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/1",
+      "state": "MERGED",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-02-19T10:41:46Z",
+      "updatedAt": "2024-02-19T10:41:59Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "03f03ef87cd05c1383e4d0d2e36cabd971c05580",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "idnits",
+      "headRefOid": "9003756efa3d6746331b3c21975bd44c950bede1",
+      "closedAt": "2024-02-19T10:41:58Z",
+      "mergedAt": "2024-02-19T10:41:58Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "c891c0cb8c19b562b02a58e8760d868ab8e77ec1"
+      },
+      "comments": [],
+      "reviews": []
+    }
+  ]
+}
