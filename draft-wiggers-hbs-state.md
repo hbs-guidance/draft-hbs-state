@@ -341,13 +341,13 @@ lived backups to ensure they will be valid when they are required, and to
 ensure the operators know how to execute the necessary recovery procedure(s).
 
 Similarly, many of the prescribed state management options require a high
-degree of human involvement which means one SHOULD consider the costs
-associated with training the human element to ensure processes and procedures
+degree of operator involvement which means one SHOULD consider the costs
+associated with training the operator element to ensure processes and procedures
 are adhered to and failures caught early and corrected before a catastrophic
 loss of security can occur (e.g., accidentally instantiating multiple instances
 of a stateful hash-based signature key/state). Note that training is not a
 fixed one-time cost either as long lifetimes will necessitate succession
-planning amongst the human element, and training of each successive generation
+planning amongst the operator element, and training of each successive generation
 of participants. Mechanisms also SHOULD be put in place to mitigate the
 ever-present insider threat via mechanisms such as M-of-N controls, ensuring
 least-privileges amongst participants, and enforcing a segregation of duties to
