@@ -505,7 +505,7 @@ root tree identifier (i.e., the "I" value for HSS/LMS and "root" value for
 XMSS/XMSS<sup>MT</sup>).
 
 Each of the N sectors can be generated with a unique seed value to
-cryptographically isolate the sectors from each other, though this REQUIRES
+cryptographically isolate the sectors from each other, though this requires
 that the path information for each sector's root node (i.e., all off-path nodes
 between the sector root node and the top level node value) be stored with each
 sector's private key at key generation time since a sector will not know the
