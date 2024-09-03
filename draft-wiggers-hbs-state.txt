@@ -5,14 +5,14 @@
 Network Working Group                                         T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 22 August 2024                                              BSI
+Expires: 7 March 2025                                                BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                        19 February 2024
+                                                        3 September 2024
 
 
            Hash-based Signatures: State and Backup Management
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 August 2024.
+   This Internet-Draft will expire on 7 March 2025.
 
 Copyright Notice
 
@@ -471,7 +471,7 @@ Table of Contents
 
    Each of the N sectors can be generated with a unique seed value to
    cryptographically isolate the sectors from each other, though this
-   REQUIRES that the path information for each sector's root node (i.e.,
+   requires that the path information for each sector's root node (i.e.,
    all off-path nodes between the sector root node and the top level
    node value) be stored with each sector's private key at key
    generation time since a sector will not know the seed information
