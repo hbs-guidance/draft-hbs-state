@@ -295,8 +295,8 @@ key import
 key and state material, from external storage to the signing device.
 
 key transfer
-: direct and cryptographically protected migration of private key
-and state material from one signing device to another signing device.
+: a cryptographically protected transfer of ownership of private key and
+state material from one signing device to another.
 
 Systems and architectures relying on key transfer are generally expected to
 require fewer operational and manually-executed steps and checks to avoid state
