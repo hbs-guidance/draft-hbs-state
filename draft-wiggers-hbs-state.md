@@ -390,7 +390,8 @@ main concerns here are
 A system may have a version of the private key stored in non-volatile memory
 (e.g. a disk) and will load it into volatile memory (e.g. RAM) while
 processing. Here, an implementer MUST ensure that these are always perfectly
-synchronized [MCGREW]. This can be particularly challenging if there are
+synchronized [MCGREW], meaning that no parts of the system are allowed to read
+any version of the key during procedure which load, write or modify keys. This can be particularly challenging if there are
 additional abstraction layers present in the system, like additional caches
 which may affect reading/writing the state and its potential existence in
 multiple locations.
