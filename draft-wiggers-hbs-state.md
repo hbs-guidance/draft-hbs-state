@@ -718,7 +718,7 @@ random.  For the sake of clarity, let us introduce some notation:
   2<sup>h<sub>0</sub></sup> - R.
 
 - I<sub>new</sub> denotes the set of indices that belong to these newly
-  generated bottom-level trees, i.e. I<sub>new</sub> = {R, R+1, ..., R+S-1}.
+  generated bottom-level trees, i.e. I<sub>new</sub> = {R, R+1, ..., R+S-1}. I<sub>new</sub> is zero-indexed here.
 
 For each new bottom-level tree, after it has been generated, the following
 steps MUST be performed:
