@@ -321,7 +321,7 @@ availability and deliver a sufficiently resilient solution, all the while
 enforcing whatever security protocols and procedures were required.
 Unfortunately, stateful hash-based signatures introduce an additional
 constraint in that they need to ensure the state is never re-used. Hence,
-archival procedures used for traditional trust infrastructures MUST be
+archival procedures used for traditional trust infrastructures have to be
 amended/redesigned to be used as viable options.
 
 One of the most problematic aspects of providing a long-lived resilient
