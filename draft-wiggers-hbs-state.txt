@@ -711,6 +711,7 @@ Table of Contents
 
    *  I_new denotes the set of indices that belong to these newly
       generated bottom-level trees, i.e. I_new = {R, R+1, ..., R+S-1}.
+      I_new is zero-indexed here.
 
    For each new bottom-level tree, after it has been generated, the
    following steps MUST be performed:
