@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-03T00:32:48.420702+00:00",
+  "timestamp": "2024-09-05T00:33:16.351817+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -110,6 +110,112 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOLPgbFM56PU7B",
+      "title": "Make it explicit that key transfer is transactional",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/3",
+      "state": "OPEN",
+      "author": "kste",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Update the description of key transfer to be more clear that ownership is transferred.",
+      "createdAt": "2024-09-03T09:48:28Z",
+      "updatedAt": "2024-09-03T09:48:29Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "5e87efae531a86624f4e69607be21b1507875726",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "keytransfer",
+      "headRefOid": "aa6149ff08d419e2eb5bc69c3284cf087fe4fd88",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOLPgbFM56PWgY",
+      "title": "Avoid keyword for archival procedure guidance",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/4",
+      "state": "OPEN",
+      "author": "kste",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This document doesn't describe steps on how to update these procedures, and therefore shouldn't use the key word MUST in this context.",
+      "createdAt": "2024-09-03T09:51:37Z",
+      "updatedAt": "2024-09-03T11:56:26Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "5e87efae531a86624f4e69607be21b1507875726",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "archival-procedures",
+      "headRefOid": "c5d39fe49328ea5ef384c3a257a97f7554d0c2af",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM6Hu5Jx",
+          "commit": {
+            "abbreviatedOid": "c5d39fe"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Looks good to me.",
+          "createdAt": "2024-09-03T11:56:26Z",
+          "updatedAt": "2024-09-03T11:56:26Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOLPgbFM56PX98",
+      "title": "Clarify perfectly synchronized",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/5",
+      "state": "OPEN",
+      "author": "kste",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add explanation on what is meant by perfectly synchronized.",
+      "createdAt": "2024-09-03T09:54:12Z",
+      "updatedAt": "2024-09-03T11:58:48Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "5e87efae531a86624f4e69607be21b1507875726",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "synchronized",
+      "headRefOid": "5cb4af3c6cebb4283c47d237367c2a24bb4b4ca0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM6Hu6Xi",
+          "commit": {
+            "abbreviatedOid": "5cb4af3"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "NONE",
+          "state": "CHANGES_REQUESTED",
+          "body": "One small nitpick: please change \"during procedure which load\" to \"during procedures which load\". Other than that it looks good to me.",
+          "createdAt": "2024-09-03T11:58:48Z",
+          "updatedAt": "2024-09-03T11:58:48Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
