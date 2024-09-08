@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-05T00:33:16.351817+00:00",
+  "timestamp": "2024-09-08T00:37:08.850635+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -123,7 +123,7 @@
       "labels": [],
       "body": "Update the description of key transfer to be more clear that ownership is transferred.",
       "createdAt": "2024-09-03T09:48:28Z",
-      "updatedAt": "2024-09-03T09:48:29Z",
+      "updatedAt": "2024-09-05T11:54:42Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "5e87efae531a86624f4e69607be21b1507875726",
@@ -135,7 +135,21 @@
       "mergedBy": null,
       "mergeCommit": null,
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM6IDyy_",
+          "commit": {
+            "abbreviatedOid": "aa6149f"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-05T11:54:42Z",
+          "updatedAt": "2024-09-05T11:54:42Z",
+          "comments": []
+        }
+      ]
     },
     {
       "number": 4,
@@ -213,6 +227,59 @@
           "body": "One small nitpick: please change \"during procedure which load\" to \"during procedures which load\". Other than that it looks good to me.",
           "createdAt": "2024-09-03T11:58:48Z",
           "updatedAt": "2024-09-03T11:58:48Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOLPgbFM56f5c-",
+      "title": "Clarify sector seeds and private key generation.",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/6",
+      "state": "OPEN",
+      "author": "kste",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-05T09:32:32Z",
+      "updatedAt": "2024-09-05T11:45:33Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "8147fbc57313b73e3283c4c58449043dcc336f69",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "sectorseeds",
+      "headRefOid": "bbbb8eefde61f964ab44b14589badaf8d4071a5d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM6IDjZo",
+          "commit": {
+            "abbreviatedOid": "bbbb8ee"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "This looks good to me, thank you for making the changes!",
+          "createdAt": "2024-09-05T11:23:17Z",
+          "updatedAt": "2024-09-05T11:23:17Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6IDuAu",
+          "commit": {
+            "abbreviatedOid": "bbbb8ee"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-05T11:45:33Z",
+          "updatedAt": "2024-09-05T11:45:33Z",
           "comments": []
         }
       ]
