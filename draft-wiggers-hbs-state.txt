@@ -5,14 +5,14 @@
 Network Working Group                                         T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 7 March 2025                                                BSI
+Expires: 13 March 2025                                               BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                        3 September 2024
+                                                        9 September 2024
 
 
            Hash-based Signatures: State and Backup Management
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 March 2025.
+   This Internet-Draft will expire on 13 March 2025.
 
 Copyright Notice
 
@@ -268,7 +268,7 @@ Table of Contents
    Unfortunately, stateful hash-based signatures introduce an additional
    constraint in that they need to ensure the state is never re-used.
    Hence, archival procedures used for traditional trust infrastructures
-   MUST be amended/redesigned to be used as viable options.
+   have to be amended/redesigned to be used as viable options.
 
    One of the most problematic aspects of providing a long-lived
    resilient solution is simply managing the physical media on which the
