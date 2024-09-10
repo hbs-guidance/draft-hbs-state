@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-08T00:37:08.850635+00:00",
+  "timestamp": "2024-09-10T00:33:52.610473+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -116,24 +116,26 @@
       "id": "PR_kwDOLPgbFM56PU7B",
       "title": "Make it explicit that key transfer is transactional",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/3",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kste",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Update the description of key transfer to be more clear that ownership is transferred.",
       "createdAt": "2024-09-03T09:48:28Z",
-      "updatedAt": "2024-09-05T11:54:42Z",
+      "updatedAt": "2024-09-09T12:18:55Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "5e87efae531a86624f4e69607be21b1507875726",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "keytransfer",
       "headRefOid": "aa6149ff08d419e2eb5bc69c3284cf087fe4fd88",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-09T12:18:53Z",
+      "mergedAt": "2024-09-09T12:18:53Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "f760492fa4a7d3dd09d3418dda0acd44b612c1cd"
+      },
       "comments": [],
       "reviews": [
         {
@@ -156,24 +158,26 @@
       "id": "PR_kwDOLPgbFM56PWgY",
       "title": "Avoid keyword for archival procedure guidance",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/4",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kste",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This document doesn't describe steps on how to update these procedures, and therefore shouldn't use the key word MUST in this context.",
       "createdAt": "2024-09-03T09:51:37Z",
-      "updatedAt": "2024-09-03T11:56:26Z",
+      "updatedAt": "2024-09-09T12:18:11Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "5e87efae531a86624f4e69607be21b1507875726",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "archival-procedures",
       "headRefOid": "c5d39fe49328ea5ef384c3a257a97f7554d0c2af",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-09T12:18:09Z",
+      "mergedAt": "2024-09-09T12:18:09Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "ef24a57d18606203d8a9ca4a70c4b0f5105c46db"
+      },
       "comments": [],
       "reviews": [
         {
@@ -196,25 +200,35 @@
       "id": "PR_kwDOLPgbFM56PX98",
       "title": "Clarify perfectly synchronized",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/5",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kste",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Add explanation on what is meant by perfectly synchronized.",
       "createdAt": "2024-09-03T09:54:12Z",
-      "updatedAt": "2024-09-03T11:58:48Z",
+      "updatedAt": "2024-09-09T12:42:48Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "5e87efae531a86624f4e69607be21b1507875726",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "synchronized",
-      "headRefOid": "5cb4af3c6cebb4283c47d237367c2a24bb4b4ca0",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "eb5709bad81f15eeab3ce1e173ee061f21ad4d8d",
+      "closedAt": "2024-09-09T12:42:46Z",
+      "mergedAt": "2024-09-09T12:42:46Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "d1f70388dbc96731b28e0ca2f837a0996930b1cb"
+      },
+      "comments": [
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I've pluralized it",
+          "createdAt": "2024-09-09T12:34:10Z",
+          "updatedAt": "2024-09-09T12:34:10Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLPgbFM6Hu6Xi",
@@ -228,6 +242,99 @@
           "createdAt": "2024-09-03T11:58:48Z",
           "updatedAt": "2024-09-03T11:58:48Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6Ieyu7",
+          "commit": {
+            "abbreviatedOid": "5cb4af3"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-09T12:31:45Z",
+          "updatedAt": "2024-09-09T12:31:45Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "As a non-native speaker: du we need \"procedures\" or \"procedure\"",
+              "createdAt": "2024-09-09T12:31:45Z",
+              "updatedAt": "2024-09-09T12:31:45Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6IezhQ",
+          "commit": {
+            "abbreviatedOid": "5cb4af3"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-09T12:33:11Z",
+          "updatedAt": "2024-09-09T12:33:11Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "This should be plural AFAIK",
+              "createdAt": "2024-09-09T12:33:11Z",
+              "updatedAt": "2024-09-09T12:33:11Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6IezsC",
+          "commit": {
+            "abbreviatedOid": "5cb4af3"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-09T12:33:29Z",
+          "updatedAt": "2024-09-09T12:33:29Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "as also pointed out by @crypto4a's comment",
+              "createdAt": "2024-09-09T12:33:29Z",
+              "updatedAt": "2024-09-09T12:33:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6Ie0lL",
+          "commit": {
+            "abbreviatedOid": "5cb4af3"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-09T12:34:55Z",
+          "updatedAt": "2024-09-09T12:34:55Z",
+          "comments": [
+            {
+              "originalPosition": 6,
+              "body": "Oh, now I see! Feels good to have, independently, the same thoughts as Jim. ",
+              "createdAt": "2024-09-09T12:34:55Z",
+              "updatedAt": "2024-09-09T12:34:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6Ie2zK",
+          "commit": {
+            "abbreviatedOid": "eb5709b"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-09T12:38:35Z",
+          "updatedAt": "2024-09-09T12:38:35Z",
+          "comments": []
         }
       ]
     },
@@ -236,24 +343,26 @@
       "id": "PR_kwDOLPgbFM56f5c-",
       "title": "Clarify sector seeds and private key generation.",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/6",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kste",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-09-05T09:32:32Z",
-      "updatedAt": "2024-09-05T11:45:33Z",
+      "updatedAt": "2024-09-09T12:18:35Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "8147fbc57313b73e3283c4c58449043dcc336f69",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "sectorseeds",
       "headRefOid": "bbbb8eefde61f964ab44b14589badaf8d4071a5d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-09T12:18:33Z",
+      "mergedAt": "2024-09-09T12:18:33Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "4518a13d61efa7bffe80122c25f3e136a6382b63"
+      },
       "comments": [],
       "reviews": [
         {
