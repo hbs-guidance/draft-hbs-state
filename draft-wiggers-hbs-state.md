@@ -77,7 +77,7 @@ informative:
 
   SP-800-208:
     target: https://doi.org/10.6028/NIST.SP.800-208
-    title: Recommendation for Stateful Hash-Based Signature Schemes
+    title: "NIST SP 800-208: Recommendation for Stateful Hash-Based Signature Schemes"
     author:
       - ins: D. Cooper
         name: David Cooper
@@ -92,14 +92,14 @@ informative:
       - ins: C. Miller
         name: Carl Miller
     date: October 2020
-    seriesinfo: NIST Special Publication 800-208
+    seriesinfo: NIST Special Publication
 
   FIPS205:
-    target: https://doi.org/10.6028/NIST.FIPS.205.ipd
-    title: "FIPS 205 (draft): Stateless Hash-Based Digital Signature Standard"
+    target: https://doi.org/10.6028/NIST.FIPS.205
+    title: "FIPS 205: Stateless Hash-Based Digital Signature Standard"
     author:
       - ins: National Institute of Standards and Technology
-    date: 2023-08-24
+    date: 2024-08-13
     seriesinfo: Federal Information Processing Standards
 
   BH16:
