@@ -833,10 +833,10 @@ Table of Contents
               Information Processing Standards , 13 August 2024,
               <https://doi.org/10.6028/NIST.FIPS.204>.
 
-   [FIPS205]  National Institute of Standards and Technology, "FIPS 205
-              (draft): Stateless Hash-Based Digital Signature Standard",
-              Federal Information Processing Standards , 24 August 2023,
-              <https://doi.org/10.6028/NIST.FIPS.205.ipd>.
+   [FIPS205]  National Institute of Standards and Technology, "FIPS 205:
+              Stateless Hash-Based Digital Signature Standard", Federal
+              Information Processing Standards , 13 August 2024,
+              <https://doi.org/10.6028/NIST.FIPS.205>.
 
    [HBSX509]  Bashiri, K., Fluhrer, S., Gazdag, S., Van Geest, D., and
               S. Kousidis, "Internet X.509 Public Key Infrastructure:
@@ -873,8 +873,9 @@ Table of Contents
 
    [SP-800-208]
               Cooper, D., Apon, D., Dang, Q., Davidson, M., Dworkin, M.,
-              and C. Miller, "Recommendation for Stateful Hash-Based
-              Signature Schemes", October 2020,
+              and C. Miller, "NIST SP 800-208: Recommendation for
+              Stateful Hash-Based Signature Schemes", NIST Special
+              Publication , October 2020,
               <https://doi.org/10.6028/NIST.SP.800-208>.
 
    [TIMEFALSEHOODS]
