@@ -5,14 +5,14 @@
 Network Working Group                                         T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 13 March 2025                                               BSI
+Expires: 20 March 2025                                               BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                        9 September 2024
+                                                       16 September 2024
 
 
            Hash-based Signatures: State and Backup Management
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 13 March 2025.
+   This Internet-Draft will expire on 20 March 2025.
 
 Copyright Notice
 
@@ -821,10 +821,10 @@ Table of Contents
               etsi_tr/103600_103699/103692/01.01.01_60/
               tr_103692v010101p.pdf>.
 
-   [FIPS205]  National Institute of Standards and Technology, "FIPS 205
-              (draft): Stateless Hash-Based Digital Signature Standard",
-              Federal Information Processing Standards , 24 August 2023,
-              <https://doi.org/10.6028/NIST.FIPS.205.ipd>.
+   [FIPS205]  National Institute of Standards and Technology, "FIPS 205:
+              Stateless Hash-Based Digital Signature Standard", Federal
+              Information Processing Standards , 13 August 2024,
+              <https://doi.org/10.6028/NIST.FIPS.205>.
 
    [HBSX509]  Bashiri, K., Fluhrer, S., Gazdag, S., Van Geest, D., and
               S. Kousidis, "Internet X.509 Public Key Infrastructure:
@@ -861,9 +861,10 @@ Table of Contents
 
    [SP-800-208]
               Cooper, D., Apon, D., Dang, Q., Davidson, M., Dworkin, M.,
-              and C. Miller, "Recommendation for Stateful Hash-Based
-              Signature Schemes", NIST Special Publication 800-208 ,
-              October 2020, <https://doi.org/10.6028/NIST.SP.800-208>.
+              and C. Miller, "NIST SP 800-208: Recommendation for
+              Stateful Hash-Based Signature Schemes", NIST Special
+              Publication , October 2020,
+              <https://doi.org/10.6028/NIST.SP.800-208>.
 
    [TIMEFALSEHOODS]
               Visée, T., "Falsehoods programmers believe about time",
