@@ -94,6 +94,14 @@ informative:
     date: October 2020
     seriesinfo: NIST Special Publication
 
+  FIPS204:
+    target: https://doi.org/10.6028/NIST.FIPS.204
+    title: "FIPS 204: Module-Lattice-Based Digital Signature Standard"
+    author:
+      - ins: National Institute of Standards and Technology
+    date: 2024-08-13
+    seriesinfo: Federal Information Processing Standards
+
   FIPS205:
     target: https://doi.org/10.6028/NIST.FIPS.205
     title: "FIPS 205: Stateless Hash-Based Digital Signature Standard"
@@ -211,17 +219,23 @@ The statefulness of S-HBS leads to significant challenges in practice:
 - If key backups are required, implementers must ensure that any backup
   mechanism can not lead to re-using a previously used OTS key.
 
-These issues lead to new requirements that most developers will not be familiar
-with and that require careful handling in practice. Due to these challenges,
-most applications should use stateless alternatives like SLH-DSA [FIPS205]
-instead. However, if performance, signature or key sizes of stateless
-alternatives are prohibitive, and the specific use case allows a very tight
-control of the signing environment, using S-HBS may be an appropriate solution.
-It seems likely that in many scenarios, this will only be possible when using
-purpose-designed hardware, such as hardware-security modules.
-
 The purpose of this document is to present, recall, and discuss various
 strategies for a correct state and backup management for S-HBS.
+
+## When are S-HBS appropriate?
+
+The issues with state management described above, as well as the limited number
+of signatures, lead to new requirements that most developers will not be
+familiar with and that require careful handling in practice. Due to these
+challenges, most applications should use _stateless_ hash-based signature
+schemes like SLH-DSA [FIPS205], which use the same security assumptions, or
+schemes based on other assumptions, such as ML-DSA [FIPS204], instead. However,
+if performance, signature or key sizes of stateless alternatives are
+prohibitive, and the specific use case allows a very tight control of the
+signing environment, using S-HBS may be an appropriate solution. It seems likely
+that in many scenarios, this will only be possible when using purpose-designed
+hardware, such as hardware-security modules.
+
 
 # Conventions and Definitions
 
