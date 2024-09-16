@@ -1307,15 +1307,16 @@ strategies for a correct state and backup management for S-HBS.<a href="#section
         </h3>
 <p id="section-1.1-1">The issues with state management described above, as well as the limited number
 of signatures, lead to new requirements that most developers will not be
-familiar with and that require careful handling in practice. Due to these
-challenges, most applications should use <em>stateless</em> hash-based signature
-schemes like SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span>, which use the same security assumptions, or
-schemes based on other assumptions, such as ML-DSA <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>, instead. However,
-if performance, signature or key sizes of stateless alternatives are
-prohibitive, and the specific use case allows a very tight control of the
-signing environment, using S-HBS may be an appropriate solution. It seems likely
-that in many scenarios, this will only be possible when using purpose-designed
-hardware, such as hardware-security modules.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+familiar with and that require careful handling in practice: S-HBS are not
+general-purpose signature schemes. Most applications, especially those that may
+produce unrestricted numbers of signatures, should use <em>stateless</em> hash-based
+signature schemes like SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span>, which use the same security
+assumptions, or schemes based on other assumptions, such as ML-DSA <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>,
+instead. However, if performance, signature or key sizes of stateless
+alternatives are prohibitive, and the specific use case allows a very tight
+control of the signing environment, using S-HBS may be an appropriate solution.
+It seems likely that in many scenarios, this will only be possible when using
+purpose-designed hardware, such as hardware-security modules.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
