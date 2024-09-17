@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-15T00:38:14.102851+00:00",
+  "timestamp": "2024-09-17T00:28:00.638208+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -389,6 +389,140 @@
           "body": "",
           "createdAt": "2024-09-05T11:45:33Z",
           "updatedAt": "2024-09-05T11:45:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "id": "PR_kwDOLPgbFM57l6AC",
+      "title": "Issue #2: When are S-HBS appropriate",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/7",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I've attempted to slightly re-organize and tweak the text in the introduction and added a subheading to (briefly) discuss when S-HBS are perhaps appropriate.\n",
+      "createdAt": "2024-09-16T09:13:46Z",
+      "updatedAt": "2024-09-16T09:38:14Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "edc6c7958f3339603755a4b9319b82a209fa89c1",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "shbs-appropriate",
+      "headRefOid": "a77319795d43087ee1b28b469743bb57bf348ec6",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM6JdQNk",
+          "commit": {
+            "abbreviatedOid": "a773197"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-16T09:29:38Z",
+          "updatedAt": "2024-09-16T09:38:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6JdQqm",
+          "commit": {
+            "abbreviatedOid": "a773197"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-16T09:30:35Z",
+          "updatedAt": "2024-09-16T09:38:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6JdQyI",
+          "commit": {
+            "abbreviatedOid": "a773197"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-16T09:30:48Z",
+          "updatedAt": "2024-09-16T09:38:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6JdSNX",
+          "commit": {
+            "abbreviatedOid": "a773197"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-16T09:33:54Z",
+          "updatedAt": "2024-09-16T09:38:14Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "id": "PR_kwDOLPgbFM57l7ak",
+      "title": "Update FIPS 205 to final",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/8",
+      "state": "MERGED",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-09-16T09:17:00Z",
+      "updatedAt": "2024-09-16T22:04:00Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "d1f70388dbc96731b28e0ca2f837a0996930b1cb",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "update-fips",
+      "headRefOid": "2d3f9b8aa939c6ece619d9639ec43473e38e5448",
+      "closedAt": "2024-09-16T09:23:49Z",
+      "mergedAt": "2024-09-16T09:23:49Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "ccf84fee7c3f7f7c6d3756e56bfc38e1bffa326e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM6JdNIg",
+          "commit": {
+            "abbreviatedOid": "2d3f9b8"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-09-16T09:23:11Z",
+          "updatedAt": "2024-09-16T09:23:11Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6JkBMg",
+          "commit": {
+            "abbreviatedOid": "2d3f9b8"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "This looks good to me.  Thanks for making the changes!",
+          "createdAt": "2024-09-16T22:04:00Z",
+          "updatedAt": "2024-09-16T22:04:00Z",
           "comments": []
         }
       ]
