@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-17T00:28:00.638208+00:00",
+  "timestamp": "2024-09-19T00:34:23.143579+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -405,7 +405,7 @@
       "labels": [],
       "body": "I've attempted to slightly re-organize and tweak the text in the introduction and added a subheading to (briefly) discuss when S-HBS are perhaps appropriate.\n",
       "createdAt": "2024-09-16T09:13:46Z",
-      "updatedAt": "2024-09-16T09:38:14Z",
+      "updatedAt": "2024-09-17T07:58:31Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "edc6c7958f3339603755a4b9319b82a209fa89c1",
@@ -469,6 +469,46 @@
           "createdAt": "2024-09-16T09:33:54Z",
           "updatedAt": "2024-09-16T09:38:14Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6Jm-BV",
+          "commit": {
+            "abbreviatedOid": "a773197"
+          },
+          "author": "kste",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-17T07:57:19Z",
+          "updatedAt": "2024-09-17T07:57:19Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "nit: Let's add the author/date/series info to FIPS205 well.",
+              "createdAt": "2024-09-17T07:57:19Z",
+              "updatedAt": "2024-09-17T07:57:19Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6Jm_I6",
+          "commit": {
+            "abbreviatedOid": "a773197"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-09-17T07:58:31Z",
+          "updatedAt": "2024-09-17T07:58:31Z",
+          "comments": [
+            {
+              "originalPosition": 14,
+              "body": "The FIPS204 section has been copy-pasted, so it's there already below the fold.",
+              "createdAt": "2024-09-17T07:58:31Z",
+              "updatedAt": "2024-09-17T07:58:31Z"
+            }
+          ]
         }
       ]
     },
