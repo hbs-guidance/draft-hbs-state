@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-24T00:35:25.277436+00:00",
+  "timestamp": "2024-09-26T00:34:53.083872+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -55,15 +55,15 @@
       "id": "I_kwDOLPgbFM6BMyU3",
       "title": "Consider section on acceptable usage scenarios?",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/2",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "cipherboy",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "The introduction currently contains broad language around the desirable properties of these category of algorithms:\r\n\r\n> Their theoretic security is well understood and depends only on the security of the underlying hash function.  As such, they can serve as an important building block for quantum-resistant information and communication technology.\r\n\r\nI think it'd benefit the broader community (especially, protocol authors looking at adding PQC into their protocols) if some of this latter phrase (\"_important building block_\") could be expanded upon, perhaps enumerating some scenarios in which these trade offs are acceptable.\r\n\r\nE.g., perhaps in the scenario where potential theoretical weakness in the design of SLH-DSA or ML-DSA are an unacceptable risk to an organization (but still desires PQC security), S-HBS schemes could be considered?",
       "createdAt": "2024-03-04T19:43:46Z",
-      "updatedAt": "2024-03-04T21:31:55Z",
-      "closedAt": null,
+      "updatedAt": "2024-09-24T12:16:52Z",
+      "closedAt": "2024-09-24T12:16:52Z",
       "comments": [
         {
           "author": "thomwiggers",
@@ -398,24 +398,26 @@
       "id": "PR_kwDOLPgbFM57l6AC",
       "title": "Issue #2: When are S-HBS appropriate",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/7",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I've attempted to slightly re-organize and tweak the text in the introduction and added a subheading to (briefly) discuss when S-HBS are perhaps appropriate.\n",
       "createdAt": "2024-09-16T09:13:46Z",
-      "updatedAt": "2024-09-17T07:58:31Z",
+      "updatedAt": "2024-09-24T12:16:54Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "edc6c7958f3339603755a4b9319b82a209fa89c1",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "shbs-appropriate",
       "headRefOid": "a77319795d43087ee1b28b469743bb57bf348ec6",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2024-09-24T12:16:51Z",
+      "mergedAt": "2024-09-24T12:16:51Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "30373e1ab73f3e7b05ce6b4ef4139f57c447755f"
+      },
       "comments": [],
       "reviews": [
         {
