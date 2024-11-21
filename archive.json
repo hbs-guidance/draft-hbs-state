@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-19T00:38:09.989478+00:00",
+  "timestamp": "2024-11-21T00:37:40.884846+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -94,6 +94,22 @@
       "body": "> On 1 okt 2024, at 08:21 Brockhaus, Hendrik wrote:\r\n> \r\n> I see the shortcut \u201eS-HBS\u201d. I know that you refer to \u201cstateful HBS\u201d. But others could confuse it with \u201cstateless HBS\u201d.\r\n> Is this abbreviation used elsewhere, e.g., at NIST or NSA? If it is only used here, I would propose to change it to \u201cstateful HBS\u201d.\r\n>  \r\n> Hendrik\r\n\r\nPreviously, other drafts appear to have used S-HBS, including https://datatracker.ietf.org/doc/draft-ietf-lamps-x509-shbs/, but we can consider changing it like that draft did. \r\n",
       "createdAt": "2024-10-09T13:54:09Z",
       "updatedAt": "2024-10-09T13:54:09Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 10,
+      "id": "I_kwDOLPgbFM6fQCLv",
+      "title": "Update WRT NIST's new stuff",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/10",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "NIST will be updating things, slides at https://csrc.nist.gov/csrc/media/Presentations/2024/stateful-hbs-backups-revising-208/images-media/kelsey-hbs-backup-external-nov-2024.pdf",
+      "createdAt": "2024-11-19T11:08:28Z",
+      "updatedAt": "2024-11-19T11:08:28Z",
       "closedAt": null,
       "comments": []
     }
