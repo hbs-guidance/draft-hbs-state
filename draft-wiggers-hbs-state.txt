@@ -5,14 +5,14 @@
 Network Working Group                                         T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 28 March 2025                                               BSI
+Expires: 3 October 2025                                              BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                       24 September 2024
+                                                            1 April 2025
 
 
            Hash-based Signatures: State and Backup Management
@@ -58,11 +58,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 28 March 2025.
+   This Internet-Draft will expire on 3 October 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -347,15 +347,14 @@ Table of Contents
    *  cloning.
 
    A system may have a version of the private key stored in non-volatile
-   memory (e.g. a disk) and will load it into volatile memory (e.g.
-   RAM) while processing.  Here, an implementer MUST ensure that these
-   are always perfectly synchronized [MCGREW], meaning that no parts of
-   the system are allowed to read any version of the key during
-   procedures which load, write or modify keys.  This can be
-   particularly challenging if there are additional abstraction layers
-   present in the system, like additional caches which may affect
-   reading/writing the state and its potential existence in multiple
-   locations.
+   memory (e.g. a disk) and will load it into volatile memory (e.g. RAM)
+   while processing.  Here, an implementer MUST ensure that these are
+   always perfectly synchronized [MCGREW], meaning that no parts of the
+   system are allowed to read any version of the key during procedures
+   which load, write or modify keys.  This can be particularly
+   challenging if there are additional abstraction layers present in the
+   system, like additional caches which may affect reading/writing the
+   state and its potential existence in multiple locations.
 
    Cloning is another concern, as it can easily lead to re-using the
    same state.  This can happen for instance if a process which issues a
