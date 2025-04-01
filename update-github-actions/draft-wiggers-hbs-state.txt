@@ -5,14 +5,14 @@
 Network Working Group                                         T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 7 March 2025                                                BSI
+Expires: 3 October 2025                                              BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                        3 September 2024
+                                                            1 April 2025
 
 
            Hash-based Signatures: State and Backup Management
@@ -58,11 +58,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 7 March 2025.
+   This Internet-Draft will expire on 3 October 2025.
 
 Copyright Notice
 
-   Copyright (c) 2024 IETF Trust and the persons identified as the
+   Copyright (c) 2025 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -77,6 +77,7 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
+     1.1.  When are S-HBS appropriate?
    2.  Conventions and Definitions
      2.1.  Specific terminology in the context of S-HBS
        2.1.1.  State management
@@ -144,20 +145,26 @@ Table of Contents
       backup mechanism can not lead to re-using a previously used OTS
       key.
 
-   These issues lead to new requirements that most developers will not
-   be familiar with and that require careful handling in practice.  Due
-   to these challenges, most applications should use stateless
-   alternatives like SLH-DSA [FIPS205] instead.  However, if
-   performance, signature or key sizes of stateless alternatives are
-   prohibitive, and the specific use case allows a very tight control of
-   the signing environment, using S-HBS may be an appropriate solution.
-   It seems likely that in many scenarios, this will only be possible
-   when using purpose-designed hardware, such as hardware-security
-   modules.
-
    The purpose of this document is to present, recall, and discuss
    various strategies for a correct state and backup management for
    S-HBS.
+
+1.1.  When are S-HBS appropriate?
+
+   The issues with state management described above, as well as the
+   limited number of signatures, lead to new requirements that most
+   developers will not be familiar with and that require careful
+   handling in practice: S-HBS are not general-purpose signature
+   schemes.  Most applications, especially those that may produce
+   unrestricted numbers of signatures, should use _stateless_ hash-based
+   signature schemes like SLH-DSA [FIPS205], which use the same security
+   assumptions, or schemes based on other assumptions, such as ML-DSA
+   [FIPS204], instead.  However, if performance, signature or key sizes
+   of stateless alternatives are prohibitive, and the specific use case
+   allows a very tight control of the signing environment, using S-HBS
+   may be an appropriate solution.  It seems likely that in many
+   scenarios, this will only be possible when using purpose-designed
+   hardware, such as hardware-security modules.
 
 2.  Conventions and Definitions
 
@@ -239,9 +246,8 @@ Table of Contents
       private key and state material, from external storage to the
       signing device.
 
-   key transfer  direct and cryptographically protected migration of
-      private key and state material from one signing device to another
-      signing device.
+   key transfer  a cryptographically protected transfer of ownership of
+      private key and state material from one signing device to another.
 
    Systems and architectures relying on key transfer are generally
    expected to require fewer operational and manually-executed steps and
@@ -341,9 +347,11 @@ Table of Contents
    *  cloning.
 
    A system may have a version of the private key stored in non-volatile
-   memory (e.g. a disk) and will load it into volatile memory (e.g.
-   RAM) while processing.  Here, an implementer MUST ensure that these
-   are always perfectly synchronized [MCGREW].  This can be particularly
+   memory (e.g. a disk) and will load it into volatile memory (e.g. RAM)
+   while processing.  Here, an implementer MUST ensure that these are
+   always perfectly synchronized [MCGREW], meaning that no parts of the
+   system are allowed to read any version of the key during procedures
+   which load, write or modify keys.  This can be particularly
    challenging if there are additional abstraction layers present in the
    system, like additional caches which may affect reading/writing the
    state and its potential existence in multiple locations.
@@ -469,8 +477,10 @@ Table of Contents
    each sector uses the same root tree identifier (i.e., the "I" value
    for HSS/LMS and "root" value for XMSS/XMSS^MT).
 
-   Each of the N sectors can be generated with a unique seed value to
-   cryptographically isolate the sectors from each other, though this
+   Each of the N sectors' OTS private key values can be generated
+   pseudo-randomly from a unique seed value generated from an
+   appropriate source of randomness.  The private keys from different
+   sectors are independent when generated by this process.  This
    requires that the path information for each sector's root node (i.e.,
    all off-path nodes between the sector root node and the top level
    node value) be stored with each sector's private key at key
@@ -711,6 +721,7 @@ Table of Contents
 
    *  I_new denotes the set of indices that belong to these newly
       generated bottom-level trees, i.e. I_new = {R, R+1, ..., R+S-1}.
+      I_new is zero-indexed here.
 
    For each new bottom-level tree, after it has been generated, the
    following steps MUST be performed:
@@ -816,10 +827,15 @@ Table of Contents
               etsi_tr/103600_103699/103692/01.01.01_60/
               tr_103692v010101p.pdf>.
 
-   [FIPS205]  National Institute of Standards and Technology, "FIPS 205
-              (draft): Stateless Hash-Based Digital Signature Standard",
-              Federal Information Processing Standards , 24 August 2023,
-              <https://doi.org/10.6028/NIST.FIPS.205.ipd>.
+   [FIPS204]  National Institute of Standards and Technology, "FIPS 204:
+              Module-Lattice-Based Digital Signature Standard", Federal
+              Information Processing Standards , 13 August 2024,
+              <https://doi.org/10.6028/NIST.FIPS.204>.
+
+   [FIPS205]  National Institute of Standards and Technology, "FIPS 205:
+              Stateless Hash-Based Digital Signature Standard", Federal
+              Information Processing Standards , 13 August 2024,
+              <https://doi.org/10.6028/NIST.FIPS.205>.
 
    [HBSX509]  Bashiri, K., Fluhrer, S., Gazdag, S., Van Geest, D., and
               S. Kousidis, "Internet X.509 Public Key Infrastructure:
@@ -856,9 +872,10 @@ Table of Contents
 
    [SP-800-208]
               Cooper, D., Apon, D., Dang, Q., Davidson, M., Dworkin, M.,
-              and C. Miller, "Recommendation for Stateful Hash-Based
-              Signature Schemes", NIST Special Publication 800-208 ,
-              October 2020, <https://doi.org/10.6028/NIST.SP.800-208>.
+              and C. Miller, "NIST SP 800-208: Recommendation for
+              Stateful Hash-Based Signature Schemes", NIST Special
+              Publication , October 2020,
+              <https://doi.org/10.6028/NIST.SP.800-208>.
 
    [TIMEFALSEHOODS]
               Visée, T., "Falsehoods programmers believe about time",
