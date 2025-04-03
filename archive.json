@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T00:34:58.861763+00:00",
+  "timestamp": "2025-04-03T00:38:59.222125+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -110,6 +110,22 @@
       "body": "NIST will be updating things, slides at https://csrc.nist.gov/csrc/media/Presentations/2024/stateful-hbs-backups-revising-208/images-media/kelsey-hbs-backup-external-nov-2024.pdf",
       "createdAt": "2024-11-19T11:08:28Z",
       "updatedAt": "2024-11-19T11:08:28Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOLPgbFM6rUku2",
+      "title": "Comments from Alicja Kario",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/11",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": ">In general, I think abstract and introduction is understating the operational\n>complexity of managing those keys.\n>\n>One thing that I didn't notice, or at least isn't explicit in section 5 is\n>partial state transfer: when we have a device with a state that allows N\n>signatures, if could transfer N/2 signatures to another device and retain\n>the other half. That also provides partial protection against hardware failure.\n>Merging state from two devices is also theoretically possible.\n>\n>The other thing, is I think it would be good to explicitly mention that\n>the state management needs to follow all the ACID properties (atomicity,\n>consistency, isolation, and durability).",
+      "createdAt": "2025-02-24T09:16:05Z",
+      "updatedAt": "2025-02-24T09:16:05Z",
       "closedAt": null,
       "comments": []
     }
@@ -600,6 +616,36 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOLPgbFM6Q86xc",
+      "title": "Update github actions",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/12",
+      "state": "MERGED",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "thomwiggers"
+      ],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-04-01T15:19:24Z",
+      "updatedAt": "2025-04-01T15:22:01Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "30373e1ab73f3e7b05ce6b4ef4139f57c447755f",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "update-github-actions",
+      "headRefOid": "f677df71af85c68102e12219a7d0b836642cef59",
+      "closedAt": "2025-04-01T15:21:59Z",
+      "mergedAt": "2025-04-01T15:21:59Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "2cd2c9700b7ac066bfc2ca33fddee6a99089d689"
+      },
+      "comments": [],
+      "reviews": []
     }
   ]
 }
