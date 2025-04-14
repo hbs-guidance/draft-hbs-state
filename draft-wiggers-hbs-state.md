@@ -584,8 +584,8 @@ keys cannot be updated due to engineering constraints or security reasons.
 A variant of the key rotation approach is to simply have an available signing
 tree endorse a new subordinate tree when it is about to become exhausted (e.g.,
 use its final OTS to sign the root node of a new subordinate tree, creating a
-{n+1}-layer multi-tree from a {n}-layer multi-tree). This process can in theory
-be repeated as many times as necessary. However, this entails having a
+{n+1}-layer multi-tree from an {n}-layer multi-tree). This process can in
+theory be repeated as many times as necessary. However, this entails having a
 multi-tree scheme with a variable number of levels, and hence, variable length
 signatures.
 
