@@ -5,14 +5,14 @@
 Network Working Group                                         T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 3 October 2025                                              BSI
+Expires: 16 October 2025                                             BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                            1 April 2025
+                                                           14 April 2025
 
 
            Hash-based Signatures: State and Backup Management
@@ -58,7 +58,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 October 2025.
+   This Internet-Draft will expire on 16 October 2025.
 
 Copyright Notice
 
@@ -549,7 +549,7 @@ Table of Contents
    A variant of the key rotation approach is to simply have an available
    signing tree endorse a new subordinate tree when it is about to
    become exhausted (e.g., use its final OTS to sign the root node of a
-   new subordinate tree, creating a {n+1}-layer multi-tree from a {n}-
+   new subordinate tree, creating a {n+1}-layer multi-tree from an {n}-
    layer multi-tree).  This process can in theory be repeated as many
    times as necessary.  However, this entails having a multi-tree scheme
    with a variable number of levels, and hence, variable length
