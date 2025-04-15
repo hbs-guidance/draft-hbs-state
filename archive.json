@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-03T00:38:59.222125+00:00",
+  "timestamp": "2025-04-15T00:40:51.292636+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -126,6 +126,54 @@
       "body": ">In general, I think abstract and introduction is understating the operational\n>complexity of managing those keys.\n>\n>One thing that I didn't notice, or at least isn't explicit in section 5 is\n>partial state transfer: when we have a device with a state that allows N\n>signatures, if could transfer N/2 signatures to another device and retain\n>the other half. That also provides partial protection against hardware failure.\n>Merging state from two devices is also theoretically possible.\n>\n>The other thing, is I think it would be good to explicitly mention that\n>the state management needs to follow all the ACID properties (atomicity,\n>consistency, isolation, and durability).",
       "createdAt": "2025-02-24T09:16:05Z",
       "updatedAt": "2025-02-24T09:16:05Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 14,
+      "id": "I_kwDOLPgbFM6yZMUi",
+      "title": "Devices with degrading storage",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/14",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Stefan-Lukas Gazdag wrote:\n\n> Storages are discussed/shown including CDs and USB drives, but what about smartcards? Do you consider them out of scope (and maybe unsuitable for practical use) or do you view them as some kind of HSM? Because smartcards have quite some restrictions on their own and this may be true for other use cases. The RAM is limited and the non-volatile memory wears of. So you need to think about state and memory management. Also see Andreas H\u00fclsing's paper from 2018. At genua we tested JavaCards at some point with similar experiences. A full discussion would be over the top for the Internet-Draft, but you may want to add a note on this.",
+      "createdAt": "2025-04-14T12:38:43Z",
+      "updatedAt": "2025-04-14T12:38:43Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 15,
+      "id": "I_kwDOLPgbFM6yZN34",
+      "title": "Elaborating in operational considerations?",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/15",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Stefan-Lukas Gazdag wrote:\n\n> - Operational considerations: A few years ago I took some thought on operating systems and how to make sure there's no copies of the state or old keys left. My conclusion was that you need your whole system to be secure at some point in time because you won't be able to handle all the temporary copies within a modern computer. For examples caches are hell. There quite a few of them. Data stored there is only really written to where it should go if being flushed. You do not necessarily want to flush. You're slowing down the whole system and sometimes things may go wrong. Or your OS just decides that what you want is not what the OS wants. You can't just read a recently written key supposedly written to disk to make sure it's stored, because there may be just some cache (maybe even on the hard disk before the actual write operation on the disk). Sometimes you have to trust that everything's alright or it will get messy.\n\n\nI think the point of this is basically: should we elaborate on the design requirements/environment requirements for secure operations at the OS level?",
+      "createdAt": "2025-04-14T12:41:12Z",
+      "updatedAt": "2025-04-14T12:41:12Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 16,
+      "id": "I_kwDOLPgbFM6yZPM2",
+      "title": "Interval-based approaches",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/16",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Stefan-Lukas Gazdag wrote:\n\n> - You can advance the state / key and store it before signing, even for an intervall of keys. E. g. reserve interval u (let's say 100 OTS keys) and store a key before signing where you got rid of all OTS keys that are reserved (forgetting old keys) or advance a PRNG to the seed you need. Which leads to another point:\n>\n> - What about giving up on OTS keys? Using each OTS signing key is only important if you want to proof, that you possess a signature for each OTS key. But  e. g. for the interval approach you could just sacrifice / omit a few (contradicts the last part of chapter four in the Internet-Draft, I think). Imagine the interval in the last point: Your advanced key was written successfully, you start using the OTS keys from the interval that are only stored in volatile memory and suddenly there's a blackout. You restart the system. Worst-case, all keys of your reserved intervall are gone. Bad, but should happen seldomly.\n\nI don't think that this erases all of the state-keeping concerns, but it certainly seems viable as a defense-in-depth approach.  This does mean that you need to increase the size of the tree (potentially significantly) which may erase some of the benefits of stateful hbs.",
+      "createdAt": "2025-04-14T12:43:18Z",
+      "updatedAt": "2025-04-14T12:43:18Z",
       "closedAt": null,
       "comments": []
     }
@@ -646,6 +694,48 @@
       },
       "comments": [],
       "reviews": []
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOLPgbFM6SedTV",
+      "title": "Fix a typo",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/13",
+      "state": "MERGED",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Thanks Stefan-Lukas for pointing this out",
+      "createdAt": "2025-04-14T11:55:32Z",
+      "updatedAt": "2025-04-14T19:16:35Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "2cd2c9700b7ac066bfc2ca33fddee6a99089d689",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "typo-SL",
+      "headRefOid": "5db26f88640dcdd47db19ad82987b500d98ae2e4",
+      "closedAt": "2025-04-14T19:16:32Z",
+      "mergedAt": "2025-04-14T19:16:32Z",
+      "mergedBy": "fluppe2",
+      "mergeCommit": {
+        "oid": "658e5c3fde45928977c6e93915a1b0f2efb550b0"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM6k1Rn8",
+          "commit": {
+            "abbreviatedOid": "5db26f8"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-04-14T19:16:18Z",
+          "updatedAt": "2025-04-14T19:16:18Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
