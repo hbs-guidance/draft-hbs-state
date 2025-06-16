@@ -1,11 +1,11 @@
 # Hash-based Signatures: State and Backup Management
 
-This is the working area for the individual Internet-Draft, "Hash-based Signatures: State and Backup Management".
+This is the working area for the PQUIP Internet-Draft, "Hash-based Signatures: State and Backup Management".
 
-* [Editor's Copy](https://hbs-guidance.github.io/draft-hbs-state/#go.draft-wiggers-hbs-state.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-wiggers-hbs-state)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-wiggers-hbs-state)
-* [Compare Editor's Copy to Individual Draft](https://hbs-guidance.github.io/draft-hbs-state/#go.draft-wiggers-hbs-state.diff)
+* [Editor's Copy](https://hbs-guidance.github.io/draft-hbs-state/#go.draft-ietf-pquip-hbs-state.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-pquip-hbs-state)
+* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-ietf-pquip-hbs-state)
+* [Compare Editor's Copy to Individual Draft](https://hbs-guidance.github.io/draft-hbs-state/#go.draft-ietf-pquip-hbs-state.diff)
 
 
 ## Contributing
