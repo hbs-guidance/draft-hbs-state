@@ -9,20 +9,20 @@ number:
 date:
 consensus: false
 v: 3
-# area: "Security"
-# workgroup: "secdispatch"
+area: "Security"
+workgroup: "Post-Quantum Use In Protocols"
 keyword:
  - stateful hash-based signatures
  - XMSS
  - LMS
  - state management
 venue:
-    group: "Post-Quantum Use In Protocols"
-    type: "Working Group"
-    mail: "pqc@ietf.org"
-    arch: "https://mailarchive.ietf.org/arch/browse/pqc/"
-    github: "https://github.com/hbs-guidance/draft-hbs-state"
-    latest: "https://hbs-guidance.github.io/draft-hbs-state/draft-wiggers-hbs-state.html"
+  group: "Post-Quantum Use In Protocols"
+  type: "Working Group"
+  mail: "pqc@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/pqc/"
+  github: "hbs-guidance/draft-hbs-state"
+  latest: "https://hbs-guidance.github.io/draft-hbs-state/draft-ietf-pquip-hbs-state.html"
 
 author:
  - ins: T. Wiggers
