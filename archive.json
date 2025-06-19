@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-04-15T00:40:51.292636+00:00",
+  "timestamp": "2025-06-19T00:44:46.015235+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -733,6 +733,96 @@
           "body": "LGTM",
           "createdAt": "2025-04-14T19:16:18Z",
           "updatedAt": "2025-04-14T19:16:18Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 17,
+      "id": "PR_kwDOLPgbFM6awXdR",
+      "title": "Update draft to adoption status",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/17",
+      "state": "MERGED",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-06-16T17:17:50Z",
+      "updatedAt": "2025-06-17T13:18:03Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "658e5c3fde45928977c6e93915a1b0f2efb550b0",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "rename",
+      "headRefOid": "b9b4976747953ab5687752f120237f8e04050f59",
+      "closedAt": "2025-06-17T13:18:02Z",
+      "mergedAt": "2025-06-17T13:18:02Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "7d35178009798b0fd8782b372b4ba899702f4ff9"
+      },
+      "comments": [
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "A few of the changes to the README were done by an automated script. I will see if I can delete the README and have it be recreated without the duplication.",
+          "createdAt": "2025-06-17T10:09:19Z",
+          "updatedAt": "2025-06-17T10:09:19Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM6u5tuM",
+          "commit": {
+            "abbreviatedOid": "a4a7812"
+          },
+          "author": "kste",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "",
+          "createdAt": "2025-06-17T06:55:09Z",
+          "updatedAt": "2025-06-17T06:56:29Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "This section seems to be duplicated?",
+              "createdAt": "2025-06-17T06:55:09Z",
+              "updatedAt": "2025-06-17T06:56:29Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6u6Tms",
+          "commit": {
+            "abbreviatedOid": "a4a7812"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-17T07:47:44Z",
+          "updatedAt": "2025-06-17T07:47:44Z",
+          "comments": [
+            {
+              "originalPosition": 16,
+              "body": "Yes, I think lines 14-19 need to be deleted.",
+              "createdAt": "2025-06-17T07:47:44Z",
+              "updatedAt": "2025-06-17T07:47:44Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6u6wZ_",
+          "commit": {
+            "abbreviatedOid": "b001f2f"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Apart of the requested change of @kste it looks good to me.\r\nTook the liberty to update .github/CODEOWNERS, see https://github.com/hbs-guidance/draft-hbs-state/pull/17/commits/b001f2fddaa7c6cd7ec203c448ae40b86ac27778.",
+          "createdAt": "2025-06-17T08:21:38Z",
+          "updatedAt": "2025-06-17T08:21:38Z",
           "comments": []
         }
       ]
