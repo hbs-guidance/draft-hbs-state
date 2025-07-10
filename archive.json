@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-19T00:44:46.015235+00:00",
+  "timestamp": "2025-07-10T00:45:24.169042+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -174,6 +174,22 @@
       "body": "Stefan-Lukas Gazdag wrote:\n\n> - You can advance the state / key and store it before signing, even for an intervall of keys. E. g. reserve interval u (let's say 100 OTS keys) and store a key before signing where you got rid of all OTS keys that are reserved (forgetting old keys) or advance a PRNG to the seed you need. Which leads to another point:\n>\n> - What about giving up on OTS keys? Using each OTS signing key is only important if you want to proof, that you possess a signature for each OTS key. But  e. g. for the interval approach you could just sacrifice / omit a few (contradicts the last part of chapter four in the Internet-Draft, I think). Imagine the interval in the last point: Your advanced key was written successfully, you start using the OTS keys from the interval that are only stored in volatile memory and suddenly there's a blackout. You restart the system. Worst-case, all keys of your reserved intervall are gone. Bad, but should happen seldomly.\n\nI don't think that this erases all of the state-keeping concerns, but it certainly seems viable as a defense-in-depth approach.  This does mean that you need to increase the size of the tree (potentially significantly) which may erase some of the benefits of stateful hbs.",
       "createdAt": "2025-04-14T12:43:18Z",
       "updatedAt": "2025-04-14T12:43:18Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 18,
+      "id": "I_kwDOLPgbFM6_eQSg",
+      "title": "\"Soft-fail\" / Warnings when at a certain amount of signatures left",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/18",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Alexander Reilean wrote:\n\n> While reviewing draft-ietf-pquip-hbs-state I understand that it addresses prevention of state reuse, backup management and training operators, but I think it leaves a gap when it comes to warning users before they exhaust the available signatures. People can still drive themselves into a corner if they follow the prescribed procedures.\n>  \n>  \n> Consider a system configured for N=100 signatures. When attempting the N+1 signature, the system returns a \u201csignatures exhausted\u201d error. While this prevents a disaster, the users are already in an operational dead-end because there is no graceful recovery path. Would it be helpful if the system could optionally warn about this a couple of signatures earlier?\n>  \n> I propose extending section 3:\n>  \n> ```\n> Consider providing a configurable warning threshold (M), that is triggered when M signatures remain. When the threshold is reached, the system should return a `signatures nearing exhaustion` error, requiring the user to explicitly acknowledge it in a way that cannot be trivially skipped.\n>  \n> This \u201csoft fail\u201d condition directs attention to the approaching exhaustion while signatures are still available, allowing enough time to initiate key rotation before operations are disrupted.\n>  \n> For flexibility, implementations may allow setting the threshold to M=0 to disable this feature.\n> ```\n>  \n>  \n> The draft could also recommend the layer at which the check should occur, e.g., in the HSM, in the software that uses the HSM, or be a part of a checklist that humans run through. Without explicitly recommending who ought to do it, we might end up in a situation where everyone thought it was someone else\u2019s responsibility. I believe this should happen in the lowest possible layer, so the warning cannot be bypassed by higher-level applications.\n>  \n> Acknowledging this error could be done by setting a configuration parameter or sending a special command to the system. It has to be an action that goes beyond a typical yes/continue/ok that people go through absent-mindedly.\n>  \n> The \u201csoft fail\u201d feature is meant to be a \u201cconstructive annoyance\u201d \u2013 it creates a temporary disruption in order to avoid a catastrophic one.\n>  \n>  \n> Would others find this addition valuable to the draft?\n>\n>p.s. the suggestion is not rooted in experience with running HSMs or secure rooms where these things happen, but rather on a hunch and a background in usability. I'd be particularly interested in hearing from those with operational experience whether they've faced such issues and how they've addressed them.\n\nhttps://mailarchive.ietf.org/arch/msg/pqc/eZw6BfguNtNPDU2A1xURVP7_4DY/\n\n ",
+      "createdAt": "2025-07-08T12:33:38Z",
+      "updatedAt": "2025-07-08T12:33:38Z",
       "closedAt": null,
       "comments": []
     }
