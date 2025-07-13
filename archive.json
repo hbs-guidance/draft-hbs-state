@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-10T00:45:24.169042+00:00",
+  "timestamp": "2025-07-13T00:52:50.913571+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -86,15 +86,15 @@
       "id": "I_kwDOLPgbFM6ZiuRp",
       "title": "Write out S-HBS as stateful HBS?",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/9",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "> On 1 okt 2024, at 08:21 Brockhaus, Hendrik wrote:\r\n> \r\n> I see the shortcut \u201eS-HBS\u201d. I know that you refer to \u201cstateful HBS\u201d. But others could confuse it with \u201cstateless HBS\u201d.\r\n> Is this abbreviation used elsewhere, e.g., at NIST or NSA? If it is only used here, I would propose to change it to \u201cstateful HBS\u201d.\r\n>  \r\n> Hendrik\r\n\r\nPreviously, other drafts appear to have used S-HBS, including https://datatracker.ietf.org/doc/draft-ietf-lamps-x509-shbs/, but we can consider changing it like that draft did. \r\n",
       "createdAt": "2024-10-09T13:54:09Z",
-      "updatedAt": "2024-10-09T13:54:09Z",
-      "closedAt": null,
+      "updatedAt": "2025-07-11T07:23:36Z",
+      "closedAt": "2025-07-11T07:23:36Z",
       "comments": []
     },
     {
@@ -109,9 +109,17 @@
       "labels": [],
       "body": "NIST will be updating things, slides at https://csrc.nist.gov/csrc/media/Presentations/2024/stateful-hbs-backups-revising-208/images-media/kelsey-hbs-backup-external-nov-2024.pdf",
       "createdAt": "2024-11-19T11:08:28Z",
-      "updatedAt": "2024-11-19T11:08:28Z",
+      "updatedAt": "2025-07-10T08:23:31Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I'm not sure we have gotten any updates on this since early this year. ",
+          "createdAt": "2025-07-10T08:23:31Z",
+          "updatedAt": "2025-07-10T08:23:31Z"
+        }
+      ]
     },
     {
       "number": 11,
@@ -839,6 +847,74 @@
           "body": "Apart of the requested change of @kste it looks good to me.\r\nTook the liberty to update .github/CODEOWNERS, see https://github.com/hbs-guidance/draft-hbs-state/pull/17/commits/b001f2fddaa7c6cd7ec203c448ae40b86ac27778.",
           "createdAt": "2025-06-17T08:21:38Z",
           "updatedAt": "2025-06-17T08:21:38Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 19,
+      "id": "PR_kwDOLPgbFM6eQSkx",
+      "title": "Write out S-HBS as Stateful HBS",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/19",
+      "state": "MERGED",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Closes #9",
+      "createdAt": "2025-07-10T08:19:51Z",
+      "updatedAt": "2025-07-11T07:23:36Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "7d35178009798b0fd8782b372b4ba899702f4ff9",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "write-out-shbs",
+      "headRefOid": "c8a80ce0f24c3d580483d5e97469803aa6e25138",
+      "closedAt": "2025-07-11T07:23:33Z",
+      "mergedAt": "2025-07-11T07:23:33Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "6f1c043dee0d74e4eafc317cf1996403a140e6b6"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM6zKu5F",
+          "commit": {
+            "abbreviatedOid": "c8a80ce"
+          },
+          "author": "kste",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-10T14:21:58Z",
+          "updatedAt": "2025-07-10T14:21:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6zLpvt",
+          "commit": {
+            "abbreviatedOid": "c8a80ce"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-10T15:10:43Z",
+          "updatedAt": "2025-07-10T15:10:43Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM6zL0NI",
+          "commit": {
+            "abbreviatedOid": "c8a80ce"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-07-10T15:20:15Z",
+          "updatedAt": "2025-07-10T15:20:15Z",
           "comments": []
         }
       ]
