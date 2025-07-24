@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-13T00:52:50.913571+00:00",
+  "timestamp": "2025-07-24T00:48:01.442514+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -109,7 +109,7 @@
       "labels": [],
       "body": "NIST will be updating things, slides at https://csrc.nist.gov/csrc/media/Presentations/2024/stateful-hbs-backups-revising-208/images-media/kelsey-hbs-backup-external-nov-2024.pdf",
       "createdAt": "2024-11-19T11:08:28Z",
-      "updatedAt": "2025-07-10T08:23:31Z",
+      "updatedAt": "2025-07-22T13:58:01Z",
       "closedAt": null,
       "comments": [
         {
@@ -118,6 +118,13 @@
           "body": "I'm not sure we have gotten any updates on this since early this year. ",
           "createdAt": "2025-07-10T08:23:31Z",
           "updatedAt": "2025-07-10T08:23:31Z"
+        },
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "This is the most recent email from John Kelsey with a slightly more detailed version: https://groups.google.com/a/list.nist.gov/g/pqc-forum/c/t8SSD639Z0M/m/OedXsgyrCgAJ\n\nThe doc is here: \n\n[NIST SP 800-208 proposal-20250131-2.pdf](https://github.com/user-attachments/files/21368634/NIST.SP.800-208.proposal-20250131-2.pdf)\n\n ",
+          "createdAt": "2025-07-22T13:58:01Z",
+          "updatedAt": "2025-07-22T13:58:01Z"
         }
       ]
     },
@@ -129,11 +136,13 @@
       "state": "OPEN",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "fluppe2"
+      ],
       "labels": [],
-      "body": ">In general, I think abstract and introduction is understating the operational\n>complexity of managing those keys.\n>\n>One thing that I didn't notice, or at least isn't explicit in section 5 is\n>partial state transfer: when we have a device with a state that allows N\n>signatures, if could transfer N/2 signatures to another device and retain\n>the other half. That also provides partial protection against hardware failure.\n>Merging state from two devices is also theoretically possible.\n>\n>The other thing, is I think it would be good to explicitly mention that\n>the state management needs to follow all the ACID properties (atomicity,\n>consistency, isolation, and durability).",
+      "body": "https://mailarchive.ietf.org/arch/msg/pqc/JierE20-zfrGfCvBOtJ0gUtuJFc/\n\n>In general, I think abstract and introduction is understating the operational\n>complexity of managing those keys.\n>\n>One thing that I didn't notice, or at least isn't explicit in section 5 is\n>partial state transfer: when we have a device with a state that allows N\n>signatures, if could transfer N/2 signatures to another device and retain\n>the other half. That also provides partial protection against hardware failure.\n>Merging state from two devices is also theoretically possible.\n>\n>The other thing, is I think it would be good to explicitly mention that\n>the state management needs to follow all the ACID properties (atomicity,\n>consistency, isolation, and durability).",
       "createdAt": "2025-02-24T09:16:05Z",
-      "updatedAt": "2025-02-24T09:16:05Z",
+      "updatedAt": "2025-07-22T14:35:53Z",
       "closedAt": null,
       "comments": []
     },
@@ -145,11 +154,13 @@
       "state": "OPEN",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "thomwiggers"
+      ],
       "labels": [],
       "body": "Stefan-Lukas Gazdag wrote:\n\n> Storages are discussed/shown including CDs and USB drives, but what about smartcards? Do you consider them out of scope (and maybe unsuitable for practical use) or do you view them as some kind of HSM? Because smartcards have quite some restrictions on their own and this may be true for other use cases. The RAM is limited and the non-volatile memory wears of. So you need to think about state and memory management. Also see Andreas H\u00fclsing's paper from 2018. At genua we tested JavaCards at some point with similar experiences. A full discussion would be over the top for the Internet-Draft, but you may want to add a note on this.",
       "createdAt": "2025-04-14T12:38:43Z",
-      "updatedAt": "2025-04-14T12:38:43Z",
+      "updatedAt": "2025-07-22T14:12:29Z",
       "closedAt": null,
       "comments": []
     },
@@ -161,11 +172,13 @@
       "state": "OPEN",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "thomwiggers"
+      ],
       "labels": [],
       "body": "Stefan-Lukas Gazdag wrote:\n\n> - Operational considerations: A few years ago I took some thought on operating systems and how to make sure there's no copies of the state or old keys left. My conclusion was that you need your whole system to be secure at some point in time because you won't be able to handle all the temporary copies within a modern computer. For examples caches are hell. There quite a few of them. Data stored there is only really written to where it should go if being flushed. You do not necessarily want to flush. You're slowing down the whole system and sometimes things may go wrong. Or your OS just decides that what you want is not what the OS wants. You can't just read a recently written key supposedly written to disk to make sure it's stored, because there may be just some cache (maybe even on the hard disk before the actual write operation on the disk). Sometimes you have to trust that everything's alright or it will get messy.\n\n\nI think the point of this is basically: should we elaborate on the design requirements/environment requirements for secure operations at the OS level?",
       "createdAt": "2025-04-14T12:41:12Z",
-      "updatedAt": "2025-04-14T12:41:12Z",
+      "updatedAt": "2025-07-22T14:12:50Z",
       "closedAt": null,
       "comments": []
     },
@@ -195,9 +208,27 @@
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
-      "body": "Alexander Reilean wrote:\n\n> While reviewing draft-ietf-pquip-hbs-state I understand that it addresses prevention of state reuse, backup management and training operators, but I think it leaves a gap when it comes to warning users before they exhaust the available signatures. People can still drive themselves into a corner if they follow the prescribed procedures.\n>  \n>  \n> Consider a system configured for N=100 signatures. When attempting the N+1 signature, the system returns a \u201csignatures exhausted\u201d error. While this prevents a disaster, the users are already in an operational dead-end because there is no graceful recovery path. Would it be helpful if the system could optionally warn about this a couple of signatures earlier?\n>  \n> I propose extending section 3:\n>  \n> ```\n> Consider providing a configurable warning threshold (M), that is triggered when M signatures remain. When the threshold is reached, the system should return a `signatures nearing exhaustion` error, requiring the user to explicitly acknowledge it in a way that cannot be trivially skipped.\n>  \n> This \u201csoft fail\u201d condition directs attention to the approaching exhaustion while signatures are still available, allowing enough time to initiate key rotation before operations are disrupted.\n>  \n> For flexibility, implementations may allow setting the threshold to M=0 to disable this feature.\n> ```\n>  \n>  \n> The draft could also recommend the layer at which the check should occur, e.g., in the HSM, in the software that uses the HSM, or be a part of a checklist that humans run through. Without explicitly recommending who ought to do it, we might end up in a situation where everyone thought it was someone else\u2019s responsibility. I believe this should happen in the lowest possible layer, so the warning cannot be bypassed by higher-level applications.\n>  \n> Acknowledging this error could be done by setting a configuration parameter or sending a special command to the system. It has to be an action that goes beyond a typical yes/continue/ok that people go through absent-mindedly.\n>  \n> The \u201csoft fail\u201d feature is meant to be a \u201cconstructive annoyance\u201d \u2013 it creates a temporary disruption in order to avoid a catastrophic one.\n>  \n>  \n> Would others find this addition valuable to the draft?\n>\n>p.s. the suggestion is not rooted in experience with running HSMs or secure rooms where these things happen, but rather on a hunch and a background in usability. I'd be particularly interested in hearing from those with operational experience whether they've faced such issues and how they've addressed them.\n\nhttps://mailarchive.ietf.org/arch/msg/pqc/eZw6BfguNtNPDU2A1xURVP7_4DY/\n\n ",
+      "body": "https://mailarchive.ietf.org/arch/msg/pqc/eZw6BfguNtNPDU2A1xURVP7_4DY/\n\nAlexander Reilean wrote:\n\n> While reviewing draft-ietf-pquip-hbs-state I understand that it addresses prevention of state reuse, backup management and training operators, but I think it leaves a gap when it comes to warning users before they exhaust the available signatures. People can still drive themselves into a corner if they follow the prescribed procedures.\n>  \n>  \n> Consider a system configured for N=100 signatures. When attempting the N+1 signature, the system returns a \u201csignatures exhausted\u201d error. While this prevents a disaster, the users are already in an operational dead-end because there is no graceful recovery path. Would it be helpful if the system could optionally warn about this a couple of signatures earlier?\n>  \n> I propose extending section 3:\n>  \n> ```\n> Consider providing a configurable warning threshold (M), that is triggered when M signatures remain. When the threshold is reached, the system should return a `signatures nearing exhaustion` error, requiring the user to explicitly acknowledge it in a way that cannot be trivially skipped.\n>  \n> This \u201csoft fail\u201d condition directs attention to the approaching exhaustion while signatures are still available, allowing enough time to initiate key rotation before operations are disrupted.\n>  \n> For flexibility, implementations may allow setting the threshold to M=0 to disable this feature.\n> ```\n>  \n>  \n> The draft could also recommend the layer at which the check should occur, e.g., in the HSM, in the software that uses the HSM, or be a part of a checklist that humans run through. Without explicitly recommending who ought to do it, we might end up in a situation where everyone thought it was someone else\u2019s responsibility. I believe this should happen in the lowest possible layer, so the warning cannot be bypassed by higher-level applications.\n>  \n> Acknowledging this error could be done by setting a configuration parameter or sending a special command to the system. It has to be an action that goes beyond a typical yes/continue/ok that people go through absent-mindedly.\n>  \n> The \u201csoft fail\u201d feature is meant to be a \u201cconstructive annoyance\u201d \u2013 it creates a temporary disruption in order to avoid a catastrophic one.\n>  \n>  \n> Would others find this addition valuable to the draft?\n>\n>p.s. the suggestion is not rooted in experience with running HSMs or secure rooms where these things happen, but rather on a hunch and a background in usability. I'd be particularly interested in hearing from those with operational experience whether they've faced such issues and how they've addressed them.\n\nhttps://mailarchive.ietf.org/arch/msg/pqc/eZw6BfguNtNPDU2A1xURVP7_4DY/\n\n ",
       "createdAt": "2025-07-08T12:33:38Z",
-      "updatedAt": "2025-07-08T12:33:38Z",
+      "updatedAt": "2025-07-22T15:58:38Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 20,
+      "id": "I_kwDOLPgbFM7B4Wyz",
+      "title": "Clarify how we differ from ETSI TR 103 692 \"State management for stateful authentication mechanisms\"",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/20",
+      "state": "OPEN",
+      "author": "fluppe2",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "fluppe2"
+      ],
+      "labels": [],
+      "body": "At IETF 123 PQUIP session the question came up, what the draft adds considering ETSI TR 103 692 \"State management for stateful authentication mechanisms\" (https://www.etsi.org/deliver/etsi_tr/103600_103699/103692/01.01.01_60/tr_103692v010101p.pdf).\n\nClarify this in the introductory sections of the draft.\n\nPunchline: ETSI's doc is more focused on background information, comparison of HSS/LMS and XMSS(^MT) and making aware of the issues coming up when having a state. Backup and restore management is not explored (see section 6.2: \"It is possible that secure mechanisms for back-up and restore for S-HBS schemes can be developed, or that there are specific contexts or applications wherein secure back-up and restore can be achieved. Such situations and solutions are not explored in the present document\").\n",
+      "createdAt": "2025-07-22T13:47:07Z",
+      "updatedAt": "2025-07-22T13:47:32Z",
       "closedAt": null,
       "comments": []
     }
