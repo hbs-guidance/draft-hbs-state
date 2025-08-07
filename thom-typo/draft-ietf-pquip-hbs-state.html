@@ -1557,13 +1557,13 @@ and<a href="#section-4-3.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-4-4">A system may have a version of the private key stored in non-volatile memory
-(e.g. a disk) and will load it into volatile memory (e.g. RAM) while
-processing. Here, an implementer <span class="bcp14">MUST</span> ensure that these are always perfectly
-synchronized <span>[<a href="#MCGREW" class="cite xref">MCGREW</a>]</span>, meaning that no parts of the system are allowed to read
-any version of the key during procedures which load, write or modify keys. This can be particularly challenging if there are
-additional abstraction layers present in the system, like additional caches
-which may affect reading/writing the state and its potential existence in
-multiple locations.<a href="#section-4-4" class="pilcrow">¶</a></p>
+(e.g. a disk) and will load it into volatile memory (e.g. RAM) while processing.
+Here, an implementer <span class="bcp14">MUST</span> ensure that these are always perfectly synchronized
+<span>[<a href="#MCGREW" class="cite xref">MCGREW</a>]</span>, meaning that no parts of the system are allowed to read any version of
+the key during procedures which load, write or modify keys. This can be
+particularly challenging if there are additional abstraction layers present in
+the system, like additional caches which may affect reading/writing the state
+and its potential existence in multiple locations.<a href="#section-4-4" class="pilcrow">¶</a></p>
 <p id="section-4-5">Cloning is another concern, as it can easily lead to re-using the same state.
 This can happen for instance if a process which issues a signing operation is
 forked, and no proper synchronization is enforced in the implementation to
