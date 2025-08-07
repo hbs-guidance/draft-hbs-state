@@ -302,7 +302,7 @@ Table of Contents
    that needs to be accounted for in any state selection process of a
    proper state and backup management solution.  Compounding these
    complexities is the fact any resilient state management system SHOULD
-   also provide some means to verify the integrity of these long lived
+   also provide some means to verify the integrity of these long-lived
    backups to ensure they will be valid when they are required, and to
    ensure the operators know how to execute the necessary recovery
    procedure(s).
@@ -426,7 +426,7 @@ Table of Contents
    The proposal of using multiple Stateful HBS keypairs for a single
    instance also generates questions as to how to establish that
    approach in existing public key infrastructures.  For example,
-   issueing multiple certificates adds the storage needs of the
+   issuing multiple certificates adds the storage needs of the
    certificate material to the public key footprint.  In order to
    alternatively issue multiple public keys encoded inside a single
    certificate one would need a standardized format if interoperability
@@ -597,7 +597,7 @@ Table of Contents
    Expanding on the given example, for software that is released with
    strictly increasing, simple single-position version numbers (i.e.,
    versions 1, 2, 3...), this can be trivially implemented.  As versions
-   have a one-to-one correspondence to an Stateful HBS signing state,
+   have a one-to-one correspondence to a Stateful HBS signing state,
    operators MUST ensure that versions can only be minted a single time.
    This MAY require skipping version numbers if a release process
    failed, to avoid double-signing.
@@ -743,7 +743,7 @@ Table of Contents
    *  sign the corresponding root node with an unused OTS key from the
       top-level tree,
 
-   *  securely _key export_ (as decribed in Section 2.1.3) the seed,
+   *  securely _key export_ (as described in Section 2.1.3) the seed,
       which was used to generate the bottom-level tree,
 
    *  export the signature of the root node, the corresponding OTS key
@@ -766,7 +766,7 @@ Table of Contents
       are available for signing messages and
 
    *  the top-level Merkle tree (which is used for signing the root-
-      nodes of sub-trees) is also not available any more.
+      nodes of sub-trees) is also not available anymore.
 
    This scenario may, for example, happen if all hardware modules are
    broken at the same time.
