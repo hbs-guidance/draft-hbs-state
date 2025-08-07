@@ -860,8 +860,9 @@ Table of Contents
 
    [MCGREW]   McGrew, D., Kampanakis, P., Fluhrer, S., Gazdag, S.,
               Butin, D., and J. Buchmann, "State Management for Hash-
-              Based Signatures", 2 November 2016,
-              <https://tubiblio.ulb.tu-darmstadt.de/id/eprint/101633>.
+              Based Signatures", Security Standardization Research
+              2016 , 2 November 2016,
+              <https://eprint.iacr.org/2016/357.pdf>.
 
    [RFC8391]  Huelsing, A., Butin, D., Gazdag, S., Rijneveld, J., and A.
               Mohaisen, "XMSS: eXtended Merkle Signature Scheme",
