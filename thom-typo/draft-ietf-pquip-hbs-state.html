@@ -11,27 +11,27 @@
 <meta content="Jim Goodman" name="author">
 <meta content="Stavros Kousidis" name="author">
 <meta content="
-       Stateful Hash-Based Signature Schemes (S-HBS) such as LMS, HSS, XMSS and
+       Stateful Hash-Based Signature Schemes (Stateful HBS) such as LMS, HSS, XMSS and
 XMSS MT  combine Merkle trees with One-Time Signatures (OTS) to
 provide signatures that are resistant against attacks using large-scale quantum
-computers. Unlike conventional stateless digital signature schemes, S-HBS have
+computers. Unlike conventional stateless digital signature schemes, Stateful HBS have
 a state to keep track of which OTS keys have been used, as double-signing with
 the same OTS key allows forgeries. 
        This document provides guidance and documents security considerations for the
-operational and technical aspects of deploying systems that rely on S-HBS.
-Management of the state of the S-HBS, including any handling of redundant key
+operational and technical aspects of deploying systems that rely on Stateful HBS.
+Management of the state of the Stateful HBS, including any handling of redundant key
 material, is a sensitive topic, and we discuss some approaches to handle the
 associated challenges. We also describe the challenges that need to be resolved
 before certain approaches should be considered. 
     " name="description">
-<meta content="xml2rfc 3.28.1" name="generator">
+<meta content="xml2rfc 3.30.0" name="generator">
 <meta content="stateful hash-based signatures" name="keyword">
 <meta content="XMSS" name="keyword">
 <meta content="LMS" name="keyword">
 <meta content="state management" name="keyword">
 <meta content="draft-ietf-pquip-hbs-state-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.28.1
+  xml2rfc 3.30.0
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1062,11 +1062,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">HBS: State and Backup</td>
-<td class="right">June 2025</td>
+<td class="right">August 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wiggers, et al.</td>
-<td class="center">Expires 19 December 2025</td>
+<td class="center">Expires 8 February 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1079,12 +1079,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-pquip-hbs-state-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-06-17" class="published">17 June 2025</time>
+<time datetime="2025-08-07" class="published">7 August 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-12-19">19 December 2025</time></dd>
+<dd class="expires"><time datetime="2026-02-08">8 February 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1113,15 +1113,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <h1 id="title">Hash-based Signatures: State and Backup Management</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
-<p id="section-abstract-1">Stateful Hash-Based Signature Schemes (S-HBS) such as LMS, HSS, XMSS and
+<p id="section-abstract-1">Stateful Hash-Based Signature Schemes (Stateful HBS) such as LMS, HSS, XMSS and
 XMSS<sup>MT</sup> combine Merkle trees with One-Time Signatures (OTS) to
 provide signatures that are resistant against attacks using large-scale quantum
-computers. Unlike conventional stateless digital signature schemes, S-HBS have
+computers. Unlike conventional stateless digital signature schemes, Stateful HBS have
 a state to keep track of which OTS keys have been used, as double-signing with
 the same OTS key allows forgeries.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 <p id="section-abstract-2">This document provides guidance and documents security considerations for the
-operational and technical aspects of deploying systems that rely on S-HBS.
-Management of the state of the S-HBS, including any handling of redundant key
+operational and technical aspects of deploying systems that rely on Stateful HBS.
+Management of the state of the Stateful HBS, including any handling of redundant key
 material, is a sensitive topic, and we discuss some approaches to handle the
 associated challenges. We also describe the challenges that need to be resolved
 before certain approaches should be considered.<a href="#section-abstract-2" class="pilcrow">¶</a></p>
@@ -1161,7 +1161,7 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 19 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1194,7 +1194,7 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
             <p id="section-toc.1-1.1.1" class="keepWithNext"><a href="#section-1" class="auto internal xref">1</a>.  <a href="#name-introduction" class="internal xref">Introduction</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.1.2.1">
-                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-when-are-s-hbs-appropriate" class="internal xref">When are S-HBS appropriate?</a></p>
+                <p id="section-toc.1-1.1.2.1.1" class="keepWithNext"><a href="#section-1.1" class="auto internal xref">1.1</a>.  <a href="#name-when-are-stateful-hbs-appro" class="internal xref">When are Stateful HBS appropriate?</a></p>
 </li>
             </ul>
 </li>
@@ -1202,7 +1202,7 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
             <p id="section-toc.1-1.2.1"><a href="#section-2" class="auto internal xref">2</a>.  <a href="#name-conventions-and-definitions" class="internal xref">Conventions and Definitions</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-specific-terminology-in-the" class="internal xref">Specific terminology in the context of S-HBS</a></p>
+                <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-specific-terminology-in-the" class="internal xref">Specific terminology in the context of Stateful HBS</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.1">
                     <p id="section-toc.1-1.2.2.1.2.1.1" class="keepWithNext"><a href="#section-2.1.1" class="auto internal xref">2.1.1</a>.  <a href="#name-state-management" class="internal xref">State management</a></p>
@@ -1290,34 +1290,34 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
       <h2 id="name-introduction">
 <a href="#section-1" class="section-number selfRef">1. </a><a href="#name-introduction" class="section-name selfRef">Introduction</a>
       </h2>
-<p id="section-1-1">Stateful Hash-Based Signature Schemes (S-HBS) such as LMS, HSS, XMSS and
+<p id="section-1-1">Stateful Hash-Based Signature Schemes (Stateful HBS) such as LMS, HSS, XMSS and
 XMSS<sup>MT</sup> combine Merkle trees with One-Time Signatures (OTS) in order
 to provide digital signature schemes that remain secure even when large-scale
 quantum computers become available. Their theoretic security is well understood
 and depends only on the security of the underlying hash function. As such, they
 can serve as an important building block for quantum-resistant information and
-communication technology. S-HBS are specified in <span>[<a href="#RFC8391" class="cite xref">RFC8391</a>]</span>, <span>[<a href="#RFC8554" class="cite xref">RFC8554</a>]</span>,
+communication technology. Stateful HBS are specified in <span>[<a href="#RFC8391" class="cite xref">RFC8391</a>]</span>, <span>[<a href="#RFC8554" class="cite xref">RFC8554</a>]</span>,
 and NIST <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">The private key of an S-HBS is a finite collection of OTS keys and an
+<p id="section-1-2">The private key of an Stateful HBS is a finite collection of OTS keys and an
 associated data structure which keeps track of which OTS keys have been used.
 This data structure is typically a simple counter and often called an index; we
-refer to it as the <strong>state</strong> of the private key. Each S-HBS private key can be
+refer to it as the <strong>state</strong> of the private key. Each Stateful HBS private key can be
 used to sign a finite number of messages, and the state must be updated with
 each generated signature.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">One must not reuse any OTS key that is part of an S-HBS private key. If an
+<p id="section-1-3">One must not reuse any OTS key that is part of an Stateful HBS private key. If an
 attacker is able to obtain signatures for two different messages created using
 the same OTS key, it is computationally feasible for that attacker to create
 forgeries <span>[<a href="#BH16" class="cite xref">BH16</a>]</span>. As noted in <span>[<a href="#MCGREW" class="cite xref">MCGREW</a>]</span> and <span>[<a href="#ETSI-TR-103-692" class="cite xref">ETSI-TR-103-692</a>]</span>, extreme care
 should be taken in order to avoid the risk that an OTS key will be reused
 accidentally.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">The statefulness of S-HBS leads to significant challenges in practice:<a href="#section-1-4" class="pilcrow">¶</a></p>
+<p id="section-1-4">The statefulness of Stateful HBS leads to significant challenges in practice:<a href="#section-1-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-5.1">
           <p id="section-1-5.1.1">Implementers must ensure that each creation of a signature updates the state
 correctly.<a href="#section-1-5.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-5.2">
-          <p id="section-1-5.2.1">If the S-HBS private key is distributed to multiple signers at the same time,
+          <p id="section-1-5.2.1">If the Stateful HBS private key is distributed to multiple signers at the same time,
 implementers must ensure that they never use the same OTS key. This may
 require synchronization between all signers.<a href="#section-1-5.2.1" class="pilcrow">¶</a></p>
 </li>
@@ -1327,22 +1327,22 @@ mechanism can not lead to re-using a previously used OTS key.<a href="#section-1
 </li>
       </ul>
 <p id="section-1-6">The purpose of this document is to present, recall, and discuss various
-strategies for a correct state and backup management for S-HBS.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<div id="when-are-s-hbs-appropriate">
+strategies for a correct state and backup management for Stateful HBS.<a href="#section-1-6" class="pilcrow">¶</a></p>
+<div id="when-are-stateful-hbs-appropriate">
 <section id="section-1.1">
-        <h3 id="name-when-are-s-hbs-appropriate">
-<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-when-are-s-hbs-appropriate" class="section-name selfRef">When are S-HBS appropriate?</a>
+        <h3 id="name-when-are-stateful-hbs-appro">
+<a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-when-are-stateful-hbs-appro" class="section-name selfRef">When are Stateful HBS appropriate?</a>
         </h3>
 <p id="section-1.1-1">The issues with state management described above, as well as the limited number
 of signatures, lead to new requirements that most developers will not be
-familiar with and that require careful handling in practice: S-HBS are not
+familiar with and that require careful handling in practice: Stateful HBS are not
 general-purpose signature schemes. Most applications, especially those that may
 produce unrestricted numbers of signatures, should use <em>stateless</em> hash-based
 signature schemes like SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span>, which use the same security
 assumptions, or schemes based on other assumptions, such as ML-DSA <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>,
 instead. However, if performance, signature or key sizes of stateless
 alternatives are prohibitive, and the specific use case allows a very tight
-control of the signing environment, using S-HBS may be an appropriate solution.
+control of the signing environment, using Stateful HBS may be an appropriate solution.
 It seems likely that in many scenarios, this will only be possible when using
 purpose-designed hardware, such as hardware-security modules.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
@@ -1358,13 +1358,13 @@ purpose-designed hardware, such as hardware-security modules.<a href="#section-1
 "<span class="bcp14">MAY</span>", and "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as
 described in BCP 14 <span>[<a href="#RFC2119" class="cite xref">RFC2119</a>]</span> <span>[<a href="#RFC8174" class="cite xref">RFC8174</a>]</span> when, and only when, they
 appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<div id="specific-terminology-in-the-context-of-s-hbs">
+<div id="specific-terminology-in-the-context-of-stateful-hbs">
 <section id="section-2.1">
         <h3 id="name-specific-terminology-in-the">
-<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-specific-terminology-in-the" class="section-name selfRef">Specific terminology in the context of S-HBS</a>
+<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-specific-terminology-in-the" class="section-name selfRef">Specific terminology in the context of Stateful HBS</a>
         </h3>
 <p id="section-2.1-1">In this subsection we specify certain notions which are important in the
-context of S-HBS.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
+context of Stateful HBS.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
 <div id="state-management">
 <section id="section-2.1.1">
           <h4 id="name-state-management">
@@ -1378,7 +1378,7 @@ of the state of the private key.<a href="#section-2.1.1-1" class="pilcrow">¶</a
               <p id="section-2.1.1-3.1.1">to securely update the state after each signature,<a href="#section-2.1.1-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-2.1.1-3.2">
-              <p id="section-2.1.1-3.2.1">to set up S-HBS with a split state and/or private key, so that signatures can
+              <p id="section-2.1.1-3.2.1">to set up Stateful HBS with a split state and/or private key, so that signatures can
 be generated from either part without risk of state reuse,<a href="#section-2.1.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-2.1.1-3.3">
@@ -1390,7 +1390,7 @@ material,<a href="#section-2.1.1-3.3.1" class="pilcrow">¶</a></p>
 the lifetime of the key.<a href="#section-2.1.1-3.4.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-2.1.1-4">Note that in particular implementations of S-HBS, or in alternative signature
+<p id="section-2.1.1-4">Note that in particular implementations of Stateful HBS, or in alternative signature
 mechanisms such as, e.g., puncturable schemes <span>[<a href="#BSW16" class="cite xref">BSW16</a>]</span>, the state and private
 key might be inseparable. However, even in these scenarios, this document's
 guidance should still apply.<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
@@ -1499,8 +1499,8 @@ difficulties associated with transferring keys between devices, and one finds
 them self with a perplexing set of challenges that needs to be accounted for in
 any state selection process of a proper state and backup management solution.
 Compounding these complexities is the fact any resilient state management
-system <span class="bcp14">SHOULD</span> also provide some means to verify the integrity of these long
-lived backups to ensure they will be valid when they are required, and to
+system <span class="bcp14">SHOULD</span> also provide some means to verify the integrity of these
+long-lived backups to ensure they will be valid when they are required, and to
 ensure the operators know how to execute the necessary recovery procedure(s).<a href="#section-3-2" class="pilcrow">¶</a></p>
 <p id="section-3-3">Similarly, many of the prescribed state management options require a high
 degree of operator involvement which means one <span class="bcp14">SHOULD</span> consider the costs
@@ -1530,7 +1530,7 @@ capabilities all the more complicated and expensive.<a href="#section-3-4" class
       <h2 id="name-requirements-for-secure-sta">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-requirements-for-secure-sta" class="section-name selfRef">Requirements for secure state management</a>
       </h2>
-<p id="section-4-1">A system deploying S-HBS <span class="bcp14">SHOULD</span> fulfill certain requirements to allow securely
+<p id="section-4-1">A system deploying Stateful HBS <span class="bcp14">SHOULD</span> fulfill certain requirements to allow securely
 handling the state. The system <span class="bcp14">MUST</span> ensure that no two signing operations can
 ever be issued from the same state. In addition, the generation of a signature
 and update of the state <span class="bcp14">SHOULD</span> appear to be an <em>atomic transaction</em>. This means
@@ -1604,9 +1604,9 @@ describes a number of approaches and their potential advantages/disadvantages.<a
         <h3 id="name-multiple-public-keys-sp-800">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-multiple-public-keys-sp-800" class="section-name selfRef">Multiple Public Keys (SP-800-208)</a>
         </h3>
-<p id="section-5.1-1">The <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> proposes generating multiple S-HBS keypairs and configuring
+<p id="section-5.1-1">The <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> proposes generating multiple Stateful HBS keypairs and configuring
 devices and clients to accept signatures created by any of these keys.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">This negatively impacts one of the advantages of using S-HBS by increasing the
+<p id="section-5.1-2">This negatively impacts one of the advantages of using Stateful HBS by increasing the
 public key footprint within the client, which can be problematic if it has
 limited public key storage capacity. <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> addresses this concern by
 suggesting using a mechanism such as that proposed in <span>[<a href="#RFC8649" class="cite xref">RFC8649</a>]</span> to update
@@ -1614,7 +1614,7 @@ the stored public key by having the current key endorse the next key that is to
 be installed. Unfortunately, for many constrained devices the public key is
 embedded in immutable ROM or fuses due to security reasons, so it cannot be
 updated in this manner.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
-<p id="section-5.1-3">The proposal of using multiple S-HBS keypairs for a single instance also
+<p id="section-5.1-3">The proposal of using multiple Stateful HBS keypairs for a single instance also
 generates questions as to how to establish that approach in existing public key
 infrastructures. For example, issueing multiple certificates adds the storage
 needs of the certificate material to the public key footprint. In order to
@@ -1627,13 +1627,13 @@ one would need a standardized format if interoperability is a concern.<a href="#
         <h3 id="name-distributed-multi-trees-sp-">
 <a href="#section-5.2" class="section-number selfRef">5.2. </a><a href="#name-distributed-multi-trees-sp-" class="section-name selfRef">Distributed Multi-trees (SP-800-208)</a>
         </h3>
-<p id="section-5.2-1">The <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> also proposes creating multiple S-HBS keys across multiple
+<p id="section-5.2-1">The <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> also proposes creating multiple Stateful HBS keys across multiple
 cryptographic modules using a distributed multi-tree approach that is a variant
-of the standard hyper-tree based S-HBS schemes HSS and XMSS<sup>MT</sup>. In
+of the standard hyper-tree based Stateful HBS schemes HSS and XMSS<sup>MT</sup>. In
 this approach trees are instantiated on a root device (HSM<sub>root</sub>), as
 well as one or more subordinate devices (HSM<sub>sub[i]</sub>), and the root
 tree is used to sign the root nodes of the subordinate trees to synthesize a
-multi-level S-HBS key. The root device is only ever used to sign subordinate
+multi-level Stateful HBS key. The root device is only ever used to sign subordinate
 device root nodes, while the subordinate device(s) is(are) used to sign
 messages. This is relatively straightforward to do using HSS, and <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span>
 describes the necessary algorithmic modifications when using XMSS<sup>MT</sup>.<a href="#section-5.2-1" class="pilcrow">¶</a></p>
@@ -1665,7 +1665,7 @@ system operators to rely on devices well beyond their expected lifetimes of
         <h3 id="name-sectorization">
 <a href="#section-5.3" class="section-number selfRef">5.3. </a><a href="#name-sectorization" class="section-name selfRef">Sectorization</a>
         </h3>
-<p id="section-5.3-1">Distributed multi-trees attempt to partition a S-HBS signing space amongst
+<p id="section-5.3-1">Distributed multi-trees attempt to partition a Stateful HBS signing space amongst
 multiple cryptographic modules by breaking up the signing space along the
 boundaries of the subordinate trees generated during the multi-tree key
 generation process. An alternative approach would be to use only a single tree,
@@ -1674,7 +1674,7 @@ number of leaves in the tree (e.g., 2<sup>s</sup> for a tree of height h &gt; s)
 creating N = 2<sup>h-s</sup> partitions or sectors, which are instantiated as N
 height-s Merkle trees whose root nodes are considered interior nodes of the
 overall height-h Merkle tree. Hence, there is no additional OTS required to
-sign their root nodes; their values are used as-is in the underlying S-HBS
+sign their root nodes; their values are used as-is in the underlying Stateful HBS
 scheme's tree ascent mechanism, yielding a common public key (i.e., root node)
 for all sectors. Care <span class="bcp14">MUST</span> be taken to ensure that each sector uses the same
 root tree identifier (i.e., the "I" value for HSS/LMS and "root" value for
@@ -1694,7 +1694,7 @@ information it computes to ascend from the leaf OTS to the sector's root node
 2<sup>h-s</sup> private key values, each capable of generating 2<sup>s</sup>
 signatures, after which the sectorized key is exhausted.<a href="#section-5.3-3" class="pilcrow">¶</a></p>
 <p id="section-5.3-4">In addition to avoiding an increased signature size; when unique seeds are
-utilized sectorization breaks a given S-HBS key/state into multiple independent
+utilized sectorization breaks a given Stateful HBS key/state into multiple independent
 fragments that can be managed as independent objects. As a result, system
 operators <span class="bcp14">MAY</span> distribute sectors to multiple cryptographic devices, allowing
 for performance scaling, and resiliency/availability, while only requiring them
@@ -1708,13 +1708,13 @@ signatures from another sector's signature space.<a href="#section-5.3-4" class=
         <h3 id="name-key-state-transfer">
 <a href="#section-5.4" class="section-number selfRef">5.4. </a><a href="#name-key-state-transfer" class="section-name selfRef">Key/State Transfer</a>
         </h3>
-<p id="section-5.4-1">S-HBS key/state transfer between cryptographic modules entails having a means
-to migrate one instance of a S-HBS key/state on a source device to a separate
+<p id="section-5.4-1">Stateful HBS key/state transfer between cryptographic modules entails having a means
+to migrate one instance of a Stateful HBS key/state on a source device to a separate
 destination device, while ensuring that any copy of the key/state is deleted
 from the source device.<a href="#section-5.4-1" class="pilcrow">¶</a></p>
 <p id="section-5.4-2">This capability may help alleviate the aforementioned concern regarding
 operating devices beyond their expected lifetimes by allowing operators to
-migrate S-HBS key/state to a newer device when the original device begins to
+migrate Stateful HBS key/state to a newer device when the original device begins to
 approach its end-of-life. However, it still leaves the operator vulnerable to
 having the source device fail before the key/state can be transferred,
 effectively causing the loss of the key/state. Hence, it will not be of much
@@ -1731,13 +1731,13 @@ transfer validation to yield a more robust transfer mechanism.<a href="#section-
         <h3 id="name-key-rotation">
 <a href="#section-5.5" class="section-number selfRef">5.5. </a><a href="#name-key-rotation" class="section-name selfRef">Key Rotation</a>
         </h3>
-<p id="section-5.5-1">Key rotation, such as that defined in <span>[<a href="#RFC8649" class="cite xref">RFC8649</a>]</span>, would generate new S-HBS
+<p id="section-5.5-1">Key rotation, such as that defined in <span>[<a href="#RFC8649" class="cite xref">RFC8649</a>]</span>, would generate new Stateful HBS
 keys on an as-needed basis, and provide a means to transition the system on to
-using this new S-HBS key, while generating the next key in the chain in
+using this new Stateful HBS key, while generating the next key in the chain in
 preparation of a future rotation/update. However, this just shifts the problem
 to the PKI and certificate handling.<a href="#section-5.5-1" class="pilcrow">¶</a></p>
 <p id="section-5.5-2">Key rotation is not foolproof since in most use cases it will require
-redundancy to ensure there is at least one S-HBS signing key available to
+redundancy to ensure there is at least one Stateful HBS signing key available to
 attest to newly generated keys. In addition, for many applications the device
 keys cannot be updated due to engineering constraints or security reasons.<a href="#section-5.5-2" class="pilcrow">¶</a></p>
 </section>
@@ -1754,7 +1754,7 @@ use its final OTS to sign the root node of a new subordinate tree, creating a
 theory be repeated as many times as necessary. However, this entails having a
 multi-tree scheme with a variable number of levels, and hence, variable length
 signatures.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
-<p id="section-5.6-2">In addition to departing quite significantly from the current S-HBS
+<p id="section-5.6-2">In addition to departing quite significantly from the current Stateful HBS
 specifications and <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span>, this approach has a number of significant
 challenges on both the engineering and operational fronts. Firstly, the
 variable length nature of the signature can lead to variable length
@@ -1782,7 +1782,7 @@ state management to the to-be signed messages.<a href="#section-5.7-1" class="pi
 <p id="section-5.7-2">Expanding on the given example, for software that is released with strictly
 increasing, simple single-position version numbers (i.e., versions 1, 2, 3...),
 this can be trivially implemented. As versions have a one-to-one correspondence
-to an S-HBS signing state, operators <span class="bcp14">MUST</span> ensure that versions can only be
+to an Stateful HBS signing state, operators <span class="bcp14">MUST</span> ensure that versions can only be
 minted a single time. This <span class="bcp14">MAY</span> require skipping version numbers if a release
 process failed, to avoid double-signing.<a href="#section-5.7-2" class="pilcrow">¶</a></p>
 <p id="section-5.7-3">This scheme can be adapted to more complicated release schemes: for example,
@@ -1804,7 +1804,7 @@ we describe in the next section.<a href="#section-5.7-4" class="pilcrow">¶</a><
         </h3>
 <p id="section-5.8-1">As a variant of pre-assigning one-time signatures based on external counters,
 it is in theory possible to base the selection of one-time signature indexes on
-the current date and time. For example, if a given S-HBS instance offers 1024
+the current date and time. For example, if a given Stateful HBS instance offers 1024
 total signatures, they could be broken up into 8 groups of 128 OTS instances
 each, with the first 128 allowed to be used in the first time window, the
 second 128 in the second time window, and so on, until the signature space is
@@ -1830,7 +1830,7 @@ ensure it does not exceed the number allowed within the window.<a href="#section
 </li>
           <li class="normal" id="section-5.8-3.4">
             <p id="section-5.8-3.4.1">Signing devices <span class="bcp14">MUST</span> still operate consistently with the requirements of
-state keeping for S-HBS: the signature index within a time window <span class="bcp14">SHOULD</span>
+state keeping for Stateful HBS: the signature index within a time window <span class="bcp14">SHOULD</span>
 still appear to be updated atomically, and signatures <span class="bcp14">MUST NOT</span> be released
 before state changes have been recorded.<a href="#section-5.8-3.4.1" class="pilcrow">¶</a></p>
 </li>
@@ -1888,7 +1888,7 @@ considerations.<a href="#section-5.8-5" class="pilcrow">¶</a></p>
       <h2 id="name-backup-management-beyond-ni">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-backup-management-beyond-ni" class="section-name selfRef">Backup management beyond NIST SP-800-208</a>
       </h2>
-<p id="section-6-1">In this section, an alternative backup mechanism for S-HBS is presented in a
+<p id="section-6-1">In this section, an alternative backup mechanism for Stateful HBS is presented in a
 generic form, which makes the strategy applicable for both multi-tree instances
 XMSS<sup>MT</sup> and HSS.  However, following the same arguments as in
 <a href="#sectorization" class="auto internal xref">Section 5.3</a>, with minor modifications, the presented strategy is also
@@ -1918,7 +1918,8 @@ following we suppose that S is <em>strictly smaller</em> than
 </li>
         <li class="normal" id="section-6-4.2">
           <p id="section-6-4.2.1">I<sub>new</sub> denotes the set of indices that belong to these newly
-generated bottom-level trees, i.e. I<sub>new</sub> = {R, R+1, ..., R+S-1}. I<sub>new</sub> is zero-indexed here.<a href="#section-6-4.2.1" class="pilcrow">¶</a></p>
+generated bottom-level trees, i.e. I<sub>new</sub> = {R, R+1, ..., R+S-1}.
+I<sub>new</sub> is zero-indexed here.<a href="#section-6-4.2.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-6-5">For each new bottom-level tree, after it has been generated, the following
@@ -1935,7 +1936,7 @@ used to generate the bottom-level tree,<a href="#section-6-6.2.1" class="pilcrow
         <li class="normal" id="section-6-6.3">
           <p id="section-6-6.3.1">export the signature of the root node, the corresponding OTS key index and
 finally the hash of the seed, using appropriate domain separation (i.e.
-ensuring there is no domain overlap with the hashes in the S-HBS scheme, and
+ensuring there is no domain overlap with the hashes in the Stateful HBS scheme, and
 the hash of the seed includes the public key and leaf index to mitigate
 multi-target attacks),<a href="#section-6-6.3.1" class="pilcrow">¶</a></p>
 </li>
