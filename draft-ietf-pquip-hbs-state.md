@@ -64,7 +64,7 @@ informative:
   # RFC8554:
 
   MCGREW:
-    target: https://tubiblio.ulb.tu-darmstadt.de/id/eprint/101633
+    target: https://eprint.iacr.org/2016/357.pdf
     title: State Management for Hash-Based Signatures
     author:
       - ins: D. McGrew
@@ -74,6 +74,7 @@ informative:
       - ins: D. Butin
       - ins: J. Buchmann
     date: 2016-11-02
+    seriesinfo: Security Standardization Research 2016
 
   SP-800-208:
     target: https://doi.org/10.6028/NIST.SP.800-208
