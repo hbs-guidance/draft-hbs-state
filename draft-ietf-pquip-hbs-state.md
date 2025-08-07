@@ -463,7 +463,7 @@ updated in this manner.
 
 The proposal of using multiple Stateful HBS keypairs for a single instance also
 generates questions as to how to establish that approach in existing public key
-infrastructures. For example, issueing multiple certificates adds the storage
+infrastructures. For example, issuing multiple certificates adds the storage
 needs of the certificate material to the public key footprint. In order to
 alternatively issue multiple public keys encoded inside a single certificate
 one would need a standardized format if interoperability is a concern.
@@ -615,7 +615,7 @@ state management to the to-be signed messages.
 Expanding on the given example, for software that is released with strictly
 increasing, simple single-position version numbers (i.e., versions 1, 2, 3...),
 this can be trivially implemented. As versions have a one-to-one correspondence
-to an Stateful HBS signing state, operators MUST ensure that versions can only be
+to a Stateful HBS signing state, operators MUST ensure that versions can only be
 minted a single time. This MAY require skipping version numbers if a release
 process failed, to avoid double-signing.
 
@@ -745,7 +745,7 @@ steps MUST be performed:
 - sign the corresponding root node with an unused OTS key from the top-level
   tree,
 
-- securely _key export_ (as decribed in [](#keymovement)) the seed, which was
+- securely _key export_ (as described in [](#keymovement)) the seed, which was
   used to generate the bottom-level tree,
 
 - export the signature of the root node, the corresponding OTS key index and
@@ -766,7 +766,7 @@ availability in the _worst-case scenario_, where at the same time both
   messages and
 
 - the top-level Merkle tree (which is used for signing the root-nodes of
-  sub-trees) is also not available any more.
+  sub-trees) is also not available anymore.
 
 This scenario may, for example, happen if all hardware modules are broken at
 the same time.
