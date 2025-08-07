@@ -352,8 +352,8 @@ difficulties associated with transferring keys between devices, and one finds
 them self with a perplexing set of challenges that needs to be accounted for in
 any state selection process of a proper state and backup management solution.
 Compounding these complexities is the fact any resilient state management
-system SHOULD also provide some means to verify the integrity of these long
-lived backups to ensure they will be valid when they are required, and to
+system SHOULD also provide some means to verify the integrity of these
+long-lived backups to ensure they will be valid when they are required, and to
 ensure the operators know how to execute the necessary recovery procedure(s).
 
 Similarly, many of the prescribed state management options require a high
