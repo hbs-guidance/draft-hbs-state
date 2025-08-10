@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-07-24T00:48:01.442514+00:00",
+  "timestamp": "2025-08-10T00:52:58.992193+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -47,6 +47,11 @@
       "name": "wontfix",
       "description": "This will not be worked on",
       "color": "ffffff"
+    },
+    {
+      "name": "suggest-close",
+      "description": "",
+      "color": "a707cc"
     }
   ],
   "issues": [
@@ -157,12 +162,22 @@
       "assignees": [
         "thomwiggers"
       ],
-      "labels": [],
+      "labels": [
+        "suggest-close"
+      ],
       "body": "Stefan-Lukas Gazdag wrote:\n\n> Storages are discussed/shown including CDs and USB drives, but what about smartcards? Do you consider them out of scope (and maybe unsuitable for practical use) or do you view them as some kind of HSM? Because smartcards have quite some restrictions on their own and this may be true for other use cases. The RAM is limited and the non-volatile memory wears of. So you need to think about state and memory management. Also see Andreas H\u00fclsing's paper from 2018. At genua we tested JavaCards at some point with similar experiences. A full discussion would be over the top for the Internet-Draft, but you may want to add a note on this.",
       "createdAt": "2025-04-14T12:38:43Z",
-      "updatedAt": "2025-07-22T14:12:29Z",
+      "updatedAt": "2025-08-07T10:34:54Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The paragraph in which USB and CD memory is mentioned refers to \"external storage\" while I think that the devices that Stefan-Lukas is referring would be those that run the signing algorithm (as that would trigger the continued write operations to flash). The point is very valid \u2014\u00a0but I don't think it's worth adding a new paragraph to the document about. ",
+          "createdAt": "2025-08-07T10:34:19Z",
+          "updatedAt": "2025-08-07T10:34:19Z"
+        }
+      ]
     },
     {
       "number": 15,
@@ -175,12 +190,22 @@
       "assignees": [
         "thomwiggers"
       ],
-      "labels": [],
+      "labels": [
+        "suggest-close"
+      ],
       "body": "Stefan-Lukas Gazdag wrote:\n\n> - Operational considerations: A few years ago I took some thought on operating systems and how to make sure there's no copies of the state or old keys left. My conclusion was that you need your whole system to be secure at some point in time because you won't be able to handle all the temporary copies within a modern computer. For examples caches are hell. There quite a few of them. Data stored there is only really written to where it should go if being flushed. You do not necessarily want to flush. You're slowing down the whole system and sometimes things may go wrong. Or your OS just decides that what you want is not what the OS wants. You can't just read a recently written key supposedly written to disk to make sure it's stored, because there may be just some cache (maybe even on the hard disk before the actual write operation on the disk). Sometimes you have to trust that everything's alright or it will get messy.\n\n\nI think the point of this is basically: should we elaborate on the design requirements/environment requirements for secure operations at the OS level?",
       "createdAt": "2025-04-14T12:41:12Z",
-      "updatedAt": "2025-07-22T14:12:50Z",
+      "updatedAt": "2025-08-07T10:40:56Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "The operational considerations section is mainly about \"soft\" requirements (procedures, training, operators) rather than technical requirements. I think that this probably makes sense to keep that way. The \"Requirements for secure state management\" paragraph that follows it is probably a better spot for this \u2014\u00a0but I think that this is essentially already covered there and by `[MCGREW]`.",
+          "createdAt": "2025-08-07T10:40:46Z",
+          "updatedAt": "2025-08-07T10:40:46Z"
+        }
+      ]
     },
     {
       "number": 16,
@@ -946,6 +971,90 @@
           "body": "",
           "createdAt": "2025-07-10T15:20:15Z",
           "updatedAt": "2025-07-10T15:20:15Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 21,
+      "id": "PR_kwDOLPgbFM6ijvPu",
+      "title": "Fix some typos and wrap a paragraph",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/21",
+      "state": "MERGED",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-08-07T10:30:36Z",
+      "updatedAt": "2025-08-07T11:10:54Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "ef50439f82ebda3fd7230ea0c84e9f38c230ba00",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "thom-typo",
+      "headRefOid": "7928f6f6c9d8aae06eb0d9dfa41b26f26ab16f88",
+      "closedAt": "2025-08-07T11:10:52Z",
+      "mergedAt": "2025-08-07T11:10:52Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM64kJSP",
+          "commit": {
+            "abbreviatedOid": "7928f6f"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-08-07T10:34:54Z",
+          "updatedAt": "2025-08-07T11:10:20Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 22,
+      "id": "PR_kwDOLPgbFM6ij4I5",
+      "title": "Improve McGrew reference",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/22",
+      "state": "MERGED",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add a link to the actual document",
+      "createdAt": "2025-08-07T10:44:04Z",
+      "updatedAt": "2025-08-07T11:10:07Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "6f1c043dee0d74e4eafc317cf1996403a140e6b6",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "thom-mcgrew-reference",
+      "headRefOid": "c56eea6e2cf1709059448bcee417b0e4d095c91c",
+      "closedAt": "2025-08-07T11:10:05Z",
+      "mergedAt": "2025-08-07T11:10:05Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "ef50439f82ebda3fd7230ea0c84e9f38c230ba00"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM64kazg",
+          "commit": {
+            "abbreviatedOid": "c56eea6"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-08-07T10:59:23Z",
+          "updatedAt": "2025-08-07T10:59:23Z",
           "comments": []
         }
       ]
