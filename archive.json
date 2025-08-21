@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-10T00:52:58.992193+00:00",
+  "timestamp": "2025-08-21T00:40:56.645402+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -254,6 +254,102 @@
       "body": "At IETF 123 PQUIP session the question came up, what the draft adds considering ETSI TR 103 692 \"State management for stateful authentication mechanisms\" (https://www.etsi.org/deliver/etsi_tr/103600_103699/103692/01.01.01_60/tr_103692v010101p.pdf).\n\nClarify this in the introductory sections of the draft.\n\nPunchline: ETSI's doc is more focused on background information, comparison of HSS/LMS and XMSS(^MT) and making aware of the issues coming up when having a state. Backup and restore management is not explored (see section 6.2: \"It is possible that secure mechanisms for back-up and restore for S-HBS schemes can be developed, or that there are specific contexts or applications wherein secure back-up and restore can be achieved. Such situations and solutions are not explored in the present document\").\n",
       "createdAt": "2025-07-22T13:47:07Z",
       "updatedAt": "2025-07-22T13:47:32Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 23,
+      "id": "I_kwDOLPgbFM7GwxHe",
+      "title": "Clarify that private key and state can be separated",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/23",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From Scott Fluhrer's comments:\n\n> You might want to make it clearer that the private key can be effectively split up into two parts: the private key, that is, the recipe for generating one-time-signature private keys (e.g. the private seed for XMSS), and the state (which tells you which one-time-signature to use next).  Those two halves could be handled independently.  That is, the first part is stateless, that is, it can be handled just like any other private key, and we can focus in on the dynamically updated second part (the state).\n\nI might want to add to this that there is a funny thing going on where the private key mainly has confidentiality requirements whereas the state has, somewhat uniquely, stricter integrity requirements on whatever storage mechanism, which is also somewhat different from the usual things we expect when handling keys.",
+      "createdAt": "2025-08-19T14:46:57Z",
+      "updatedAt": "2025-08-19T14:46:57Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 25,
+      "id": "I_kwDOLPgbFM7Gw38H",
+      "title": "Should we expand \"when appropriate\"",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/25",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Scott suggested the following elaboration:\n\n> Section 1.1 When are S-HBS appropriate \u2013 one thing that is not listed is that the verification code can be quite simple (hash computation plus some simple logic) \u2013 this may be an advantage for tightly constrained verifiers.\n\nI would argue that this is covered by \u201cperformance of alternatives being prohibitive\u201d \u2014 but I am also trying to keep the \u201cwhen are they appropriate\u201d section as short, sweet and to the point as possible. We can consider expanding on this section a bit more, if people would want to see that (especially if they have unanswered questions or see gaps). ",
+      "createdAt": "2025-08-19T14:55:23Z",
+      "updatedAt": "2025-08-19T14:55:23Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 26,
+      "id": "I_kwDOLPgbFM7Gw6UO",
+      "title": "Differing keys in sectorization",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/26",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Scott Fluhrer suggested:\n\n> In section 5.3, you mention the possibility of using different private seeds (XMSS terminology) for different sectors.  Normally in cryptography, we suggest using different keys to reduce the amount of damage that is done if a key is leaked.  However, that doesn\u2019t apply here \u2013 here, if any private seed leaks, the adversary can sign anything they want (and while they may be limited to that specific sector, the adversary can still sign at will, given that there is no standard mechanisms to revoke signatures from a sector).  I would suggest using the same private seed for all sectors (unless it is significantly more convenient to not to) \u2013 it may make things simpler, and is no less secure.\n\nI may be missing some point why this makes sense to do so I'm creating this issue \u2014\u00a0I agree that we should clarify or indeed simplify the sectorization (and probably note why there's no point to different keys though it is possible).",
+      "createdAt": "2025-08-19T14:58:20Z",
+      "updatedAt": "2025-08-19T14:58:20Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 27,
+      "id": "I_kwDOLPgbFM7Gw80d",
+      "title": "Reference a correct attack paper",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/27",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "BH16 may have a flaw, and eprint 2023/1905 may be a better reference",
+      "createdAt": "2025-08-19T15:01:32Z",
+      "updatedAt": "2025-08-19T15:01:32Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 28,
+      "id": "I_kwDOLPgbFM7Gw_TK",
+      "title": "Scope: speeding up signing?",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/28",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Scott Fluhrer helpfully suggested providing text for speeding up signing: \n\n> One thing I\u2019m not sure about: there are some clever ways to speed up the signing process (by storing some of the intermediate nodes of the Merkle tree, and use those nodes to help generate the authentication path), and that may interact with the state management.  I know of four such techniques, each of which is \u201cbest\u201d by some criteria, and some of which update which nodes are stored during each signature, and one which does not (which ends up using more storage and require more hashes to sign, but also avoid issues with updating the nodes along with the state).  To what extent should this draft address this?  I should be the one to contribute text, should you decide it should be appropriate (although I would like some guidelines as to how thorough I should be \u2013 I could go one for quite some time\u2026)\n\nThe question is do we think this fits in scope? It may be a bit too \"implementation\" side",
+      "createdAt": "2025-08-19T15:04:44Z",
+      "updatedAt": "2025-08-19T15:04:44Z",
+      "closedAt": null,
+      "comments": []
+    },
+    {
+      "number": 29,
+      "id": "I_kwDOLPgbFM7GxA1M",
+      "title": "Scope: parameter selection",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/29",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Scott Fluhrer suggested that we could include more content on \"how to do HBS signatures\".\n\n> I\u2019m not sure to what extent we want to broaden this from \u201chow we do state management\u201d to \u201cgeneral advice on how to use stateful hash-based signatures\u201d; although the document does have some of that general advice.  If we continue in that vein, I believe that you should mention that in XMSS/XMSS^MT, RFC 8391 and NIST SP 800-208 differs on SHAKE-based parameter sets.  I would recommend using the NIST parameter sets, should you decide you need an XMSS+SHAKE parameter set (the SHAKE-128 parameter set that RFC 8391 uses with n=32 reduces security to 128 bits, which is significantly weaker than the design goal).\n>\n>Another thought (if we were continuing with the giving general advice about stateful hash based signatures) is on selecting the parameter set.  For example, LMS with \u201cw=8\u201d (which would be w=256 in XMSS terminology) approximately halves the signature size, at the cost of making the signature generation and verification processes more expensive.  How far should we go into that (given that it is covered by other documents)\n\nI feel that \"picking parameters\" is a bit more of an operator concern and we do already touch on that (for example in that you need to consider your state management solutions when picking parameters). So this might be worth following up on?",
+      "createdAt": "2025-08-19T15:06:37Z",
+      "updatedAt": "2025-08-19T15:06:37Z",
       "closedAt": null,
       "comments": []
     }
@@ -1056,6 +1152,53 @@
           "createdAt": "2025-08-07T10:59:23Z",
           "updatedAt": "2025-08-07T10:59:23Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 24,
+      "id": "PR_kwDOLPgbFM6kUM_g",
+      "title": "The easy parts of Scott's comments",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/24",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-08-19T14:54:14Z",
+      "updatedAt": "2025-08-20T07:30:40Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "scott-comments",
+      "headRefOid": "a35d0a262564d58125ca6de401bed55eb4e4dc27",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM663t0I",
+          "commit": {
+            "abbreviatedOid": "a35d0a2"
+          },
+          "author": "kste",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-08-20T07:30:17Z",
+          "updatedAt": "2025-08-20T07:30:40Z",
+          "comments": [
+            {
+              "originalPosition": 45,
+              "body": "[optional] Maybe we should point out the even larger key sizes for other PQC schemes here?",
+              "createdAt": "2025-08-20T07:30:18Z",
+              "updatedAt": "2025-08-20T07:30:40Z"
+            }
+          ]
         }
       ]
     }
