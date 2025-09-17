@@ -372,6 +372,14 @@ security. Note that the segregation of duties MUST persist across successive
 generations to ensure participants do not acquire multiple roles over time,
 thereby undermining the intended segregation.
 
+In addition to the state management, implementers MAY consider to implement
+mechanisms to prevent abrupt signature exhaustion. Implementations MAY
+consider providing a configurable warning threshold, M, which is triggered
+when M signatures remain. When the number of available signatures reaches
+this threshold, the system should return a signatures nearing exhaustion warning.
+This warning condition SHOULD require explicit acknowledgment from the user
+through a mechanism that cannot be trivially skipped.
+
 Lastly, costs associated with any external dependencies required by a
 particular solution (e.g., access to a public ledger or transparency log,
 providing accurate time references and synchronization mechanisms, access to
