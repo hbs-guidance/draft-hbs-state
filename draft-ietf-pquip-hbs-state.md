@@ -227,16 +227,16 @@ strategies for a correct state and backup management for Stateful HBS.
 
 The issues with state management described above, as well as the limited number
 of signatures, lead to new requirements that most developers will not be
-familiar with and that require careful handling in practice: Stateful HBS are not
-general-purpose signature schemes. Most applications, especially those that may
-produce unrestricted numbers of signatures, should use _stateless_ hash-based
-signature schemes like SLH-DSA [FIPS205], which use the same security
+familiar with and that require careful handling in practice: Stateful HBS are
+not general-purpose signature schemes. Most applications, especially those that
+may produce unrestricted numbers of signatures, should use _stateless_
+hash-based signature schemes like SLH-DSA [FIPS205], which use the same security
 assumptions, or schemes based on other assumptions, such as ML-DSA [FIPS204],
-instead. However, if performance, signature or key sizes of stateless
-alternatives are prohibitive, and the specific use case allows a very tight
-control of the signing environment, using Stateful HBS may be an appropriate solution.
-It seems likely that in many scenarios, this will only be possible when using
-purpose-designed hardware, such as hardware-security modules.
+instead. However, if run time, implementation size, signature or key sizes of
+stateless alternatives are prohibitive, and the specific use case allows a very
+tight control of the signing environment, using Stateful HBS may be an
+appropriate solution. It seems likely that in many scenarios, this will only be
+possible when using purpose-designed hardware, such as hardware-security modules.
 
 
 # Conventions and Definitions
