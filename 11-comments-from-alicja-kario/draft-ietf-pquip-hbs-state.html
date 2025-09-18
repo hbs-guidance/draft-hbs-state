@@ -24,24 +24,24 @@ material, is a sensitive topic, and we discuss some approaches to handle the
 associated challenges. We also describe the challenges that need to be resolved
 before certain approaches should be considered. 
     " name="description">
-<meta content="xml2rfc 3.30.0" name="generator">
+<meta content="xml2rfc 3.30.2" name="generator">
 <meta content="stateful hash-based signatures" name="keyword">
 <meta content="XMSS" name="keyword">
 <meta content="LMS" name="keyword">
 <meta content="state management" name="keyword">
 <meta content="draft-ietf-pquip-hbs-state-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.30.0
+  xml2rfc 3.30.2
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.6
     lxml 5.3.1
-    platformdirs 4.3.8
+    platformdirs 4.4.0
     pycountry 24.6.1
     PyYAML 6.0.2
-    requests 2.32.4
+    requests 2.32.5
     setuptools 80.9.0
     wcwidth 0.2.13
 -->
@@ -1062,11 +1062,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">HBS: State and Backup</td>
-<td class="right">August 2025</td>
+<td class="right">September 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wiggers, et al.</td>
-<td class="center">Expires 20 February 2026</td>
+<td class="center">Expires 22 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1079,12 +1079,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-pquip-hbs-state-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-08-19" class="published">19 August 2025</time>
+<time datetime="2025-09-18" class="published">18 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-02-20">20 February 2026</time></dd>
+<dd class="expires"><time datetime="2026-03-22">22 March 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1161,7 +1161,7 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 22 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1322,8 +1322,11 @@ implementers must ensure that they never use the same OTS key. This may
 require synchronization between all signers.<a href="#section-1-5.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-1-5.3">
-          <p id="section-1-5.3.1">If key backups are required, implementers must ensure that any backup
-mechanism can not lead to re-using a previously used OTS key.<a href="#section-1-5.3.1" class="pilcrow">¶</a></p>
+          <p id="section-1-5.3.1">Additional operational complexity arises when part of the available OTS signatures are allocated to different devices (partial state transfer), or when state from different devices needs merging; these introduce risks of overlap, failure, and require careful coordination.<a href="#section-1-5.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-1-5.4">
+          <p id="section-1-5.4.1">If key backups are required, implementers must ensure that any backup
+mechanism can not lead to re-using a previously used OTS key.<a href="#section-1-5.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-1-6">The purpose of this document is to present, recall, and discuss various
@@ -1333,19 +1336,18 @@ strategies for a correct state and backup management for Stateful HBS.<a href="#
         <h3 id="name-when-are-stateful-hbs-appro">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-when-are-stateful-hbs-appro" class="section-name selfRef">When are Stateful HBS appropriate?</a>
         </h3>
-<p id="section-1.1-1">The issues with state management described above, as well as (for most parameter
-sets) the limited number of signatures, lead to new requirements that most
-developers will not be familiar with and that require careful handling in
-practice: Stateful HBS are not general-purpose signature schemes. Most
-applications, especially those that may produce unrestricted numbers of
-signatures, should use <em>stateless</em> hash-based signature schemes like SLH-DSA
-<span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span>, which use the same security assumptions, or schemes based on other
-assumptions, such as ML-DSA <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>, instead. However, if performance,
-signature or key sizes of stateless alternatives are prohibitive, and the
-specific use case allows a very tight control of the signing environment, using
-Stateful HBS may be an appropriate solution. It seems likely that in many
-scenarios, this will only be possible when using purpose-designed hardware, such
-as hardware-security modules.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">The issues with state management described above, as well as the limited number
+of signatures, lead to new requirements that most developers will not be
+familiar with and that require careful handling in practice: Stateful HBS are not
+general-purpose signature schemes. Most applications, especially those that may
+produce unrestricted numbers of signatures, should use <em>stateless</em> hash-based
+signature schemes like SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span>, which use the same security
+assumptions, or schemes based on other assumptions, such as ML-DSA <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>,
+instead. However, if performance, signature or key sizes of stateless
+alternatives are prohibitive, and the specific use case allows a very tight
+control of the signing environment, using Stateful HBS may be an appropriate solution.
+It seems likely that in many scenarios, this will only be possible when using
+purpose-designed hardware, such as hardware-security modules.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1383,12 +1385,15 @@ of the state of the private key.<a href="#section-2.1.1-1" class="pilcrow">¶</a
 be generated from either part without risk of state reuse,<a href="#section-2.1.1-3.2.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-2.1.1-3.3">
-              <p id="section-2.1.1-3.3.1">to enable effective but secure handling of private key and state backup
-material,<a href="#section-2.1.1-3.3.1" class="pilcrow">¶</a></p>
+              <p id="section-2.1.1-3.3.1">to enable partial transfer of unused signature capacity between devices, and optionally merging state fragments without overlap,<a href="#section-2.1.1-3.3.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-2.1.1-3.4">
-              <p id="section-2.1.1-3.4.1">to guarantee the availability of both the private key and its state across
-the lifetime of the key.<a href="#section-2.1.1-3.4.1" class="pilcrow">¶</a></p>
+              <p id="section-2.1.1-3.4.1">to enable effective but secure handling of private key and state backup
+material,<a href="#section-2.1.1-3.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-2.1.1-3.5">
+              <p id="section-2.1.1-3.5.1">to guarantee the availability of both the private key and its state across
+the lifetime of the key.<a href="#section-2.1.1-3.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
 <p id="section-2.1.1-4">Note that in particular implementations of Stateful HBS, or in alternative signature
@@ -1537,51 +1542,73 @@ ever be issued from the same state. In addition, the generation of a signature
 and update of the state <span class="bcp14">SHOULD</span> appear to be an <em>atomic transaction</em>. This means
 that the system <span class="bcp14">MUST NOT</span> release a signature without irrevocably and correctly
 updating the state.<a href="#section-4-1" class="pilcrow">¶</a></p>
-<p id="section-4-2">These requirements impose significant restrictions on the underlying technical
+<p id="section-4-2">State management systems <span class="bcp14">SHOULD</span> satisfy all <em>ACID</em> properties:<a href="#section-4-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-4-3.1">
+          <p id="section-4-3.1.1"><em>Atomicity</em>: each operation must be indivisible — either the signature is
+generated and the state is updated together, or neither occurs.<a href="#section-4-3.1.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-3.2">
+          <p id="section-4-3.2.1"><em>Consistency</em>: the state before and after each update must reflect a valid
+progression of available OTS indices, and no invalid or conflicting state is
+ever observable.<a href="#section-4-3.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-3.3">
+          <p id="section-4-3.3.1"><em>Isolation</em>: concurrent or overlapping operations (e.g., from separate
+processes or devices) must not interfere in ways that could lead to state
+reuse.<a href="#section-4-3.3.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="section-4-3.4">
+          <p id="section-4-3.4.1"><em>Durability</em>: once a state transition (e.g., after issuing a signature) is
+committed, that transition must survive crashes, power loss, or device
+failure.<a href="#section-4-3.4.1" class="pilcrow">¶</a></p>
+</li>
+      </ul>
+<p id="section-4-4">These requirements impose significant restrictions on the underlying technical
 approach and a careful implementation of how the state will be updated or
 synchronized. The abstraction layers of modern systems can make it particularly
 difficult to guarantee that no two versions of the same state are present. The
-main concerns here are<a href="#section-4-2" class="pilcrow">¶</a></p>
+main concerns here are<a href="#section-4-4" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="section-4-3.1">
-          <p id="section-4-3.1.1">how the actual storage for the state is implemented,<a href="#section-4-3.1.1" class="pilcrow">¶</a></p>
+<li class="normal" id="section-4-5.1">
+          <p id="section-4-5.1.1">how the actual storage for the state is implemented,<a href="#section-4-5.1.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-4-3.2">
-          <p id="section-4-3.2.1">how it is modified,<a href="#section-4-3.2.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-5.2">
+          <p id="section-4-5.2.1">how it is modified,<a href="#section-4-5.2.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-4-3.3">
-          <p id="section-4-3.3.1">how an accidental/intentional failure/glitch might affect the state security,
-and<a href="#section-4-3.3.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-5.3">
+          <p id="section-4-5.3.1">how an accidental/intentional failure/glitch might affect the state security,
+and<a href="#section-4-5.3.1" class="pilcrow">¶</a></p>
 </li>
-        <li class="normal" id="section-4-3.4">
-          <p id="section-4-3.4.1">cloning.<a href="#section-4-3.4.1" class="pilcrow">¶</a></p>
+        <li class="normal" id="section-4-5.4">
+          <p id="section-4-5.4.1">cloning.<a href="#section-4-5.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-4-4">A system may have a version of the private key stored in non-volatile memory
+<p id="section-4-6">A system may have a version of the private key stored in non-volatile memory
 (e.g. a disk) and will load it into volatile memory (e.g. RAM) while processing.
 Here, an implementer <span class="bcp14">MUST</span> ensure that these are always perfectly synchronized
 <span>[<a href="#MCGREW" class="cite xref">MCGREW</a>]</span>, meaning that no parts of the system are allowed to read any version of
 the key during procedures which load, write or modify keys. This can be
 particularly challenging if there are additional abstraction layers present in
 the system, like additional caches which may affect reading/writing the state
-and its potential existence in multiple locations.<a href="#section-4-4" class="pilcrow">¶</a></p>
-<p id="section-4-5">Cloning is another concern, as it can easily lead to re-using the same state.
+and its potential existence in multiple locations.<a href="#section-4-6" class="pilcrow">¶</a></p>
+<p id="section-4-7">Cloning is another concern, as it can easily lead to re-using the same state.
 This can happen for instance if a process which issues a signing operation is
 forked, and no proper synchronization is enforced in the implementation to
 guarantee correct state update. Virtual machine (VM) cloning is another
 potential security risk here, as both backing up a VM into non-volatile memory
 or live cloning of a VM can easily lead to a state re-use <span>[<a href="#MCGREW" class="cite xref">MCGREW</a>]</span>. With users
 shifting workloads to cloud service providers, the issue of VM cloning may
-become more prevalent.<a href="#section-4-5" class="pilcrow">¶</a></p>
-<p id="section-4-6">Using dedicated cryptographic hardware is <span class="bcp14">RECOMMENDED</span> to enforce these
+become more prevalent.<a href="#section-4-7" class="pilcrow">¶</a></p>
+<p id="section-4-8">Using dedicated cryptographic hardware is <span class="bcp14">RECOMMENDED</span> to enforce these
 requirements, ensure correct behavior and handle the complexity of state
 management. In particular, this enables implementing rollback resistant
-counters which can be difficult to achieve in a software-only fashion.<a href="#section-4-6" class="pilcrow">¶</a></p>
-<p id="section-4-7">On the verifier side, no state management is required. However, the verifier
+counters which can be difficult to achieve in a software-only fashion.<a href="#section-4-8" class="pilcrow">¶</a></p>
+<p id="section-4-9">On the verifier side, no state management is required. However, the verifier
 needs to trust the signer to not have re-used the state. A verifier <span class="bcp14">MAY</span> want to
 check that no state re-use happened in the past by a signer, before accepting a
-signature.<a href="#section-4-7" class="pilcrow">¶</a></p>
-<p id="section-4-8">In practice, this can be done if the verifier has access to all signatures
+signature.<a href="#section-4-9" class="pilcrow">¶</a></p>
+<p id="section-4-10">In practice, this can be done if the verifier has access to all signatures
 issued by the signer. As the signatures contain the index of the OTS key used,
 detecting if an index was used more than once becomes trivial. In practice,
 such a (public) data structure which contains all signatures <span class="bcp14">MAY</span> already be
@@ -1589,7 +1616,7 @@ present in some use cases (e.g. certificate transparency <span>[<a href="#RFC916
 be built. It is worth noting that while trusting the signer to not re-use the
 state is a strong assumption, other signature schemes like ECDSA introduce
 similar assumptions for the verifier, by requiring the signer to never re-use
-the nonce.<a href="#section-4-8" class="pilcrow">¶</a></p>
+the nonce.<a href="#section-4-10" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="potential-solutions">
@@ -1607,14 +1634,12 @@ describes a number of approaches and their potential advantages/disadvantages.<a
         </h3>
 <p id="section-5.1-1">The <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> proposes generating multiple Stateful HBS keypairs and configuring
 devices and clients to accept signatures created by any of these keys.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">This negatively impacts one of the advantages of using Stateful HBS by
-increasing the public key footprint within the client, which can be problematic
-if it has limited public key storage capacity. (Though public keys are typically
-equivalently sized to ECDSA rather than larger classical RSA keys often
-currently found.) <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> addresses storage capacity concerns by suggesting
-using a mechanism such as that proposed in <span>[<a href="#RFC8649" class="cite xref">RFC8649</a>]</span> to update the stored
-public key by having the current key endorse the next key that is to be
-installed. Unfortunately, for many constrained devices the public key is
+<p id="section-5.1-2">This negatively impacts one of the advantages of using Stateful HBS by increasing the
+public key footprint within the client, which can be problematic if it has
+limited public key storage capacity. <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> addresses this concern by
+suggesting using a mechanism such as that proposed in <span>[<a href="#RFC8649" class="cite xref">RFC8649</a>]</span> to update
+the stored public key by having the current key endorse the next key that is to
+be installed. Unfortunately, for many constrained devices the public key is
 embedded in immutable ROM or fuses due to security reasons, so it cannot be
 updated in this manner.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">The proposal of using multiple Stateful HBS keypairs for a single instance also
@@ -1723,10 +1748,19 @@ having the source device fail before the key/state can be transferred,
 effectively causing the loss of the key/state. Hence, it will not be of much
 help addressing the single point of failure issue identified for root trees,
 but may be useful for managing subordinate trees.<a href="#section-5.4-2" class="pilcrow">¶</a></p>
-<p id="section-5.4-3">A more elaborate variant of key transfer, going beyond what <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span>
+<p id="section-5.4-3">In addition to complete key/state transfer, a device holding part of the total
+available OTS signatures may transfer some unused capacity to another device
+(partial state transfer). In more advanced deployments, state fragments from
+two devices may be merged to reconstruct or continue signature operations.
+These operations carry risk: ensuring no overlap in used indices, ensuring
+atomicity of transfer/merge operations, managing consistency, possible
+conflicts, and durability of state across devices. Such approaches require
+strong synchronization, auditability, and appropriate backup mechanisms to
+avoid double-signing or loss of capacity.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
+<p id="section-5.4-4">A more elaborate variant of key transfer, going beyond what <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span>
 allows, can be found described in <a href="#alt-backup-mgmt" class="auto internal xref">Section 6</a> where key transfer is
 accomplished using a two-step export and import process with hash-based
-transfer validation to yield a more robust transfer mechanism.<a href="#section-5.4-3" class="pilcrow">¶</a></p>
+transfer validation to yield a more robust transfer mechanism.<a href="#section-5.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="key-rotation">

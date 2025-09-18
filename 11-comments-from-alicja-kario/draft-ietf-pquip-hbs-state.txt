@@ -5,14 +5,14 @@
 Post-Quantum Use In Protocols                                 T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 20 February 2026                                            BSI
+Expires: 22 March 2026                                               BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                          19 August 2025
+                                                       18 September 2025
 
 
            Hash-based Signatures: State and Backup Management
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 February 2026.
+   This Internet-Draft will expire on 22 March 2026.
 
 Copyright Notice
 
@@ -153,6 +153,12 @@ Table of Contents
       same OTS key.  This may require synchronization between all
       signers.
 
+   *  Additional operational complexity arises when part of the
+      available OTS signatures are allocated to different devices
+      (partial state transfer), or when state from different devices
+      needs merging; these introduce risks of overlap, failure, and
+      require careful coordination.
+
    *  If key backups are required, implementers must ensure that any
       backup mechanism can not lead to re-using a previously used OTS
       key.
@@ -163,21 +169,20 @@ Table of Contents
 
 1.1.  When are Stateful HBS appropriate?
 
-   The issues with state management described above, as well as (for
-   most parameter sets) the limited number of signatures, lead to new
-   requirements that most developers will not be familiar with and that
-   require careful handling in practice: Stateful HBS are not general-
-   purpose signature schemes.  Most applications, especially those that
-   may produce unrestricted numbers of signatures, should use
-   _stateless_ hash-based signature schemes like SLH-DSA [FIPS205],
-   which use the same security assumptions, or schemes based on other
-   assumptions, such as ML-DSA [FIPS204], instead.  However, if
-   performance, signature or key sizes of stateless alternatives are
-   prohibitive, and the specific use case allows a very tight control of
-   the signing environment, using Stateful HBS may be an appropriate
-   solution.  It seems likely that in many scenarios, this will only be
-   possible when using purpose-designed hardware, such as hardware-
-   security modules.
+   The issues with state management described above, as well as the
+   limited number of signatures, lead to new requirements that most
+   developers will not be familiar with and that require careful
+   handling in practice: Stateful HBS are not general-purpose signature
+   schemes.  Most applications, especially those that may produce
+   unrestricted numbers of signatures, should use _stateless_ hash-based
+   signature schemes like SLH-DSA [FIPS205], which use the same security
+   assumptions, or schemes based on other assumptions, such as ML-DSA
+   [FIPS204], instead.  However, if performance, signature or key sizes
+   of stateless alternatives are prohibitive, and the specific use case
+   allows a very tight control of the signing environment, using
+   Stateful HBS may be an appropriate solution.  It seems likely that in
+   many scenarios, this will only be possible when using purpose-
+   designed hardware, such as hardware-security modules.
 
 2.  Conventions and Definitions
 
@@ -204,6 +209,9 @@ Table of Contents
    *  to set up Stateful HBS with a split state and/or private key, so
       that signatures can be generated from either part without risk of
       state reuse,
+
+   *  to enable partial transfer of unused signature capacity between
+      devices, and optionally merging state fragments without overlap,
 
    *  to enable effective but secure handling of private key and state
       backup material,
@@ -344,6 +352,24 @@ Table of Contents
    system MUST NOT release a signature without irrevocably and correctly
    updating the state.
 
+   State management systems SHOULD satisfy all _ACID_ properties:
+
+   *  _Atomicity_: each operation must be indivisible — either the
+      signature is generated and the state is updated together, or
+      neither occurs.
+
+   *  _Consistency_: the state before and after each update must reflect
+      a valid progression of available OTS indices, and no invalid or
+      conflicting state is ever observable.
+
+   *  _Isolation_: concurrent or overlapping operations (e.g., from
+      separate processes or devices) must not interfere in ways that
+      could lead to state reuse.
+
+   *  _Durability_: once a state transition (e.g., after issuing a
+      signature) is committed, that transition must survive crashes,
+      power loss, or device failure.
+
    These requirements impose significant restrictions on the underlying
    technical approach and a careful implementation of how the state will
    be updated or synchronized.  The abstraction layers of modern systems
@@ -417,9 +443,7 @@ Table of Contents
    This negatively impacts one of the advantages of using Stateful HBS
    by increasing the public key footprint within the client, which can
    be problematic if it has limited public key storage capacity.
-   (Though public keys are typically equivalently sized to ECDSA rather
-   than larger classical RSA keys often currently found.)  [SP-800-208]
-   addresses storage capacity concerns by suggesting using a mechanism
+   [SP-800-208] addresses this concern by suggesting using a mechanism
    such as that proposed in [RFC8649] to update the stored public key by
    having the current key endorse the next key that is to be installed.
    Unfortunately, for many constrained devices the public key is
@@ -539,6 +563,17 @@ Table of Contents
    causing the loss of the key/state.  Hence, it will not be of much
    help addressing the single point of failure issue identified for root
    trees, but may be useful for managing subordinate trees.
+
+   In addition to complete key/state transfer, a device holding part of
+   the total available OTS signatures may transfer some unused capacity
+   to another device (partial state transfer).  In more advanced
+   deployments, state fragments from two devices may be merged to
+   reconstruct or continue signature operations.  These operations carry
+   risk: ensuring no overlap in used indices, ensuring atomicity of
+   transfer/merge operations, managing consistency, possible conflicts,
+   and durability of state across devices.  Such approaches require
+   strong synchronization, auditability, and appropriate backup
+   mechanisms to avoid double-signing or loss of capacity.
 
    A more elaborate variant of key transfer, going beyond what
    [SP-800-208] allows, can be found described in Section 6 where key
