@@ -121,6 +121,14 @@ informative:
         ins: A. Hülsing
     date: 2016
 
+  Fluhrer23:
+    title: "Oops, I did it again revisited; another look at reusing one-time signatures"
+    author:
+      -
+        ins: S. Fluhrer
+        fullname: Scott Fluhrer
+    date: 2023
+
   ETSI-TR-103-692:
     target: https://www.etsi.org/deliver/etsi_tr/103600_103699/103692/01.01.01_60/tr_103692v010101p.pdf
     title: State management for stateful authentication mechanisms
@@ -201,12 +209,12 @@ refer to it as the __state__ of the private key. Each Stateful HBS private key c
 used to sign a finite number of messages, and the state must be updated with
 each generated signature.
 
-One must not reuse any OTS key that is part of an Stateful HBS private key. If an
-attacker is able to obtain signatures for two different messages created using
-the same OTS key, it is computationally feasible for that attacker to create
-forgeries [BH16]. As noted in [MCGREW] and [ETSI-TR-103-692], extreme care
-should be taken in order to avoid the risk that an OTS key will be reused
-accidentally.
+One must not reuse any OTS key that is part of an Stateful HBS private key. If
+an attacker is able to obtain signatures for two different messages created
+using the same OTS key, it is computationally feasible for that attacker to
+create forgeries [BH16] [Fluhrer23]. As noted in [MCGREW] and [ETSI-TR-103-692],
+extreme care should be taken in order to avoid the risk that an OTS key will be
+reused accidentally.
 
 The statefulness of Stateful HBS leads to significant challenges in practice:
 
