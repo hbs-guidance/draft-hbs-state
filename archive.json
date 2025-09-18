@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-21T00:40:56.645402+00:00",
+  "timestamp": "2025-09-18T00:39:37.486349+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -156,7 +156,7 @@
       "id": "I_kwDOLPgbFM6yZMUi",
       "title": "Devices with degrading storage",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/14",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -167,8 +167,8 @@
       ],
       "body": "Stefan-Lukas Gazdag wrote:\n\n> Storages are discussed/shown including CDs and USB drives, but what about smartcards? Do you consider them out of scope (and maybe unsuitable for practical use) or do you view them as some kind of HSM? Because smartcards have quite some restrictions on their own and this may be true for other use cases. The RAM is limited and the non-volatile memory wears of. So you need to think about state and memory management. Also see Andreas H\u00fclsing's paper from 2018. At genua we tested JavaCards at some point with similar experiences. A full discussion would be over the top for the Internet-Draft, but you may want to add a note on this.",
       "createdAt": "2025-04-14T12:38:43Z",
-      "updatedAt": "2025-08-07T10:34:54Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-16T13:31:47Z",
+      "closedAt": "2025-09-16T13:31:47Z",
       "comments": [
         {
           "author": "thomwiggers",
@@ -184,7 +184,7 @@
       "id": "I_kwDOLPgbFM6yZN34",
       "title": "Elaborating in operational considerations?",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/15",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -195,8 +195,8 @@
       ],
       "body": "Stefan-Lukas Gazdag wrote:\n\n> - Operational considerations: A few years ago I took some thought on operating systems and how to make sure there's no copies of the state or old keys left. My conclusion was that you need your whole system to be secure at some point in time because you won't be able to handle all the temporary copies within a modern computer. For examples caches are hell. There quite a few of them. Data stored there is only really written to where it should go if being flushed. You do not necessarily want to flush. You're slowing down the whole system and sometimes things may go wrong. Or your OS just decides that what you want is not what the OS wants. You can't just read a recently written key supposedly written to disk to make sure it's stored, because there may be just some cache (maybe even on the hard disk before the actual write operation on the disk). Sometimes you have to trust that everything's alright or it will get messy.\n\n\nI think the point of this is basically: should we elaborate on the design requirements/environment requirements for secure operations at the OS level?",
       "createdAt": "2025-04-14T12:41:12Z",
-      "updatedAt": "2025-08-07T10:40:56Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-16T13:34:17Z",
+      "closedAt": "2025-09-16T13:34:17Z",
       "comments": [
         {
           "author": "thomwiggers",
@@ -215,11 +215,13 @@
       "state": "OPEN",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "crypto4a"
+      ],
       "labels": [],
       "body": "Stefan-Lukas Gazdag wrote:\n\n> - You can advance the state / key and store it before signing, even for an intervall of keys. E. g. reserve interval u (let's say 100 OTS keys) and store a key before signing where you got rid of all OTS keys that are reserved (forgetting old keys) or advance a PRNG to the seed you need. Which leads to another point:\n>\n> - What about giving up on OTS keys? Using each OTS signing key is only important if you want to proof, that you possess a signature for each OTS key. But  e. g. for the interval approach you could just sacrifice / omit a few (contradicts the last part of chapter four in the Internet-Draft, I think). Imagine the interval in the last point: Your advanced key was written successfully, you start using the OTS keys from the interval that are only stored in volatile memory and suddenly there's a blackout. You restart the system. Worst-case, all keys of your reserved intervall are gone. Bad, but should happen seldomly.\n\nI don't think that this erases all of the state-keeping concerns, but it certainly seems viable as a defense-in-depth approach.  This does mean that you need to increase the size of the tree (potentially significantly) which may erase some of the benefits of stateful hbs.",
       "createdAt": "2025-04-14T12:43:18Z",
-      "updatedAt": "2025-04-14T12:43:18Z",
+      "updatedAt": "2025-09-16T13:36:44Z",
       "closedAt": null,
       "comments": []
     },
@@ -231,13 +233,30 @@
       "state": "OPEN",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "kste"
+      ],
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/pqc/eZw6BfguNtNPDU2A1xURVP7_4DY/\n\nAlexander Reilean wrote:\n\n> While reviewing draft-ietf-pquip-hbs-state I understand that it addresses prevention of state reuse, backup management and training operators, but I think it leaves a gap when it comes to warning users before they exhaust the available signatures. People can still drive themselves into a corner if they follow the prescribed procedures.\n>  \n>  \n> Consider a system configured for N=100 signatures. When attempting the N+1 signature, the system returns a \u201csignatures exhausted\u201d error. While this prevents a disaster, the users are already in an operational dead-end because there is no graceful recovery path. Would it be helpful if the system could optionally warn about this a couple of signatures earlier?\n>  \n> I propose extending section 3:\n>  \n> ```\n> Consider providing a configurable warning threshold (M), that is triggered when M signatures remain. When the threshold is reached, the system should return a `signatures nearing exhaustion` error, requiring the user to explicitly acknowledge it in a way that cannot be trivially skipped.\n>  \n> This \u201csoft fail\u201d condition directs attention to the approaching exhaustion while signatures are still available, allowing enough time to initiate key rotation before operations are disrupted.\n>  \n> For flexibility, implementations may allow setting the threshold to M=0 to disable this feature.\n> ```\n>  \n>  \n> The draft could also recommend the layer at which the check should occur, e.g., in the HSM, in the software that uses the HSM, or be a part of a checklist that humans run through. Without explicitly recommending who ought to do it, we might end up in a situation where everyone thought it was someone else\u2019s responsibility. I believe this should happen in the lowest possible layer, so the warning cannot be bypassed by higher-level applications.\n>  \n> Acknowledging this error could be done by setting a configuration parameter or sending a special command to the system. It has to be an action that goes beyond a typical yes/continue/ok that people go through absent-mindedly.\n>  \n> The \u201csoft fail\u201d feature is meant to be a \u201cconstructive annoyance\u201d \u2013 it creates a temporary disruption in order to avoid a catastrophic one.\n>  \n>  \n> Would others find this addition valuable to the draft?\n>\n>p.s. the suggestion is not rooted in experience with running HSMs or secure rooms where these things happen, but rather on a hunch and a background in usability. I'd be particularly interested in hearing from those with operational experience whether they've faced such issues and how they've addressed them.\n\nhttps://mailarchive.ietf.org/arch/msg/pqc/eZw6BfguNtNPDU2A1xURVP7_4DY/\n\n ",
       "createdAt": "2025-07-08T12:33:38Z",
-      "updatedAt": "2025-07-22T15:58:38Z",
+      "updatedAt": "2025-09-17T18:22:29Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "We will add a few sentences to operational considerations about availability that you may want some kind of warning system if you reach certain thresholds of signatures left.",
+          "createdAt": "2025-09-16T13:39:04Z",
+          "updatedAt": "2025-09-16T13:39:04Z"
+        },
+        {
+          "author": "ralienpp",
+          "authorAssociation": "NONE",
+          "body": "Thanks for incorporating my feedback; the proposed wording sounds good to me.",
+          "createdAt": "2025-09-17T18:22:29Z",
+          "updatedAt": "2025-09-17T18:22:29Z"
+        }
+      ]
     },
     {
       "number": 20,
@@ -265,11 +284,13 @@
       "state": "OPEN",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "fluppe2"
+      ],
       "labels": [],
       "body": "From Scott Fluhrer's comments:\n\n> You might want to make it clearer that the private key can be effectively split up into two parts: the private key, that is, the recipe for generating one-time-signature private keys (e.g. the private seed for XMSS), and the state (which tells you which one-time-signature to use next).  Those two halves could be handled independently.  That is, the first part is stateless, that is, it can be handled just like any other private key, and we can focus in on the dynamically updated second part (the state).\n\nI might want to add to this that there is a funny thing going on where the private key mainly has confidentiality requirements whereas the state has, somewhat uniquely, stricter integrity requirements on whatever storage mechanism, which is also somewhat different from the usual things we expect when handling keys.",
       "createdAt": "2025-08-19T14:46:57Z",
-      "updatedAt": "2025-08-19T14:46:57Z",
+      "updatedAt": "2025-09-16T13:41:01Z",
       "closedAt": null,
       "comments": []
     },
@@ -281,13 +302,23 @@
       "state": "OPEN",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "thomwiggers"
+      ],
       "labels": [],
       "body": "Scott suggested the following elaboration:\n\n> Section 1.1 When are S-HBS appropriate \u2013 one thing that is not listed is that the verification code can be quite simple (hash computation plus some simple logic) \u2013 this may be an advantage for tightly constrained verifiers.\n\nI would argue that this is covered by \u201cperformance of alternatives being prohibitive\u201d \u2014 but I am also trying to keep the \u201cwhen are they appropriate\u201d section as short, sweet and to the point as possible. We can consider expanding on this section a bit more, if people would want to see that (especially if they have unanswered questions or see gaps). ",
       "createdAt": "2025-08-19T14:55:23Z",
-      "updatedAt": "2025-08-19T14:55:23Z",
+      "updatedAt": "2025-09-16T13:44:00Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "we will split performance in implementation size and run time and call it a day",
+          "createdAt": "2025-09-16T13:43:27Z",
+          "updatedAt": "2025-09-16T13:43:40Z"
+        }
+      ]
     },
     {
       "number": 26,
@@ -297,11 +328,13 @@
       "state": "OPEN",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "fluppe2"
+      ],
       "labels": [],
       "body": "Scott Fluhrer suggested:\n\n> In section 5.3, you mention the possibility of using different private seeds (XMSS terminology) for different sectors.  Normally in cryptography, we suggest using different keys to reduce the amount of damage that is done if a key is leaked.  However, that doesn\u2019t apply here \u2013 here, if any private seed leaks, the adversary can sign anything they want (and while they may be limited to that specific sector, the adversary can still sign at will, given that there is no standard mechanisms to revoke signatures from a sector).  I would suggest using the same private seed for all sectors (unless it is significantly more convenient to not to) \u2013 it may make things simpler, and is no less secure.\n\nI may be missing some point why this makes sense to do so I'm creating this issue \u2014\u00a0I agree that we should clarify or indeed simplify the sectorization (and probably note why there's no point to different keys though it is possible).",
       "createdAt": "2025-08-19T14:58:20Z",
-      "updatedAt": "2025-08-19T14:58:20Z",
+      "updatedAt": "2025-09-16T13:25:40Z",
       "closedAt": null,
       "comments": []
     },
@@ -313,11 +346,13 @@
       "state": "OPEN",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "thomwiggers"
+      ],
       "labels": [],
       "body": "BH16 may have a flaw, and eprint 2023/1905 may be a better reference",
       "createdAt": "2025-08-19T15:01:32Z",
-      "updatedAt": "2025-08-19T15:01:32Z",
+      "updatedAt": "2025-09-16T13:47:07Z",
       "closedAt": null,
       "comments": []
     },
@@ -330,10 +365,12 @@
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
-      "labels": [],
+      "labels": [
+        "suggest-close"
+      ],
       "body": "Scott Fluhrer helpfully suggested providing text for speeding up signing: \n\n> One thing I\u2019m not sure about: there are some clever ways to speed up the signing process (by storing some of the intermediate nodes of the Merkle tree, and use those nodes to help generate the authentication path), and that may interact with the state management.  I know of four such techniques, each of which is \u201cbest\u201d by some criteria, and some of which update which nodes are stored during each signature, and one which does not (which ends up using more storage and require more hashes to sign, but also avoid issues with updating the nodes along with the state).  To what extent should this draft address this?  I should be the one to contribute text, should you decide it should be appropriate (although I would like some guidelines as to how thorough I should be \u2013 I could go one for quite some time\u2026)\n\nThe question is do we think this fits in scope? It may be a bit too \"implementation\" side",
       "createdAt": "2025-08-19T15:04:44Z",
-      "updatedAt": "2025-08-19T15:04:44Z",
+      "updatedAt": "2025-09-16T13:48:35Z",
       "closedAt": null,
       "comments": []
     },
@@ -345,13 +382,23 @@
       "state": "OPEN",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
-      "assignees": [],
+      "assignees": [
+        "BashiriK"
+      ],
       "labels": [],
       "body": "Scott Fluhrer suggested that we could include more content on \"how to do HBS signatures\".\n\n> I\u2019m not sure to what extent we want to broaden this from \u201chow we do state management\u201d to \u201cgeneral advice on how to use stateful hash-based signatures\u201d; although the document does have some of that general advice.  If we continue in that vein, I believe that you should mention that in XMSS/XMSS^MT, RFC 8391 and NIST SP 800-208 differs on SHAKE-based parameter sets.  I would recommend using the NIST parameter sets, should you decide you need an XMSS+SHAKE parameter set (the SHAKE-128 parameter set that RFC 8391 uses with n=32 reduces security to 128 bits, which is significantly weaker than the design goal).\n>\n>Another thought (if we were continuing with the giving general advice about stateful hash based signatures) is on selecting the parameter set.  For example, LMS with \u201cw=8\u201d (which would be w=256 in XMSS terminology) approximately halves the signature size, at the cost of making the signature generation and verification processes more expensive.  How far should we go into that (given that it is covered by other documents)\n\nI feel that \"picking parameters\" is a bit more of an operator concern and we do already touch on that (for example in that you need to consider your state management solutions when picking parameters). So this might be worth following up on?",
       "createdAt": "2025-08-19T15:06:37Z",
-      "updatedAt": "2025-08-19T15:06:37Z",
+      "updatedAt": "2025-09-16T13:51:47Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "We're currently thinking about making a passing comment that size/speed may matter and you need to think about this in the operational considerations, but don't go into lots of detail.",
+          "createdAt": "2025-09-16T13:51:27Z",
+          "updatedAt": "2025-09-16T13:51:27Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -1201,6 +1248,32 @@
           ]
         }
       ]
+    },
+    {
+      "number": 30,
+      "id": "PR_kwDOLPgbFM6pE64Y",
+      "title": "Add warnings when reaching threshold",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/30",
+      "state": "OPEN",
+      "author": "kste",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Add section to operational considerations to consider warning when threshold of signatures is reached.\r\n\r\nAddress issue #18",
+      "createdAt": "2025-09-17T13:25:57Z",
+      "updatedAt": "2025-09-17T13:25:58Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "kste-issue-18",
+      "headRefOid": "3bf94b4dcab4b9023406d13cac06cdf773fb0e10",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
