@@ -201,14 +201,21 @@ refer to it as the __state__ of the private key. Each Stateful HBS private key c
 used to sign a finite number of messages, and the state must be updated with
 each generated signature.
 
-One must not reuse any OTS key that is part of an Stateful HBS private key. If an
-attacker is able to obtain signatures for two different messages created using
-the same OTS key, it is computationally feasible for that attacker to create
-forgeries [BH16]. As noted in [MCGREW] and [ETSI-TR-103-692], extreme care
-should be taken in order to avoid the risk that an OTS key will be reused
-accidentally.
+One must not reuse any OTS key that is part of an Stateful HBS private key. If
+an attacker is able to obtain signatures for two different messages created
+using the same OTS key, it is computationally feasible for that attacker to
+create forgeries [BH16]. As noted in [MCGREW] and [ETSI-TR-103-692], extreme
+care should be taken in order to avoid the risk that an OTS key will be reused
+accidentally. Whereas [MCGREW] identifies the fundamental failure modes of
+stateful hash-based signatures and and proposes architectural strategies such
+as reservation in hierarchical schemes, and [ETSI-TR-103-692] provides a broad
+analysis of state management challenges and risks, this document complements
+both by cataloging concrete operational patterns in {{pot-sol}} and by
+addressing backup and recovery considerations {{alt-backup-mgmt}} not covered
+in prior work.
 
-The statefulness of Stateful HBS leads to significant challenges in practice:
+In particular, the challenges below highlight why careful state and backup
+management are essential in Stateful HBS:
 
 - Implementers must ensure that each creation of a signature updates the state
   correctly.
@@ -220,8 +227,8 @@ The statefulness of Stateful HBS leads to significant challenges in practice:
 - If key backups are required, implementers must ensure that any backup
   mechanism can not lead to re-using a previously used OTS key.
 
-The purpose of this document is to present, recall, and discuss various
-strategies for a correct state and backup management for Stateful HBS.
+The following sections present, recall, and discuss various strategies for a
+correct state and backup management for Stateful HBS.
 
 ## When are Stateful HBS appropriate?
 
@@ -441,7 +448,7 @@ state is a strong assumption, other signature schemes like ECDSA introduce
 similar assumptions for the verifier, by requiring the signer to never re-use
 the nonce.
 
-# Potential Solutions
+# Potential Solutions {#pot-sol}
 
 A variety of potential solutions have been proposed both within the
 [SP-800-208] specification, as well as from external sources. This section
