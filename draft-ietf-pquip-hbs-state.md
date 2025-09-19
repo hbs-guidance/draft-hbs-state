@@ -703,6 +703,34 @@ induced clock drift will then need to be accounted for in the future. If clock
 drift is to be avoided, this approach SHOULD account for availability
 considerations.
 
+## Interval-based Approaches
+
+The State Reservation Strategy described in section 5 of [MCGREW] provides
+another means of managing the state by allowing users to reserve intervals of
+the signing space, marking the interval' associated OTS keys as being used in
+the overall HBS state, which is then written back to non-volatile memory prior
+to their usage. The OTS keys within the reservation interval are then consumed
+as-needed, without having to update the state again until they have all been
+consumed and additional OTS keys are required. Note that the reserved OTS keys
+are kept in dynamic memory so they will be lost if the signing device loses
+power or is reset, resulting in a reduction in the number of usable signatures
+for a given HBS instantiation.
+
+Over provisioning can be used to ensure a sufficient number of signatures can
+be provided in the presence of unexpected losses due to power loss or resets.
+Over provisioning will cause a minor increase between 2% and 12% on signature
+length as the MTS validation paths increase to accomodate the increased Merkle
+tree height. However, reservation eliminates the need to update the state
+after each OTS key is used, minimizing the likelihood of state reuse due to
+state update failures and coherency issues.
+
+Multiple signing devices can in theory utilize reservation intervals to
+carve out portions of signing space so that a single S-HBS key can be shared
+amongst multiple devices, leading to potential performance and
+disaster-recovery benefits. However, great care must be taken to manage the
+reservations to ensure there is no overlap or repeated reservation of a
+given interval, either in part or in whole.
+
 # Backup management beyond NIST SP-800-208 {#alt-backup-mgmt}
 
 In this section, an alternative backup mechanism for Stateful HBS is presented in a
