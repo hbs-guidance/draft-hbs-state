@@ -719,7 +719,7 @@ for a given HBS instantiation.
 Over provisioning can be used to ensure a sufficient number of signatures can
 be provided in the presence of unexpected losses due to power loss or resets.
 Over provisioning will cause a minor increase between 2% and 12% on signature
-length as the MTS validation paths increase to accomodate the increased Merkle
+length as the MTS validation paths increase to accommodate the increased Merkle
 tree height. However, reservation eliminates the need to update the state
 after each OTS key is used, minimizing the likelihood of state reuse due to
 state update failures and coherency issues.
