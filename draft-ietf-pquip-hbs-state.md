@@ -207,8 +207,8 @@ using the same OTS key, it is computationally feasible for that attacker to
 create forgeries [BH16]. As noted in [MCGREW] and [ETSI-TR-103-692], extreme
 care should be taken in order to avoid the risk that an OTS key will be reused
 accidentally. Whereas [MCGREW] identifies the fundamental failure modes of
-stateful hash-based signatures and and proposes architectural strategies such
-as reservation in hierarchical schemes, and [ETSI-TR-103-692] provides a broad
+stateful hash-based signatures and proposes architectural strategies such
+as a reservation approach, and [ETSI-TR-103-692] provides a broad
 analysis of state management challenges and risks, this document complements
 both by cataloging concrete operational patterns in {{pot-sol}} and by
 addressing backup and recovery considerations {{alt-backup-mgmt}} not covered
