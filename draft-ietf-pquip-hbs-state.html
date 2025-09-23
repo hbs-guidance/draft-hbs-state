@@ -1250,6 +1250,9 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.8">
                 <p id="section-toc.1-1.5.2.8.1"><a href="#section-5.8" class="auto internal xref">5.8</a>.  <a href="#name-time-based-state-management" class="internal xref">Time-based State Management</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.9">
+                <p id="section-toc.1-1.5.2.9.1"><a href="#section-5.9" class="auto internal xref">5.9</a>.  <a href="#name-interval-based-approaches" class="internal xref">Interval-based Approaches</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
@@ -1889,6 +1892,36 @@ signing device to the next time window by incrementing its clock; however, this
 induced clock drift will then need to be accounted for in the future. If clock
 drift is to be avoided, this approach <span class="bcp14">SHOULD</span> account for availability
 considerations.<a href="#section-5.8-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="interval-based-approaches">
+<section id="section-5.9">
+        <h3 id="name-interval-based-approaches">
+<a href="#section-5.9" class="section-number selfRef">5.9. </a><a href="#name-interval-based-approaches" class="section-name selfRef">Interval-based Approaches</a>
+        </h3>
+<p id="section-5.9-1">The State Reservation Strategy described in section 5 of <span>[<a href="#MCGREW" class="cite xref">MCGREW</a>]</span> provides
+another means of managing the state by allowing users to reserve intervals of
+the signing space, marking the interval's associated OTS keys as being used in
+the overall HBS state, which is then written back to non-volatile memory prior
+to their usage. The OTS keys within the reservation interval are then consumed
+as-needed, without having to update the state again until they have all been
+consumed and additional OTS keys are required. Note that the reserved OTS keys
+are kept in dynamic memory so they will be lost if the signing device loses
+power or is reset, resulting in a reduction in the number of usable signatures
+for a given HBS instantiation.<a href="#section-5.9-1" class="pilcrow">¶</a></p>
+<p id="section-5.9-2">Over provisioning can be used to ensure a sufficient number of signatures can
+be provided in the presence of unexpected losses due to power loss or resets.
+Over provisioning will cause a minor increase between 2% and 12% on signature
+length as the MTS validation paths increase to accommodate the increased Merkle
+tree height. However, reservation eliminates the need to update the state
+after each OTS key is used, minimizing the likelihood of state reuse due to
+state update failures and coherency issues.<a href="#section-5.9-2" class="pilcrow">¶</a></p>
+<p id="section-5.9-3">Multiple signing devices can in theory utilize reservation intervals to
+carve out portions of signing space so that a single S-HBS key can be shared
+amongst multiple devices, leading to potential performance and
+disaster-recovery benefits. However, great care must be taken to manage the
+reservations to ensure there is no overlap or repeated reservation of a
+given interval, either in part or in whole.<a href="#section-5.9-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
