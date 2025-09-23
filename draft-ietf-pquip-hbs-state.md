@@ -707,7 +707,7 @@ considerations.
 
 The State Reservation Strategy described in section 5 of [MCGREW] provides
 another means of managing the state by allowing users to reserve intervals of
-the signing space, marking the interval' associated OTS keys as being used in
+the signing space, marking the interval's associated OTS keys as being used in
 the overall HBS state, which is then written back to non-volatile memory prior
 to their usage. The OTS keys within the reservation interval are then consumed
 as-needed, without having to update the state again until they have all been
