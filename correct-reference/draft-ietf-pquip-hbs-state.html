@@ -1066,7 +1066,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wiggers, et al.</td>
-<td class="center">Expires 22 March 2026</td>
+<td class="center">Expires 28 March 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1079,12 +1079,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-pquip-hbs-state-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-18" class="published">18 September 2025</time>
+<time datetime="2025-09-24" class="published">24 September 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-03-22">22 March 2026</time></dd>
+<dd class="expires"><time datetime="2026-03-28">28 March 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1161,7 +1161,7 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 22 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 28 March 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1250,6 +1250,9 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.8">
                 <p id="section-toc.1-1.5.2.8.1"><a href="#section-5.8" class="auto internal xref">5.8</a>.  <a href="#name-time-based-state-management" class="internal xref">Time-based State Management</a></p>
 </li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.5.2.9">
+                <p id="section-toc.1-1.5.2.9.1"><a href="#section-5.9" class="auto internal xref">5.9</a>.  <a href="#name-interval-based-approaches" class="internal xref">Interval-based Approaches</a></p>
+</li>
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.6">
@@ -1333,18 +1336,19 @@ strategies for a correct state and backup management for Stateful HBS.<a href="#
         <h3 id="name-when-are-stateful-hbs-appro">
 <a href="#section-1.1" class="section-number selfRef">1.1. </a><a href="#name-when-are-stateful-hbs-appro" class="section-name selfRef">When are Stateful HBS appropriate?</a>
         </h3>
-<p id="section-1.1-1">The issues with state management described above, as well as the limited number
-of signatures, lead to new requirements that most developers will not be
-familiar with and that require careful handling in practice: Stateful HBS are not
-general-purpose signature schemes. Most applications, especially those that may
-produce unrestricted numbers of signatures, should use <em>stateless</em> hash-based
-signature schemes like SLH-DSA <span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span>, which use the same security
-assumptions, or schemes based on other assumptions, such as ML-DSA <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>,
-instead. However, if performance, signature or key sizes of stateless
-alternatives are prohibitive, and the specific use case allows a very tight
-control of the signing environment, using Stateful HBS may be an appropriate solution.
-It seems likely that in many scenarios, this will only be possible when using
-purpose-designed hardware, such as hardware-security modules.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+<p id="section-1.1-1">The issues with state management described above, as well as (for most parameter
+sets) the limited number of signatures, lead to new requirements that most
+developers will not be familiar with and that require careful handling in
+practice: Stateful HBS are not general-purpose signature schemes. Most
+applications, especially those that may produce unrestricted numbers of
+signatures, should use <em>stateless</em> hash-based signature schemes like SLH-DSA
+<span>[<a href="#FIPS205" class="cite xref">FIPS205</a>]</span>, which use the same security assumptions, or schemes based on other
+assumptions, such as ML-DSA <span>[<a href="#FIPS204" class="cite xref">FIPS204</a>]</span>, instead. However, if performance,
+signature or key sizes of stateless alternatives are prohibitive, and the
+specific use case allows a very tight control of the signing environment, using
+Stateful HBS may be an appropriate solution. It seems likely that in many
+scenarios, this will only be possible when using purpose-designed hardware, such
+as hardware-security modules.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -1517,12 +1521,19 @@ ensure multiple parties are required to collude to undermine a solution's
 security. Note that the segregation of duties <span class="bcp14">MUST</span> persist across successive
 generations to ensure participants do not acquire multiple roles over time,
 thereby undermining the intended segregation.<a href="#section-3-3" class="pilcrow">¶</a></p>
-<p id="section-3-4">Lastly, costs associated with any external dependencies required by a
+<p id="section-3-4">In addition to the state management, implementers <span class="bcp14">MAY</span> consider to implement
+mechanisms to prevent abrupt signature exhaustion. Implementations <span class="bcp14">MAY</span>
+consider providing a configurable warning threshold, M, which is triggered
+when M signatures remain. When the number of available signatures reaches
+this threshold, the system should return a signatures nearing exhaustion warning.
+This warning condition <span class="bcp14">SHOULD</span> require explicit acknowledgment from the user
+through a mechanism that cannot be trivially skipped.<a href="#section-3-4" class="pilcrow">¶</a></p>
+<p id="section-3-5">Lastly, costs associated with any external dependencies required by a
 particular solution (e.g., access to a public ledger or transparency log,
 providing accurate time references and synchronization mechanisms, access to
 attestation facilities, etc.) <span class="bcp14">MUST</span> be accounted for as well, particularly if a
 system is operating in an offline mode that makes delivering these additional
-capabilities all the more complicated and expensive.<a href="#section-3-4" class="pilcrow">¶</a></p>
+capabilities all the more complicated and expensive.<a href="#section-3-5" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="requirements-for-secure-state-management">
@@ -1606,12 +1617,14 @@ describes a number of approaches and their potential advantages/disadvantages.<a
         </h3>
 <p id="section-5.1-1">The <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> proposes generating multiple Stateful HBS keypairs and configuring
 devices and clients to accept signatures created by any of these keys.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">This negatively impacts one of the advantages of using Stateful HBS by increasing the
-public key footprint within the client, which can be problematic if it has
-limited public key storage capacity. <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> addresses this concern by
-suggesting using a mechanism such as that proposed in <span>[<a href="#RFC8649" class="cite xref">RFC8649</a>]</span> to update
-the stored public key by having the current key endorse the next key that is to
-be installed. Unfortunately, for many constrained devices the public key is
+<p id="section-5.1-2">This negatively impacts one of the advantages of using Stateful HBS by
+increasing the public key footprint within the client, which can be problematic
+if it has limited public key storage capacity. (Though public keys are typically
+equivalently sized to ECDSA rather than larger classical RSA keys often
+currently found.) <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> addresses storage capacity concerns by suggesting
+using a mechanism such as that proposed in <span>[<a href="#RFC8649" class="cite xref">RFC8649</a>]</span> to update the stored
+public key by having the current key endorse the next key that is to be
+installed. Unfortunately, for many constrained devices the public key is
 embedded in immutable ROM or fuses due to security reasons, so it cannot be
 updated in this manner.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">The proposal of using multiple Stateful HBS keypairs for a single instance also
@@ -1879,6 +1892,36 @@ signing device to the next time window by incrementing its clock; however, this
 induced clock drift will then need to be accounted for in the future. If clock
 drift is to be avoided, this approach <span class="bcp14">SHOULD</span> account for availability
 considerations.<a href="#section-5.8-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="interval-based-approaches">
+<section id="section-5.9">
+        <h3 id="name-interval-based-approaches">
+<a href="#section-5.9" class="section-number selfRef">5.9. </a><a href="#name-interval-based-approaches" class="section-name selfRef">Interval-based Approaches</a>
+        </h3>
+<p id="section-5.9-1">The State Reservation Strategy described in section 5 of <span>[<a href="#MCGREW" class="cite xref">MCGREW</a>]</span> provides
+another means of managing the state by allowing users to reserve intervals of
+the signing space, marking the interval's associated OTS keys as being used in
+the overall HBS state, which is then written back to non-volatile memory prior
+to their usage. The OTS keys within the reservation interval are then consumed
+as-needed, without having to update the state again until they have all been
+consumed and additional OTS keys are required. Note that the reserved OTS keys
+are kept in dynamic memory so they will be lost if the signing device loses
+power or is reset, resulting in a reduction in the number of usable signatures
+for a given HBS instantiation.<a href="#section-5.9-1" class="pilcrow">¶</a></p>
+<p id="section-5.9-2">Over provisioning can be used to ensure a sufficient number of signatures can
+be provided in the presence of unexpected losses due to power loss or resets.
+Over provisioning will cause a minor increase between 2% and 12% on signature
+length as the MTS validation paths increase to accommodate the increased Merkle
+tree height. However, reservation eliminates the need to update the state
+after each OTS key is used, minimizing the likelihood of state reuse due to
+state update failures and coherency issues.<a href="#section-5.9-2" class="pilcrow">¶</a></p>
+<p id="section-5.9-3">Multiple signing devices can in theory utilize reservation intervals to
+carve out portions of signing space so that a single S-HBS key can be shared
+amongst multiple devices, leading to potential performance and
+disaster-recovery benefits. However, great care must be taken to manage the
+reservations to ensure there is no overlap or repeated reservation of a
+given interval, either in part or in whole.<a href="#section-5.9-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
