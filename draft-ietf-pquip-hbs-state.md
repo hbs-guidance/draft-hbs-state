@@ -121,6 +121,14 @@ informative:
         ins: A. Hülsing
     date: 2016
 
+  Fluhrer23:
+    title: "Oops, I did it again revisited; another look at reusing one-time signatures"
+    author:
+      -
+        ins: S. Fluhrer
+        fullname: Scott Fluhrer
+    date: 2023
+
   ETSI-TR-103-692:
     target: https://www.etsi.org/deliver/etsi_tr/103600_103699/103692/01.01.01_60/tr_103692v010101p.pdf
     title: State management for stateful authentication mechanisms
@@ -201,12 +209,12 @@ refer to it as the __state__ of the private key. Each Stateful HBS private key c
 used to sign a finite number of messages, and the state must be updated with
 each generated signature.
 
-One must not reuse any OTS key that is part of an Stateful HBS private key. If an
-attacker is able to obtain signatures for two different messages created using
-the same OTS key, it is computationally feasible for that attacker to create
-forgeries [BH16]. As noted in [MCGREW] and [ETSI-TR-103-692], extreme care
-should be taken in order to avoid the risk that an OTS key will be reused
-accidentally.
+One must not reuse any OTS key that is part of an Stateful HBS private key. If
+an attacker is able to obtain signatures for two different messages created
+using the same OTS key, it is computationally feasible for that attacker to
+create forgeries [BH16] [Fluhrer23]. As noted in [MCGREW] and [ETSI-TR-103-692],
+extreme care should be taken in order to avoid the risk that an OTS key will be
+reused accidentally.
 
 The statefulness of Stateful HBS leads to significant challenges in practice:
 
@@ -227,18 +235,19 @@ strategies for a correct state and backup management for Stateful HBS.
 
 ## When are Stateful HBS appropriate?
 
-The issues with state management described above, as well as the limited number
-of signatures, lead to new requirements that most developers will not be
-familiar with and that require careful handling in practice: Stateful HBS are not
-general-purpose signature schemes. Most applications, especially those that may
-produce unrestricted numbers of signatures, should use _stateless_ hash-based
-signature schemes like SLH-DSA [FIPS205], which use the same security
-assumptions, or schemes based on other assumptions, such as ML-DSA [FIPS204],
-instead. However, if performance, signature or key sizes of stateless
-alternatives are prohibitive, and the specific use case allows a very tight
-control of the signing environment, using Stateful HBS may be an appropriate solution.
-It seems likely that in many scenarios, this will only be possible when using
-purpose-designed hardware, such as hardware-security modules.
+The issues with state management described above, as well as (for most parameter
+sets) the limited number of signatures, lead to new requirements that most
+developers will not be familiar with and that require careful handling in
+practice: Stateful HBS are not general-purpose signature schemes. Most
+applications, especially those that may produce unrestricted numbers of
+signatures, should use _stateless_ hash-based signature schemes like SLH-DSA
+[FIPS205], which use the same security assumptions, or schemes based on other
+assumptions, such as ML-DSA [FIPS204], instead. However, if performance,
+signature or key sizes of stateless alternatives are prohibitive, and the
+specific use case allows a very tight control of the signing environment, using
+Stateful HBS may be an appropriate solution. It seems likely that in many
+scenarios, this will only be possible when using purpose-designed hardware, such
+as hardware-security modules.
 
 
 # Conventions and Definitions
@@ -376,6 +385,14 @@ security. Note that the segregation of duties MUST persist across successive
 generations to ensure participants do not acquire multiple roles over time,
 thereby undermining the intended segregation.
 
+In addition to the state management, implementers MAY consider to implement
+mechanisms to prevent abrupt signature exhaustion. Implementations MAY
+consider providing a configurable warning threshold, M, which is triggered
+when M signatures remain. When the number of available signatures reaches
+this threshold, the system should return a signatures nearing exhaustion warning.
+This warning condition SHOULD require explicit acknowledgment from the user
+through a mechanism that cannot be trivially skipped.
+
 Lastly, costs associated with any external dependencies required by a
 particular solution (e.g., access to a public ledger or transparency log,
 providing accurate time references and synchronization mechanisms, access to
@@ -473,12 +490,14 @@ describes a number of approaches and their potential advantages/disadvantages.
 The [SP-800-208] proposes generating multiple Stateful HBS keypairs and configuring
 devices and clients to accept signatures created by any of these keys.
 
-This negatively impacts one of the advantages of using Stateful HBS by increasing the
-public key footprint within the client, which can be problematic if it has
-limited public key storage capacity. [SP-800-208] addresses this concern by
-suggesting using a mechanism such as that proposed in {{?RFC8649}} to update
-the stored public key by having the current key endorse the next key that is to
-be installed. Unfortunately, for many constrained devices the public key is
+This negatively impacts one of the advantages of using Stateful HBS by
+increasing the public key footprint within the client, which can be problematic
+if it has limited public key storage capacity. (Though public keys are typically
+equivalently sized to ECDSA rather than larger classical RSA keys often
+currently found.) [SP-800-208] addresses storage capacity concerns by suggesting
+using a mechanism such as that proposed in {{?RFC8649}} to update the stored
+public key by having the current key endorse the next key that is to be
+installed. Unfortunately, for many constrained devices the public key is
 embedded in immutable ROM or fuses due to security reasons, so it cannot be
 updated in this manner.
 
@@ -733,6 +752,34 @@ signing device to the next time window by incrementing its clock; however, this
 induced clock drift will then need to be accounted for in the future. If clock
 drift is to be avoided, this approach SHOULD account for availability
 considerations.
+
+## Interval-based Approaches
+
+The State Reservation Strategy described in section 5 of [MCGREW] provides
+another means of managing the state by allowing users to reserve intervals of
+the signing space, marking the interval's associated OTS keys as being used in
+the overall HBS state, which is then written back to non-volatile memory prior
+to their usage. The OTS keys within the reservation interval are then consumed
+as-needed, without having to update the state again until they have all been
+consumed and additional OTS keys are required. Note that the reserved OTS keys
+are kept in dynamic memory so they will be lost if the signing device loses
+power or is reset, resulting in a reduction in the number of usable signatures
+for a given HBS instantiation.
+
+Over provisioning can be used to ensure a sufficient number of signatures can
+be provided in the presence of unexpected losses due to power loss or resets.
+Over provisioning will cause a minor increase between 2% and 12% on signature
+length as the MTS validation paths increase to accommodate the increased Merkle
+tree height. However, reservation eliminates the need to update the state
+after each OTS key is used, minimizing the likelihood of state reuse due to
+state update failures and coherency issues.
+
+Multiple signing devices can in theory utilize reservation intervals to
+carve out portions of signing space so that a single S-HBS key can be shared
+amongst multiple devices, leading to potential performance and
+disaster-recovery benefits. However, great care must be taken to manage the
+reservations to ensure there is no overlap or repeated reservation of a
+given interval, either in part or in whole.
 
 # Backup management beyond NIST SP-800-208 {#alt-backup-mgmt}
 
