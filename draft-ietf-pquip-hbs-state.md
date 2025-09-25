@@ -225,6 +225,8 @@ The statefulness of Stateful HBS leads to significant challenges in practice:
   implementers must ensure that they never use the same OTS key. This may
   require synchronization between all signers.
 
+- Additional operational complexity arises when part of the available OTS signatures are allocated to different devices (partial state transfer), or when state from different devices needs merging; these introduce risks of overlap, failure, and require careful coordination.
+
 - If key backups are required, implementers must ensure that any backup
   mechanism can not lead to re-using a previously used OTS key.
 
@@ -268,6 +270,8 @@ This includes mechanisms, which aim:
 
 - to set up Stateful HBS with a split state and/or private key, so that signatures can
   be generated from either part without risk of state reuse,
+
+- to enable partial transfer of unused signature capacity between devices, and optionally merging state fragments without overlap,
 
 - to enable effective but secure handling of private key and state backup
   material,
@@ -404,6 +408,23 @@ ever be issued from the same state. In addition, the generation of a signature
 and update of the state SHOULD appear to be an _atomic transaction_. This means
 that the system MUST NOT release a signature without irrevocably and correctly
 updating the state.
+
+State management systems SHOULD satisfy all _ACID_ properties:
+
+- _Atomicity_: each operation must be indivisible — either the signature is
+  generated and the state is updated together, or neither occurs.
+
+- _Consistency_: the state before and after each update must reflect a valid
+  progression of available OTS indices, and no invalid or conflicting state is
+  ever observable.
+
+- _Isolation_: concurrent or overlapping operations (e.g., from separate
+  processes or devices) must not interfere in ways that could lead to state
+  reuse.
+
+- _Durability_: once a state transition (e.g., after issuing a signature) is
+  committed, that transition must survive crashes, power loss, or device
+  failure.
 
 These requirements impose significant restrictions on the underlying technical
 approach and a careful implementation of how the state will be updated or
@@ -580,6 +601,16 @@ having the source device fail before the key/state can be transferred,
 effectively causing the loss of the key/state. Hence, it will not be of much
 help addressing the single point of failure issue identified for root trees,
 but may be useful for managing subordinate trees.
+
+In addition to complete key/state transfer, a device holding part of the total
+available OTS signatures may transfer some unused capacity to another device
+(partial state transfer). In more advanced deployments, state fragments from
+two devices may be merged to reconstruct or continue signature operations.
+These operations carry risk: ensuring no overlap in used indices, ensuring
+atomicity of transfer/merge operations, managing consistency, possible
+conflicts, and durability of state across devices. Such approaches require
+strong synchronization, auditability, and appropriate backup mechanisms to
+avoid double-signing or loss of capacity.
 
 A more elaborate variant of key transfer, going beyond what [SP-800-208]
 allows, can be found described in [](#alt-backup-mgmt) where key transfer is
