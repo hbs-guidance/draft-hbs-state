@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-21T00:44:40.070504+00:00",
+  "timestamp": "2025-09-25T00:41:02.318950+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -230,7 +230,7 @@
       "id": "I_kwDOLPgbFM6_eQSg",
       "title": "\"Soft-fail\" / Warnings when at a certain amount of signatures left",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/18",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -239,8 +239,8 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/pqc/eZw6BfguNtNPDU2A1xURVP7_4DY/\n\nAlexander Reilean wrote:\n\n> While reviewing draft-ietf-pquip-hbs-state I understand that it addresses prevention of state reuse, backup management and training operators, but I think it leaves a gap when it comes to warning users before they exhaust the available signatures. People can still drive themselves into a corner if they follow the prescribed procedures.\n>  \n>  \n> Consider a system configured for N=100 signatures. When attempting the N+1 signature, the system returns a \u201csignatures exhausted\u201d error. While this prevents a disaster, the users are already in an operational dead-end because there is no graceful recovery path. Would it be helpful if the system could optionally warn about this a couple of signatures earlier?\n>  \n> I propose extending section 3:\n>  \n> ```\n> Consider providing a configurable warning threshold (M), that is triggered when M signatures remain. When the threshold is reached, the system should return a `signatures nearing exhaustion` error, requiring the user to explicitly acknowledge it in a way that cannot be trivially skipped.\n>  \n> This \u201csoft fail\u201d condition directs attention to the approaching exhaustion while signatures are still available, allowing enough time to initiate key rotation before operations are disrupted.\n>  \n> For flexibility, implementations may allow setting the threshold to M=0 to disable this feature.\n> ```\n>  \n>  \n> The draft could also recommend the layer at which the check should occur, e.g., in the HSM, in the software that uses the HSM, or be a part of a checklist that humans run through. Without explicitly recommending who ought to do it, we might end up in a situation where everyone thought it was someone else\u2019s responsibility. I believe this should happen in the lowest possible layer, so the warning cannot be bypassed by higher-level applications.\n>  \n> Acknowledging this error could be done by setting a configuration parameter or sending a special command to the system. It has to be an action that goes beyond a typical yes/continue/ok that people go through absent-mindedly.\n>  \n> The \u201csoft fail\u201d feature is meant to be a \u201cconstructive annoyance\u201d \u2013 it creates a temporary disruption in order to avoid a catastrophic one.\n>  \n>  \n> Would others find this addition valuable to the draft?\n>\n>p.s. the suggestion is not rooted in experience with running HSMs or secure rooms where these things happen, but rather on a hunch and a background in usability. I'd be particularly interested in hearing from those with operational experience whether they've faced such issues and how they've addressed them.\n\nhttps://mailarchive.ietf.org/arch/msg/pqc/eZw6BfguNtNPDU2A1xURVP7_4DY/\n\n ",
       "createdAt": "2025-07-08T12:33:38Z",
-      "updatedAt": "2025-09-17T18:22:29Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-23T14:38:47Z",
+      "closedAt": "2025-09-23T14:38:47Z",
       "comments": [
         {
           "author": "thomwiggers",
@@ -1223,37 +1223,39 @@
       "id": "PR_kwDOLPgbFM6kUM_g",
       "title": "The easy parts of Scott's comments",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/24",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-08-19T14:54:14Z",
-      "updatedAt": "2025-09-18T15:48:18Z",
+      "updatedAt": "2025-09-23T14:39:43Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
-      "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
+      "baseRefOid": "8bdcacae8e0d187c44ed1ba12e3931c069f2868e",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "scott-comments",
-      "headRefOid": "a35d0a262564d58125ca6de401bed55eb4e4dc27",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f3291be9c6fe1d4e85e7e795a7bc7dfb370748c0",
+      "closedAt": "2025-09-23T14:39:41Z",
+      "mergedAt": "2025-09-23T14:39:41Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "5782391fb31f41c7520d05bd728e9e5e6da6768e"
+      },
       "comments": [],
       "reviews": [
         {
           "id": "PRR_kwDOLPgbFM663t0I",
           "commit": {
-            "abbreviatedOid": "a35d0a2"
+            "abbreviatedOid": "f3291be"
           },
           "author": "kste",
           "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2025-08-20T07:30:17Z",
-          "updatedAt": "2025-08-20T07:30:40Z",
+          "updatedAt": "2025-09-23T14:39:11Z",
           "comments": [
             {
               "originalPosition": 45,
@@ -1266,14 +1268,14 @@
         {
           "id": "PRR_kwDOLPgbFM7BJ955",
           "commit": {
-            "abbreviatedOid": "a35d0a2"
+            "abbreviatedOid": "f3291be"
           },
           "author": "fluppe2",
           "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "LGTM",
           "createdAt": "2025-09-18T15:48:18Z",
-          "updatedAt": "2025-09-18T15:48:18Z",
+          "updatedAt": "2025-09-23T14:39:11Z",
           "comments": []
         }
       ]
@@ -1283,24 +1285,26 @@
       "id": "PR_kwDOLPgbFM6pE64Y",
       "title": "Add warnings when reaching threshold",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/30",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "kste",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Add section to operational considerations to consider warning when threshold of signatures is reached.\r\n\r\nAddress issue #18",
       "createdAt": "2025-09-17T13:25:57Z",
-      "updatedAt": "2025-09-18T15:51:35Z",
+      "updatedAt": "2025-09-23T14:38:48Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "kste-issue-18",
       "headRefOid": "3bf94b4dcab4b9023406d13cac06cdf773fb0e10",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-23T14:38:47Z",
+      "mergedAt": "2025-09-23T14:38:46Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "8bdcacae8e0d187c44ed1ba12e3931c069f2868e"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1343,13 +1347,13 @@
       "labels": [],
       "body": "See Reference a correct attack paper\nFixes #27",
       "createdAt": "2025-09-18T14:00:48Z",
-      "updatedAt": "2025-09-18T15:52:24Z",
+      "updatedAt": "2025-09-24T10:19:38Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
-      "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
+      "baseRefOid": "0b2cbb6d9a494e51bd8ec6ec032f70d855a5e8e7",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "correct-reference",
-      "headRefOid": "d4d7a81e5e9e3d06abc2439531d02a5217891621",
+      "headRefOid": "8ee63755ab97fd59583fd3675b8091780893b05a",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -1359,27 +1363,27 @@
         {
           "id": "PRR_kwDOLPgbFM7BHmYo",
           "commit": {
-            "abbreviatedOid": "d4d7a81"
+            "abbreviatedOid": "8ee6375"
           },
           "author": "crypto4a",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "Looks good to me. Thanks for making the change!",
           "createdAt": "2025-09-18T14:08:18Z",
-          "updatedAt": "2025-09-18T14:08:18Z",
+          "updatedAt": "2025-09-24T10:19:38Z",
           "comments": []
         },
         {
           "id": "PRR_kwDOLPgbFM7BKDu4",
           "commit": {
-            "abbreviatedOid": "d4d7a81"
+            "abbreviatedOid": "8ee6375"
           },
           "author": "fluppe2",
           "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "LGTM",
           "createdAt": "2025-09-18T15:52:24Z",
-          "updatedAt": "2025-09-18T15:52:24Z",
+          "updatedAt": "2025-09-24T10:19:37Z",
           "comments": []
         }
       ]
@@ -1449,7 +1453,7 @@
       "labels": [],
       "body": "Tried to address #11.",
       "createdAt": "2025-09-18T16:35:16Z",
-      "updatedAt": "2025-09-18T17:42:08Z",
+      "updatedAt": "2025-09-24T10:17:13Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
@@ -1468,11 +1472,37 @@
             "abbreviatedOid": "0f06740"
           },
           "author": "crypto4a",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "Looks good to me. Thanks for making this update.",
           "createdAt": "2025-09-18T17:42:08Z",
           "updatedAt": "2025-09-18T17:42:08Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7CcOr0",
+          "commit": {
+            "abbreviatedOid": "0f06740"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "I really like the changes. However, as they seem to be significant I would suggest that all of us should approve this pull request.",
+          "createdAt": "2025-09-24T10:15:44Z",
+          "updatedAt": "2025-09-24T10:15:44Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7CcPwT",
+          "commit": {
+            "abbreviatedOid": "0f06740"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-24T10:17:13Z",
+          "updatedAt": "2025-09-24T10:17:13Z",
           "comments": []
         }
       ]
@@ -1489,13 +1519,13 @@
       "labels": [],
       "body": "Addresses #20 while also covering MCGREW. Had to smooth out the sentences after the inserted part.",
       "createdAt": "2025-09-19T06:25:59Z",
-      "updatedAt": "2025-09-19T11:26:13Z",
+      "updatedAt": "2025-09-24T17:27:29Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "20-clarify-how-we-differ-from-etsi-tr-103-692-state-management-for-stateful-authentication-mechanisms",
-      "headRefOid": "76b78cb184758dd327613274582005bb19539df6",
+      "headRefOid": "bbd34e6b12a57095ed49f1b4d2450c4cbc945be4",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -1508,12 +1538,98 @@
             "abbreviatedOid": "76b78cb"
           },
           "author": "crypto4a",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "Looks good to me. Thanks for making this change!",
           "createdAt": "2025-09-19T11:26:13Z",
           "updatedAt": "2025-09-19T11:26:13Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7CcNxH",
+          "commit": {
+            "abbreviatedOid": "bbd34e6"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "Looks good to me!",
+          "createdAt": "2025-09-24T10:14:35Z",
+          "updatedAt": "2025-09-24T10:14:35Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7CcQq-",
+          "commit": {
+            "abbreviatedOid": "bbd34e6"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-24T10:18:30Z",
+          "updatedAt": "2025-09-24T10:18:30Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7CcRE4",
+          "commit": {
+            "abbreviatedOid": "bbd34e6"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-09-24T10:19:04Z",
+          "updatedAt": "2025-09-24T10:19:09Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "this should probably also cite Scott's paper aside from BH16",
+              "createdAt": "2025-09-24T10:19:04Z",
+              "updatedAt": "2025-09-24T10:19:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7CcR2f",
+          "commit": {
+            "abbreviatedOid": "bbd34e6"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-24T10:20:08Z",
+          "updatedAt": "2025-09-24T10:20:09Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Ah #31 is not merged yet",
+              "createdAt": "2025-09-24T10:20:09Z",
+              "updatedAt": "2025-09-24T10:20:09Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7Ci5Y5",
+          "commit": {
+            "abbreviatedOid": "bbd34e6"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-09-24T17:27:29Z",
+          "updatedAt": "2025-09-24T17:27:29Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "@thomwiggers Once you merge #31 I will merge this one, which should resolve that.",
+              "createdAt": "2025-09-24T17:27:29Z",
+              "updatedAt": "2025-09-24T17:27:29Z"
+            }
+          ]
         }
       ]
     },
@@ -1522,24 +1638,26 @@
       "id": "PR_kwDOLPgbFM6pfFoW",
       "title": "Interval-based state reservation text.",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/36",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "crypto4a",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Adding text describing interval-based state reservation to address issue #16.",
       "createdAt": "2025-09-19T11:20:29Z",
-      "updatedAt": "2025-09-20T08:13:29Z",
+      "updatedAt": "2025-09-23T14:41:00Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
-      "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
+      "baseRefOid": "5782391fb31f41c7520d05bd728e9e5e6da6768e",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "jimg-issue-16",
-      "headRefOid": "199b35f8cb62332406c3edaec6e59d23f9551437",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f97236bf57ae53d8c46f31a07f766c2ecbfe4aa3",
+      "closedAt": "2025-09-23T14:40:58Z",
+      "mergedAt": "2025-09-23T14:40:58Z",
+      "mergedBy": "crypto4a",
+      "mergeCommit": {
+        "oid": "0b2cbb6d9a494e51bd8ec6ec032f70d855a5e8e7"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1581,6 +1699,19 @@
               "updatedAt": "2025-09-20T08:13:29Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7CLYA4",
+          "commit": {
+            "abbreviatedOid": "f97236b"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Very nice text.",
+          "createdAt": "2025-09-23T12:28:41Z",
+          "updatedAt": "2025-09-23T14:40:18Z",
+          "comments": []
         }
       ]
     }
