@@ -141,10 +141,16 @@ Table of Contents
    computationally feasible for that attacker to create forgeries BH16
    [Fluhrer23].  As noted in [MCGREW] and [ETSI-TR-103-692], extreme
    care should be taken in order to avoid the risk that an OTS key will
-   be reused accidentally.
+   be reused accidentally.  Whereas [MCGREW] identifies the fundamental
+   failure modes of stateful hash-based signatures and proposes
+   architectural strategies such as a reservation approach, and
+   [ETSI-TR-103-692] provides a broad analysis of state management
+   challenges and risks, this document complements both by cataloging
+   concrete operational patterns in Section 5 and by addressing backup
+   and recovery considerations Section 6 not covered in prior work.
 
-   The statefulness of Stateful HBS leads to significant challenges in
-   practice:
+   In particular, the challenges below highlight why careful state and
+   backup management are essential in Stateful HBS:
 
    *  Implementers must ensure that each creation of a signature updates
       the state correctly.
@@ -164,9 +170,9 @@ Table of Contents
       backup mechanism can not lead to re-using a previously used OTS
       key.
 
-   The purpose of this document is to present, recall, and discuss
-   various strategies for a correct state and backup management for
-   Stateful HBS.
+   The following sections present, recall, and discuss various
+   strategies for a correct state and backup management for Stateful
+   HBS.
 
 1.1.  When are Stateful HBS appropriate?
 

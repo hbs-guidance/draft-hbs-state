@@ -1310,10 +1310,17 @@ each generated signature.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">One must not reuse any OTS key that is part of an Stateful HBS private key. If
 an attacker is able to obtain signatures for two different messages created
 using the same OTS key, it is computationally feasible for that attacker to
-create forgeries <span><a href="#Fluhrer23" class="internal xref">BH16</a> [<a href="#Fluhrer23" class="cite xref">Fluhrer23</a>]</span>. As noted in <span>[<a href="#MCGREW" class="cite xref">MCGREW</a>]</span> and <span>[<a href="#ETSI-TR-103-692" class="cite xref">ETSI-TR-103-692</a>]</span>,
-extreme care should be taken in order to avoid the risk that an OTS key will be
-reused accidentally.<a href="#section-1-3" class="pilcrow">¶</a></p>
-<p id="section-1-4">The statefulness of Stateful HBS leads to significant challenges in practice:<a href="#section-1-4" class="pilcrow">¶</a></p>
+create forgeries <span><a href="#Fluhrer23" class="internal xref">BH16</a> [<a href="#Fluhrer23" class="cite xref">Fluhrer23</a>]</span>. As noted in <span>[<a href="#MCGREW" class="cite xref">MCGREW</a>]</span> and <span>[<a href="#ETSI-TR-103-692" class="cite xref">ETSI-TR-103-692</a>]</span>, extreme
+care should be taken in order to avoid the risk that an OTS key will be reused
+accidentally. Whereas <span>[<a href="#MCGREW" class="cite xref">MCGREW</a>]</span> identifies the fundamental failure modes of
+stateful hash-based signatures and proposes architectural strategies such
+as a reservation approach, and <span>[<a href="#ETSI-TR-103-692" class="cite xref">ETSI-TR-103-692</a>]</span> provides a broad
+analysis of state management challenges and risks, this document complements
+both by cataloging concrete operational patterns in <a href="#pot-sol" class="auto internal xref">Section 5</a> and by
+addressing backup and recovery considerations <a href="#alt-backup-mgmt" class="auto internal xref">Section 6</a> not covered
+in prior work.<a href="#section-1-3" class="pilcrow">¶</a></p>
+<p id="section-1-4">In particular, the challenges below highlight why careful state and backup
+management are essential in Stateful HBS:<a href="#section-1-4" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-1-5.1">
           <p id="section-1-5.1.1">Implementers must ensure that each creation of a signature updates the state
@@ -1332,8 +1339,8 @@ require synchronization between all signers.<a href="#section-1-5.2.1" class="pi
 mechanism can not lead to re-using a previously used OTS key.<a href="#section-1-5.4.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
-<p id="section-1-6">The purpose of this document is to present, recall, and discuss various
-strategies for a correct state and backup management for Stateful HBS.<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-6">The following sections present, recall, and discuss various strategies for a
+correct state and backup management for Stateful HBS.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <div id="when-are-stateful-hbs-appropriate">
 <section id="section-1.1">
         <h3 id="name-when-are-stateful-hbs-appro">
@@ -1630,7 +1637,7 @@ similar assumptions for the verifier, by requiring the signer to never re-use
 the nonce.<a href="#section-4-10" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="potential-solutions">
+<div id="pot-sol">
 <section id="section-5">
       <h2 id="name-potential-solutions">
 <a href="#section-5" class="section-number selfRef">5. </a><a href="#name-potential-solutions" class="section-name selfRef">Potential Solutions</a>
