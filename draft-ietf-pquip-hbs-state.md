@@ -240,7 +240,7 @@ management are essential in Stateful HBS:
 The following sections present, recall, and discuss various strategies for a
 correct state and backup management for Stateful HBS.
 
-## When are Stateful HBS appropriate?
+## When are Stateful HBS Appropriate?
 
 The issues with state management described above, as well as (for most parameter
 sets) the limited number of signatures, lead to new requirements that most
@@ -261,12 +261,12 @@ as hardware-security modules.
 
 {::boilerplate bcp14-tagged}
 
-## Specific terminology in the context of Stateful HBS
+## Specific Terminology in the Context of Stateful HBS
 
 In this subsection we specify certain notions which are important in the
 context of Stateful HBS.
 
-### State management
+### State Management
 
 In this document _state management_ refers to the handling and implementation
 of the state of the private key.
@@ -291,7 +291,7 @@ mechanisms such as, e.g., puncturable schemes [BSW16], the state and private
 key might be inseparable. However, even in these scenarios, this document's
 guidance should still apply.
 
-### Backup management
+### Backup Management
 
 In order to mitigate failure of, e.g., devices storing key material and to
 facilitate other types of disaster recovery, backups of private keys and their
@@ -315,7 +315,7 @@ These mechanisms include procedures and protocols, which aim:
 Backup management can be viewed as a more specific type of state management; we
 make this distinction to clarify the aims of our recommendations.
 
-### Key export, key import and key transfer {#keymovement}
+### Key Export, Key Import and Key Transfer {#keymovement}
 
 As part of state and backup management, we will discuss mechanisms to export,
 import or transfer private key and state material. In order to avoid
@@ -407,7 +407,7 @@ attestation facilities, etc.) MUST be accounted for as well, particularly if a
 system is operating in an offline mode that makes delivering these additional
 capabilities all the more complicated and expensive.
 
-# Requirements for secure state management
+# Requirements for Secure State Management
 
 A system deploying Stateful HBS SHOULD fulfill certain requirements to allow securely
 handling the state. The system MUST ensure that no two signing operations can
@@ -788,7 +788,7 @@ disaster-recovery benefits. However, great care must be taken to manage the
 reservations to ensure there is no overlap or repeated reservation of a
 given interval, either in part or in whole.
 
-# Backup management beyond NIST SP-800-208 {#alt-backup-mgmt}
+# Backup Management Beyond NIST SP-800-208 {#alt-backup-mgmt}
 
 In this section, an alternative backup mechanism for Stateful HBS is presented in a
 generic form, which makes the strategy applicable for both multi-tree instances
