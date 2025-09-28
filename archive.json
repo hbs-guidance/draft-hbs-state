@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-25T00:41:02.318950+00:00",
+  "timestamp": "2025-09-28T00:45:20.240461+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -138,7 +138,7 @@
       "id": "I_kwDOLPgbFM6rUku2",
       "title": "Comments from Alicja Kario",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/11",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -147,8 +147,8 @@
       "labels": [],
       "body": "https://mailarchive.ietf.org/arch/msg/pqc/JierE20-zfrGfCvBOtJ0gUtuJFc/\n\n>In general, I think abstract and introduction is understating the operational\n>complexity of managing those keys.\n>\n>One thing that I didn't notice, or at least isn't explicit in section 5 is\n>partial state transfer: when we have a device with a state that allows N\n>signatures, if could transfer N/2 signatures to another device and retain\n>the other half. That also provides partial protection against hardware failure.\n>Merging state from two devices is also theoretically possible.\n>\n>The other thing, is I think it would be good to explicitly mention that\n>the state management needs to follow all the ACID properties (atomicity,\n>consistency, isolation, and durability).",
       "createdAt": "2025-02-24T09:16:05Z",
-      "updatedAt": "2025-07-22T14:35:53Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-25T13:44:28Z",
+      "closedAt": "2025-09-25T13:44:28Z",
       "comments": []
     },
     {
@@ -263,7 +263,7 @@
       "id": "I_kwDOLPgbFM7B4Wyz",
       "title": "Clarify how we differ from ETSI TR 103 692 \"State management for stateful authentication mechanisms\"",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/20",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fluppe2",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -272,8 +272,8 @@
       "labels": [],
       "body": "At IETF 123 PQUIP session the question came up, what the draft adds considering ETSI TR 103 692 \"State management for stateful authentication mechanisms\" (https://www.etsi.org/deliver/etsi_tr/103600_103699/103692/01.01.01_60/tr_103692v010101p.pdf).\n\nClarify this in the introductory sections of the draft.\n\nPunchline: ETSI's doc is more focused on background information, comparison of HSS/LMS and XMSS(^MT) and making aware of the issues coming up when having a state. Backup and restore management is not explored (see section 6.2: \"It is possible that secure mechanisms for back-up and restore for S-HBS schemes can be developed, or that there are specific contexts or applications wherein secure back-up and restore can be achieved. Such situations and solutions are not explored in the present document\").\n",
       "createdAt": "2025-07-22T13:47:07Z",
-      "updatedAt": "2025-07-22T13:47:32Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-25T13:47:11Z",
+      "closedAt": "2025-09-25T13:47:11Z",
       "comments": []
     },
     {
@@ -343,7 +343,7 @@
       "id": "I_kwDOLPgbFM7Gw80d",
       "title": "Reference a correct attack paper",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/27",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -352,8 +352,8 @@
       "labels": [],
       "body": "BH16 may have a flaw, and eprint 2023/1905 may be a better reference",
       "createdAt": "2025-08-19T15:01:32Z",
-      "updatedAt": "2025-09-16T13:47:07Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-25T09:17:55Z",
+      "closedAt": "2025-09-25T09:17:55Z",
       "comments": []
     },
     {
@@ -1340,24 +1340,26 @@
       "id": "PR_kwDOLPgbFM6pTReg",
       "title": "Additionally cite Scott's paper that explains a flaw in the BH16 analysis",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/31",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "See Reference a correct attack paper\nFixes #27",
       "createdAt": "2025-09-18T14:00:48Z",
-      "updatedAt": "2025-09-24T10:19:38Z",
+      "updatedAt": "2025-09-25T09:17:56Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "0b2cbb6d9a494e51bd8ec6ec032f70d855a5e8e7",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "correct-reference",
       "headRefOid": "8ee63755ab97fd59583fd3675b8091780893b05a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-25T09:17:54Z",
+      "mergedAt": "2025-09-25T09:17:54Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "7efac7ed3b5b3f675e4e15fc94d468c2caa07e4a"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1446,63 +1448,78 @@
       "id": "PR_kwDOLPgbFM6pVZIv",
       "title": "Added partial state transfer and ACID requirement",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/33",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fluppe2",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Tried to address #11.",
       "createdAt": "2025-09-18T16:35:16Z",
-      "updatedAt": "2025-09-24T10:17:13Z",
+      "updatedAt": "2025-09-25T13:44:29Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
-      "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
+      "baseRefOid": "7efac7ed3b5b3f675e4e15fc94d468c2caa07e4a",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "11-comments-from-alicja-kario",
-      "headRefOid": "0f06740b423934ff0841ea1c1b4641a05acdafa4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "4cc34876083d20b4be1b2222051911b2fea5888a",
+      "closedAt": "2025-09-25T13:44:27Z",
+      "mergedAt": "2025-09-25T13:44:27Z",
+      "mergedBy": "fluppe2",
+      "mergeCommit": {
+        "oid": "68b03c5afc5659ab8325a0754d8964819c0180ef"
+      },
       "comments": [],
       "reviews": [
         {
           "id": "PRR_kwDOLPgbFM7BMPX6",
           "commit": {
-            "abbreviatedOid": "0f06740"
+            "abbreviatedOid": "4cc3487"
           },
           "author": "crypto4a",
           "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "Looks good to me. Thanks for making this update.",
           "createdAt": "2025-09-18T17:42:08Z",
-          "updatedAt": "2025-09-18T17:42:08Z",
+          "updatedAt": "2025-09-25T13:43:46Z",
           "comments": []
         },
         {
           "id": "PRR_kwDOLPgbFM7CcOr0",
           "commit": {
-            "abbreviatedOid": "0f06740"
+            "abbreviatedOid": "4cc3487"
           },
           "author": "BashiriK",
           "authorAssociation": "NONE",
           "state": "APPROVED",
           "body": "I really like the changes. However, as they seem to be significant I would suggest that all of us should approve this pull request.",
           "createdAt": "2025-09-24T10:15:44Z",
-          "updatedAt": "2025-09-24T10:15:44Z",
+          "updatedAt": "2025-09-25T13:43:46Z",
           "comments": []
         },
         {
           "id": "PRR_kwDOLPgbFM7CcPwT",
           "commit": {
-            "abbreviatedOid": "0f06740"
+            "abbreviatedOid": "4cc3487"
           },
           "author": "thomwiggers",
           "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2025-09-24T10:17:13Z",
-          "updatedAt": "2025-09-24T10:17:13Z",
+          "updatedAt": "2025-09-25T13:43:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7Cwci1",
+          "commit": {
+            "abbreviatedOid": "4cc3487"
+          },
+          "author": "tomato42",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-09-25T12:47:24Z",
+          "updatedAt": "2025-09-25T13:43:46Z",
           "comments": []
         }
       ]
@@ -1512,24 +1529,26 @@
       "id": "PR_kwDOLPgbFM6pb60H",
       "title": "Added comparison to MCGREW paper and ETSI TR 103 692 to introduction",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/35",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fluppe2",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses #20 while also covering MCGREW. Had to smooth out the sentences after the inserted part.",
       "createdAt": "2025-09-19T06:25:59Z",
-      "updatedAt": "2025-09-24T17:27:29Z",
+      "updatedAt": "2025-09-25T13:47:13Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
-      "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
+      "baseRefOid": "68b03c5afc5659ab8325a0754d8964819c0180ef",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "20-clarify-how-we-differ-from-etsi-tr-103-692-state-management-for-stateful-authentication-mechanisms",
-      "headRefOid": "bbd34e6b12a57095ed49f1b4d2450c4cbc945be4",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "2c64b9757866eb90d76404933170a0bf10af676a",
+      "closedAt": "2025-09-25T13:47:10Z",
+      "mergedAt": "2025-09-25T13:47:10Z",
+      "mergedBy": "fluppe2",
+      "mergeCommit": {
+        "oid": "a30a9d82bcf12d63e4a78eaad2b24c4a7613b3e7"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1714,6 +1733,32 @@
           "comments": []
         }
       ]
+    },
+    {
+      "number": 37,
+      "id": "PR_kwDOLPgbFM6q1dtT",
+      "title": "Put section titles in title case",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/37",
+      "state": "OPEN",
+      "author": "fluppe2",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-09-27T06:25:21Z",
+      "updatedAt": "2025-09-27T06:25:22Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "a30a9d82bcf12d63e4a78eaad2b24c4a7613b3e7",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "34-consistent-capitalization-of-section-titles",
+      "headRefOid": "97250fd5ac9e8a0fa23c811c4cfcd8b79781f240",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
     }
   ]
 }
