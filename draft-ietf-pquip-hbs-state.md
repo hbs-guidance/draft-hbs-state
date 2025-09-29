@@ -242,7 +242,6 @@ correct state and backup management for Stateful HBS.
 
 ## When are Stateful HBS Appropriate?
 
-
 The issues with state management described above, as well as (for most parameter
 sets) the limited number of signatures, lead to new requirements that most
 developers will not be familiar with and that require careful handling in
