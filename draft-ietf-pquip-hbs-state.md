@@ -121,6 +121,14 @@ informative:
         ins: A. Hülsing
     date: 2016
 
+  Fluhrer23:
+    title: "Oops, I did it again revisited; another look at reusing one-time signatures"
+    author:
+      -
+        ins: S. Fluhrer
+        fullname: Scott Fluhrer
+    date: 2023
+
   ETSI-TR-103-692:
     target: https://www.etsi.org/deliver/etsi_tr/103600_103699/103692/01.01.01_60/tr_103692v010101p.pdf
     title: State management for stateful authentication mechanisms
@@ -201,14 +209,21 @@ refer to it as the __state__ of the private key. Each Stateful HBS private key c
 used to sign a finite number of messages, and the state must be updated with
 each generated signature.
 
-One must not reuse any OTS key that is part of an Stateful HBS private key. If an
-attacker is able to obtain signatures for two different messages created using
-the same OTS key, it is computationally feasible for that attacker to create
-forgeries [BH16]. As noted in [MCGREW] and [ETSI-TR-103-692], extreme care
-should be taken in order to avoid the risk that an OTS key will be reused
-accidentally.
+One must not reuse any OTS key that is part of an Stateful HBS private key. If
+an attacker is able to obtain signatures for two different messages created
+using the same OTS key, it is computationally feasible for that attacker to
+create forgeries [BH16] [Fluhrer23]. As noted in [MCGREW] and [ETSI-TR-103-692], extreme
+care should be taken in order to avoid the risk that an OTS key will be reused
+accidentally. Whereas [MCGREW] identifies the fundamental failure modes of
+stateful hash-based signatures and proposes architectural strategies such
+as a reservation approach, and [ETSI-TR-103-692] provides a broad
+analysis of state management challenges and risks, this document complements
+both by cataloging concrete operational patterns in {{pot-sol}} and by
+addressing backup and recovery considerations {{alt-backup-mgmt}} not covered
+in prior work.
 
-The statefulness of Stateful HBS leads to significant challenges in practice:
+In particular, the challenges below highlight why careful state and backup
+management are essential in Stateful HBS:
 
 - Implementers must ensure that each creation of a signature updates the state
   correctly.
@@ -217,38 +232,42 @@ The statefulness of Stateful HBS leads to significant challenges in practice:
   implementers must ensure that they never use the same OTS key. This may
   require synchronization between all signers.
 
+- Additional operational complexity arises when part of the available OTS signatures are allocated to different devices (partial state transfer), or when state from different devices needs merging; these introduce risks of overlap, failure, and require careful coordination.
+
 - If key backups are required, implementers must ensure that any backup
   mechanism can not lead to re-using a previously used OTS key.
 
-The purpose of this document is to present, recall, and discuss various
-strategies for a correct state and backup management for Stateful HBS.
+The following sections present, recall, and discuss various strategies for a
+correct state and backup management for Stateful HBS.
 
-## When are Stateful HBS appropriate?
+## When are Stateful HBS Appropriate?
 
-The issues with state management described above, as well as the limited number
-of signatures, lead to new requirements that most developers will not be
-familiar with and that require careful handling in practice: Stateful HBS are
-not general-purpose signature schemes. Most applications, especially those that
-may produce unrestricted numbers of signatures, should use _stateless_
-hash-based signature schemes like SLH-DSA [FIPS205], which use the same security
-assumptions, or schemes based on other assumptions, such as ML-DSA [FIPS204],
-instead. However, if run time, implementation size, signature or key sizes of
-stateless alternatives are prohibitive, and the specific use case allows a very
-tight control of the signing environment, using Stateful HBS may be an
-appropriate solution. It seems likely that in many scenarios, this will only be
-possible when using purpose-designed hardware, such as hardware-security modules.
+
+The issues with state management described above, as well as (for most parameter
+sets) the limited number of signatures, lead to new requirements that most
+developers will not be familiar with and that require careful handling in
+practice: Stateful HBS are not general-purpose signature schemes. Most
+applications, especially those that may produce unrestricted numbers of
+signatures, should use _stateless_ hash-based signature schemes like SLH-DSA
+[FIPS205], which use the same security assumptions, or schemes based on other
+assumptions, such as ML-DSA [FIPS204], instead. However, if run time, implementation
+size, or signature or key sizes of stateless alternatives are prohibitive, and the
+specific use case allows a very tight control of the signing environment, using
+Stateful HBS may be an appropriate solution. It seems likely that in many
+scenarios, this will only be possible when using purpose-designed hardware, such
+as hardware-security modules.
 
 
 # Conventions and Definitions
 
 {::boilerplate bcp14-tagged}
 
-## Specific terminology in the context of Stateful HBS
+## Specific Terminology in the Context of Stateful HBS
 
 In this subsection we specify certain notions which are important in the
 context of Stateful HBS.
 
-### State management
+### State Management
 
 In this document _state management_ refers to the handling and implementation
 of the state of the private key.
@@ -259,6 +278,8 @@ This includes mechanisms, which aim:
 
 - to set up Stateful HBS with a split state and/or private key, so that signatures can
   be generated from either part without risk of state reuse,
+
+- to enable partial transfer of unused signature capacity between devices, and optionally merging state fragments without overlap,
 
 - to enable effective but secure handling of private key and state backup
   material,
@@ -271,7 +292,7 @@ mechanisms such as, e.g., puncturable schemes [BSW16], the state and private
 key might be inseparable. However, even in these scenarios, this document's
 guidance should still apply.
 
-### Backup management
+### Backup Management
 
 In order to mitigate failure of, e.g., devices storing key material and to
 facilitate other types of disaster recovery, backups of private keys and their
@@ -295,7 +316,7 @@ These mechanisms include procedures and protocols, which aim:
 Backup management can be viewed as a more specific type of state management; we
 make this distinction to clarify the aims of our recommendations.
 
-### Key export, key import and key transfer {#keymovement}
+### Key Export, Key Import and Key Transfer {#keymovement}
 
 As part of state and backup management, we will discuss mechanisms to export,
 import or transfer private key and state material. In order to avoid
@@ -372,6 +393,14 @@ security. Note that the segregation of duties MUST persist across successive
 generations to ensure participants do not acquire multiple roles over time,
 thereby undermining the intended segregation.
 
+In addition to the state management, implementers MAY consider to implement
+mechanisms to prevent abrupt signature exhaustion. Implementations MAY
+consider providing a configurable warning threshold, M, which is triggered
+when M signatures remain. When the number of available signatures reaches
+this threshold, the system should return a signatures nearing exhaustion warning.
+This warning condition SHOULD require explicit acknowledgment from the user
+through a mechanism that cannot be trivially skipped.
+
 Lastly, costs associated with any external dependencies required by a
 particular solution (e.g., access to a public ledger or transparency log,
 providing accurate time references and synchronization mechanisms, access to
@@ -379,7 +408,7 @@ attestation facilities, etc.) MUST be accounted for as well, particularly if a
 system is operating in an offline mode that makes delivering these additional
 capabilities all the more complicated and expensive.
 
-# Requirements for secure state management
+# Requirements for Secure State Management
 
 A system deploying Stateful HBS SHOULD fulfill certain requirements to allow securely
 handling the state. The system MUST ensure that no two signing operations can
@@ -387,6 +416,23 @@ ever be issued from the same state. In addition, the generation of a signature
 and update of the state SHOULD appear to be an _atomic transaction_. This means
 that the system MUST NOT release a signature without irrevocably and correctly
 updating the state.
+
+State management systems SHOULD satisfy all _ACID_ properties:
+
+- _Atomicity_: each operation must be indivisible — either the signature is
+  generated and the state is updated together, or neither occurs.
+
+- _Consistency_: the state before and after each update must reflect a valid
+  progression of available OTS indices, and no invalid or conflicting state is
+  ever observable.
+
+- _Isolation_: concurrent or overlapping operations (e.g., from separate
+  processes or devices) must not interfere in ways that could lead to state
+  reuse.
+
+- _Durability_: once a state transition (e.g., after issuing a signature) is
+  committed, that transition must survive crashes, power loss, or device
+  failure.
 
 These requirements impose significant restrictions on the underlying technical
 approach and a careful implementation of how the state will be updated or
@@ -441,7 +487,7 @@ state is a strong assumption, other signature schemes like ECDSA introduce
 similar assumptions for the verifier, by requiring the signer to never re-use
 the nonce.
 
-# Potential Solutions
+# Potential Solutions {#pot-sol}
 
 A variety of potential solutions have been proposed both within the
 [SP-800-208] specification, as well as from external sources. This section
@@ -452,12 +498,14 @@ describes a number of approaches and their potential advantages/disadvantages.
 The [SP-800-208] proposes generating multiple Stateful HBS keypairs and configuring
 devices and clients to accept signatures created by any of these keys.
 
-This negatively impacts one of the advantages of using Stateful HBS by increasing the
-public key footprint within the client, which can be problematic if it has
-limited public key storage capacity. [SP-800-208] addresses this concern by
-suggesting using a mechanism such as that proposed in {{?RFC8649}} to update
-the stored public key by having the current key endorse the next key that is to
-be installed. Unfortunately, for many constrained devices the public key is
+This negatively impacts one of the advantages of using Stateful HBS by
+increasing the public key footprint within the client, which can be problematic
+if it has limited public key storage capacity. (Though public keys are typically
+equivalently sized to ECDSA rather than larger classical RSA keys often
+currently found.) [SP-800-208] addresses storage capacity concerns by suggesting
+using a mechanism such as that proposed in {{?RFC8649}} to update the stored
+public key by having the current key endorse the next key that is to be
+installed. Unfortunately, for many constrained devices the public key is
 embedded in immutable ROM or fuses due to security reasons, so it cannot be
 updated in this manner.
 
@@ -561,6 +609,16 @@ having the source device fail before the key/state can be transferred,
 effectively causing the loss of the key/state. Hence, it will not be of much
 help addressing the single point of failure issue identified for root trees,
 but may be useful for managing subordinate trees.
+
+In addition to complete key/state transfer, a device holding part of the total
+available OTS signatures may transfer some unused capacity to another device
+(partial state transfer). In more advanced deployments, state fragments from
+two devices may be merged to reconstruct or continue signature operations.
+These operations carry risk: ensuring no overlap in used indices, ensuring
+atomicity of transfer/merge operations, managing consistency, possible
+conflicts, and durability of state across devices. Such approaches require
+strong synchronization, auditability, and appropriate backup mechanisms to
+avoid double-signing or loss of capacity.
 
 A more elaborate variant of key transfer, going beyond what [SP-800-208]
 allows, can be found described in [](#alt-backup-mgmt) where key transfer is
@@ -703,7 +761,35 @@ induced clock drift will then need to be accounted for in the future. If clock
 drift is to be avoided, this approach SHOULD account for availability
 considerations.
 
-# Backup management beyond NIST SP-800-208 {#alt-backup-mgmt}
+## Interval-based Approaches
+
+The State Reservation Strategy described in section 5 of [MCGREW] provides
+another means of managing the state by allowing users to reserve intervals of
+the signing space, marking the interval's associated OTS keys as being used in
+the overall HBS state, which is then written back to non-volatile memory prior
+to their usage. The OTS keys within the reservation interval are then consumed
+as-needed, without having to update the state again until they have all been
+consumed and additional OTS keys are required. Note that the reserved OTS keys
+are kept in dynamic memory so they will be lost if the signing device loses
+power or is reset, resulting in a reduction in the number of usable signatures
+for a given HBS instantiation.
+
+Over provisioning can be used to ensure a sufficient number of signatures can
+be provided in the presence of unexpected losses due to power loss or resets.
+Over provisioning will cause a minor increase between 2% and 12% on signature
+length as the MTS validation paths increase to accommodate the increased Merkle
+tree height. However, reservation eliminates the need to update the state
+after each OTS key is used, minimizing the likelihood of state reuse due to
+state update failures and coherency issues.
+
+Multiple signing devices can in theory utilize reservation intervals to
+carve out portions of signing space so that a single S-HBS key can be shared
+amongst multiple devices, leading to potential performance and
+disaster-recovery benefits. However, great care must be taken to manage the
+reservations to ensure there is no overlap or repeated reservation of a
+given interval, either in part or in whole.
+
+# Backup Management Beyond NIST SP-800-208 {#alt-backup-mgmt}
 
 In this section, an alternative backup mechanism for Stateful HBS is presented in a
 generic form, which makes the strategy applicable for both multi-tree instances
