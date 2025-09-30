@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-28T00:45:20.240461+00:00",
+  "timestamp": "2025-09-30T00:41:17.413961+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -299,7 +299,7 @@
       "id": "I_kwDOLPgbFM7Gw38H",
       "title": "Should we expand \"when appropriate\"",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/25",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -308,8 +308,8 @@
       "labels": [],
       "body": "Scott suggested the following elaboration:\n\n> Section 1.1 When are S-HBS appropriate \u2013 one thing that is not listed is that the verification code can be quite simple (hash computation plus some simple logic) \u2013 this may be an advantage for tightly constrained verifiers.\n\nI would argue that this is covered by \u201cperformance of alternatives being prohibitive\u201d \u2014 but I am also trying to keep the \u201cwhen are they appropriate\u201d section as short, sweet and to the point as possible. We can consider expanding on this section a bit more, if people would want to see that (especially if they have unanswered questions or see gaps). ",
       "createdAt": "2025-08-19T14:55:23Z",
-      "updatedAt": "2025-09-16T13:44:00Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-29T07:07:16Z",
+      "closedAt": "2025-09-29T07:07:16Z",
       "comments": [
         {
           "author": "thomwiggers",
@@ -405,15 +405,15 @@
       "id": "I_kwDOLPgbFM7MgyB9",
       "title": "Consistent capitalization of section titles",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/34",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fluppe2",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Noticed that some are title case and others sentence case.",
       "createdAt": "2025-09-18T16:36:42Z",
-      "updatedAt": "2025-09-18T16:36:42Z",
-      "closedAt": null,
+      "updatedAt": "2025-09-29T07:03:37Z",
+      "closedAt": "2025-09-29T07:03:37Z",
       "comments": []
     }
   ],
@@ -1395,24 +1395,26 @@
       "id": "PR_kwDOLPgbFM6pTUMg",
       "title": "Note implementation size separately in \"when appropriate\" but don't elaborate further",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/32",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This is a response to a comment by Scott Fluhrer, see issue #25",
       "createdAt": "2025-09-18T14:03:28Z",
-      "updatedAt": "2025-09-18T15:54:52Z",
+      "updatedAt": "2025-09-29T07:07:17Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
-      "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
+      "baseRefOid": "14fe130a7b4b532bb46602a49631516b0b067ada",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "expand-when-appropriate",
-      "headRefOid": "ab02a007bdce5128de5eb11e1c70ba4f3ba8ce34",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "fae067dc0a17bc84d255650931d2bba90fe739e1",
+      "closedAt": "2025-09-29T07:07:16Z",
+      "mergedAt": "2025-09-29T07:07:16Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "2dbf860563d8e2931128d9fcbb508817617c7d09"
+      },
       "comments": [],
       "reviews": [
         {
@@ -1739,26 +1741,42 @@
       "id": "PR_kwDOLPgbFM6q1dtT",
       "title": "Put section titles in title case",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/37",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fluppe2",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-09-27T06:25:21Z",
-      "updatedAt": "2025-09-27T06:25:22Z",
+      "updatedAt": "2025-09-29T07:03:38Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "a30a9d82bcf12d63e4a78eaad2b24c4a7613b3e7",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "34-consistent-capitalization-of-section-titles",
       "headRefOid": "97250fd5ac9e8a0fa23c811c4cfcd8b79781f240",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-09-29T07:03:37Z",
+      "mergedAt": "2025-09-29T07:03:37Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "14fe130a7b4b532bb46602a49631516b0b067ada"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7DZWCf",
+          "commit": {
+            "abbreviatedOid": "97250fd"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "This should not be controversial so I will just go ahead and press the merge button",
+          "createdAt": "2025-09-29T07:03:31Z",
+          "updatedAt": "2025-09-29T07:03:31Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
