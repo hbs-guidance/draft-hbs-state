@@ -531,7 +531,7 @@ The [SP-800-208] also proposes creating multiple Stateful HBS keys across multip
 cryptographic modules using a distributed multi-tree approach that is a variant
 of the standard hyper-tree based Stateful HBS schemes HSS and XMSS<sup>MT</sup>. In
 this approach trees are instantiated on a root device (HSM<sub>root</sub>), as
-well as one or more subordinate devices (HSM<sub>sub[i]</sub>), and the root
+well as one or more subordinate devices (HSM<sub>sub\[i\]</sub>), and the root
 tree is used to sign the root nodes of the subordinate trees to synthesize a
 multi-level Stateful HBS key. The root device is only ever used to sign subordinate
 device root nodes, while the subordinate device(s) is(are) used to sign
@@ -597,11 +597,13 @@ signatures, after which the sectorized key is exhausted.
 In addition to avoiding an increased signature size; when unique seeds are
 utilized sectorization breaks a given Stateful HBS key/state into multiple independent
 fragments that can be managed as independent objects. As a result, system
-operators MAY distribute sectors to multiple cryptographic devices, allowing
-for performance scaling, and resiliency/availability, while only requiring them
-to manage the uniqueness of each sector instead of having to co-ordinate state
-usage between devices since in this scenario a sector cannot generate
-signatures from another sector's signature space.
+operators MAY distribute sectors to multiple cryptographic devices, providing
+scalability through parallelization and improved resiliency/availability. This
+approach offers isolation between sectors, ensuring that a compromise in one
+does not extend to others, thereby supporting damage containment. At the same
+time, it simplifies operational robustness by removing the need for
+cross-device state coordination, since each sector is restricted to its own
+signature space.
 
 ## Key/State Transfer
 
