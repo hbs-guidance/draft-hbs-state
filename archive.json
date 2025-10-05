@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-09-30T00:41:17.413961+00:00",
+  "timestamp": "2025-10-05T00:44:45.964232+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -212,7 +212,7 @@
       "id": "I_kwDOLPgbFM6yZPM2",
       "title": "Interval-based approaches",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/16",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -221,9 +221,17 @@
       "labels": [],
       "body": "Stefan-Lukas Gazdag wrote:\n\n> - You can advance the state / key and store it before signing, even for an intervall of keys. E. g. reserve interval u (let's say 100 OTS keys) and store a key before signing where you got rid of all OTS keys that are reserved (forgetting old keys) or advance a PRNG to the seed you need. Which leads to another point:\n>\n> - What about giving up on OTS keys? Using each OTS signing key is only important if you want to proof, that you possess a signature for each OTS key. But  e. g. for the interval approach you could just sacrifice / omit a few (contradicts the last part of chapter four in the Internet-Draft, I think). Imagine the interval in the last point: Your advanced key was written successfully, you start using the OTS keys from the interval that are only stored in volatile memory and suddenly there's a blackout. You restart the system. Worst-case, all keys of your reserved intervall are gone. Bad, but should happen seldomly.\n\nI don't think that this erases all of the state-keeping concerns, but it certainly seems viable as a defense-in-depth approach.  This does mean that you need to increase the size of the tree (potentially significantly) which may erase some of the benefits of stateful hbs.",
       "createdAt": "2025-04-14T12:43:18Z",
-      "updatedAt": "2025-09-16T13:36:44Z",
-      "closedAt": null,
-      "comments": []
+      "updatedAt": "2025-10-03T12:18:20Z",
+      "closedAt": "2025-10-03T12:18:20Z",
+      "comments": [
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "@crypto4a Can this issue be closed as we merged #36 ?",
+          "createdAt": "2025-10-03T05:25:37Z",
+          "updatedAt": "2025-10-03T05:25:37Z"
+        }
+      ]
     },
     {
       "number": 18,
@@ -334,9 +342,17 @@
       "labels": [],
       "body": "Scott Fluhrer suggested:\n\n> In section 5.3, you mention the possibility of using different private seeds (XMSS terminology) for different sectors.  Normally in cryptography, we suggest using different keys to reduce the amount of damage that is done if a key is leaked.  However, that doesn\u2019t apply here \u2013 here, if any private seed leaks, the adversary can sign anything they want (and while they may be limited to that specific sector, the adversary can still sign at will, given that there is no standard mechanisms to revoke signatures from a sector).  I would suggest using the same private seed for all sectors (unless it is significantly more convenient to not to) \u2013 it may make things simpler, and is no less secure.\n\nI may be missing some point why this makes sense to do so I'm creating this issue \u2014\u00a0I agree that we should clarify or indeed simplify the sectorization (and probably note why there's no point to different keys though it is possible).",
       "createdAt": "2025-08-19T14:58:20Z",
-      "updatedAt": "2025-09-16T13:25:40Z",
+      "updatedAt": "2025-10-03T05:44:34Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think we explain in section 5.3 how sectorization can be seen as a state management strategy. That is,\n\n> As a result, system operators MAY distribute sectors to multiple cryptographic devices, allowing for performance scaling, and resiliency/availability, while only requiring them to manage the uniqueness of each sector instead of having to co-ordinate state usage between devices since in this scenario a sector cannot generate signatures from another sector's signature space.\n\nOf course, this does not address OTS key reuse within sectors, but that is not the point here. The aim is isolation for damage containment and operational robustness, while also supporting scalability.\n\nHowever, we should sharpen that paragraph, see corresponding PR.",
+          "createdAt": "2025-10-03T05:35:00Z",
+          "updatedAt": "2025-10-03T05:44:34Z"
+        }
+      ]
     },
     {
       "number": 27,
@@ -1774,6 +1790,86 @@
           "body": "This should not be controversial so I will just go ahead and press the merge button",
           "createdAt": "2025-09-29T07:03:31Z",
           "updatedAt": "2025-09-29T07:03:31Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 38,
+      "id": "PR_kwDOLPgbFM6r5MrQ",
+      "title": "Sharpened scope of sectorization (and fixed a minor parsing issue)",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/38",
+      "state": "OPEN",
+      "author": "fluppe2",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "This addresses issue #26 (see explanation there).\r\n\r\nWhile at it I fixed a parsing issue \"No link definition for link ID 'i' found on line 482\" caused by `HSM<sub>sub[i]</sub>` in Section 5.2 on Distributed Multi-Trees. I escaped the square brackets so they\u2019re treated as literal characters, not a link ID: `HSM<sub>sub\\[i\\]</sub>`.",
+      "createdAt": "2025-10-03T06:03:11Z",
+      "updatedAt": "2025-10-03T12:24:23Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "2dbf860563d8e2931128d9fcbb508817617c7d09",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "26-differing-keys-in-sectorization",
+      "headRefOid": "f5758a2d2c1ee7ae5d87b565cde9d1623108ded9",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7Eni4o",
+          "commit": {
+            "abbreviatedOid": "f5758a2"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Looks good to me. I think the updated text improves the message!",
+          "createdAt": "2025-10-03T12:24:23Z",
+          "updatedAt": "2025-10-03T12:24:23Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 39,
+      "id": "PR_kwDOLPgbFM6r5cRc",
+      "title": "Clarified conceptual split of private key and state",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/39",
+      "state": "OPEN",
+      "author": "fluppe2",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "I added a new terminology section to clearly state the conceptual split that Scott suggested to point out.\r\n\r\nThis should tackle issue #23 .",
+      "createdAt": "2025-10-03T06:37:11Z",
+      "updatedAt": "2025-10-03T12:27:55Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "2dbf860563d8e2931128d9fcbb508817617c7d09",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "23-clarify-that-private-key-and-state-can-be-separated",
+      "headRefOid": "40820ed06f0f6e5c8b1b70b9836b4c348da5b80a",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7EnlIR",
+          "commit": {
+            "abbreviatedOid": "40820ed"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Looks good to me, and I think it adds additional clarity. My only comment (which I don't think merits addressing in a document targeting this level of understanding) is that separating things introduces additional complexities as well to ensure all elements are present and linked appropriately in an operational system.",
+          "createdAt": "2025-10-03T12:27:55Z",
+          "updatedAt": "2025-10-03T12:27:55Z",
           "comments": []
         }
       ]
