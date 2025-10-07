@@ -406,7 +406,7 @@ schemes — such as adjustable tree heights or Winternitz parameters — there
 exists a large variety of possible configurations. The availability of these
 different configurations offers many trade-offs between signature
 generation/verification time, signature size, and key generation time. Hence,
-careful attention during the design phase is essential to ensure the chosen
+careful attention during the design phase is essential to ensure that the chosen
 parameter set aligns optimally with the specific requirements of the intended
 use case.  
 
