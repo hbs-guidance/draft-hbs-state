@@ -43,7 +43,7 @@ before certain approaches should be considered.
     PyYAML 6.0.2
     requests 2.32.5
     setuptools 80.9.0
-    wcwidth 0.2.13
+    wcwidth 0.2.14
 -->
 <link href="draft-ietf-pquip-hbs-state.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -1062,11 +1062,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">HBS: State and Backup</td>
-<td class="right">September 2025</td>
+<td class="right">October 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wiggers, et al.</td>
-<td class="center">Expires 2 April 2026</td>
+<td class="center">Expires 10 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1079,12 +1079,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-pquip-hbs-state-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-09-29" class="published">29 September 2025</time>
+<time datetime="2025-10-07" class="published">7 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-02">2 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-10">10 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1161,7 +1161,7 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 2 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1541,12 +1541,21 @@ when M signatures remain. When the number of available signatures reaches
 this threshold, the system should return a signatures nearing exhaustion warning.
 This warning condition <span class="bcp14">SHOULD</span> require explicit acknowledgment from the user
 through a mechanism that cannot be trivially skipped.<a href="#section-3-4" class="pilcrow">¶</a></p>
-<p id="section-3-5">Lastly, costs associated with any external dependencies required by a
+<p id="section-3-5">Another important consideration in deploying stateful hash-based signatures is
+the selection of an appropriate parameter set. Given the flexibility of these
+schemes — such as adjustable tree heights or Winternitz parameters — there
+exists a large variety of possible configurations. The availability of these
+different configurations offers many trade-offs between signature
+generation/verification time, signature size, and key generation time. Hence,
+careful attention during the design phase is essential to ensure that the chosen
+parameter set aligns optimally with the specific requirements of the intended
+use case.<a href="#section-3-5" class="pilcrow">¶</a></p>
+<p id="section-3-6">Lastly, costs associated with any external dependencies required by a
 particular solution (e.g., access to a public ledger or transparency log,
 providing accurate time references and synchronization mechanisms, access to
 attestation facilities, etc.) <span class="bcp14">MUST</span> be accounted for as well, particularly if a
 system is operating in an offline mode that makes delivering these additional
-capabilities all the more complicated and expensive.<a href="#section-3-5" class="pilcrow">¶</a></p>
+capabilities all the more complicated and expensive.<a href="#section-3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="requirements-for-secure-state-management">
@@ -2224,6 +2233,9 @@ and less error-prone" - <span>[<a href="#RFC8411" class="cite xref">RFC8411</a>]
 </li>
         <li class="normal" id="appendix-B-1.2">
           <p id="appendix-B-1.2.1">Bruno Couillard (Crypto4A Technologies)<a href="#appendix-B-1.2.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="normal" id="appendix-B-1.3">
+          <p id="appendix-B-1.3.1">Stefan-Lukas Gazdag (genua GmbH)<a href="#appendix-B-1.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
