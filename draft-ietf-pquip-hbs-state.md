@@ -408,7 +408,7 @@ different configurations offers many trade-offs between signature
 generation/verification time, signature size, and key generation time. Hence,
 careful attention during the design phase is essential to ensure that the chosen
 parameter set aligns optimally with the specific requirements of the intended
-use case.  
+use case.
 
 Lastly, costs associated with any external dependencies required by a
 particular solution (e.g., access to a public ledger or transparency log,
