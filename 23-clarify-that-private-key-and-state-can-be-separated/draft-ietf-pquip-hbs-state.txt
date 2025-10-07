@@ -5,14 +5,14 @@
 Post-Quantum Use In Protocols                                 T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 6 April 2026                                                BSI
+Expires: 10 April 2026                                               BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                          3 October 2025
+                                                          7 October 2025
 
 
            Hash-based Signatures: State and Backup Management
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 April 2026.
+   This Internet-Draft will expire on 10 April 2026.
 
 Copyright Notice
 
@@ -219,10 +219,11 @@ Table of Contents
 
    Conceptually, the private key and the state are distinct and should
    be handled accordingly: the private key is a static secret, while the
-   state is mutable, evolves with each signature, and requires careful
-   coordination.  In some implementations, these two components may be
-   packaged together and not directly separable; in such cases, this
-   document’s guidance applies to the combined artifact.
+   state is mutable, evolves with each signature, and must be maintained
+   with integrity and correctness.  In some implementations, these two
+   components may be packaged together and not directly separable; in
+   such cases, this document’s guidance applies to the combined
+   artifact.
 
 2.1.2.  State Management
 
