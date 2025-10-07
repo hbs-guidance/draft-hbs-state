@@ -400,7 +400,7 @@ this threshold, the system should return a signatures nearing exhaustion warning
 This warning condition SHOULD require explicit acknowledgment from the user
 through a mechanism that cannot be trivially skipped.
 
-Another critical consideration in deploying stateful hash-based signatures is
+Another important consideration in deploying stateful hash-based signatures is
 the selection of an appropriate parameter set. Given the flexibility of these
 schemes — such as adjustable tree heights or Winternitz parameters — there
 exists a large variety of possible configurations. The availability of these
