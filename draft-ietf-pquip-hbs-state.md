@@ -280,7 +280,7 @@ must change on every successful signature.
 
 Conceptually, the private key and the state are distinct and should be handled
 accordingly: the private key is a static secret, while the state is mutable,
-evolves with each signature, and requires careful coordination. In some
+evolves with each signature, and must be maintained with integrity and correctness. In some
 implementations, these two components may be packaged together and not directly
 separable; in such cases, this document’s guidance applies to the combined
 artifact.
