@@ -419,6 +419,16 @@ this threshold, the system should return a signatures nearing exhaustion warning
 This warning condition SHOULD require explicit acknowledgment from the user
 through a mechanism that cannot be trivially skipped.
 
+Another important consideration in deploying stateful hash-based signatures is
+the selection of an appropriate parameter set. Given the flexibility of these
+schemes — such as adjustable tree heights or Winternitz parameters — there
+exists a large variety of possible configurations. The availability of these
+different configurations offers many trade-offs between signature
+generation/verification time, signature size, and key generation time. Hence,
+careful attention during the design phase is essential to ensure that the chosen
+parameter set aligns optimally with the specific requirements of the intended
+use case.
+
 Lastly, costs associated with any external dependencies required by a
 particular solution (e.g., access to a public ledger or transparency log,
 providing accurate time references and synchronization mechanisms, access to
@@ -540,7 +550,7 @@ The [SP-800-208] also proposes creating multiple Stateful HBS keys across multip
 cryptographic modules using a distributed multi-tree approach that is a variant
 of the standard hyper-tree based Stateful HBS schemes HSS and XMSS<sup>MT</sup>. In
 this approach trees are instantiated on a root device (HSM<sub>root</sub>), as
-well as one or more subordinate devices (HSM<sub>sub[i]</sub>), and the root
+well as one or more subordinate devices (HSM<sub>sub\[i\]</sub>), and the root
 tree is used to sign the root nodes of the subordinate trees to synthesize a
 multi-level Stateful HBS key. The root device is only ever used to sign subordinate
 device root nodes, while the subordinate device(s) is(are) used to sign
@@ -606,11 +616,13 @@ signatures, after which the sectorized key is exhausted.
 In addition to avoiding an increased signature size; when unique seeds are
 utilized sectorization breaks a given Stateful HBS key/state into multiple independent
 fragments that can be managed as independent objects. As a result, system
-operators MAY distribute sectors to multiple cryptographic devices, allowing
-for performance scaling, and resiliency/availability, while only requiring them
-to manage the uniqueness of each sector instead of having to co-ordinate state
-usage between devices since in this scenario a sector cannot generate
-signatures from another sector's signature space.
+operators MAY distribute sectors to multiple cryptographic devices, providing
+scalability through parallelization and improved resiliency/availability. This
+approach offers isolation between sectors, ensuring that a compromise in one
+does not extend to others, thereby supporting damage containment. At the same
+time, it simplifies operational robustness by removing the need for
+cross-device state coordination, since each sector is restricted to its own
+signature space.
 
 ## Key/State Transfer
 
@@ -932,3 +944,4 @@ and less error-prone" - {{?RFC8411}}.
 
 - Jeff Andersen (Google)
 - Bruno Couillard (Crypto4A Technologies)
+- Stefan-Lukas Gazdag (genua GmbH)
