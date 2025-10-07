@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-05T00:44:45.964232+00:00",
+  "timestamp": "2025-10-07T00:40:30.716667+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -1806,7 +1806,7 @@
       "labels": [],
       "body": "This addresses issue #26 (see explanation there).\r\n\r\nWhile at it I fixed a parsing issue \"No link definition for link ID 'i' found on line 482\" caused by `HSM<sub>sub[i]</sub>` in Section 5.2 on Distributed Multi-Trees. I escaped the square brackets so they\u2019re treated as literal characters, not a link ID: `HSM<sub>sub\\[i\\]</sub>`.",
       "createdAt": "2025-10-03T06:03:11Z",
-      "updatedAt": "2025-10-03T12:24:23Z",
+      "updatedAt": "2025-10-06T09:58:49Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "2dbf860563d8e2931128d9fcbb508817617c7d09",
@@ -1831,6 +1831,19 @@
           "createdAt": "2025-10-03T12:24:23Z",
           "updatedAt": "2025-10-03T12:24:23Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7E6h-K",
+          "commit": {
+            "abbreviatedOid": "f5758a2"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-06T09:58:49Z",
+          "updatedAt": "2025-10-06T09:58:49Z",
+          "comments": []
         }
       ]
     },
@@ -1846,7 +1859,7 @@
       "labels": [],
       "body": "I added a new terminology section to clearly state the conceptual split that Scott suggested to point out.\r\n\r\nThis should tackle issue #23 .",
       "createdAt": "2025-10-03T06:37:11Z",
-      "updatedAt": "2025-10-03T12:27:55Z",
+      "updatedAt": "2025-10-06T17:32:17Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "2dbf860563d8e2931128d9fcbb508817617c7d09",
@@ -1870,6 +1883,172 @@
           "body": "Looks good to me, and I think it adds additional clarity. My only comment (which I don't think merits addressing in a document targeting this level of understanding) is that separating things introduces additional complexities as well to ensure all elements are present and linked appropriately in an operational system.",
           "createdAt": "2025-10-03T12:27:55Z",
           "updatedAt": "2025-10-03T12:27:55Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7E6frx",
+          "commit": {
+            "abbreviatedOid": "40820ed"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-06T09:55:51Z",
+          "updatedAt": "2025-10-06T09:55:51Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\r\nConceptually, the private key and the state are distinct and should be handled\r\naccordingly: the private key is a static secret, while the state is mutable,\r\nevolves with each signature, and requires additional, special security measures. In some\r\n```\r\n\r\nMy motivation for this remark: After the \"while\"-phrase you expect differences between the state and the provate key. However, also the private key requires careful consideration. ",
+              "createdAt": "2025-10-06T09:55:51Z",
+              "updatedAt": "2025-10-06T09:55:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7E6gH3",
+          "commit": {
+            "abbreviatedOid": "40820ed"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "I agree with everything and I only have one small comment, which I added to the text.",
+          "createdAt": "2025-10-06T09:56:26Z",
+          "updatedAt": "2025-10-06T09:56:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7FEFre",
+          "commit": {
+            "abbreviatedOid": "40820ed"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-06T17:27:31Z",
+          "updatedAt": "2025-10-06T17:27:31Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "The phrase `additional, special security measures` sounds to me like the state requires more or special security measures than the private key, which could mislead the reader into thinking the state must be secret which is not the case.",
+              "createdAt": "2025-10-06T17:27:31Z",
+              "updatedAt": "2025-10-06T17:27:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7FELfJ",
+          "commit": {
+            "abbreviatedOid": "40820ed"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-06T17:32:16Z",
+          "updatedAt": "2025-10-06T17:32:17Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "What about this?\r\n\r\n> Conceptually, the private key and the state are distinct and should be handled accordingly: the private key is a static secret, while the state is mutable, evolves with each signature, and must be maintained with integrity and correctness.",
+              "createdAt": "2025-10-06T17:32:16Z",
+              "updatedAt": "2025-10-06T17:32:17Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 40,
+      "id": "PR_kwDOLPgbFM6sQ1_x",
+      "title": "Parameter selection and Stefan-Lukas as a contributor.",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/40",
+      "state": "OPEN",
+      "author": "BashiriK",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "I added some text on parameter selection and Stefan-Lukas as a contributor.",
+      "createdAt": "2025-10-06T12:50:42Z",
+      "updatedAt": "2025-10-06T17:21:51Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "2dbf860563d8e2931128d9fcbb508817617c7d09",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "fix-issue-29",
+      "headRefOid": "7b6512d655e00b4541833e59f2fbf67fae66bc21",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7E9Y3z",
+          "commit": {
+            "abbreviatedOid": "7b6512d"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Looks good to me! Thanks for adding in this additional text.",
+          "createdAt": "2025-10-06T12:57:55Z",
+          "updatedAt": "2025-10-06T12:57:55Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7FD9Ah",
+          "commit": {
+            "abbreviatedOid": "7b6512d"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-06T17:20:01Z",
+          "updatedAt": "2025-10-06T17:20:02Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\ncareful attention during the design phase is essential to ensure that the chosen\r\n```\r\nnon-essential comment, you can decline it if you wish",
+              "createdAt": "2025-10-06T17:20:01Z",
+              "updatedAt": "2025-10-06T17:20:02Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7FD-xH",
+          "commit": {
+            "abbreviatedOid": "7b6512d"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-06T17:21:25Z",
+          "updatedAt": "2025-10-06T17:21:26Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nAnother important consideration in deploying stateful hash-based signatures is\r\n```\r\nThe word `critical` sounds a bit dramatic to me, but maybe this is only a personal feeling.",
+              "createdAt": "2025-10-06T17:21:26Z",
+              "updatedAt": "2025-10-06T17:21:26Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7FD_UF",
+          "commit": {
+            "abbreviatedOid": "7b6512d"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Apart from my (non-critical) comments LGTM.",
+          "createdAt": "2025-10-06T17:21:51Z",
+          "updatedAt": "2025-10-06T17:21:51Z",
           "comments": []
         }
       ]
