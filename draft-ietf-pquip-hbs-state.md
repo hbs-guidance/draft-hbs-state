@@ -400,6 +400,16 @@ this threshold, the system should return a signatures nearing exhaustion warning
 This warning condition SHOULD require explicit acknowledgment from the user
 through a mechanism that cannot be trivially skipped.
 
+Another important consideration in deploying stateful hash-based signatures is
+the selection of an appropriate parameter set. Given the flexibility of these
+schemes — such as adjustable tree heights or Winternitz parameters — there
+exists a large variety of possible configurations. The availability of these
+different configurations offers many trade-offs between signature
+generation/verification time, signature size, and key generation time. Hence,
+careful attention during the design phase is essential to ensure that the chosen
+parameter set aligns optimally with the specific requirements of the intended
+use case.
+
 Lastly, costs associated with any external dependencies required by a
 particular solution (e.g., access to a public ledger or transparency log,
 providing accurate time references and synchronization mechanisms, access to
@@ -913,3 +923,4 @@ and less error-prone" - {{?RFC8411}}.
 
 - Jeff Andersen (Google)
 - Bruno Couillard (Crypto4A Technologies)
+- Stefan-Lukas Gazdag (genua GmbH)
