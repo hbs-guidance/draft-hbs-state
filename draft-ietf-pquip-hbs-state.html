@@ -1066,7 +1066,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wiggers, et al.</td>
-<td class="center">Expires 10 April 2026</td>
+<td class="center">Expires 11 April 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1079,12 +1079,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-pquip-hbs-state-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-10-07" class="published">7 October 2025</time>
+<time datetime="2025-10-08" class="published">8 October 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-04-10">10 April 2026</time></dd>
+<dd class="expires"><time datetime="2026-04-11">11 April 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1161,7 +1161,7 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 10 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 April 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1205,13 +1205,16 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
                 <p id="section-toc.1-1.2.2.1.1"><a href="#section-2.1" class="auto internal xref">2.1</a>.  <a href="#name-specific-terminology-in-the" class="internal xref">Specific Terminology in the Context of Stateful HBS</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.1">
-                    <p id="section-toc.1-1.2.2.1.2.1.1" class="keepWithNext"><a href="#section-2.1.1" class="auto internal xref">2.1.1</a>.  <a href="#name-state-management" class="internal xref">State Management</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.1.1" class="keepWithNext"><a href="#section-2.1.1" class="auto internal xref">2.1.1</a>.  <a href="#name-private-key-components" class="internal xref">Private Key Components</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.2">
-                    <p id="section-toc.1-1.2.2.1.2.2.1"><a href="#section-2.1.2" class="auto internal xref">2.1.2</a>.  <a href="#name-backup-management" class="internal xref">Backup Management</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.2.1"><a href="#section-2.1.2" class="auto internal xref">2.1.2</a>.  <a href="#name-state-management" class="internal xref">State Management</a></p>
 </li>
                   <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.3">
-                    <p id="section-toc.1-1.2.2.1.2.3.1"><a href="#section-2.1.3" class="auto internal xref">2.1.3</a>.  <a href="#name-key-export-key-import-and-k" class="internal xref">Key Export, Key Import and Key Transfer</a></p>
+                    <p id="section-toc.1-1.2.2.1.2.3.1"><a href="#section-2.1.3" class="auto internal xref">2.1.3</a>.  <a href="#name-backup-management" class="internal xref">Backup Management</a></p>
+</li>
+                  <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1.2.4">
+                    <p id="section-toc.1-1.2.2.1.2.4.1"><a href="#section-2.1.4" class="auto internal xref">2.1.4</a>.  <a href="#name-key-export-key-import-and-k" class="internal xref">Key Export, Key Import and Key Transfer</a></p>
 </li>
                 </ul>
 </li>
@@ -1379,109 +1382,138 @@ appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶<
         </h3>
 <p id="section-2.1-1">In this subsection we specify certain notions which are important in the
 context of Stateful HBS.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-<div id="state-management">
+<div id="private-key-components">
 <section id="section-2.1.1">
-          <h4 id="name-state-management">
-<a href="#section-2.1.1" class="section-number selfRef">2.1.1. </a><a href="#name-state-management" class="section-name selfRef">State Management</a>
+          <h4 id="name-private-key-components">
+<a href="#section-2.1.1" class="section-number selfRef">2.1.1. </a><a href="#name-private-key-components" class="section-name selfRef">Private Key Components</a>
           </h4>
-<p id="section-2.1.1-1">In this document <em>state management</em> refers to the handling and implementation
-of the state of the private key.<a href="#section-2.1.1-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.1-2">This includes mechanisms, which aim:<a href="#section-2.1.1-2" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-2.1.1-3.1">
-              <p id="section-2.1.1-3.1.1">to securely update the state after each signature,<a href="#section-2.1.1-3.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-2.1.1-3.2">
-              <p id="section-2.1.1-3.2.1">to set up Stateful HBS with a split state and/or private key, so that signatures can
-be generated from either part without risk of state reuse,<a href="#section-2.1.1-3.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-2.1.1-3.3">
-              <p id="section-2.1.1-3.3.1">to enable partial transfer of unused signature capacity between devices, and optionally merging state fragments without overlap,<a href="#section-2.1.1-3.3.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-2.1.1-3.4">
-              <p id="section-2.1.1-3.4.1">to enable effective but secure handling of private key and state backup
-material,<a href="#section-2.1.1-3.4.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-2.1.1-3.5">
-              <p id="section-2.1.1-3.5.1">to guarantee the availability of both the private key and its state across
-the lifetime of the key.<a href="#section-2.1.1-3.5.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-2.1.1-4">Note that in particular implementations of Stateful HBS, or in alternative signature
-mechanisms such as, e.g., puncturable schemes <span>[<a href="#BSW16" class="cite xref">BSW16</a>]</span>, the state and private
-key might be inseparable. However, even in these scenarios, this document's
-guidance should still apply.<a href="#section-2.1.1-4" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="backup-management">
-<section id="section-2.1.2">
-          <h4 id="name-backup-management">
-<a href="#section-2.1.2" class="section-number selfRef">2.1.2. </a><a href="#name-backup-management" class="section-name selfRef">Backup Management</a>
-          </h4>
-<p id="section-2.1.2-1">In order to mitigate failure of, e.g., devices storing key material and to
-facilitate other types of disaster recovery, backups of private keys and their
-associated states <span class="bcp14">SHOULD</span> be considered as part of a security architecture.<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-2">In this document, <em>backup management</em> refers to all mechanisms surrounding the
-goal to guarantee the availability of the private key and state, but with
-special care to avoid state reuse by rolling back to a state in which
-already-used OTS keys are still available.<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
-<p id="section-2.1.2-3">These mechanisms include procedures and protocols, which aim:<a href="#section-2.1.2-3" class="pilcrow">¶</a></p>
-<ul class="normal">
-<li class="normal" id="section-2.1.2-4.1">
-              <p id="section-2.1.2-4.1.1">to securely store this private key and state material outside the in-use
-signing device,<a href="#section-2.1.2-4.1.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-2.1.2-4.2">
-              <p id="section-2.1.2-4.2.1">to import an externally stored private key and state to a newly initiated
-signing device,<a href="#section-2.1.2-4.2.1" class="pilcrow">¶</a></p>
-</li>
-            <li class="normal" id="section-2.1.2-4.3">
-              <p id="section-2.1.2-4.3.1">allow practicing with backup recovery and to ensure backups are valid.<a href="#section-2.1.2-4.3.1" class="pilcrow">¶</a></p>
-</li>
-          </ul>
-<p id="section-2.1.2-5">Backup management can be viewed as a more specific type of state management; we
-make this distinction to clarify the aims of our recommendations.<a href="#section-2.1.2-5" class="pilcrow">¶</a></p>
-</section>
-</div>
-<div id="keymovement">
-<section id="section-2.1.3">
-          <h4 id="name-key-export-key-import-and-k">
-<a href="#section-2.1.3" class="section-number selfRef">2.1.3. </a><a href="#name-key-export-key-import-and-k" class="section-name selfRef">Key Export, Key Import and Key Transfer</a>
-          </h4>
-<p id="section-2.1.3-1">As part of state and backup management, we will discuss mechanisms to export,
-import or transfer private key and state material. In order to avoid
-misunderstandings we now specify these notions more precisely.<a href="#section-2.1.3-1" class="pilcrow">¶</a></p>
-<span class="break"></span><dl class="dlParallel" id="section-2.1.3-2">
-            <dt id="section-2.1.3-2.1">key export</dt>
-            <dd style="margin-left: 1.5em" id="section-2.1.3-2.2">
-              <p id="section-2.1.3-2.2.1">mechanism of exporting secret data, which yields (partial) private
-key and state material, from the signing device to external storage. This
-external storage may be given in digital or non-digital form.<a href="#section-2.1.3-2.2.1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2.1.1-1">
+            <dt id="section-2.1.1-1.1">private key</dt>
+            <dd style="margin-left: 1.5em" id="section-2.1.1-1.2">
+              <p id="section-2.1.1-1.2.1">the static, long-lived secret(s) from which OTS private keys are derived.
+This material is stateless: given the scheme parameters, it deterministically
+defines the set of OTS private keys but does not change over time.<a href="#section-2.1.1-1.2.1" class="pilcrow">¶</a></p>
 </dd>
             <dd class="break"></dd>
-<dt id="section-2.1.3-2.3">key import</dt>
-            <dd style="margin-left: 1.5em" id="section-2.1.3-2.4">
-              <p id="section-2.1.3-2.4.1">mechanism of importing secret data, which loads (partial) private
-key and state material, from external storage to the signing device.<a href="#section-2.1.3-2.4.1" class="pilcrow">¶</a></p>
-</dd>
-            <dd class="break"></dd>
-<dt id="section-2.1.3-2.5">key transfer</dt>
-            <dd style="margin-left: 1.5em" id="section-2.1.3-2.6">
-              <p id="section-2.1.3-2.6.1">a cryptographically protected transfer of ownership of private key and
-state material from one signing device to another.<a href="#section-2.1.3-2.6.1" class="pilcrow">¶</a></p>
+<dt id="section-2.1.1-1.3">state</dt>
+            <dd style="margin-left: 1.5em" id="section-2.1.1-1.4">
+              <p id="section-2.1.1-1.4.1">the dynamically updated data structure that records which OTS key indices
+have been consumed (often a monotone counter). This material is mutable and
+must change on every successful signature.<a href="#section-2.1.1-1.4.1" class="pilcrow">¶</a></p>
 </dd>
           <dd class="break"></dd>
 </dl>
-<p id="section-2.1.3-3">Systems and architectures relying on key transfer are generally expected to
+<p id="section-2.1.1-2">Conceptually, the private key and the state are distinct and should be handled
+accordingly: the private key is a static secret, while the state is mutable,
+evolves with each signature, and must be maintained with integrity and correctness. In some
+implementations, these two components may be packaged together and not directly
+separable; in such cases, this document’s guidance applies to the combined
+artifact.<a href="#section-2.1.1-2" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="state-management">
+<section id="section-2.1.2">
+          <h4 id="name-state-management">
+<a href="#section-2.1.2" class="section-number selfRef">2.1.2. </a><a href="#name-state-management" class="section-name selfRef">State Management</a>
+          </h4>
+<p id="section-2.1.2-1">In this document <em>state management</em> refers to the handling and implementation
+of the state of the private key.<a href="#section-2.1.2-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-2">This includes mechanisms, which aim:<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.1.2-3.1">
+              <p id="section-2.1.2-3.1.1">to securely update the state after each signature,<a href="#section-2.1.2-3.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-2.1.2-3.2">
+              <p id="section-2.1.2-3.2.1">to set up Stateful HBS with a split state and/or private key, so that signatures can
+be generated from either part without risk of state reuse,<a href="#section-2.1.2-3.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-2.1.2-3.3">
+              <p id="section-2.1.2-3.3.1">to enable partial transfer of unused signature capacity between devices, and optionally merging state fragments without overlap,<a href="#section-2.1.2-3.3.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-2.1.2-3.4">
+              <p id="section-2.1.2-3.4.1">to enable effective but secure handling of private key and state backup
+material,<a href="#section-2.1.2-3.4.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-2.1.2-3.5">
+              <p id="section-2.1.2-3.5.1">to guarantee the availability of both the private key and its state across
+the lifetime of the key.<a href="#section-2.1.2-3.5.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-2.1.2-4">Note that in particular implementations of Stateful HBS, or in alternative signature
+mechanisms such as, e.g., puncturable schemes <span>[<a href="#BSW16" class="cite xref">BSW16</a>]</span>, the state and private
+key might be inseparable. However, even in these scenarios, this document's
+guidance should still apply.<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="backup-management">
+<section id="section-2.1.3">
+          <h4 id="name-backup-management">
+<a href="#section-2.1.3" class="section-number selfRef">2.1.3. </a><a href="#name-backup-management" class="section-name selfRef">Backup Management</a>
+          </h4>
+<p id="section-2.1.3-1">In order to mitigate failure of, e.g., devices storing key material and to
+facilitate other types of disaster recovery, backups of private keys and their
+associated states <span class="bcp14">SHOULD</span> be considered as part of a security architecture.<a href="#section-2.1.3-1" class="pilcrow">¶</a></p>
+<p id="section-2.1.3-2">In this document, <em>backup management</em> refers to all mechanisms surrounding the
+goal to guarantee the availability of the private key and state, but with
+special care to avoid state reuse by rolling back to a state in which
+already-used OTS keys are still available.<a href="#section-2.1.3-2" class="pilcrow">¶</a></p>
+<p id="section-2.1.3-3">These mechanisms include procedures and protocols, which aim:<a href="#section-2.1.3-3" class="pilcrow">¶</a></p>
+<ul class="normal">
+<li class="normal" id="section-2.1.3-4.1">
+              <p id="section-2.1.3-4.1.1">to securely store this private key and state material outside the in-use
+signing device,<a href="#section-2.1.3-4.1.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-2.1.3-4.2">
+              <p id="section-2.1.3-4.2.1">to import an externally stored private key and state to a newly initiated
+signing device,<a href="#section-2.1.3-4.2.1" class="pilcrow">¶</a></p>
+</li>
+            <li class="normal" id="section-2.1.3-4.3">
+              <p id="section-2.1.3-4.3.1">allow practicing with backup recovery and to ensure backups are valid.<a href="#section-2.1.3-4.3.1" class="pilcrow">¶</a></p>
+</li>
+          </ul>
+<p id="section-2.1.3-5">Backup management can be viewed as a more specific type of state management; we
+make this distinction to clarify the aims of our recommendations.<a href="#section-2.1.3-5" class="pilcrow">¶</a></p>
+</section>
+</div>
+<div id="keymovement">
+<section id="section-2.1.4">
+          <h4 id="name-key-export-key-import-and-k">
+<a href="#section-2.1.4" class="section-number selfRef">2.1.4. </a><a href="#name-key-export-key-import-and-k" class="section-name selfRef">Key Export, Key Import and Key Transfer</a>
+          </h4>
+<p id="section-2.1.4-1">As part of state and backup management, we will discuss mechanisms to export,
+import or transfer private key and state material. In order to avoid
+misunderstandings we now specify these notions more precisely.<a href="#section-2.1.4-1" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2.1.4-2">
+            <dt id="section-2.1.4-2.1">key export</dt>
+            <dd style="margin-left: 1.5em" id="section-2.1.4-2.2">
+              <p id="section-2.1.4-2.2.1">mechanism of exporting secret data, which yields (partial) private
+key and state material, from the signing device to external storage. This
+external storage may be given in digital or non-digital form.<a href="#section-2.1.4-2.2.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+<dt id="section-2.1.4-2.3">key import</dt>
+            <dd style="margin-left: 1.5em" id="section-2.1.4-2.4">
+              <p id="section-2.1.4-2.4.1">mechanism of importing secret data, which loads (partial) private
+key and state material, from external storage to the signing device.<a href="#section-2.1.4-2.4.1" class="pilcrow">¶</a></p>
+</dd>
+            <dd class="break"></dd>
+<dt id="section-2.1.4-2.5">key transfer</dt>
+            <dd style="margin-left: 1.5em" id="section-2.1.4-2.6">
+              <p id="section-2.1.4-2.6.1">a cryptographically protected transfer of ownership of private key and
+state material from one signing device to another.<a href="#section-2.1.4-2.6.1" class="pilcrow">¶</a></p>
+</dd>
+          <dd class="break"></dd>
+</dl>
+<p id="section-2.1.4-3">Systems and architectures relying on key transfer are generally expected to
 require fewer operational and manually-executed steps and checks to avoid state
-reuse.<a href="#section-2.1.3-3" class="pilcrow">¶</a></p>
-<p id="section-2.1.3-4">Note that, at times, secure variants of the aforementioned primitives may be
+reuse.<a href="#section-2.1.4-3" class="pilcrow">¶</a></p>
+<p id="section-2.1.4-4">Note that, at times, secure variants of the aforementioned primitives may be
 required (e.g., securely importing/exporting the key). In these situations
 cryptographic mechanisms <span class="bcp14">SHOULD</span> be utilized to provide assurances related to
 the confidentiality (e.g., utilizing symmetric/asymmetric encryption
 mechanisms) and/or integrity/authenticity (e.g., utilizing digital signatures,
 hash functions, and keyed message authentication codes) of the associated
-operations.<a href="#section-2.1.3-4" class="pilcrow">¶</a></p>
+operations.<a href="#section-2.1.4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
@@ -2028,7 +2060,7 @@ steps <span class="bcp14">MUST</span> be performed:<a href="#section-6-5" class=
 tree,<a href="#section-6-6.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-6-6.2">
-          <p id="section-6-6.2.1">securely <em>key export</em> (as described in <a href="#keymovement" class="auto internal xref">Section 2.1.3</a>) the seed, which was
+          <p id="section-6-6.2.1">securely <em>key export</em> (as described in <a href="#keymovement" class="auto internal xref">Section 2.1.4</a>) the seed, which was
 used to generate the bottom-level tree,<a href="#section-6-6.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-6-6.3">
@@ -2068,7 +2100,7 @@ following steps <span class="bcp14">MUST</span> be performed:<a href="#section-6
           <p id="section-6-11.1.1">initiate a new hardware module<a href="#section-6-11.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-6-11.2">
-          <p id="section-6-11.2.1">securely <em>key import</em> (as decribed in <a href="#keymovement" class="auto internal xref">Section 2.1.3</a>) the first unused seed
+          <p id="section-6-11.2.1">securely <em>key import</em> (as decribed in <a href="#keymovement" class="auto internal xref">Section 2.1.4</a>) the first unused seed
 into this hardware module<a href="#section-6-11.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-6-11.3">
