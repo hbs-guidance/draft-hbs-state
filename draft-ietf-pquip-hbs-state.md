@@ -266,6 +266,25 @@ as hardware-security modules.
 In this subsection we specify certain notions which are important in the
 context of Stateful HBS.
 
+### Private Key Components
+
+private key
+: the static, long-lived secret(s) from which OTS private keys are derived.
+This material is stateless: given the scheme parameters, it deterministically
+defines the set of OTS private keys but does not change over time.
+
+state
+: the dynamically updated data structure that records which OTS key indices
+have been consumed (often a monotone counter). This material is mutable and
+must change on every successful signature.
+
+Conceptually, the private key and the state are distinct and should be handled
+accordingly: the private key is a static secret, while the state is mutable,
+evolves with each signature, and must be maintained with integrity and correctness. In some
+implementations, these two components may be packaged together and not directly
+separable; in such cases, this document’s guidance applies to the combined
+artifact.
+
 ### State Management
 
 In this document _state management_ refers to the handling and implementation
