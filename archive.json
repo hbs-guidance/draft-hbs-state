@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-07T00:40:30.716667+00:00",
+  "timestamp": "2025-10-09T00:40:33.850368+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -289,7 +289,7 @@
       "id": "I_kwDOLPgbFM7GwxHe",
       "title": "Clarify that private key and state can be separated",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/23",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -298,8 +298,8 @@
       "labels": [],
       "body": "From Scott Fluhrer's comments:\n\n> You might want to make it clearer that the private key can be effectively split up into two parts: the private key, that is, the recipe for generating one-time-signature private keys (e.g. the private seed for XMSS), and the state (which tells you which one-time-signature to use next).  Those two halves could be handled independently.  That is, the first part is stateless, that is, it can be handled just like any other private key, and we can focus in on the dynamically updated second part (the state).\n\nI might want to add to this that there is a funny thing going on where the private key mainly has confidentiality requirements whereas the state has, somewhat uniquely, stricter integrity requirements on whatever storage mechanism, which is also somewhat different from the usual things we expect when handling keys.",
       "createdAt": "2025-08-19T14:46:57Z",
-      "updatedAt": "2025-09-16T13:41:01Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-08T07:31:29Z",
+      "closedAt": "2025-10-08T07:31:28Z",
       "comments": []
     },
     {
@@ -333,7 +333,7 @@
       "id": "I_kwDOLPgbFM7Gw6UO",
       "title": "Differing keys in sectorization",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/26",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -342,8 +342,8 @@
       "labels": [],
       "body": "Scott Fluhrer suggested:\n\n> In section 5.3, you mention the possibility of using different private seeds (XMSS terminology) for different sectors.  Normally in cryptography, we suggest using different keys to reduce the amount of damage that is done if a key is leaked.  However, that doesn\u2019t apply here \u2013 here, if any private seed leaks, the adversary can sign anything they want (and while they may be limited to that specific sector, the adversary can still sign at will, given that there is no standard mechanisms to revoke signatures from a sector).  I would suggest using the same private seed for all sectors (unless it is significantly more convenient to not to) \u2013 it may make things simpler, and is no less secure.\n\nI may be missing some point why this makes sense to do so I'm creating this issue \u2014\u00a0I agree that we should clarify or indeed simplify the sectorization (and probably note why there's no point to different keys though it is possible).",
       "createdAt": "2025-08-19T14:58:20Z",
-      "updatedAt": "2025-10-03T05:44:34Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-07T17:41:41Z",
+      "closedAt": "2025-10-07T17:41:41Z",
       "comments": [
         {
           "author": "fluppe2",
@@ -386,16 +386,24 @@
       ],
       "body": "Scott Fluhrer helpfully suggested providing text for speeding up signing: \n\n> One thing I\u2019m not sure about: there are some clever ways to speed up the signing process (by storing some of the intermediate nodes of the Merkle tree, and use those nodes to help generate the authentication path), and that may interact with the state management.  I know of four such techniques, each of which is \u201cbest\u201d by some criteria, and some of which update which nodes are stored during each signature, and one which does not (which ends up using more storage and require more hashes to sign, but also avoid issues with updating the nodes along with the state).  To what extent should this draft address this?  I should be the one to contribute text, should you decide it should be appropriate (although I would like some guidelines as to how thorough I should be \u2013 I could go one for quite some time\u2026)\n\nThe question is do we think this fits in scope? It may be a bit too \"implementation\" side",
       "createdAt": "2025-08-19T15:04:44Z",
-      "updatedAt": "2025-09-16T13:48:35Z",
+      "updatedAt": "2025-10-08T03:18:23Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I must confess that it sounds extremely interesting, and I would be very happy to include a reference to a paper describing such optimizations.\n\nHowever, optimizing signature generation for stateful hash-based schemes may not be a top priority in the typical (offline) use cases envisioned for such schemes, such as Root CAs or Code Signing. Therefore, in my opinion, this is out of scope for the document, as it would require a deep dive into such optimizations and could lead to diffusion rather than providing clear guidance.\n\nI support the suggested close of this issue.",
+          "createdAt": "2025-10-08T03:18:23Z",
+          "updatedAt": "2025-10-08T03:18:23Z"
+        }
+      ]
     },
     {
       "number": 29,
       "id": "I_kwDOLPgbFM7GxA1M",
       "title": "Scope: parameter selection",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/29",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [
@@ -404,8 +412,8 @@
       "labels": [],
       "body": "Scott Fluhrer suggested that we could include more content on \"how to do HBS signatures\".\n\n> I\u2019m not sure to what extent we want to broaden this from \u201chow we do state management\u201d to \u201cgeneral advice on how to use stateful hash-based signatures\u201d; although the document does have some of that general advice.  If we continue in that vein, I believe that you should mention that in XMSS/XMSS^MT, RFC 8391 and NIST SP 800-208 differs on SHAKE-based parameter sets.  I would recommend using the NIST parameter sets, should you decide you need an XMSS+SHAKE parameter set (the SHAKE-128 parameter set that RFC 8391 uses with n=32 reduces security to 128 bits, which is significantly weaker than the design goal).\n>\n>Another thought (if we were continuing with the giving general advice about stateful hash based signatures) is on selecting the parameter set.  For example, LMS with \u201cw=8\u201d (which would be w=256 in XMSS terminology) approximately halves the signature size, at the cost of making the signature generation and verification processes more expensive.  How far should we go into that (given that it is covered by other documents)\n\nI feel that \"picking parameters\" is a bit more of an operator concern and we do already touch on that (for example in that you need to consider your state management solutions when picking parameters). So this might be worth following up on?",
       "createdAt": "2025-08-19T15:06:37Z",
-      "updatedAt": "2025-09-16T13:51:47Z",
-      "closedAt": null,
+      "updatedAt": "2025-10-07T09:35:32Z",
+      "closedAt": "2025-10-07T09:30:13Z",
       "comments": [
         {
           "author": "thomwiggers",
@@ -413,6 +421,13 @@
           "body": "We're currently thinking about making a passing comment that size/speed may matter and you need to think about this in the operational considerations, but don't go into lots of detail.",
           "createdAt": "2025-09-16T13:51:27Z",
           "updatedAt": "2025-09-16T13:51:27Z"
+        },
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "ah we should still ask for feedback on this to the list",
+          "createdAt": "2025-10-07T09:35:00Z",
+          "updatedAt": "2025-10-07T09:35:00Z"
         }
       ]
     },
@@ -1204,7 +1219,7 @@
       "labels": [],
       "body": "Add a link to the actual document",
       "createdAt": "2025-08-07T10:44:04Z",
-      "updatedAt": "2025-08-07T11:10:07Z",
+      "updatedAt": "2025-10-07T09:37:28Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "6f1c043dee0d74e4eafc317cf1996403a140e6b6",
@@ -1246,7 +1261,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-08-19T14:54:14Z",
-      "updatedAt": "2025-09-23T14:39:43Z",
+      "updatedAt": "2025-10-07T09:37:29Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "8bdcacae8e0d187c44ed1ba12e3931c069f2868e",
@@ -1308,7 +1323,7 @@
       "labels": [],
       "body": "Add section to operational considerations to consider warning when threshold of signatures is reached.\r\n\r\nAddress issue #18",
       "createdAt": "2025-09-17T13:25:57Z",
-      "updatedAt": "2025-09-23T14:38:48Z",
+      "updatedAt": "2025-10-07T09:37:29Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "35a43d4a4d49b013b2d2147a876ac37d1f0a6938",
@@ -1363,7 +1378,7 @@
       "labels": [],
       "body": "See Reference a correct attack paper\nFixes #27",
       "createdAt": "2025-09-18T14:00:48Z",
-      "updatedAt": "2025-09-25T09:17:56Z",
+      "updatedAt": "2025-10-07T09:37:30Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "0b2cbb6d9a494e51bd8ec6ec032f70d855a5e8e7",
@@ -1418,7 +1433,7 @@
       "labels": [],
       "body": "This is a response to a comment by Scott Fluhrer, see issue #25",
       "createdAt": "2025-09-18T14:03:28Z",
-      "updatedAt": "2025-09-29T07:07:17Z",
+      "updatedAt": "2025-10-07T09:37:30Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "14fe130a7b4b532bb46602a49631516b0b067ada",
@@ -1473,7 +1488,7 @@
       "labels": [],
       "body": "Tried to address #11.",
       "createdAt": "2025-09-18T16:35:16Z",
-      "updatedAt": "2025-09-25T13:44:29Z",
+      "updatedAt": "2025-10-07T09:37:31Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "7efac7ed3b5b3f675e4e15fc94d468c2caa07e4a",
@@ -1507,7 +1522,7 @@
             "abbreviatedOid": "4cc3487"
           },
           "author": "BashiriK",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "I really like the changes. However, as they seem to be significant I would suggest that all of us should approve this pull request.",
           "createdAt": "2025-09-24T10:15:44Z",
@@ -1554,7 +1569,7 @@
       "labels": [],
       "body": "Addresses #20 while also covering MCGREW. Had to smooth out the sentences after the inserted part.",
       "createdAt": "2025-09-19T06:25:59Z",
-      "updatedAt": "2025-09-25T13:47:13Z",
+      "updatedAt": "2025-10-07T09:37:31Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "68b03c5afc5659ab8325a0754d8964819c0180ef",
@@ -1588,7 +1603,7 @@
             "abbreviatedOid": "bbd34e6"
           },
           "author": "BashiriK",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "Looks good to me!",
           "createdAt": "2025-09-24T10:14:35Z",
@@ -1682,7 +1697,7 @@
       "labels": [],
       "body": "Adding text describing interval-based state reservation to address issue #16.",
       "createdAt": "2025-09-19T11:20:29Z",
-      "updatedAt": "2025-09-23T14:41:00Z",
+      "updatedAt": "2025-10-07T09:37:32Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "5782391fb31f41c7520d05bd728e9e5e6da6768e",
@@ -1764,7 +1779,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-09-27T06:25:21Z",
-      "updatedAt": "2025-09-29T07:03:38Z",
+      "updatedAt": "2025-10-07T09:37:33Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "a30a9d82bcf12d63e4a78eaad2b24c4a7613b3e7",
@@ -1799,50 +1814,52 @@
       "id": "PR_kwDOLPgbFM6r5MrQ",
       "title": "Sharpened scope of sectorization (and fixed a minor parsing issue)",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/38",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fluppe2",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "This addresses issue #26 (see explanation there).\r\n\r\nWhile at it I fixed a parsing issue \"No link definition for link ID 'i' found on line 482\" caused by `HSM<sub>sub[i]</sub>` in Section 5.2 on Distributed Multi-Trees. I escaped the square brackets so they\u2019re treated as literal characters, not a link ID: `HSM<sub>sub\\[i\\]</sub>`.",
       "createdAt": "2025-10-03T06:03:11Z",
-      "updatedAt": "2025-10-06T09:58:49Z",
+      "updatedAt": "2025-10-07T17:41:42Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
-      "baseRefOid": "2dbf860563d8e2931128d9fcbb508817617c7d09",
+      "baseRefOid": "e296901954b6472226e0f2142e4807a3e1232ebb",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "26-differing-keys-in-sectorization",
-      "headRefOid": "f5758a2d2c1ee7ae5d87b565cde9d1623108ded9",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "bd8b028c7b573d1158d34d695b0158d9cf1cb1a7",
+      "closedAt": "2025-10-07T17:41:40Z",
+      "mergedAt": "2025-10-07T17:41:40Z",
+      "mergedBy": "fluppe2",
+      "mergeCommit": {
+        "oid": "e9169e3b005739a157492f3f2678f3bd6fb129e2"
+      },
       "comments": [],
       "reviews": [
         {
           "id": "PRR_kwDOLPgbFM7Eni4o",
           "commit": {
-            "abbreviatedOid": "f5758a2"
+            "abbreviatedOid": "bd8b028"
           },
           "author": "crypto4a",
           "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "Looks good to me. I think the updated text improves the message!",
           "createdAt": "2025-10-03T12:24:23Z",
-          "updatedAt": "2025-10-03T12:24:23Z",
+          "updatedAt": "2025-10-07T09:34:22Z",
           "comments": []
         },
         {
           "id": "PRR_kwDOLPgbFM7E6h-K",
           "commit": {
-            "abbreviatedOid": "f5758a2"
+            "abbreviatedOid": "bd8b028"
           },
           "author": "BashiriK",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "",
           "createdAt": "2025-10-06T09:58:49Z",
-          "updatedAt": "2025-10-06T09:58:49Z",
+          "updatedAt": "2025-10-07T09:34:22Z",
           "comments": []
         }
       ]
@@ -1852,25 +1869,35 @@
       "id": "PR_kwDOLPgbFM6r5cRc",
       "title": "Clarified conceptual split of private key and state",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/39",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fluppe2",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I added a new terminology section to clearly state the conceptual split that Scott suggested to point out.\r\n\r\nThis should tackle issue #23 .",
       "createdAt": "2025-10-03T06:37:11Z",
-      "updatedAt": "2025-10-06T17:32:17Z",
+      "updatedAt": "2025-10-08T07:31:29Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
-      "baseRefOid": "2dbf860563d8e2931128d9fcbb508817617c7d09",
+      "baseRefOid": "e9169e3b005739a157492f3f2678f3bd6fb129e2",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "23-clarify-that-private-key-and-state-can-be-separated",
-      "headRefOid": "40820ed06f0f6e5c8b1b70b9836b4c348da5b80a",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "12fa124c01432db3267a7d12e66e3e93d28ef7fb",
+      "closedAt": "2025-10-08T07:31:27Z",
+      "mergedAt": "2025-10-08T07:31:27Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "8e6596bd27df98a584c953dc29ec492256bb5bb9"
+      },
+      "comments": [
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "I think that one is good to go into the main branch.\r\n@thomwiggers do you want to approve and merge?",
+          "createdAt": "2025-10-07T17:43:19Z",
+          "updatedAt": "2025-10-07T17:43:19Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLPgbFM7EnlIR",
@@ -1891,7 +1918,7 @@
             "abbreviatedOid": "40820ed"
           },
           "author": "BashiriK",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-10-06T09:55:51Z",
@@ -1911,7 +1938,7 @@
             "abbreviatedOid": "40820ed"
           },
           "author": "BashiriK",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "APPROVED",
           "body": "I agree with everything and I only have one small comment, which I added to the text.",
           "createdAt": "2025-10-06T09:56:26Z",
@@ -1957,6 +1984,59 @@
               "updatedAt": "2025-10-06T17:32:17Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7FPnys",
+          "commit": {
+            "abbreviatedOid": "40820ed"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-07T09:21:55Z",
+          "updatedAt": "2025-10-07T09:21:55Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "I like the specificity of the new text.",
+              "createdAt": "2025-10-07T09:21:55Z",
+              "updatedAt": "2025-10-07T09:21:55Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7FPonT",
+          "commit": {
+            "abbreviatedOid": "40820ed"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Looks good, but I think @BashiriK and @fluppe2 made a good point about being specific.",
+          "createdAt": "2025-10-07T09:22:53Z",
+          "updatedAt": "2025-10-07T09:23:20Z",
+          "comments": [
+            {
+              "originalPosition": 18,
+              "body": "```suggestion\nConceptually, the private key and the state are distinct and should be handled\naccordingly: the private key is a static secret, while the state is mutable,\nevolves with each signature, and must be maintained with integrity and correctness. In some\n```",
+              "createdAt": "2025-10-07T09:22:53Z",
+              "updatedAt": "2025-10-07T09:23:20Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7Ffk22",
+          "commit": {
+            "abbreviatedOid": "12fa124"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-10-08T07:31:22Z",
+          "updatedAt": "2025-10-08T07:31:22Z",
+          "comments": []
         }
       ]
     },
@@ -1965,25 +2045,35 @@
       "id": "PR_kwDOLPgbFM6sQ1_x",
       "title": "Parameter selection and Stefan-Lukas as a contributor.",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/40",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "BashiriK",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "I added some text on parameter selection and Stefan-Lukas as a contributor.",
       "createdAt": "2025-10-06T12:50:42Z",
-      "updatedAt": "2025-10-06T17:21:51Z",
+      "updatedAt": "2025-10-07T09:37:33Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "2dbf860563d8e2931128d9fcbb508817617c7d09",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "fix-issue-29",
-      "headRefOid": "7b6512d655e00b4541833e59f2fbf67fae66bc21",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "headRefOid": "df80191184e0cb4a6372f084c74e1665edd6aac1",
+      "closedAt": "2025-10-07T09:30:12Z",
+      "mergedAt": "2025-10-07T09:30:12Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "e296901954b6472226e0f2142e4807a3e1232ebb"
+      },
+      "comments": [
+        {
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Thanks!",
+          "createdAt": "2025-10-07T09:30:16Z",
+          "updatedAt": "2025-10-07T09:30:16Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLPgbFM7E9Y3z",
@@ -2050,6 +2140,26 @@
           "createdAt": "2025-10-06T17:21:51Z",
           "updatedAt": "2025-10-06T17:21:51Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7FPruL",
+          "commit": {
+            "abbreviatedOid": "54f795f"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-10-07T09:26:23Z",
+          "updatedAt": "2025-10-07T09:26:29Z",
+          "comments": [
+            {
+              "originalPosition": 1,
+              "body": "Thanks Copilot. \ud83d\ude02 ",
+              "createdAt": "2025-10-07T09:26:23Z",
+              "updatedAt": "2025-10-07T09:26:29Z"
+            }
+          ]
         }
       ]
     }
