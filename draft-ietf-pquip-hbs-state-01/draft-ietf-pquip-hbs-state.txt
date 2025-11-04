@@ -5,14 +5,14 @@
 Post-Quantum Use In Protocols                                 T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 29 March 2026                                               BSI
+Expires: 8 May 2026                                                  BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                       25 September 2025
+                                                         4 November 2025
 
 
            Hash-based Signatures: State and Backup Management
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 March 2026.
+   This Internet-Draft will expire on 8 May 2026.
 
 Copyright Notice
 
@@ -87,14 +87,15 @@ Copyright Notice
 Table of Contents
 
    1.  Introduction
-     1.1.  When are Stateful HBS appropriate?
+     1.1.  When are Stateful HBS Appropriate?
    2.  Conventions and Definitions
-     2.1.  Specific terminology in the context of Stateful HBS
-       2.1.1.  State management
-       2.1.2.  Backup management
-       2.1.3.  Key export, key import and key transfer
+     2.1.  Specific Terminology in the Context of Stateful HBS
+       2.1.1.  Private Key Components
+       2.1.2.  State Management
+       2.1.3.  Backup Management
+       2.1.4.  Key Export, Key Import and Key Transfer
    3.  Operational Considerations
-   4.  Requirements for secure state management
+   4.  Requirements for Secure State Management
    5.  Potential Solutions
      5.1.  Multiple Public Keys (SP-800-208)
      5.2.  Distributed Multi-trees (SP-800-208)
@@ -105,7 +106,7 @@ Table of Contents
      5.7.  Pre-assigning States
      5.8.  Time-based State Management
      5.9.  Interval-based Approaches
-   6.  Backup management beyond NIST SP-800-208
+   6.  Backup Management Beyond NIST SP-800-208
    7.  Security Considerations
    8.  IANA Considerations
    9.  References
@@ -174,7 +175,7 @@ Table of Contents
    strategies for a correct state and backup management for Stateful
    HBS.
 
-1.1.  When are Stateful HBS appropriate?
+1.1.  When are Stateful HBS Appropriate?
 
    The issues with state management described above, as well as (for
    most parameter sets) the limited number of signatures, lead to new
@@ -184,13 +185,13 @@ Table of Contents
    may produce unrestricted numbers of signatures, should use
    _stateless_ hash-based signature schemes like SLH-DSA [FIPS205],
    which use the same security assumptions, or schemes based on other
-   assumptions, such as ML-DSA [FIPS204], instead.  However, if
-   performance, signature or key sizes of stateless alternatives are
-   prohibitive, and the specific use case allows a very tight control of
-   the signing environment, using Stateful HBS may be an appropriate
-   solution.  It seems likely that in many scenarios, this will only be
-   possible when using purpose-designed hardware, such as hardware-
-   security modules.
+   assumptions, such as ML-DSA [FIPS204], instead.  However, if run
+   time, implementation size, or signature or key sizes of stateless
+   alternatives are prohibitive, and the specific use case allows a very
+   tight control of the signing environment, using Stateful HBS may be
+   an appropriate solution.  It seems likely that in many scenarios,
+   this will only be possible when using purpose-designed hardware, such
+   as hardware-security modules.
 
 2.  Conventions and Definitions
 
@@ -200,12 +201,31 @@ Table of Contents
    BCP 14 [RFC2119] [RFC8174] when, and only when, they appear in all
    capitals, as shown here.
 
-2.1.  Specific terminology in the context of Stateful HBS
+2.1.  Specific Terminology in the Context of Stateful HBS
 
    In this subsection we specify certain notions which are important in
    the context of Stateful HBS.
 
-2.1.1.  State management
+2.1.1.  Private Key Components
+
+   private key  the static, long-lived secret(s) from which OTS private
+      keys are derived.  This material is stateless: given the scheme
+      parameters, it deterministically defines the set of OTS private
+      keys but does not change over time.
+
+   state  the dynamically updated data structure that records which OTS
+      key indices have been consumed (often a monotone counter).  This
+      material is mutable and must change on every successful signature.
+
+   Conceptually, the private key and the state are distinct and should
+   be handled accordingly: the private key is a static secret, while the
+   state is mutable, evolves with each signature, and must be maintained
+   with integrity and correctness.  In some implementations, these two
+   components may be packaged together and not directly separable; in
+   such cases, this document’s guidance applies to the combined
+   artifact.
+
+2.1.2.  State Management
 
    In this document _state management_ refers to the handling and
    implementation of the state of the private key.
@@ -232,7 +252,7 @@ Table of Contents
    [BSW16], the state and private key might be inseparable.  However,
    even in these scenarios, this document's guidance should still apply.
 
-2.1.2.  Backup management
+2.1.3.  Backup Management
 
    In order to mitigate failure of, e.g., devices storing key material
    and to facilitate other types of disaster recovery, backups of
@@ -259,7 +279,7 @@ Table of Contents
    management; we make this distinction to clarify the aims of our
    recommendations.
 
-2.1.3.  Key export, key import and key transfer
+2.1.4.  Key Export, Key Import and Key Transfer
 
    As part of state and backup management, we will discuss mechanisms to
    export, import or transfer private key and state material.  In order
@@ -351,6 +371,17 @@ Table of Contents
    condition SHOULD require explicit acknowledgment from the user
    through a mechanism that cannot be trivially skipped.
 
+   Another important consideration in deploying stateful hash-based
+   signatures is the selection of an appropriate parameter set.  Given
+   the flexibility of these schemes — such as adjustable tree heights or
+   Winternitz parameters — there exists a large variety of possible
+   configurations.  The availability of these different configurations
+   offers many trade-offs between signature generation/verification
+   time, signature size, and key generation time.  Hence, careful
+   attention during the design phase is essential to ensure that the
+   chosen parameter set aligns optimally with the specific requirements
+   of the intended use case.
+
    Lastly, costs associated with any external dependencies required by a
    particular solution (e.g., access to a public ledger or transparency
    log, providing accurate time references and synchronization
@@ -359,7 +390,7 @@ Table of Contents
    offline mode that makes delivering these additional capabilities all
    the more complicated and expensive.
 
-4.  Requirements for secure state management
+4.  Requirements for Secure State Management
 
    A system deploying Stateful HBS SHOULD fulfill certain requirements
    to allow securely handling the state.  The system MUST ensure that no
@@ -560,11 +591,13 @@ Table of Contents
    seeds are utilized sectorization breaks a given Stateful HBS key/
    state into multiple independent fragments that can be managed as
    independent objects.  As a result, system operators MAY distribute
-   sectors to multiple cryptographic devices, allowing for performance
-   scaling, and resiliency/availability, while only requiring them to
-   manage the uniqueness of each sector instead of having to co-ordinate
-   state usage between devices since in this scenario a sector cannot
-   generate signatures from another sector's signature space.
+   sectors to multiple cryptographic devices, providing scalability
+   through parallelization and improved resiliency/availability.  This
+   approach offers isolation between sectors, ensuring that a compromise
+   in one does not extend to others, thereby supporting damage
+   containment.  At the same time, it simplifies operational robustness
+   by removing the need for cross-device state coordination, since each
+   sector is restricted to its own signature space.
 
 5.4.  Key/State Transfer
 
@@ -786,7 +819,7 @@ Table of Contents
    manage the reservations to ensure there is no overlap or repeated
    reservation of a given interval, either in part or in whole.
 
-6.  Backup management beyond NIST SP-800-208
+6.  Backup Management Beyond NIST SP-800-208
 
    In this section, an alternative backup mechanism for Stateful HBS is
    presented in a generic form, which makes the strategy applicable for
@@ -830,7 +863,7 @@ Table of Contents
    *  sign the corresponding root node with an unused OTS key from the
       top-level tree,
 
-   *  securely _key export_ (as described in Section 2.1.3) the seed,
+   *  securely _key export_ (as described in Section 2.1.4) the seed,
       which was used to generate the bottom-level tree,
 
    *  export the signature of the root node, the corresponding OTS key
@@ -866,7 +899,7 @@ Table of Contents
 
    *  initiate a new hardware module
 
-   *  securely _key import_ (as decribed in Section 2.1.3) the first
+   *  securely _key import_ (as decribed in Section 2.1.4) the first
       unused seed into this hardware module
 
    *  generate the bottom-level tree corresponding to the seed
@@ -1012,6 +1045,8 @@ Contributors
    *  Jeff Andersen (Google)
 
    *  Bruno Couillard (Crypto4A Technologies)
+
+   *  Stefan-Lukas Gazdag (genua GmbH)
 
 Authors' Addresses
 
