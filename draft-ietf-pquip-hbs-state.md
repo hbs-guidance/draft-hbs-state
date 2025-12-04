@@ -259,8 +259,6 @@ as hardware-security modules.
 
 # Conventions and Definitions
 
-{::boilerplate bcp14-tagged}
-
 ## Specific Terminology in the Context of Stateful HBS
 
 In this subsection we specify certain notions which are important in the
@@ -314,7 +312,7 @@ guidance should still apply.
 
 In order to mitigate failure of, e.g., devices storing key material and to
 facilitate other types of disaster recovery, backups of private keys and their
-associated states SHOULD be considered as part of a security architecture.
+associated states should be considered as part of a security architecture.
 
 In this document, _backup management_ refers to all mechanisms surrounding the
 goal to guarantee the availability of the private key and state, but with
@@ -359,7 +357,7 @@ reuse.
 
 Note that, at times, secure variants of the aforementioned primitives may be
 required (e.g., securely importing/exporting the key). In these situations
-cryptographic mechanisms SHOULD be utilized to provide assurances related to
+cryptographic mechanisms should be utilized to provide assurances related to
 the confidentiality (e.g., utilizing symmetric/asymmetric encryption
 mechanisms) and/or integrity/authenticity (e.g., utilizing digital signatures,
 hash functions, and keyed message authentication codes) of the associated
@@ -391,32 +389,32 @@ difficulties associated with transferring keys between devices, and one finds
 them self with a perplexing set of challenges that needs to be accounted for in
 any state selection process of a proper state and backup management solution.
 Compounding these complexities is the fact any resilient state management
-system SHOULD also provide some means to verify the integrity of these
+system should also provide some means to verify the integrity of these
 long-lived backups to ensure they will be valid when they are required, and to
 ensure the operators know how to execute the necessary recovery procedure(s).
 
 Similarly, many of the prescribed state management options require a high
-degree of operator involvement which means one SHOULD consider the costs
+degree of operator involvement which means one should consider the costs
 associated with training the operator element to ensure processes and procedures
 are adhered to and failures caught early and corrected before a catastrophic
 loss of security can occur (e.g., accidentally instantiating multiple instances
 of a stateful hash-based signature key/state). Note that training is not a
 fixed one-time cost either as long lifetimes will necessitate succession
 planning amongst the operator element, and training of each successive generation
-of participants. Mechanisms also SHOULD be put in place to mitigate the
+of participants. Mechanisms also should be put in place to mitigate the
 ever-present insider threat via mechanisms such as M-of-N controls, ensuring
 least-privileges amongst participants, and enforcing a segregation of duties to
 ensure multiple parties are required to collude to undermine a solution's
-security. Note that the segregation of duties MUST persist across successive
+security. Note that the segregation of duties must persist across successive
 generations to ensure participants do not acquire multiple roles over time,
 thereby undermining the intended segregation.
 
-In addition to the state management, implementers MAY consider to implement
-mechanisms to prevent abrupt signature exhaustion. Implementations MAY
+In addition to the state management, implementers may consider implementing
+mechanisms to prevent abrupt signature exhaustion. Implementations may
 consider providing a configurable warning threshold, M, which is triggered
 when M signatures remain. When the number of available signatures reaches
-this threshold, the system should return a signatures nearing exhaustion warning.
-This warning condition SHOULD require explicit acknowledgment from the user
+this threshold, the system should return a 'signatures nearing exhaustion' warning.
+This warning condition should require explicit acknowledgment from the user
 through a mechanism that cannot be trivially skipped.
 
 Another important consideration in deploying stateful hash-based signatures is
@@ -432,20 +430,20 @@ use case.
 Lastly, costs associated with any external dependencies required by a
 particular solution (e.g., access to a public ledger or transparency log,
 providing accurate time references and synchronization mechanisms, access to
-attestation facilities, etc.) MUST be accounted for as well, particularly if a
+attestation facilities, etc.) must be accounted for as well, particularly if a
 system is operating in an offline mode that makes delivering these additional
 capabilities all the more complicated and expensive.
 
 # Requirements for Secure State Management
 
-A system deploying Stateful HBS SHOULD fulfill certain requirements to allow securely
-handling the state. The system MUST ensure that no two signing operations can
+A system deploying Stateful HBS should fulfill certain requirements to allow securely
+handling the state. The system must ensure that no two signing operations can
 ever be issued from the same state. In addition, the generation of a signature
-and update of the state SHOULD appear to be an _atomic transaction_. This means
-that the system MUST NOT release a signature without irrevocably and correctly
+and update of the state should appear to be an _atomic transaction_. This means
+that the system must not release a signature without irrevocably and correctly
 updating the state.
 
-State management systems SHOULD satisfy all _ACID_ properties:
+State management systems should satisfy all _ACID_ properties:
 
 - _Atomicity_: each operation must be indivisible — either the signature is
   generated and the state is updated together, or neither occurs.
@@ -479,7 +477,7 @@ main concerns here are
 
 A system may have a version of the private key stored in non-volatile memory
 (e.g. a disk) and will load it into volatile memory (e.g. RAM) while processing.
-Here, an implementer MUST ensure that these are always perfectly synchronized
+Here, an implementer must ensure that these are always perfectly synchronized
 [MCGREW], meaning that no parts of the system are allowed to read any version of
 the key during procedures which load, write or modify keys. This can be
 particularly challenging if there are additional abstraction layers present in
@@ -495,20 +493,20 @@ or live cloning of a VM can easily lead to a state re-use [MCGREW]. With users
 shifting workloads to cloud service providers, the issue of VM cloning may
 become more prevalent.
 
-Using dedicated cryptographic hardware is RECOMMENDED to enforce these
+Using dedicated cryptographic hardware is recommended to enforce these
 requirements, ensure correct behavior and handle the complexity of state
 management. In particular, this enables implementing rollback resistant
 counters which can be difficult to achieve in a software-only fashion.
 
 On the verifier side, no state management is required. However, the verifier
-needs to trust the signer to not have re-used the state. A verifier MAY want to
+needs to trust the signer to not have re-used the state. A verifier may want to
 check that no state re-use happened in the past by a signer, before accepting a
 signature.
 
 In practice, this can be done if the verifier has access to all signatures
 issued by the signer. As the signatures contain the index of the OTS key used,
 detecting if an index was used more than once becomes trivial. In practice,
-such a (public) data structure which contains all signatures MAY already be
+such a (public) data structure which contains all signatures may already be
 present in some use cases (e.g. certificate transparency {{?RFC9162}}) or could
 be built. It is worth noting that while trusting the signer to not re-use the
 state is a strong assumption, other signature schemes like ECDSA introduce
@@ -566,7 +564,7 @@ many subordinate trees as possible be generated during the initial root key
 generation and subordinate-signing procedure. Unfortunately, this can incur a
 large capital expenditure to procure all of the necessary devices, many of
 which may not be used for a long period of time, if at all. The subordinate
-tree root node signing process MUST also be carefully managed to ensure top
+tree root node signing process must also be carefully managed to ensure top
 level trees are only ever used to sign the root nodes of trusted/approved
 subordinate trees to ensure that no malicious signing request is accepted,
 which would effectively give a rogue entity the ability to generate valid
@@ -593,7 +591,7 @@ height-s Merkle trees whose root nodes are considered interior nodes of the
 overall height-h Merkle tree. Hence, there is no additional OTS required to
 sign their root nodes; their values are used as-is in the underlying Stateful HBS
 scheme's tree ascent mechanism, yielding a common public key (i.e., root node)
-for all sectors. Care MUST be taken to ensure that each sector uses the same
+for all sectors. Care must be taken to ensure that each sector uses the same
 root tree identifier (i.e., the "I" value for HSS/LMS and "root" value for
 XMSS/XMSS<sup>MT</sup>).
 
@@ -616,7 +614,7 @@ signatures, after which the sectorized key is exhausted.
 In addition to avoiding an increased signature size; when unique seeds are
 utilized sectorization breaks a given Stateful HBS key/state into multiple independent
 fragments that can be managed as independent objects. As a result, system
-operators MAY distribute sectors to multiple cryptographic devices, providing
+operators may distribute sectors to multiple cryptographic devices, providing
 scalability through parallelization and improved resiliency/availability. This
 approach offers isolation between sectors, ensuring that a compromise in one
 does not extend to others, thereby supporting damage containment. At the same
@@ -690,7 +688,7 @@ as the rigor around authorizing those two types of operations will vary
 dramatically, leading to either a much more onerous message signing operation,
 or a much more risky subordinate tree signing operation. This may put the
 system operator in an untenable situation where no users are satisfied with the
-resulting solution, and hence, SHOULD NOT be considered as a viable solution.
+resulting solution, and hence, should not be considered as a viable solution.
 
 ## Pre-assigning States
 
@@ -703,16 +701,16 @@ state management to the to-be signed messages.
 Expanding on the given example, for software that is released with strictly
 increasing, simple single-position version numbers (i.e., versions 1, 2, 3...),
 this can be trivially implemented. As versions have a one-to-one correspondence
-to a Stateful HBS signing state, operators MUST ensure that versions can only be
-minted a single time. This MAY require skipping version numbers if a release
+to a Stateful HBS signing state, operators must ensure that versions can only be
+minted a single time. This may require skipping version numbers if a release
 process failed, to avoid double-signing.
 
 This scheme can be adapted to more complicated release schemes: for example,
 minor update-releases 1.0 to 1.99 can be accommodated by assigning signatures
 1-100 for these version numbers, while release 2.0-2.99 would get signatures
-101-200. The assignments MUST be fixed as the scheme is set up, and operators
-SHOULD take into account that they are strictly limiting the number of update
-releases. In the described solution to state management, one MUST move up a
+101-200. The assignments must be fixed as the scheme is set up, and operators
+should take into account that they are strictly limiting the number of update
+releases. In the described solution to state management, one must move up a
 major release number after 99 minor releases, even if this would break, e.g.,
 semantic versioning conventions.
 
@@ -729,66 +727,66 @@ each, with the first 128 allowed to be used in the first time window, the
 second 128 in the second time window, and so on, until the signature space is
 effectively exhausted after 8 time windows. Note that a time-based approach to
 state management will "waste" any OTS keys that are unused in past time
-windows. One MUST NOT attempt to use these keys after the time window has gone
+windows. One must not attempt to use these keys after the time window has gone
 by.
 
 Any time-based approach has a very strict reliance on accurate time-keeping and
 synchronization of clocks. In particular, we identify that at least the
 following engineering-related challenges need to be considered:
 
-- Signing devices MUST have accurate timekeeping (which is a very challenging
+- Signing devices must have accurate timekeeping (which is a very challenging
   engineering problem [XKCD1883], [XKCD2867], [TIMEFALSEHOODS]).
 
-- Time on signing devices MUST NOT be allowed to ever move backwards, as this
+- Time on signing devices must not be allowed to ever move backwards, as this
   can cause double-signing.
 
-- Within time windows, signers MUST track the number of signatures produced to
+- Within time windows, signers must track the number of signatures produced to
   ensure it does not exceed the number allowed within the window.
 
-- Signing devices MUST still operate consistently with the requirements of
-  state keeping for Stateful HBS: the signature index within a time window SHOULD
-  still appear to be updated atomically, and signatures MUST NOT be released
+- Signing devices must still operate consistently with the requirements of
+  state keeping for Stateful HBS: the signature index within a time window should
+  still appear to be updated atomically, and signatures must not be released
   before state changes have been recorded.
 
-- A system SHOULD be robust against exhaustion of the number of signatures
+- A system should be robust against exhaustion of the number of signatures
   available in a time window, as in this case it is REQUIRED to wait until the
   next time window starts before new messages can be signed.
 
-- Time on signing devices SHOULD NOT be allowed to be moved forward maliciously
+- Time on signing devices should not be allowed to be moved forward maliciously
   or accidentally, which would allow for a simple denial-of-service attack by
   skipping over portions of the signature space.
 
-- If a signing device needs to be replaced, the replacement device MUST be set
+- If a signing device needs to be replaced, the replacement device must be set
   up with its time in sync with or ahead of the device it is to replace. This
-  implies the current time on signing devices SHOULD be continuously recorded.
+  implies the current time on signing devices should be continuously recorded.
 
-- Rate limiting MAY need to be considered, as exhausting the available
+- Rate limiting may need to be considered, as exhausting the available
   signatures in a given time window may otherwise be easy.
 
-- It MAY be necessary for signers to keep a separate clock for time-based state
+- It may be necessary for signers to keep a separate clock for time-based state
   management, and one for not necessarily monotonically increasing "wall-time",
   e.g., if signed artifacts are expected to be time-stamped with real-world time.
 
 If these concerns can not be sufficiently addressed, time-based state
-management as described in this paragraph SHOULD NOT be used. Note that this
+management as described in this paragraph should not be used. Note that this
 list of concerns is not exhaustive, and other, unmentioned, concerns may also
 be relevant to the security of a time-based solution.
 
 Time-based systems can be backed up by simply recording the private keys and
 the configuration of the time windows. In case of loss of a signing device, a
 time-based state management system can be recovered by using this information
-to bring online a new device in the next time window. This approach MAY also be
+to bring online a new device in the next time window. This approach may also be
 used as a recovery mechanism in the case of (suspected) state consistency
-problems during a time window. However, the operator MUST NOT allow new
+problems during a time window. However, the operator must not allow new
 signatures to be produced before the new time window starts, unless they know
 the exact state at which the previous device became unavailable and are able to
 set up the new device accordingly. Waiting until the start of the next time
 window avoids double signing, as the OTS keys assigned to future time windows
 are guaranteed to have not yet been used. However, this might incur significant
-downtime of the signing systems. Downtime MAY be avoided by forcibly moving the
+downtime of the signing systems. Downtime may be avoided by forcibly moving the
 signing device to the next time window by incrementing its clock; however, this
 induced clock drift will then need to be accounted for in the future. If clock
-drift is to be avoided, this approach SHOULD account for availability
+drift is to be avoided, this approach should account for availability
 considerations.
 
 ## Interval-based Approaches
@@ -832,7 +830,7 @@ The strategy presented in this section builds upon the multi-tree variant
 approach from [SP-800-208], and aims to mitigate its limitations described in
 [](#nist-dist-multi-tree).  Thus, it is assumed that already a top-level Merkle
 tree (for signing the root-nodes of sub-trees) and several bottom-level Merkle
-trees (for signing messages) are initiated.  These bottom-level trees MAY be
+trees (for signing messages) are initiated.  These bottom-level trees may be
 implemented on different hardware modules in order to obtain redundancy and
 improve availability.  Let R be the number of these already initiated
 bottom-level trees.  Let h<sub>0</sub> be the height of the top-level-tree.  It
@@ -856,7 +854,7 @@ random.  For the sake of clarity, let us introduce some notation:
   I<sub>new</sub> is zero-indexed here.
 
 For each new bottom-level tree, after it has been generated, the following
-steps MUST be performed:
+steps must be performed:
 
 - sign the corresponding root node with an unused OTS key from the top-level
   tree,
@@ -890,7 +888,7 @@ the same time.
 As soon as this worst-case scenario occurs, the newly generated bottom-level
 trees (i.e. those bottom-level trees, whose indices belong to I<sub>new</sub>)
 need to be initiated in order to ensure availability. In order to do this the
-following steps MUST be performed:
+following steps must be performed:
 
 - initiate a new hardware module
 
