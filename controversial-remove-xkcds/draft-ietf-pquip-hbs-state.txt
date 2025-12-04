@@ -1021,12 +1021,6 @@ Table of Contents
               n.d., <https://gist.github.com/timvisee/
               fcda9bbdff88d45cc9061606b4b923ca>.
 
-   [XKCD1883] Munroe, R., "xkcd: Timezones", n.d.,
-              <https://xkcd.com/1883/>.
-
-   [XKCD2867] Munroe, R., "xkcd: DateTime", n.d.,
-              <https://xkcd.com/2867/>.
-
 Acknowledgments
 
    This document was inspired by discussions at the 2nd Oxford Post-
