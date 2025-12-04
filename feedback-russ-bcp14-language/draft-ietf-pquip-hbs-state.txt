@@ -445,7 +445,7 @@ Table of Contents
    workloads to cloud service providers, the issue of VM cloning may
    become more prevalent.
 
-   Using dedicated cryptographic hardware is RECOMMENDED to enforce
+   Using dedicated cryptographic hardware is recommended to enforce
    these requirements, ensure correct behavior and handle the complexity
    of state management.  In particular, this enables implementing
    rollback resistant counters which can be difficult to achieve in a
