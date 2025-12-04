@@ -200,7 +200,7 @@ quantum computers become available. The theoretic security of Stateful HBS is
 well understood and depends only on the security of the underlying hash
 function. As such, Stateful HBS can serve as an important building block for
 quantum-resistant information and communication technology. Stateful HBS are
-specified in {{?RFC8391}}, {{?RFC8554}}, and NIST [SP-800-208].
+specified in {{?RFC8391}}, {{?RFC8554}}, and NIST {{SP-800-208}}.
 
 The private key of an Stateful HBS is a finite collection of OTS keys and an
 associated data structure which keeps track of which OTS keys have been used.
@@ -212,13 +212,12 @@ each generated signature.
 One must not reuse any OTS key that is part of an Stateful HBS private key. If
 an attacker is able to obtain signatures for two different messages created
 using the same OTS key, it is computationally feasible for that attacker to
-create forgeries [BH16] <!-- comment to work around bug
-https://github.com/cabo/kramdown-rfc/issues/273 --> [Fluhrer23]. As noted in
-[MCGREW] and [ETSI-TR-103-692], extreme care should be taken in order to avoid
-the risk that an OTS key will be reused accidentally. Whereas [MCGREW]
+create forgeries {{BH16}} {{Fluhrer23}}. As noted in
+{{MCGREW}} and {{ETSI-TR-103-692}}, extreme care should be taken in order to avoid
+the risk that an OTS key will be reused accidentally. Whereas {{MCGREW}}
 identifies the fundamental failure modes of Stateful HBS and
 proposes architectural strategies such as a reservation approach, and
-[ETSI-TR-103-692] provides a broad analysis of state management challenges and
+{{ETSI-TR-103-692}} provides a broad analysis of state management challenges and
 risks, this document complements both by cataloging concrete operational
 patterns in {{pot-sol}} and by addressing backup and recovery considerations
 {{alt-backup-mgmt}} not covered in prior work.
@@ -249,8 +248,8 @@ developers will not be familiar with and that require careful handling in
 practice: Stateful HBS are not general-purpose signature schemes. Most
 applications, especially those that may produce unrestricted numbers of
 signatures, should use _stateless_ hash-based signature schemes like SLH-DSA
-[FIPS205], which use the same security assumptions, or schemes based on other
-assumptions, such as ML-DSA [FIPS204], instead. However, if run time, implementation
+{{FIPS205}}, which use the same security assumptions, or schemes based on other
+assumptions, such as ML-DSA {{FIPS204}}, instead. However, if run time, implementation
 size, or signature or key sizes of stateless alternatives are prohibitive, and the
 specific use case allows a very tight control of the signing environment, using
 Stateful HBS may be an appropriate solution. It seems likely that in many
@@ -303,7 +302,7 @@ This includes mechanisms, which aim:
   the lifetime of the key.
 
 Note that in particular implementations of Stateful HBS, or in alternative signature
-mechanisms such as, e.g., puncturable schemes [BSW16], the state and private
+mechanisms such as, e.g., puncturable schemes {{BSW16}}, the state and private
 key might be inseparable. However, even in these scenarios, this document's
 guidance should still apply.
 
@@ -477,7 +476,7 @@ main concerns here are
 A system may have a version of the private key stored in non-volatile memory
 (e.g. a disk) and will load it into volatile memory (e.g. RAM) while processing.
 Here, an implementer must ensure that these are always perfectly synchronized
-[MCGREW], meaning that no parts of the system are allowed to read any version of
+{{MCGREW}}, meaning that no parts of the system are allowed to read any version of
 the key during procedures which load, write or modify keys. This can be
 particularly challenging if there are additional abstraction layers present in
 the system, like additional caches which may affect reading/writing the state
@@ -488,7 +487,7 @@ This can happen for instance if a process which issues a signing operation is
 forked, and no proper synchronization is enforced in the implementation to
 guarantee correct state update. Virtual machine (VM) cloning is another
 potential security risk here, as both backing up a VM into non-volatile memory
-or live cloning of a VM can easily lead to a state re-use [MCGREW]. With users
+or live cloning of a VM can easily lead to a state re-use {{MCGREW}}. With users
 shifting workloads to cloud service providers, the issue of VM cloning may
 become more prevalent.
 
@@ -515,19 +514,19 @@ the nonce.
 # Potential Solutions {#pot-sol}
 
 A variety of potential solutions have been proposed both within the
-[SP-800-208] specification, as well as from external sources. This section
+{{SP-800-208}} specification, as well as from external sources. This section
 describes a number of approaches and their potential advantages/disadvantages.
 
 ## Multiple Public Keys (SP-800-208)
 
-The [SP-800-208] proposes generating multiple Stateful HBS keypairs and configuring
+The {{SP-800-208}} proposes generating multiple Stateful HBS keypairs and configuring
 devices and clients to accept signatures created by any of these keys.
 
 This negatively impacts one of the advantages of using Stateful HBS by
 increasing the public key footprint within the client, which can be problematic
 if it has limited public key storage capacity. (Though public keys are typically
 equivalently sized to ECDSA rather than larger classical RSA keys often
-currently found.) [SP-800-208] addresses storage capacity concerns by suggesting
+currently found.) {{SP-800-208}} addresses storage capacity concerns by suggesting
 using a mechanism such as that proposed in {{?RFC8649}} to update the stored
 public key by having the current key endorse the next key that is to be
 installed. Unfortunately, for many constrained devices the public key is
@@ -543,22 +542,22 @@ one would need a standardized format if interoperability is a concern.
 
 ## Distributed Multi-trees (SP-800-208) {#nist-dist-multi-tree}
 
-The [SP-800-208] also proposes creating multiple Stateful HBS keys across multiple
+The {{SP-800-208}} also proposes creating multiple Stateful HBS keys across multiple
 cryptographic modules using a distributed multi-tree approach that is a variant
 of the standard hyper-tree based Stateful HBS schemes HSS and XMSS<sup>MT</sup>. In
 this approach, trees are instantiated on a root device (HSM<sub>root</sub>), as
-well as one or more subordinate devices (HSM<sub>sub\[i\]</sub>), and the root
+well as one or more subordinate devices (HSM<sub>sub\{{i\}}</sub>), and the root
 tree is used to sign the root nodes of the subordinate trees to synthesize a
 multi-level Stateful HBS key. The root device is only ever used to sign subordinate
 device root nodes, while the subordinate device(s) is(are) used to sign
-messages. This is relatively straightforward to do using HSS, and [SP-800-208]
+messages. This is relatively straightforward to do using HSS, and {{SP-800-208}}
 describes the necessary algorithmic modifications when using XMSS<sup>MT</sup>.
 
 One drawback of this approach is the increased signature size as an additional
 OTS needs to be generated, effectively doubling the overall signature size.
 Another concern is the single point of failure nature of relying on the root
 tree module to sign all of the subordinate trees; if the root tree device fails
-then no new subordinate trees can be signed. [SP-800-208] suggested that as
+then no new subordinate trees can be signed. {{SP-800-208}} suggested that as
 many subordinate trees as possible be generated during the initial root key
 generation and subordinate-signing procedure. Unfortunately, this can incur a
 large capital expenditure to procure all of the necessary devices, many of
@@ -569,7 +568,7 @@ subordinate trees to ensure that no malicious signing request is accepted,
 which would effectively give a rogue entity the ability to generate valid
 signatures, thereby undermining the security of the entire system.
 
-The [SP-800-208] also suggests combining distributed multi-trees with multiple
+The {{SP-800-208}} also suggests combining distributed multi-trees with multiple
 root public keys as a means to mitigate some of the concerns regarding having a
 single point of failure in the root tree. However, even if a system operator
 does everything right, use cases with exceptionally long lifetimes of 10-20+
@@ -648,7 +647,7 @@ conflicts, and durability of state across devices. Such approaches require
 strong synchronization, auditability, and appropriate backup mechanisms to
 avoid double-signing or loss of capacity.
 
-A more elaborate variant of key transfer, going beyond what [SP-800-208]
+A more elaborate variant of key transfer, going beyond what {{SP-800-208}}
 allows, can be found described in [](#alt-backup-mgmt) where key transfer is
 accomplished using a two-step export and import process with hash-based
 transfer validation to yield a more robust transfer mechanism.
@@ -677,7 +676,7 @@ multi-tree scheme with a variable number of levels, and hence, variable length
 signatures.
 
 In addition to departing quite significantly from the current Stateful HBS
-specifications and [SP-800-208], this approach has a number of significant
+specifications and {{SP-800-208}}, this approach has a number of significant
 challenges on both the engineering and operational fronts. Firstly, the
 variable length nature of the signature can lead to variable length
 verification of signatures, which may cause significant issues for use cases
@@ -735,7 +734,7 @@ synchronization of clocks. In particular, we identify that at least the
 following engineering-related challenges need to be considered:
 
 - Signing devices must have accurate timekeeping (which is a very challenging
-  engineering problem [XKCD1883], [XKCD2867], [TIMEFALSEHOODS]).
+  engineering problem {{XKCD1883}}, {{XKCD2867}}, {{TIMEFALSEHOODS}}).
 
 - Time on signing devices must not be allowed to ever move backwards, as this
   can cause double-signing.
@@ -791,7 +790,7 @@ considerations.
 
 ## Interval-based Approaches
 
-The State Reservation Strategy described in section 5 of [MCGREW] provides
+The State Reservation Strategy described in section 5 of {{MCGREW}} provides
 another means of managing the state by allowing users to reserve intervals of
 the signing space, marking the interval's associated OTS keys as being used in
 the overall HBS state, which is then written back to non-volatile memory prior
@@ -827,7 +826,7 @@ applicable for single-tree instances such as XMSS and LMS.
 
 
 The strategy presented in this section builds upon the multi-tree variant
-approach from [SP-800-208], and aims to mitigate its limitations described in
+approach from {{SP-800-208}}, and aims to mitigate its limitations described in
 [](#nist-dist-multi-tree).  Thus, it is assumed that already a top-level Merkle
 tree (for signing the root-nodes of sub-trees) and several bottom-level Merkle
 trees (for signing messages) are initiated.  These bottom-level trees may be
@@ -838,7 +837,7 @@ is assumed that R + 1 is strictly smaller than 2<sup>h<sub>0</sub></sup>, the
 number of leaves of the top-level tree.
 
 In this new strategy, after the completed key generation procedure from the
-multi-tree variant approach from [SP-800-208], further bottom-level trees are
+multi-tree variant approach from {{SP-800-208}}, further bottom-level trees are
 generated, one by one, in one of the hardware modules.  These new  bottom-level
 trees are each generated from a different seed, which is chosen uniformly at
 random.  For the sake of clarity, let us introduce some notation:
@@ -876,7 +875,7 @@ indices belong to I<sub>new</sub>) are only used in order to guarantee
 availability in the _worst-case scenario_, where at the same time both
 
 - none of the R bottom-level Merkle trees (which were generated according to
-  the multi-tree variant approach from [SP-800-208]) are available for signing
+  the multi-tree variant approach from {{SP-800-208}}) are available for signing
   messages and
 
 - the top-level Merkle tree (which is used for signing the root-nodes of
@@ -915,7 +914,7 @@ signature over the complete tree.
 # Security Considerations
 
 Further security considerations, which are not already covered in this
-document, are given in [SP-800-208], [MCGREW], [FIPS205], {{?RFC8391}} and
+document, are given in {{SP-800-208}}, {{MCGREW}}, {{FIPS205}}, {{?RFC8391}} and
 {{?RFC8554}}.
 
 
