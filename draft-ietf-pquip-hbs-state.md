@@ -257,14 +257,12 @@ scenarios, this will only be possible when using purpose-designed hardware, such
 as hardware-security modules.
 
 
-# Conventions and Definitions
+# Specific Terminology in the Context of Stateful HBS
 
-## Specific Terminology in the Context of Stateful HBS
-
-In this subsection we specify certain notions which are important in the
+In this section we specify certain notions which are important in the
 context of Stateful HBS.
 
-### Private Key Components
+## Private Key Components
 
 private key
 : the static, long-lived secret(s) from which OTS private keys are derived.
@@ -283,7 +281,7 @@ implementations, these two components may be packaged together and not directly
 separable; in such cases, this document’s guidance applies to the combined
 artifact.
 
-### State Management
+## State Management
 
 In this document _state management_ refers to the handling and implementation
 of the state of the private key.
@@ -308,7 +306,7 @@ mechanisms such as, e.g., puncturable schemes [BSW16], the state and private
 key might be inseparable. However, even in these scenarios, this document's
 guidance should still apply.
 
-### Backup Management
+## Backup Management
 
 In order to mitigate failure of, e.g., devices storing key material and to
 facilitate other types of disaster recovery, backups of private keys and their
@@ -332,7 +330,7 @@ These mechanisms include procedures and protocols, which aim:
 Backup management can be viewed as a more specific type of state management; we
 make this distinction to clarify the aims of our recommendations.
 
-### Key Export, Key Import and Key Transfer {#keymovement}
+## Key Export, Key Import and Key Transfer {#keymovement}
 
 As part of state and backup management, we will discuss mechanisms to export,
 import or transfer private key and state material. In order to avoid
