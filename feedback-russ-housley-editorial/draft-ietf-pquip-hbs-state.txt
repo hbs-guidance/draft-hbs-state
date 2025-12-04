@@ -28,13 +28,13 @@ Abstract
    OTS keys have been used, as double-signing with the same OTS key
    allows forgeries.
 
-   This document provides guidance and documents security considerations
+   This document provides guidance and catalogs security considerations
    for the operational and technical aspects of deploying systems that
    rely on Stateful HBS.  Management of the state of the Stateful HBS,
    including any handling of redundant key material, is a sensitive
-   topic, and we discuss some approaches to handle the associated
-   challenges.  We also describe the challenges that need to be resolved
-   before certain approaches should be considered.
+   topic.  This document describes some approaches to handle the
+   associated challenges.  It also describes the challenges that need to
+   be resolved before certain approaches should be considered.
 
 About This Document
 
