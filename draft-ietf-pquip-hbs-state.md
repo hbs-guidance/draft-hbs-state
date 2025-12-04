@@ -155,18 +155,6 @@ informative:
       - ins: D. Van Geest
       - ins: S. Kousidis
 
-  XKCD2867:
-    target: https://xkcd.com/2867/
-    title: "xkcd: DateTime"
-    author:
-      - ins: R. Munroe
-
-  XKCD1883:
-    target: https://xkcd.com/1883/
-    title: "xkcd: Timezones"
-    author:
-      - ins: R. Munroe
-
   TIMEFALSEHOODS:
     target: https://gist.github.com/timvisee/fcda9bbdff88d45cc9061606b4b923ca
     title: "Falsehoods programmers believe about time"
@@ -734,7 +722,7 @@ synchronization of clocks. In particular, we identify that at least the
 following engineering-related challenges need to be considered:
 
 - Signing devices must have accurate timekeeping (which is a very challenging
-  engineering problem {{XKCD1883}}, {{XKCD2867}}, {{TIMEFALSEHOODS}}).
+  engineering problem [TIMEFALSEHOODS]).
 
 - Time on signing devices must not be allowed to ever move backwards, as this
   can cause double-signing.
