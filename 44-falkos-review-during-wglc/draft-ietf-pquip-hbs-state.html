@@ -1422,7 +1422,7 @@ of the state of the private key.<a href="#section-2.1.2-1" class="pilcrow">¶</a
 <p id="section-2.1.2-2">This includes mechanisms, which aim:<a href="#section-2.1.2-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-2.1.2-3.1">
-              <p id="section-2.1.2-3.1.1">to securely update the state after each signature,<a href="#section-2.1.2-3.1.1" class="pilcrow">¶</a></p>
+              <p id="section-2.1.2-3.1.1">to securely update the state before the signature is released,<a href="#section-2.1.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
             <li class="normal" id="section-2.1.2-3.2">
               <p id="section-2.1.2-3.2.1">to set up Stateful HBS with a split state and/or private key, so that signatures can
@@ -1440,10 +1440,12 @@ material,<a href="#section-2.1.2-3.4.1" class="pilcrow">¶</a></p>
 the lifetime of the key.<a href="#section-2.1.2-3.5.1" class="pilcrow">¶</a></p>
 </li>
           </ul>
-<p id="section-2.1.2-4">Note that in particular implementations of Stateful HBS, or in alternative signature
-mechanisms such as, e.g., puncturable schemes <span>[<a href="#BSW16" class="cite xref">BSW16</a>]</span>, the state and private
-key might be inseparable. However, even in these scenarios, this document's
-guidance should still apply.<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
+<p id="section-2.1.2-4">Note that in particular implementations of Stateful HBS, or in alternative
+signature mechanisms, the state and private key might be inseparable. For
+example, puncturable schemes <span>[<a href="#BSW16" class="cite xref">BSW16</a>]</span> represent such an alternative; they are
+research-level constructions and are not currently standardized or deployed in
+practice. However, even in these scenarios, this document's guidance should
+still apply.<a href="#section-2.1.2-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="backup-management">
