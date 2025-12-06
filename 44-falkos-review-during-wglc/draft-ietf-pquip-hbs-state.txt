@@ -373,7 +373,7 @@ Table of Contents
    threshold, M, which is triggered when M signatures remain.  When the
    number of available signatures reaches this threshold, the system
    should return a signatures nearing exhaustion warning.  This warning
-   condition SHOULD require explicit acknowledgment from the user
+   condition should require explicit acknowledgment from the user
    through a mechanism that cannot be trivially skipped.
 
    Another important consideration in deploying stateful hash-based
