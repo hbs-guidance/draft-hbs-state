@@ -634,7 +634,7 @@ two devices may be merged to reconstruct or continue signature operations.
 These operations carry risk: ensuring no overlap in used indices, ensuring
 atomicity of transfer/merge operations, managing consistency, possible
 conflicts, and durability of state across devices. Such approaches require
-strong synchronization, auditability, and appropriate backup mechanisms to
+robust synchronization, auditability, and appropriate backup mechanisms to
 avoid double-signing or loss of capacity.
 
 A more elaborate variant of key transfer, going beyond what {{SP-800-208}}
