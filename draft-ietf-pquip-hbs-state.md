@@ -279,7 +279,7 @@ of the state of the private key.
 
 This includes mechanisms, which aim:
 
-- to securely update the state after each signature,
+- to securely update the state before the signature is released,
 
 - to set up Stateful HBS with a split state and/or private key, so that signatures can
   be generated from either part without risk of state reuse,
@@ -292,10 +292,12 @@ This includes mechanisms, which aim:
 - to guarantee the availability of both the private key and its state across
   the lifetime of the key.
 
-Note that in particular implementations of Stateful HBS, or in alternative signature
-mechanisms such as, e.g., puncturable schemes {{BSW16}}, the state and private
-key might be inseparable. However, even in these scenarios, this document's
-guidance should still apply.
+Note that in particular implementations of Stateful HBS, or in alternative
+signature mechanisms, the state and private key might be inseparable. For
+example, puncturable schemes {{BSW16}} represent such an alternative; they are
+research-level constructions and are not currently standardized or deployed in
+practice. However, even in these scenarios, this document's guidance should
+still apply.
 
 ## Backup Management
 
@@ -739,7 +741,7 @@ following engineering-related challenges need to be considered:
   before state changes have been recorded.
 
 - A system should be robust against exhaustion of the number of signatures
-  available in a time window, as in this case it is REQUIRED to wait until the
+  available in a time window, as in this case it is required to wait until the
   next time window starts before new messages can be signed.
 
 - Time on signing devices should not be allowed to be moved forward maliciously
