@@ -436,8 +436,8 @@ updating the state.
 
 State management systems should satisfy all _ACID_ properties:
 
-- _Atomicity_: each operation must be indivisible — either the signature is
-  generated and the state is updated together, or neither occurs.
+- _Atomicity_: each operation on the state must be indivisible — such that it
+  either commits completely or leaves the state unchanged.
 
 - _Consistency_: the state before and after each update must reflect a valid
   progression of available OTS indices, and no invalid or conflicting state is
@@ -447,7 +447,7 @@ State management systems should satisfy all _ACID_ properties:
   processes or devices) must not interfere in ways that could lead to state
   reuse.
 
-- _Durability_: once a state transition (e.g., after issuing a signature) is
+- _Durability_: once a state transition (e.g., before issuing a signature) is
   committed, that transition must survive crashes, power loss, or device
   failure.
 
@@ -461,10 +461,7 @@ main concerns here are
 
 - how it is modified,
 
-- how an accidental/intentional failure/glitch might affect the state security,
-  and
-
-- cloning.
+- how an accidental/intentional failure/glitch might affect the state security.
 
 A system may have a version of the private key stored in non-volatile memory
 (e.g. a disk) and will load it into volatile memory (e.g. RAM) while processing.
