@@ -1607,8 +1607,8 @@ updating the state.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">State management systems <span class="bcp14">SHOULD</span> satisfy all <em>ACID</em> properties:<a href="#section-4-2" class="pilcrow">¶</a></p>
 <ul class="normal">
 <li class="normal" id="section-4-3.1">
-          <p id="section-4-3.1.1"><em>Atomicity</em>: each operation must be indivisible — either the signature is
-generated and the state is updated together, or neither occurs.<a href="#section-4-3.1.1" class="pilcrow">¶</a></p>
+          <p id="section-4-3.1.1"><em>Atomicity</em>: each operation on the state must be indivisible — such that it
+either commits completely or leaves the state unchanged.<a href="#section-4-3.1.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-3.2">
           <p id="section-4-3.2.1"><em>Consistency</em>: the state before and after each update must reflect a valid
@@ -1621,7 +1621,7 @@ processes or devices) must not interfere in ways that could lead to state
 reuse.<a href="#section-4-3.3.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-3.4">
-          <p id="section-4-3.4.1"><em>Durability</em>: once a state transition (e.g., after issuing a signature) is
+          <p id="section-4-3.4.1"><em>Durability</em>: once a state transition (e.g., before issuing a signature) is
 committed, that transition must survive crashes, power loss, or device
 failure.<a href="#section-4-3.4.1" class="pilcrow">¶</a></p>
 </li>
@@ -1639,11 +1639,7 @@ main concerns here are<a href="#section-4-4" class="pilcrow">¶</a></p>
           <p id="section-4-5.2.1">how it is modified,<a href="#section-4-5.2.1" class="pilcrow">¶</a></p>
 </li>
         <li class="normal" id="section-4-5.3">
-          <p id="section-4-5.3.1">how an accidental/intentional failure/glitch might affect the state security,
-and<a href="#section-4-5.3.1" class="pilcrow">¶</a></p>
-</li>
-        <li class="normal" id="section-4-5.4">
-          <p id="section-4-5.4.1">cloning.<a href="#section-4-5.4.1" class="pilcrow">¶</a></p>
+          <p id="section-4-5.3.1">how an accidental/intentional failure/glitch might affect the state security.<a href="#section-4-5.3.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 <p id="section-4-6">A system may have a version of the private key stored in non-volatile memory
