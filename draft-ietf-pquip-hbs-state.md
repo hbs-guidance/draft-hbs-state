@@ -509,7 +509,7 @@ describes a number of approaches and their potential advantages/disadvantages.
 
 ## Multiple Public Keys (SP-800-208)
 
-The {{SP-800-208}} proposes generating multiple Stateful HBS keypairs and configuring
+{{SP-800-208}} proposes generating multiple Stateful HBS keypairs and configuring
 devices and clients to accept signatures created by any of these keys.
 
 This negatively impacts one of the advantages of using Stateful HBS by
@@ -532,7 +532,7 @@ one would need a standardized format if interoperability is a concern.
 
 ## Distributed Multi-trees (SP-800-208) {#nist-dist-multi-tree}
 
-The {{SP-800-208}} also proposes creating multiple Stateful HBS keys across multiple
+{{SP-800-208}} also proposes creating multiple Stateful HBS keys across multiple
 cryptographic modules using a distributed multi-tree approach that is a variant
 of the standard hyper-tree based Stateful HBS schemes HSS and XMSS<sup>MT</sup>. In
 this approach, trees are instantiated on a root device (HSM<sub>root</sub>), as
@@ -558,7 +558,7 @@ subordinate trees to ensure that no malicious signing request is accepted,
 which would effectively give a rogue entity the ability to generate valid
 signatures, thereby undermining the security of the entire system.
 
-The {{SP-800-208}} also suggests combining distributed multi-trees with multiple
+{{SP-800-208}} also suggests combining distributed multi-trees with multiple
 root public keys as a means to mitigate some of the concerns regarding having a
 single point of failure in the root tree. However, even if a system operator
 does everything right, use cases with exceptionally long lifetimes of 10-20+
