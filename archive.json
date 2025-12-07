@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-10-09T00:40:33.850368+00:00",
+  "timestamp": "2025-12-07T00:51:28.134192+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -377,7 +377,7 @@
       "id": "I_kwDOLPgbFM7Gw_TK",
       "title": "Scope: speeding up signing?",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/28",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
@@ -386,8 +386,8 @@
       ],
       "body": "Scott Fluhrer helpfully suggested providing text for speeding up signing: \n\n> One thing I\u2019m not sure about: there are some clever ways to speed up the signing process (by storing some of the intermediate nodes of the Merkle tree, and use those nodes to help generate the authentication path), and that may interact with the state management.  I know of four such techniques, each of which is \u201cbest\u201d by some criteria, and some of which update which nodes are stored during each signature, and one which does not (which ends up using more storage and require more hashes to sign, but also avoid issues with updating the nodes along with the state).  To what extent should this draft address this?  I should be the one to contribute text, should you decide it should be appropriate (although I would like some guidelines as to how thorough I should be \u2013 I could go one for quite some time\u2026)\n\nThe question is do we think this fits in scope? It may be a bit too \"implementation\" side",
       "createdAt": "2025-08-19T15:04:44Z",
-      "updatedAt": "2025-10-08T03:18:23Z",
-      "closedAt": null,
+      "updatedAt": "2025-12-04T13:46:47Z",
+      "closedAt": "2025-12-04T13:46:46Z",
       "comments": [
         {
           "author": "fluppe2",
@@ -446,6 +446,67 @@
       "updatedAt": "2025-09-29T07:03:37Z",
       "closedAt": "2025-09-29T07:03:37Z",
       "comments": []
+    },
+    {
+      "number": 44,
+      "id": "I_kwDOLPgbFM7cm1La",
+      "title": "Falkos review during WGLC",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/44",
+      "state": "OPEN",
+      "author": "fluppe2",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [
+        "fluppe2"
+      ],
+      "labels": [],
+      "body": "See:\n\n- https://mailarchive.ietf.org/arch/msg/pqc/BDAo2GCOe73vHK2AZYHYRFYKEOU/\n- https://mailarchive.ietf.org/arch/msg/pqc/R8FJ485gWAOgXVb7xqOKnudF4y0/\n\nTasks:\n\n- [x] (T1) Section 2.1.1. Privat Key Components\n\n  - is lacking an introductionary sentence, it starts with an itemize right away.\n\n  - \u201d the private key is a static secret\u201d. It should be mentioned that this is only a conceptional view. In actual implementations, the state of the OTS generator may well change with each signature.\n\n- [x] (T2) Section 2.1.2. State Management\n\n  - \u201cto securely update the state after each signature,\u201d This sentence could be read as describing an insecure state update and should be changed to definitely describing a secure state update.\n\n  - \u201csuch as, e.g.,\u201d language: seems to redundantly introduce the example\n\n  - \u201cpuncturable schemes [BSW16],\u201d This technology is not properly introduced in the draft. It should also be made clear whether this references a deployable technology or research that in the future might become deployable technology. Further, I suggest it should be at least outlined how this concept relates to SHBS and the prescriptions of this draft or left completely aside.\n\n- [x] (T3) Section 3. Operational Considerations\n\n  * A paragraph in this section states \u201cIn addition to the state management, implementers MAY consider to implement mechanisms to prevent abrupt signature exhaustion\u201d and then \u201cThis warning condition SHOULD require explicit acknowledgment from the user\u201d. I\u2019d say that the \u201cSHOULD\u201d is inappropriate since the whole mechanism is under \u201cMAY\u201d. I couldn\u2019t figure out what I should understand from this \u201cSHOULD\u201d if I am anyway free to not implement said mechanism of not, due to the \u201cMAY\u201d. So I would prefer to change the \u201cSHOULD\u201d to \u201cMAY\u201d as well.\n\n- [x] (T4) Section 4. Requirements for Secure State Management\n\n  *  \u201cAtomicity: each operation must be indivisible \u2014 either the signature is generated and the state is updated together, or neither\n    occurs.\u201d I see that it is necessary to prevent the release of a signature without state update, but I don\u2019t see why it would be necessary to prevent state update without releasing a signature. I claim that \u201csignature is generated\u201d is not an appropriate concept in any case. Even if the device would internally generate a signature together atomically with the state update, that would not be observable on the outside. If the device is reset after the generation, the state update would persist (as it has to for the operation to be secure) but the signature would be lost before it can be output. I think this statement should be rendered to appropriately describe observable behaviour of the system and thus effectively require state update before signature release and not more.\n\n  * \u201cThe main concerns here are [\u2026] how an accidental/intentional failure/glitch might affect the state security, and cloning.\u201d I don\u2019t understand the final part of the sentence \u201cand cloning\u201d. What is meant exactly how \u201ccloning\u201d is affected? What kind of cloning is considered here?\n\n- [x] (T5) Section 5.2. Distributed Multi-trees (SP-800-208)\n\n  * \u201cThe [SP-800-208]\u201d \u2013 remove \u201cThe\u201d (multiple instances)\n\n- [x] (T6) Section 5.4. Key/State Transfer\n\n  * Please explain what \u201cstrong synchronization\u201d is exactly defining, specifically what the word \u201cstrong\u201d adds to bare \u201csynchronization\u201d.\n\n- [ ] (T7) Section 5.6. Variable-length Signature Chains\n\n  * I don\u2019t understand the conclusion about variable length chains given in this section. Is there a way to realize a cryptographic sound solution? If yes, please describe, reference, or outline it. If not, the text should say so explicitly.\n\n  * In my view the explanation given in this section starting with \u201cFrom an operational perspective, the ability of a subordinate tree to sign \neither messages or new subordinate trees leads to severe security implications [\u2026]\u201d is not adequate as it doesn\u2019t clearly answer this \nessential question.\n\n- [ ] (T8) Section 7. Security Considerations\n\n  * The text in this section should state that security considerations are given throughout the document.\n\n- [ ] (T9) General (and in particular Section 2.1.2., 5.6.)\n\n  * After giving it some more thought, I have general concerns about addressing non-standard cryptographic schemes in this draft. Besides the above topic, this also applies to the reference [BSW16]. My suggestion would be to remove these two references (and others if I should have overlooked them) to research topics or non-standard cryptographic schemes. If the authors consider mentioning these reference as necessary for some reason, that should be done by clearly pointing out that those topics are addressed as potential future technologies. However, I would still have concerns in this case, as it seems impossible to predict how currently non-standard cryptographic ideas might end up as standards. I do not see how the reader of this draft will benefit from such vague references to potential future technologies. I rather see the risk of mismatches, wrong interpretations, and the unintentional facilitation of justifications of the use of non-standard cryptographic schemes.",
+      "createdAt": "2025-12-06T06:26:28Z",
+      "updatedAt": "2025-12-06T07:48:27Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Task (T1):\n\n* Fixed lacking introductory sentence in Section 2.1.1.\n\n* Looking at the second comment on \"the private key is a static secret\u201d and the \"state of the OTS generator\" it seems that it has been overlooked that this section exactly explains that difference, and that this has already been addressed.",
+          "createdAt": "2025-12-06T07:08:23Z",
+          "updatedAt": "2025-12-06T07:08:23Z"
+        },
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Task (T2):\n\n* Turned \"after signature\" into \"before signature release\"\n* Got rid of \"such as, e.g.\" and made clear that those schemes are only a research-class example, in particular neither standardized nor deployed.",
+          "createdAt": "2025-12-06T07:22:16Z",
+          "updatedAt": "2025-12-06T07:22:16Z"
+        },
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Task (T3):\n\n* Turned the questioned \"SHOULD\" into non-normative \"should\" to indicate that this is guidance and not a requirement.",
+          "createdAt": "2025-12-06T07:28:17Z",
+          "updatedAt": "2025-12-06T07:28:17Z"
+        },
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Task (T4):\n\n* Altered \"Atomicit\" to correctly refer to the state update mechanism.\n* Removed \"and cloning\" as it seems to have been an artefact in that list.\n\nFurthermore:\n* Fixed \"Durability\": turned \"after\" into \"before\" to be consistent with the change in Section 2.1.2 due to task (T2).",
+          "createdAt": "2025-12-06T07:39:55Z",
+          "updatedAt": "2025-12-06T07:39:55Z"
+        },
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Task (T5):\n \n* Fixed in Section 5.2 and throughout document.",
+          "createdAt": "2025-12-06T07:45:24Z",
+          "updatedAt": "2025-12-06T07:45:24Z"
+        },
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Task (T6):\n\n* Clarified \"strong sync.\" -> \"robust sync.\". \"Robust\" is terminology used throughout the document.",
+          "createdAt": "2025-12-06T07:48:27Z",
+          "updatedAt": "2025-12-06T07:48:27Z"
+        }
+      ]
     }
   ],
   "pulls": [
@@ -2160,6 +2221,191 @@
               "updatedAt": "2025-10-07T09:26:29Z"
             }
           ]
+        }
+      ]
+    },
+    {
+      "number": 41,
+      "id": "PR_kwDOLPgbFM63EUJY",
+      "title": "Address feedback from Russ Housley: No longer use BCP 14 language",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/41",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "We were using the BCP 14 boilerplate basically because it was in the IETF  template.  \n\nThis PR removes it, though I will note that nobody so far noted it. I honestly don't know what the exact cutoff is. RFC 2119, section 6, says it MUST only be used for interoperability hazards, so I guess that supports that BCP14 keywords do not apply here (most of our uses are security concerns).",
+      "createdAt": "2025-12-04T13:20:03Z",
+      "updatedAt": "2025-12-05T06:57:40Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "8e6596bd27df98a584c953dc29ec492256bb5bb9",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "feedback-russ-bcp14-language",
+      "headRefOid": "b5c8955e76dc1a2aa8733a5da8ff77f8de3472b3",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7TA0Ew",
+          "commit": {
+            "abbreviatedOid": "b5c8955"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Looks good to me. Thanks for making the necessary changes!",
+          "createdAt": "2025-12-04T14:03:49Z",
+          "updatedAt": "2025-12-04T14:03:49Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7TM2pk",
+          "commit": {
+            "abbreviatedOid": "b5c8955"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "I am happy that Russ looked at the draft with great care. His comments are very valuable. Thank you, Thom, for your efforts.",
+          "createdAt": "2025-12-05T06:57:40Z",
+          "updatedAt": "2025-12-05T06:57:40Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 42,
+      "id": "PR_kwDOLPgbFM63EnFb",
+      "title": "Address Russ Housley's editorial remarks",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/42",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Thanks Russ!",
+      "createdAt": "2025-12-04T13:38:49Z",
+      "updatedAt": "2025-12-05T12:38:33Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "8e6596bd27df98a584c953dc29ec492256bb5bb9",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "feedback-russ-housley-editorial",
+      "headRefOid": "a35ae6e5397c0f89009cf57cf4fd3b73fd33decd",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7TBShQ",
+          "commit": {
+            "abbreviatedOid": "a35ae6e"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Looks good to me. Thanks for making the changes!",
+          "createdAt": "2025-12-04T14:31:45Z",
+          "updatedAt": "2025-12-04T14:31:45Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7TMzf1",
+          "commit": {
+            "abbreviatedOid": "a35ae6e"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "+1",
+          "createdAt": "2025-12-05T06:51:12Z",
+          "updatedAt": "2025-12-05T06:51:12Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7TRkmL",
+          "commit": {
+            "abbreviatedOid": "a35ae6e"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM",
+          "createdAt": "2025-12-05T12:38:33Z",
+          "updatedAt": "2025-12-05T12:38:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 43,
+      "id": "PR_kwDOLPgbFM63EsQb",
+      "title": "Remove XKCDs about time and programmers",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/43",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Russ Housley acknowledges that they are funny argues that perhaps these are not appropriate to use as informal references in an XKCD. \n\nI do think they're funny. They've certainly been useful in e.g. slides in the discussions leading up to this moment. \nBut perhaps the time has come for them to disappear from this document. \n\nPlease voice opinions for or against in this PR or on list.",
+      "createdAt": "2025-12-04T13:44:07Z",
+      "updatedAt": "2025-12-05T12:36:33Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "8e6596bd27df98a584c953dc29ec492256bb5bb9",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "controversial-remove-xkcds",
+      "headRefOid": "40aaeb6d5bfc7119afc387abfb51f7908eeeb3a0",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7TBDcq",
+          "commit": {
+            "abbreviatedOid": "40aaeb6"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "I'm sad to see it go, but I think Russ is right.\r\nThat being said, we should definitely continue to use XKCD as much as possible in presentations and the like as a little irreverence can go a long way to help explain/motivate design choices! ;-) ",
+          "createdAt": "2025-12-04T14:17:51Z",
+          "updatedAt": "2025-12-04T14:17:51Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7TM1Gs",
+          "commit": {
+            "abbreviatedOid": "40aaeb6"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "I agree that it is time to say good by to the comics. At least we know that the wisdom they echoed is still inside. ",
+          "createdAt": "2025-12-05T06:54:29Z",
+          "updatedAt": "2025-12-05T06:54:29Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7TRik2",
+          "commit": {
+            "abbreviatedOid": "40aaeb6"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-12-05T12:36:33Z",
+          "updatedAt": "2025-12-05T12:36:33Z",
+          "comments": []
         }
       ]
     }
