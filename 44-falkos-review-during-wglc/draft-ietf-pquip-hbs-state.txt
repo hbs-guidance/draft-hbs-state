@@ -927,9 +927,10 @@ Table of Contents
 
 7.  Security Considerations
 
-   Further security considerations, which are not already covered in
-   this document, are given in [SP-800-208], [MCGREW], [FIPS205],
-   [RFC8391] and [RFC8554].
+   Security considerations are given throughout this document.  Further
+   security considerations, which are not already covered in this
+   document, are given in [SP-800-208], [MCGREW], [FIPS205], [RFC8391]
+   and [RFC8554].
 
 8.  IANA Considerations
 
