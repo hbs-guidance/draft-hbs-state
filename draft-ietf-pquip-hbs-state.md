@@ -657,13 +657,14 @@ keys cannot be updated due to engineering constraints or security reasons.
 
 ## Variable-length Signature Chains
 
-A variant of the key rotation approach is to simply have an available signing
+A variant of the key rotation approach is to have an available signing
 tree endorse a new subordinate tree when it is about to become exhausted (e.g.,
 use its final OTS to sign the root node of a new subordinate tree, creating a
 {n+1}-layer multi-tree from an {n}-layer multi-tree). This process can in
 theory be repeated as many times as necessary. However, this entails having a
 multi-tree scheme with a variable number of levels, and hence, variable length
-signatures.
+signatures. Such dynamically extensible constructions are research-class and
+are not currently standardized or deployed.
 
 In addition to departing quite significantly from the current Stateful HBS
 specifications and {{SP-800-208}}, this approach has a number of significant
