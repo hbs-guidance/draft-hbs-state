@@ -1065,7 +1065,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wiggers, et al.</td>
-<td class="center">Expires 9 June 2026</td>
+<td class="center">Expires 10 June 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1078,12 +1078,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-pquip-hbs-state-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-12-06" class="published">6 December 2025</time>
+<time datetime="2025-12-07" class="published">7 December 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-06-09">9 June 2026</time></dd>
+<dd class="expires"><time datetime="2026-06-10">10 June 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1160,7 +1160,7 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 9 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 June 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1846,13 +1846,14 @@ keys cannot be updated due to engineering constraints or security reasons.<a hre
         <h3 id="name-variable-length-signature-c">
 <a href="#section-5.6" class="section-number selfRef">5.6. </a><a href="#name-variable-length-signature-c" class="section-name selfRef">Variable-length Signature Chains</a>
         </h3>
-<p id="section-5.6-1">A variant of the key rotation approach is to simply have an available signing
+<p id="section-5.6-1">A variant of the key rotation approach is to have an available signing
 tree endorse a new subordinate tree when it is about to become exhausted (e.g.,
 use its final OTS to sign the root node of a new subordinate tree, creating a
 {n+1}-layer multi-tree from an {n}-layer multi-tree). This process can in
 theory be repeated as many times as necessary. However, this entails having a
 multi-tree scheme with a variable number of levels, and hence, variable length
-signatures.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
+signatures. Such dynamically extensible constructions are research-class and
+are not currently standardized or deployed.<a href="#section-5.6-1" class="pilcrow">¶</a></p>
 <p id="section-5.6-2">In addition to departing quite significantly from the current Stateful HBS
 specifications and <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span>, this approach has a number of significant
 challenges on both the engineering and operational fronts. Firstly, the
@@ -1865,7 +1866,7 @@ as the rigor around authorizing those two types of operations will vary
 dramatically, leading to either a much more onerous message signing operation,
 or a much more risky subordinate tree signing operation. This may put the
 system operator in an untenable situation where no users are satisfied with the
-resulting solution, and hence, <span class="bcp14">SHOULD NOT</span> be considered as a viable solution.<a href="#section-5.6-2" class="pilcrow">¶</a></p>
+resulting solution, and hence, <span class="bcp14">MUST NOT</span> be considered as a viable solution.<a href="#section-5.6-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="pre-assigning-states">

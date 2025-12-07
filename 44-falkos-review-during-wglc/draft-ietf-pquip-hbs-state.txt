@@ -5,14 +5,14 @@
 Post-Quantum Use In Protocols                                 T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 9 June 2026                                                 BSI
+Expires: 10 June 2026                                                BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                         6 December 2025
+                                                         7 December 2025
 
 
            Hash-based Signatures: State and Backup Management
@@ -68,7 +68,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 9 June 2026.
+   This Internet-Draft will expire on 10 June 2026.
 
 Copyright Notice
 
@@ -653,14 +653,15 @@ Table of Contents
 
 5.6.  Variable-length Signature Chains
 
-   A variant of the key rotation approach is to simply have an available
+   A variant of the key rotation approach is to have an available
    signing tree endorse a new subordinate tree when it is about to
    become exhausted (e.g., use its final OTS to sign the root node of a
    new subordinate tree, creating a {n+1}-layer multi-tree from an {n}-
    layer multi-tree).  This process can in theory be repeated as many
    times as necessary.  However, this entails having a multi-tree scheme
    with a variable number of levels, and hence, variable length
-   signatures.
+   signatures.  Such dynamically extensible constructions are research-
+   class and are not currently standardized or deployed.
 
    In addition to departing quite significantly from the current
    Stateful HBS specifications and [SP-800-208], this approach has a
@@ -676,7 +677,7 @@ Table of Contents
    onerous message signing operation, or a much more risky subordinate
    tree signing operation.  This may put the system operator in an
    untenable situation where no users are satisfied with the resulting
-   solution, and hence, SHOULD NOT be considered as a viable solution.
+   solution, and hence, MUST NOT be considered as a viable solution.
 
 5.7.  Pre-assigning States
 
