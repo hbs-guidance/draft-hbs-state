@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-12-07T00:51:28.134192+00:00",
+  "timestamp": "2025-12-09T00:45:08.985163+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -459,9 +459,9 @@
         "fluppe2"
       ],
       "labels": [],
-      "body": "See:\n\n- https://mailarchive.ietf.org/arch/msg/pqc/BDAo2GCOe73vHK2AZYHYRFYKEOU/\n- https://mailarchive.ietf.org/arch/msg/pqc/R8FJ485gWAOgXVb7xqOKnudF4y0/\n\nTasks:\n\n- [x] (T1) Section 2.1.1. Privat Key Components\n\n  - is lacking an introductionary sentence, it starts with an itemize right away.\n\n  - \u201d the private key is a static secret\u201d. It should be mentioned that this is only a conceptional view. In actual implementations, the state of the OTS generator may well change with each signature.\n\n- [x] (T2) Section 2.1.2. State Management\n\n  - \u201cto securely update the state after each signature,\u201d This sentence could be read as describing an insecure state update and should be changed to definitely describing a secure state update.\n\n  - \u201csuch as, e.g.,\u201d language: seems to redundantly introduce the example\n\n  - \u201cpuncturable schemes [BSW16],\u201d This technology is not properly introduced in the draft. It should also be made clear whether this references a deployable technology or research that in the future might become deployable technology. Further, I suggest it should be at least outlined how this concept relates to SHBS and the prescriptions of this draft or left completely aside.\n\n- [x] (T3) Section 3. Operational Considerations\n\n  * A paragraph in this section states \u201cIn addition to the state management, implementers MAY consider to implement mechanisms to prevent abrupt signature exhaustion\u201d and then \u201cThis warning condition SHOULD require explicit acknowledgment from the user\u201d. I\u2019d say that the \u201cSHOULD\u201d is inappropriate since the whole mechanism is under \u201cMAY\u201d. I couldn\u2019t figure out what I should understand from this \u201cSHOULD\u201d if I am anyway free to not implement said mechanism of not, due to the \u201cMAY\u201d. So I would prefer to change the \u201cSHOULD\u201d to \u201cMAY\u201d as well.\n\n- [x] (T4) Section 4. Requirements for Secure State Management\n\n  *  \u201cAtomicity: each operation must be indivisible \u2014 either the signature is generated and the state is updated together, or neither\n    occurs.\u201d I see that it is necessary to prevent the release of a signature without state update, but I don\u2019t see why it would be necessary to prevent state update without releasing a signature. I claim that \u201csignature is generated\u201d is not an appropriate concept in any case. Even if the device would internally generate a signature together atomically with the state update, that would not be observable on the outside. If the device is reset after the generation, the state update would persist (as it has to for the operation to be secure) but the signature would be lost before it can be output. I think this statement should be rendered to appropriately describe observable behaviour of the system and thus effectively require state update before signature release and not more.\n\n  * \u201cThe main concerns here are [\u2026] how an accidental/intentional failure/glitch might affect the state security, and cloning.\u201d I don\u2019t understand the final part of the sentence \u201cand cloning\u201d. What is meant exactly how \u201ccloning\u201d is affected? What kind of cloning is considered here?\n\n- [x] (T5) Section 5.2. Distributed Multi-trees (SP-800-208)\n\n  * \u201cThe [SP-800-208]\u201d \u2013 remove \u201cThe\u201d (multiple instances)\n\n- [x] (T6) Section 5.4. Key/State Transfer\n\n  * Please explain what \u201cstrong synchronization\u201d is exactly defining, specifically what the word \u201cstrong\u201d adds to bare \u201csynchronization\u201d.\n\n- [ ] (T7) Section 5.6. Variable-length Signature Chains\n\n  * I don\u2019t understand the conclusion about variable length chains given in this section. Is there a way to realize a cryptographic sound solution? If yes, please describe, reference, or outline it. If not, the text should say so explicitly.\n\n  * In my view the explanation given in this section starting with \u201cFrom an operational perspective, the ability of a subordinate tree to sign \neither messages or new subordinate trees leads to severe security implications [\u2026]\u201d is not adequate as it doesn\u2019t clearly answer this \nessential question.\n\n- [ ] (T8) Section 7. Security Considerations\n\n  * The text in this section should state that security considerations are given throughout the document.\n\n- [ ] (T9) General (and in particular Section 2.1.2., 5.6.)\n\n  * After giving it some more thought, I have general concerns about addressing non-standard cryptographic schemes in this draft. Besides the above topic, this also applies to the reference [BSW16]. My suggestion would be to remove these two references (and others if I should have overlooked them) to research topics or non-standard cryptographic schemes. If the authors consider mentioning these reference as necessary for some reason, that should be done by clearly pointing out that those topics are addressed as potential future technologies. However, I would still have concerns in this case, as it seems impossible to predict how currently non-standard cryptographic ideas might end up as standards. I do not see how the reader of this draft will benefit from such vague references to potential future technologies. I rather see the risk of mismatches, wrong interpretations, and the unintentional facilitation of justifications of the use of non-standard cryptographic schemes.",
+      "body": "See:\n\n- https://mailarchive.ietf.org/arch/msg/pqc/BDAo2GCOe73vHK2AZYHYRFYKEOU/\n- https://mailarchive.ietf.org/arch/msg/pqc/R8FJ485gWAOgXVb7xqOKnudF4y0/\n\nTasks:\n\n- [x] (T1) Section 2.1.1. Privat Key Components\n\n  - is lacking an introductionary sentence, it starts with an itemize right away.\n\n  - \u201d the private key is a static secret\u201d. It should be mentioned that this is only a conceptional view. In actual implementations, the state of the OTS generator may well change with each signature.\n\n- [x] (T2) Section 2.1.2. State Management\n\n  - \u201cto securely update the state after each signature,\u201d This sentence could be read as describing an insecure state update and should be changed to definitely describing a secure state update.\n\n  - \u201csuch as, e.g.,\u201d language: seems to redundantly introduce the example\n\n  - \u201cpuncturable schemes [BSW16],\u201d This technology is not properly introduced in the draft. It should also be made clear whether this references a deployable technology or research that in the future might become deployable technology. Further, I suggest it should be at least outlined how this concept relates to SHBS and the prescriptions of this draft or left completely aside.\n\n- [x] (T3) Section 3. Operational Considerations\n\n  * A paragraph in this section states \u201cIn addition to the state management, implementers MAY consider to implement mechanisms to prevent abrupt signature exhaustion\u201d and then \u201cThis warning condition SHOULD require explicit acknowledgment from the user\u201d. I\u2019d say that the \u201cSHOULD\u201d is inappropriate since the whole mechanism is under \u201cMAY\u201d. I couldn\u2019t figure out what I should understand from this \u201cSHOULD\u201d if I am anyway free to not implement said mechanism of not, due to the \u201cMAY\u201d. So I would prefer to change the \u201cSHOULD\u201d to \u201cMAY\u201d as well.\n\n- [x] (T4) Section 4. Requirements for Secure State Management\n\n  *  \u201cAtomicity: each operation must be indivisible \u2014 either the signature is generated and the state is updated together, or neither\n    occurs.\u201d I see that it is necessary to prevent the release of a signature without state update, but I don\u2019t see why it would be necessary to prevent state update without releasing a signature. I claim that \u201csignature is generated\u201d is not an appropriate concept in any case. Even if the device would internally generate a signature together atomically with the state update, that would not be observable on the outside. If the device is reset after the generation, the state update would persist (as it has to for the operation to be secure) but the signature would be lost before it can be output. I think this statement should be rendered to appropriately describe observable behaviour of the system and thus effectively require state update before signature release and not more.\n\n  * \u201cThe main concerns here are [\u2026] how an accidental/intentional failure/glitch might affect the state security, and cloning.\u201d I don\u2019t understand the final part of the sentence \u201cand cloning\u201d. What is meant exactly how \u201ccloning\u201d is affected? What kind of cloning is considered here?\n\n- [x] (T5) Section 5.2. Distributed Multi-trees (SP-800-208)\n\n  * \u201cThe [SP-800-208]\u201d \u2013 remove \u201cThe\u201d (multiple instances)\n\n- [x] (T6) Section 5.4. Key/State Transfer\n\n  * Please explain what \u201cstrong synchronization\u201d is exactly defining, specifically what the word \u201cstrong\u201d adds to bare \u201csynchronization\u201d.\n\n- [x] (T7) Section 5.6. Variable-length Signature Chains\n\n  * I don\u2019t understand the conclusion about variable length chains given in this section. Is there a way to realize a cryptographic sound solution? If yes, please describe, reference, or outline it. If not, the text should say so explicitly.\n\n  * In my view the explanation given in this section starting with \u201cFrom an operational perspective, the ability of a subordinate tree to sign \neither messages or new subordinate trees leads to severe security implications [\u2026]\u201d is not adequate as it doesn\u2019t clearly answer this \nessential question.\n\n- [x] (T8) Section 7. Security Considerations\n\n  * The text in this section should state that security considerations are given throughout the document.\n\n- [x] (T9) General (and in particular Section 2.1.2., 5.6.)\n\n  * After giving it some more thought, I have general concerns about addressing non-standard cryptographic schemes in this draft. Besides the above topic, this also applies to the reference [BSW16]. My suggestion would be to remove these two references (and others if I should have overlooked them) to research topics or non-standard cryptographic schemes. If the authors consider mentioning these reference as necessary for some reason, that should be done by clearly pointing out that those topics are addressed as potential future technologies. However, I would still have concerns in this case, as it seems impossible to predict how currently non-standard cryptographic ideas might end up as standards. I do not see how the reader of this draft will benefit from such vague references to potential future technologies. I rather see the risk of mismatches, wrong interpretations, and the unintentional facilitation of justifications of the use of non-standard cryptographic schemes.",
       "createdAt": "2025-12-06T06:26:28Z",
-      "updatedAt": "2025-12-06T07:48:27Z",
+      "updatedAt": "2025-12-07T06:21:41Z",
       "closedAt": null,
       "comments": [
         {
@@ -505,6 +505,27 @@
           "body": "Task (T6):\n\n* Clarified \"strong sync.\" -> \"robust sync.\". \"Robust\" is terminology used throughout the document.",
           "createdAt": "2025-12-06T07:48:27Z",
           "updatedAt": "2025-12-06T07:48:27Z"
+        },
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Task (T7):\n * Emphasized that those dynamic schemes are research-class, in particular neither standardized nor deployed.\n * Clarified our conclusion by turning \"SHOULD NOT\" into \"MUST NOT\".",
+          "createdAt": "2025-12-07T06:16:14Z",
+          "updatedAt": "2025-12-07T06:16:14Z"
+        },
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Task (T8):\n\n* Added sentence.",
+          "createdAt": "2025-12-07T06:20:23Z",
+          "updatedAt": "2025-12-07T06:20:23Z"
+        },
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Task (T9):\n* Addressed by task (T2) and (T7).",
+          "createdAt": "2025-12-07T06:21:34Z",
+          "updatedAt": "2025-12-07T06:21:34Z"
         }
       ]
     }
@@ -2405,6 +2426,46 @@
           "body": "",
           "createdAt": "2025-12-05T12:36:33Z",
           "updatedAt": "2025-12-05T12:36:33Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 45,
+      "id": "PR_kwDOLPgbFM63g0MU",
+      "title": "Address Falko's Last Call Comments",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/45",
+      "state": "OPEN",
+      "author": "fluppe2",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Details about how I addressed the comments can be found in issue #44 .\r\n\r\nIn particular, I would like to ask feedback for how I treated Falko's comments on\r\n * punctured schemes (Section 2.1.2) in commit https://github.com/hbs-guidance/draft-hbs-state/commit/e794dbe8a43564c61112767a73a5f8205ade5844, and\r\n * variable-length signature chains (Section 5.6) in commit https://github.com/hbs-guidance/draft-hbs-state/commit/6ce7d34da2012ba880542606bfd731c014018554\r\n\r\nI understood from a private conversation with Falko that he would be satisfied with those changes, but I would like to see consensus among the authors concerning the changes.\r\n\r\nNote: We should first merge #41 , #42 , and #43 . I would then take care of merge conflicts (if any) before merging the present pull request.",
+      "createdAt": "2025-12-07T06:34:49Z",
+      "updatedAt": "2025-12-08T14:15:38Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "8e6596bd27df98a584c953dc29ec492256bb5bb9",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "44-falkos-review-during-wglc",
+      "headRefOid": "5a69430e3299401424898ff5e987d940b433c5aa",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7Tu8wD",
+          "commit": {
+            "abbreviatedOid": "5a69430"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Looks good to me. Thanks for adding in all of the requested changes (and pushing back where appropriate!).",
+          "createdAt": "2025-12-08T14:15:38Z",
+          "updatedAt": "2025-12-08T14:15:38Z",
           "comments": []
         }
       ]
