@@ -182,11 +182,11 @@ computers. Unlike conventional stateless digital signature schemes, Stateful HBS
 a state to keep track of which OTS keys have been used, as double-signing with
 the same OTS key allows forgeries.
 
-This document provides guidance and documents security considerations for the
+This document provides guidance and catalogs security considerations for the
 operational and technical aspects of deploying systems that rely on Stateful HBS.
 Management of the state of the Stateful HBS, including any handling of redundant key
-material, is a sensitive topic, and we discuss some approaches to handle the
-associated challenges. We also describe the challenges that need to be resolved
+material, is a sensitive topic. This document describes some approaches to handle the
+associated challenges. It also describes the challenges that need to be resolved
 before certain approaches should be considered.
 
 --- middle
@@ -196,11 +196,11 @@ before certain approaches should be considered.
 Stateful Hash-Based Signature Schemes (Stateful HBS) such as LMS, HSS, XMSS and
 XMSS<sup>MT</sup> combine Merkle trees with One-Time Signatures (OTS) in order
 to provide digital signature schemes that remain secure even when large-scale
-quantum computers become available. Their theoretic security is well understood
-and depends only on the security of the underlying hash function. As such, they
-can serve as an important building block for quantum-resistant information and
-communication technology. Stateful HBS are specified in {{?RFC8391}}, {{?RFC8554}},
-and NIST [SP-800-208].
+quantum computers become available. The theoretic security of Stateful HBS is
+well understood and depends only on the security of the underlying hash
+function. As such, Stateful HBS can serve as an important building block for
+quantum-resistant information and communication technology. Stateful HBS are
+specified in {{?RFC8391}}, {{?RFC8554}}, and NIST {{SP-800-208}}.
 
 The private key of an Stateful HBS is a finite collection of OTS keys and an
 associated data structure which keeps track of which OTS keys have been used.
@@ -212,15 +212,15 @@ each generated signature.
 One must not reuse any OTS key that is part of an Stateful HBS private key. If
 an attacker is able to obtain signatures for two different messages created
 using the same OTS key, it is computationally feasible for that attacker to
-create forgeries [BH16] [Fluhrer23]. As noted in [MCGREW] and [ETSI-TR-103-692], extreme
-care should be taken in order to avoid the risk that an OTS key will be reused
-accidentally. Whereas [MCGREW] identifies the fundamental failure modes of
-stateful hash-based signatures and proposes architectural strategies such
-as a reservation approach, and [ETSI-TR-103-692] provides a broad
-analysis of state management challenges and risks, this document complements
-both by cataloging concrete operational patterns in {{pot-sol}} and by
-addressing backup and recovery considerations {{alt-backup-mgmt}} not covered
-in prior work.
+create forgeries {{BH16}} {{Fluhrer23}}. As noted in
+{{MCGREW}} and {{ETSI-TR-103-692}}, extreme care should be taken in order to avoid
+the risk that an OTS key will be reused accidentally. Whereas {{MCGREW}}
+identifies the fundamental failure modes of Stateful HBS and
+proposes architectural strategies such as a reservation approach, and
+{{ETSI-TR-103-692}} provides a broad analysis of state management challenges and
+risks, this document complements both by cataloging concrete operational
+patterns in {{pot-sol}} and by addressing backup and recovery considerations
+{{alt-backup-mgmt}} not covered in prior work.
 
 In particular, the challenges below highlight why careful state and backup
 management are essential in Stateful HBS:
@@ -248,8 +248,8 @@ developers will not be familiar with and that require careful handling in
 practice: Stateful HBS are not general-purpose signature schemes. Most
 applications, especially those that may produce unrestricted numbers of
 signatures, should use _stateless_ hash-based signature schemes like SLH-DSA
-[FIPS205], which use the same security assumptions, or schemes based on other
-assumptions, such as ML-DSA [FIPS204], instead. However, if run time, implementation
+{{FIPS205}}, which use the same security assumptions, or schemes based on other
+assumptions, such as ML-DSA {{FIPS204}}, instead. However, if run time, implementation
 size, or signature or key sizes of stateless alternatives are prohibitive, and the
 specific use case allows a very tight control of the signing environment, using
 Stateful HBS may be an appropriate solution. It seems likely that in many
@@ -283,7 +283,7 @@ artifact.
 
 ## State Management
 
-In this document _state management_ refers to the handling and implementation
+In this document, _state management_ refers to the handling and implementation
 of the state of the private key.
 
 This includes mechanisms, which aim:
@@ -302,7 +302,7 @@ This includes mechanisms, which aim:
   the lifetime of the key.
 
 Note that in particular implementations of Stateful HBS, or in alternative signature
-mechanisms such as, e.g., puncturable schemes [BSW16], the state and private
+mechanisms such as, e.g., puncturable schemes {{BSW16}}, the state and private
 key might be inseparable. However, even in these scenarios, this document's
 guidance should still apply.
 
@@ -363,14 +363,14 @@ operations.
 
 # Operational Considerations
 
-An important aspect of the evaluation of various hash-based signature state and
+An important aspect of the evaluation of various HBS state and
 backup management options is to consider the operational costs associated with
 the option(s) being evaluated. In the past, a traditional trust infrastructure
 solution could utilize straightforward archival procedures to make copies of
 the keys, which could then be distributed geographically to ensure their
 availability and deliver a sufficiently resilient solution, all the while
 enforcing whatever security protocols and procedures were required.
-Unfortunately, stateful hash-based signatures introduce an additional
+Unfortunately, Stateful HBS introduce an additional
 constraint in that they need to ensure the state is never re-used. Hence,
 archival procedures used for traditional trust infrastructures have to be
 amended/redesigned to be used as viable options.
@@ -382,7 +382,7 @@ of their lifetime. Physical media/devices degrade over time, and the more
 complex the media/device, the more likely it is to fail at some point in time
 (e.g., data stored on a CD vs. data stored on a USB drive vs. data stored in a
 Hardware Security Module). Combine that fact with the long lifetimes associated
-with stateful hash-based signature keys (e.g., 10-20+ years) and the
+with Stateful HBS keys (e.g., 10-20+ years) and the
 difficulties associated with transferring keys between devices, and one finds
 them self with a perplexing set of challenges that needs to be accounted for in
 any state selection process of a proper state and backup management solution.
@@ -396,7 +396,7 @@ degree of operator involvement which means one should consider the costs
 associated with training the operator element to ensure processes and procedures
 are adhered to and failures caught early and corrected before a catastrophic
 loss of security can occur (e.g., accidentally instantiating multiple instances
-of a stateful hash-based signature key/state). Note that training is not a
+of a Stateful HBS key/state). Note that training is not a
 fixed one-time cost either as long lifetimes will necessitate succession
 planning amongst the operator element, and training of each successive generation
 of participants. Mechanisms also should be put in place to mitigate the
@@ -415,7 +415,7 @@ this threshold, the system should return a 'signatures nearing exhaustion' warn
 This warning condition should require explicit acknowledgment from the user
 through a mechanism that cannot be trivially skipped.
 
-Another important consideration in deploying stateful hash-based signatures is
+Another important consideration in deploying Stateful HBS is
 the selection of an appropriate parameter set. Given the flexibility of these
 schemes — such as adjustable tree heights or Winternitz parameters — there
 exists a large variety of possible configurations. The availability of these
@@ -476,7 +476,7 @@ main concerns here are
 A system may have a version of the private key stored in non-volatile memory
 (e.g. a disk) and will load it into volatile memory (e.g. RAM) while processing.
 Here, an implementer must ensure that these are always perfectly synchronized
-[MCGREW], meaning that no parts of the system are allowed to read any version of
+{{MCGREW}}, meaning that no parts of the system are allowed to read any version of
 the key during procedures which load, write or modify keys. This can be
 particularly challenging if there are additional abstraction layers present in
 the system, like additional caches which may affect reading/writing the state
@@ -487,7 +487,7 @@ This can happen for instance if a process which issues a signing operation is
 forked, and no proper synchronization is enforced in the implementation to
 guarantee correct state update. Virtual machine (VM) cloning is another
 potential security risk here, as both backing up a VM into non-volatile memory
-or live cloning of a VM can easily lead to a state re-use [MCGREW]. With users
+or live cloning of a VM can easily lead to a state re-use {{MCGREW}}. With users
 shifting workloads to cloud service providers, the issue of VM cloning may
 become more prevalent.
 
@@ -514,19 +514,19 @@ the nonce.
 # Potential Solutions {#pot-sol}
 
 A variety of potential solutions have been proposed both within the
-[SP-800-208] specification, as well as from external sources. This section
+{{SP-800-208}} specification, as well as from external sources. This section
 describes a number of approaches and their potential advantages/disadvantages.
 
 ## Multiple Public Keys (SP-800-208)
 
-The [SP-800-208] proposes generating multiple Stateful HBS keypairs and configuring
+The {{SP-800-208}} proposes generating multiple Stateful HBS keypairs and configuring
 devices and clients to accept signatures created by any of these keys.
 
 This negatively impacts one of the advantages of using Stateful HBS by
 increasing the public key footprint within the client, which can be problematic
 if it has limited public key storage capacity. (Though public keys are typically
 equivalently sized to ECDSA rather than larger classical RSA keys often
-currently found.) [SP-800-208] addresses storage capacity concerns by suggesting
+currently found.) {{SP-800-208}} addresses storage capacity concerns by suggesting
 using a mechanism such as that proposed in {{?RFC8649}} to update the stored
 public key by having the current key endorse the next key that is to be
 installed. Unfortunately, for many constrained devices the public key is
@@ -542,22 +542,22 @@ one would need a standardized format if interoperability is a concern.
 
 ## Distributed Multi-trees (SP-800-208) {#nist-dist-multi-tree}
 
-The [SP-800-208] also proposes creating multiple Stateful HBS keys across multiple
+The {{SP-800-208}} also proposes creating multiple Stateful HBS keys across multiple
 cryptographic modules using a distributed multi-tree approach that is a variant
 of the standard hyper-tree based Stateful HBS schemes HSS and XMSS<sup>MT</sup>. In
-this approach trees are instantiated on a root device (HSM<sub>root</sub>), as
-well as one or more subordinate devices (HSM<sub>sub\[i\]</sub>), and the root
+this approach, trees are instantiated on a root device (HSM<sub>root</sub>), as
+well as one or more subordinate devices (HSM<sub>sub\{{i\}}</sub>), and the root
 tree is used to sign the root nodes of the subordinate trees to synthesize a
 multi-level Stateful HBS key. The root device is only ever used to sign subordinate
 device root nodes, while the subordinate device(s) is(are) used to sign
-messages. This is relatively straightforward to do using HSS, and [SP-800-208]
+messages. This is relatively straightforward to do using HSS, and {{SP-800-208}}
 describes the necessary algorithmic modifications when using XMSS<sup>MT</sup>.
 
 One drawback of this approach is the increased signature size as an additional
 OTS needs to be generated, effectively doubling the overall signature size.
 Another concern is the single point of failure nature of relying on the root
 tree module to sign all of the subordinate trees; if the root tree device fails
-then no new subordinate trees can be signed. [SP-800-208] suggested that as
+then no new subordinate trees can be signed. {{SP-800-208}} suggested that as
 many subordinate trees as possible be generated during the initial root key
 generation and subordinate-signing procedure. Unfortunately, this can incur a
 large capital expenditure to procure all of the necessary devices, many of
@@ -568,7 +568,7 @@ subordinate trees to ensure that no malicious signing request is accepted,
 which would effectively give a rogue entity the ability to generate valid
 signatures, thereby undermining the security of the entire system.
 
-The [SP-800-208] also suggests combining distributed multi-trees with multiple
+The {{SP-800-208}} also suggests combining distributed multi-trees with multiple
 root public keys as a means to mitigate some of the concerns regarding having a
 single point of failure in the root tree. However, even if a system operator
 does everything right, use cases with exceptionally long lifetimes of 10-20+
@@ -578,32 +578,33 @@ system operators to rely on devices well beyond their expected lifetimes of
 
 ## Sectorization {#sectorization}
 
-Distributed multi-trees attempt to partition a Stateful HBS signing space amongst
-multiple cryptographic modules by breaking up the signing space along the
-boundaries of the subordinate trees generated during the multi-tree key
+Distributed multi-trees attempt to partition a Stateful HBS signing space
+amongst multiple cryptographic modules by breaking up the signing space along
+the boundaries of the subordinate trees generated during the multi-tree key
 generation process. An alternative approach would be to use only a single tree,
 and partition its signature space along some power-of-2 less than the total
 number of leaves in the tree (e.g., 2<sup>s</sup> for a tree of height h > s),
 creating N = 2<sup>h-s</sup> partitions or sectors, which are instantiated as N
 height-s Merkle trees whose root nodes are considered interior nodes of the
-overall height-h Merkle tree. Hence, there is no additional OTS required to
-sign their root nodes; their values are used as-is in the underlying Stateful HBS
-scheme's tree ascent mechanism, yielding a common public key (i.e., root node)
-for all sectors. Care must be taken to ensure that each sector uses the same
-root tree identifier (i.e., the "I" value for HSS/LMS and "root" value for
+overall height-h Merkle tree. Hence, there is no additional OTS required to sign
+their root nodes; their values are used as-is in the tree ascent mechanism of
+the underlying Stateful HBS scheme, yielding a common public key (i.e., root
+node) for all sectors. Care must be taken to ensure that each sector uses the
+same root tree identifier (i.e., the "I" value for HSS/LMS and "root" value for
 XMSS/XMSS<sup>MT</sup>).
 
 Each of the N sectors' OTS private key values can be generated pseudo-randomly
 from a unique seed value generated from an appropriate source of randomness. The
-private keys from different sectors are independent when generated by this process. This
-requires that the path information for each sector's root node (i.e., all off-path nodes
-between the sector root node and the top level node value) be stored with each
-sector's private key at key generation time since a sector will not know the
-seed information required to compute any of the other sectors' root nodes
-during the tree ascent phase of a signature generation operation. During
-signature generation the signer appends the stored path information to the path
-information it computes to ascend from the leaf OTS to the sector's root node
-(which it can compute given that it knows its own seed value).
+private keys from different sectors are independent when generated by this
+process. This requires that the path information for the root node of each
+sector (i.e., all off-path nodes between the sector root node and the top level
+node value) be stored with each sector's private key at key generation time
+since a sector will not know the seed information required to compute any of the
+other sectors' root nodes during the tree ascent phase of a signature generation
+operation. During signature generation the signer appends the stored path
+information to the path information it computes to ascend from the leaf OTS to
+the sector's root node (which it can compute given that it knows its own seed
+value).
 
 Hence, sectorized key generation results in a single public key value and
 2<sup>h-s</sup> private key values, each capable of generating 2<sup>s</sup>
@@ -646,7 +647,7 @@ conflicts, and durability of state across devices. Such approaches require
 strong synchronization, auditability, and appropriate backup mechanisms to
 avoid double-signing or loss of capacity.
 
-A more elaborate variant of key transfer, going beyond what [SP-800-208]
+A more elaborate variant of key transfer, going beyond what {{SP-800-208}}
 allows, can be found described in [](#alt-backup-mgmt) where key transfer is
 accomplished using a two-step export and import process with hash-based
 transfer validation to yield a more robust transfer mechanism.
@@ -675,7 +676,7 @@ multi-tree scheme with a variable number of levels, and hence, variable length
 signatures.
 
 In addition to departing quite significantly from the current Stateful HBS
-specifications and [SP-800-208], this approach has a number of significant
+specifications and {{SP-800-208}}, this approach has a number of significant
 challenges on both the engineering and operational fronts. Firstly, the
 variable length nature of the signature can lead to variable length
 verification of signatures, which may cause significant issues for use cases
@@ -733,7 +734,7 @@ synchronization of clocks. In particular, we identify that at least the
 following engineering-related challenges need to be considered:
 
 - Signing devices must have accurate timekeeping (which is a very challenging
-  engineering problem [XKCD1883], [XKCD2867], [TIMEFALSEHOODS]).
+  engineering problem {{XKCD1883}}, {{XKCD2867}}, {{TIMEFALSEHOODS}}).
 
 - Time on signing devices must not be allowed to ever move backwards, as this
   can cause double-signing.
@@ -789,7 +790,7 @@ considerations.
 
 ## Interval-based Approaches
 
-The State Reservation Strategy described in section 5 of [MCGREW] provides
+The State Reservation Strategy described in section 5 of {{MCGREW}} provides
 another means of managing the state by allowing users to reserve intervals of
 the signing space, marking the interval's associated OTS keys as being used in
 the overall HBS state, which is then written back to non-volatile memory prior
@@ -825,7 +826,7 @@ applicable for single-tree instances such as XMSS and LMS.
 
 
 The strategy presented in this section builds upon the multi-tree variant
-approach from [SP-800-208], and aims to mitigate its limitations described in
+approach from {{SP-800-208}}, and aims to mitigate its limitations described in
 [](#nist-dist-multi-tree).  Thus, it is assumed that already a top-level Merkle
 tree (for signing the root-nodes of sub-trees) and several bottom-level Merkle
 trees (for signing messages) are initiated.  These bottom-level trees may be
@@ -836,7 +837,7 @@ is assumed that R + 1 is strictly smaller than 2<sup>h<sub>0</sub></sup>, the
 number of leaves of the top-level tree.
 
 In this new strategy, after the completed key generation procedure from the
-multi-tree variant approach from [SP-800-208], further bottom-level trees are
+multi-tree variant approach from {{SP-800-208}}, further bottom-level trees are
 generated, one by one, in one of the hardware modules.  These new  bottom-level
 trees are each generated from a different seed, which is chosen uniformly at
 random.  For the sake of clarity, let us introduce some notation:
@@ -874,7 +875,7 @@ indices belong to I<sub>new</sub>) are only used in order to guarantee
 availability in the _worst-case scenario_, where at the same time both
 
 - none of the R bottom-level Merkle trees (which were generated according to
-  the multi-tree variant approach from [SP-800-208]) are available for signing
+  the multi-tree variant approach from {{SP-800-208}}) are available for signing
   messages and
 
 - the top-level Merkle tree (which is used for signing the root-nodes of
@@ -913,7 +914,7 @@ signature over the complete tree.
 # Security Considerations
 
 Further security considerations, which are not already covered in this
-document, are given in [SP-800-208], [MCGREW], [FIPS205], {{?RFC8391}} and
+document, are given in {{SP-800-208}}, {{MCGREW}}, {{FIPS205}}, {{?RFC8391}} and
 {{?RFC8554}}.
 
 
