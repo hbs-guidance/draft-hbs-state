@@ -253,7 +253,7 @@ context of Stateful HBS.
 ## Private Key Components
 
 This section describes the two conceptual components that make up the private
-key material used in Steful HBS.
+key material used in Stateful HBS.
 
 private key
 : the static, long-lived secret(s) from which OTS private keys are derived.
