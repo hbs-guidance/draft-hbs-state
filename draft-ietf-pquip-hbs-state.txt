@@ -712,8 +712,7 @@ Table of Contents
    considered:
 
    *  Signing devices must have accurate timekeeping (which is a very
-      challenging engineering problem [XKCD1883], [XKCD2867],
-      [TIMEFALSEHOODS]).
+      challenging engineering problem [TIMEFALSEHOODS]).
 
    *  Time on signing devices must not be allowed to ever move
       backwards, as this can cause double-signing.
@@ -995,12 +994,6 @@ Table of Contents
               Visée, T., "Falsehoods programmers believe about time",
               n.d., <https://gist.github.com/timvisee/
               fcda9bbdff88d45cc9061606b4b923ca>.
-
-   [XKCD1883] Munroe, R., "xkcd: Timezones", n.d.,
-              <https://xkcd.com/1883/>.
-
-   [XKCD2867] Munroe, R., "xkcd: DateTime", n.d.,
-              <https://xkcd.com/2867/>.
 
 Acknowledgments
 
