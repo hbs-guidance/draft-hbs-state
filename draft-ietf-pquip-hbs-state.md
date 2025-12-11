@@ -252,6 +252,9 @@ context of Stateful HBS.
 
 ## Private Key Components
 
+This section describes the two conceptual components that make up the private
+key material used in Stateful HBS.
+
 private key
 : the static, long-lived secret(s) from which OTS private keys are derived.
 This material is stateless: given the scheme parameters, it deterministically
@@ -276,7 +279,7 @@ of the state of the private key.
 
 This includes mechanisms, which aim:
 
-- to securely update the state after each signature,
+- to securely update the state before the signature is released,
 
 - to set up Stateful HBS with a split state and/or private key, so that signatures can
   be generated from either part without risk of state reuse,
@@ -289,10 +292,12 @@ This includes mechanisms, which aim:
 - to guarantee the availability of both the private key and its state across
   the lifetime of the key.
 
-Note that in particular implementations of Stateful HBS, or in alternative signature
-mechanisms such as, e.g., puncturable schemes {{BSW16}}, the state and private
-key might be inseparable. However, even in these scenarios, this document's
-guidance should still apply.
+Note that in particular implementations of Stateful HBS, or in alternative
+signature mechanisms, the state and private key might be inseparable. For
+example, puncturable schemes {{BSW16}} represent such an alternative; they are
+research-level constructions and are not currently standardized or deployed in
+practice. However, even in these scenarios, this document's guidance should
+still apply.
 
 ## Backup Management
 
@@ -431,8 +436,8 @@ updating the state.
 
 State management systems should satisfy all _ACID_ properties:
 
-- _Atomicity_: each operation must be indivisible — either the signature is
-  generated and the state is updated together, or neither occurs.
+- _Atomicity_: each operation on the state must be indivisible — such that it
+  either commits completely or leaves the state unchanged.
 
 - _Consistency_: the state before and after each update must reflect a valid
   progression of available OTS indices, and no invalid or conflicting state is
@@ -442,7 +447,7 @@ State management systems should satisfy all _ACID_ properties:
   processes or devices) must not interfere in ways that could lead to state
   reuse.
 
-- _Durability_: once a state transition (e.g., after issuing a signature) is
+- _Durability_: once a state transition (e.g., before issuing a signature) is
   committed, that transition must survive crashes, power loss, or device
   failure.
 
@@ -456,10 +461,7 @@ main concerns here are
 
 - how it is modified,
 
-- how an accidental/intentional failure/glitch might affect the state security,
-  and
-
-- cloning.
+- how an accidental/intentional failure/glitch might affect the state security.
 
 A system may have a version of the private key stored in non-volatile memory
 (e.g. a disk) and will load it into volatile memory (e.g. RAM) while processing.
@@ -507,7 +509,7 @@ describes a number of approaches and their potential advantages/disadvantages.
 
 ## Multiple Public Keys (SP-800-208)
 
-The {{SP-800-208}} proposes generating multiple Stateful HBS keypairs and configuring
+{{SP-800-208}} proposes generating multiple Stateful HBS keypairs and configuring
 devices and clients to accept signatures created by any of these keys.
 
 This negatively impacts one of the advantages of using Stateful HBS by
@@ -530,7 +532,7 @@ one would need a standardized format if interoperability is a concern.
 
 ## Distributed Multi-trees (SP-800-208) {#nist-dist-multi-tree}
 
-The {{SP-800-208}} also proposes creating multiple Stateful HBS keys across multiple
+{{SP-800-208}} also proposes creating multiple Stateful HBS keys across multiple
 cryptographic modules using a distributed multi-tree approach that is a variant
 of the standard hyper-tree based Stateful HBS schemes HSS and XMSS<sup>MT</sup>. In
 this approach, trees are instantiated on a root device (HSM<sub>root</sub>), as
@@ -556,7 +558,7 @@ subordinate trees to ensure that no malicious signing request is accepted,
 which would effectively give a rogue entity the ability to generate valid
 signatures, thereby undermining the security of the entire system.
 
-The {{SP-800-208}} also suggests combining distributed multi-trees with multiple
+{{SP-800-208}} also suggests combining distributed multi-trees with multiple
 root public keys as a means to mitigate some of the concerns regarding having a
 single point of failure in the root tree. However, even if a system operator
 does everything right, use cases with exceptionally long lifetimes of 10-20+
@@ -632,7 +634,7 @@ two devices may be merged to reconstruct or continue signature operations.
 These operations carry risk: ensuring no overlap in used indices, ensuring
 atomicity of transfer/merge operations, managing consistency, possible
 conflicts, and durability of state across devices. Such approaches require
-strong synchronization, auditability, and appropriate backup mechanisms to
+robust synchronization, auditability, and appropriate backup mechanisms to
 avoid double-signing or loss of capacity.
 
 A more elaborate variant of key transfer, going beyond what {{SP-800-208}}
@@ -655,13 +657,14 @@ keys cannot be updated due to engineering constraints or security reasons.
 
 ## Variable-length Signature Chains
 
-A variant of the key rotation approach is to simply have an available signing
+A variant of the key rotation approach is to have an available signing
 tree endorse a new subordinate tree when it is about to become exhausted (e.g.,
 use its final OTS to sign the root node of a new subordinate tree, creating a
 {n+1}-layer multi-tree from an {n}-layer multi-tree). This process can in
 theory be repeated as many times as necessary. However, this entails having a
 multi-tree scheme with a variable number of levels, and hence, variable length
-signatures.
+signatures. Such dynamically extensible constructions are research-class and
+are not currently standardized or deployed.
 
 In addition to departing quite significantly from the current Stateful HBS
 specifications and {{SP-800-208}}, this approach has a number of significant
@@ -736,7 +739,7 @@ following engineering-related challenges need to be considered:
   before state changes have been recorded.
 
 - A system should be robust against exhaustion of the number of signatures
-  available in a time window, as in this case it is REQUIRED to wait until the
+  available in a time window, as in this case it is required to wait until the
   next time window starts before new messages can be signed.
 
 - Time on signing devices should not be allowed to be moved forward maliciously
@@ -901,10 +904,9 @@ signature over the complete tree.
 
 # Security Considerations
 
-Further security considerations, which are not already covered in this
-document, are given in {{SP-800-208}}, {{MCGREW}}, {{FIPS205}}, {{?RFC8391}} and
-{{?RFC8554}}.
-
+Security considerations are given throughout this document. Further security
+considerations, which are not already covered in this document, are given in
+{{SP-800-208}}, {{MCGREW}}, {{FIPS205}}, {{?RFC8391}} and {{?RFC8554}}.
 
 # IANA Considerations
 
