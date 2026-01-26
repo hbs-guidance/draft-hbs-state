@@ -62,6 +62,16 @@ informative:
   # I-D.draft-fluhrer-lms-more-parm-sets:
   # RFC8391:
   # RFC8554:
+  RFC9802:
+  I-D.draft-ietf-suit-mti:
+
+  CNSA2.0:
+    target: https://media.defense.gov/2022/Sep/07/2003071834/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS_.PDF
+    title: Commercial National Security Algorithm Suite 2.0 (CNSA 2.0) Cybersecurity Advisory (CSA)
+    author:
+      -
+        ins: National Security Agency (NSA)
+    date: 2022-09-07
 
   MCGREW:
     target: https://eprint.iacr.org/2016/357.pdf
@@ -244,6 +254,7 @@ Stateful HBS may be an appropriate solution. It seems likely that in many
 scenarios, this will only be possible when using purpose-designed hardware, such
 as hardware-security modules.
 
+Stateful HBS are already profiled or discussed in several deployment-focused specifications and guidance documents. For example, [RFC9802] discusses suitable use cases for stateful HBS in X.509 (including firmware/software signing and CA certificates). The SUIT Mandatory-to-Implement algorithms specification [I-D.draft-ietf-suit-mti] defines an asymmetric profile that uses HSS-LMS, providing an interoperability target for software/firmware update IoT ecosystems. Additionally, the NSA [CNSA2.0] allows LMS (and XMSS) in specific application scenarios such as firmware/software signing.
 
 # Specific Terminology in the Context of Stateful HBS
 
