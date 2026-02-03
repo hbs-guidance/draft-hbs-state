@@ -251,8 +251,8 @@ assumptions, such as ML-DSA {{FIPS204}}, instead. However, if run time, implemen
 size, or signature or key sizes of stateless alternatives are prohibitive, and the
 specific use case allows a very tight control of the signing environment, using
 Stateful HBS may be an appropriate solution. It seems likely that in many
-scenarios, this will only be possible when using purpose-designed hardware, such
-as hardware-security modules.
+scenarios, it is only possible to meet the requirements set out in {{req-state}}
+when using purpose-designed hardware, such as hardware-security modules.
 
 Stateful HBS are already profiled or discussed in several deployment-focused specifications and guidance documents. For example, [RFC9802] discusses suitable use cases for stateful HBS in X.509 (including firmware/software signing and CA certificates). The SUIT Mandatory-to-Implement algorithms specification [I-D.draft-ietf-suit-mti] defines an asymmetric profile that uses HSS-LMS, providing an interoperability target for software/firmware update IoT ecosystems. Additionally, the NSA [CNSA2.0] allows LMS (and XMSS) in specific application scenarios such as firmware/software signing.
 
@@ -436,7 +436,7 @@ attestation facilities, etc.) must be accounted for as well, particularly if a
 system is operating in an offline mode that makes delivering these additional
 capabilities all the more complicated and expensive.
 
-# Requirements for Secure State Management
+# Requirements for Secure State Management {#req-state}
 
 A system deploying Stateful HBS should fulfill certain requirements to allow securely
 handling the state. The system must ensure that no two signing operations can
