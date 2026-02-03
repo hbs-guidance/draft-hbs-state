@@ -520,17 +520,19 @@ describes a number of approaches and their potential advantages/disadvantages.
 
 ## Multiple Public Keys (SP-800-208)
 
-{{SP-800-208}} proposes generating multiple Stateful HBS keypairs and configuring
-devices and clients to accept signatures created by any of these keys.
+{{SP-800-208}} proposes generating multiple Stateful HBS keypairs and
+configuring devices and clients to accept signatures created by any of these
+keys. Secondary Stateful HBS keys can be kept in storage until the first keypair
+is exhausted or lost.
 
-This negatively impacts one of the advantages of using Stateful HBS by
-increasing the public key footprint within the client, which can be problematic
-if it has limited public key storage capacity. (Though public keys are typically
-equivalently sized to ECDSA rather than larger classical RSA keys often
-currently found.) {{SP-800-208}} addresses storage capacity concerns by suggesting
-using a mechanism such as that proposed in {{?RFC8649}} to update the stored
-public key by having the current key endorse the next key that is to be
-installed. Unfortunately, for many constrained devices the public key is
+Accepting multiple public keys negatively impacts one of the advantages of using
+Stateful HBS by increasing the public key footprint within the client, which can
+be problematic if it has limited public key storage capacity. (Though public
+keys are typically equivalently sized to ECDSA rather than larger classical RSA
+keys often currently found.) {{SP-800-208}} addresses storage capacity concerns
+by suggesting using a mechanism such as that proposed in {{?RFC8649}} to update
+the stored public key by having the current key endorse the next key that is to
+be installed. Unfortunately, for many constrained devices the public key is
 embedded in immutable ROM or fuses due to security reasons, so it cannot be
 updated in this manner.
 
