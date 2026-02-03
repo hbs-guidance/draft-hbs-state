@@ -292,7 +292,7 @@ This includes mechanisms, which aim:
 
 - to securely update the state before the signature is released,
 
-- to set up Stateful HBS with a split state and/or private key, so that signatures can
+- to set up Stateful HBS where the state is separated in distinct, non-overlapping parts, so that signatures can
   be generated from either part without risk of state reuse,
 
 - to enable partial transfer of unused signature capacity between devices, and optionally merging state fragments without overlap,
