@@ -200,14 +200,14 @@ function. As such, Stateful HBS can serve as an important building block for
 quantum-resistant information and communication technology. Stateful HBS are
 specified in {{?RFC8391}}, {{?RFC8554}}, and NIST {{SP-800-208}}.
 
-The private key of an Stateful HBS is a finite collection of OTS keys and an
-associated data structure which keeps track of which OTS keys have been used.
-This data structure is typically a simple counter and often called an index; we
-refer to it as the __state__ of the private key. Each Stateful HBS private key can be
-used to sign a finite number of messages, and the state must be updated with
-each generated signature.
+The private key of a Stateful HBS is a finite collection of OTS keys (typically
+generated on-demand from a seed) and an associated data structure which keeps
+track of which OTS keys have been used. This data structure is typically a
+simple counter and often called an index; we refer to it as the __state__ of the
+private key. Each Stateful HBS private key can be used to sign a finite number
+of messages, and the state must be updated with each generated signature.
 
-One must not reuse any OTS key that is part of an Stateful HBS private key. If
+One must not reuse any OTS key that is part of a Stateful HBS private key. If
 an attacker is able to obtain signatures for two different messages created
 using the same OTS key, it is computationally feasible for that attacker to
 create forgeries {{BH16}} {{Fluhrer23}}. As noted in
