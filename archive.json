@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-01-29T00:57:29.435685+00:00",
+  "timestamp": "2026-02-05T00:59:45.436997+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -534,15 +534,15 @@
       "id": "I_kwDOLPgbFM7l55Qn",
       "title": "Address Jiankang Yao's review",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/issues/46",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "fluppe2",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "See https://mailarchive.ietf.org/arch/msg/pqc/bX8-Mmtlmmx1D3MzQEXKxAKodgA/\n\nIn particular, add references to other standards which recommend/require HSS/LMS and/or XMSS/XMSS^MT support.",
       "createdAt": "2026-01-26T18:37:23Z",
-      "updatedAt": "2026-01-26T18:37:23Z",
-      "closedAt": null,
+      "updatedAt": "2026-02-03T13:10:35Z",
+      "closedAt": "2026-02-03T13:10:35Z",
       "comments": []
     }
   ],
@@ -2519,24 +2519,26 @@
       "id": "PR_kwDOLPgbFM6_bjxu",
       "title": "Add usage examples in terms of other guidance/requirement specifications",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/47",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fluppe2",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-01-26T18:56:10Z",
-      "updatedAt": "2026-01-27T09:15:23Z",
+      "updatedAt": "2026-02-03T13:10:35Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "a9367a1a8cb8f5157079f647a43cc18650aee8b1",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "46-address-jiankang-yaos-review",
       "headRefOid": "d69748f8ef4397eac2396ed7ab9eef25a45cd2da",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-03T13:10:33Z",
+      "mergedAt": "2026-02-03T13:10:33Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "a8618ba9e73d837f1f95ca7610d03840b60d2380"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2563,6 +2565,59 @@
           "body": "",
           "createdAt": "2026-01-27T09:15:23Z",
           "updatedAt": "2026-01-27T09:15:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7fOu_e",
+          "commit": {
+            "abbreviatedOid": "d69748f"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "SGTM",
+          "createdAt": "2026-02-03T13:10:27Z",
+          "updatedAt": "2026-02-03T13:10:27Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 48,
+      "id": "PR_kwDOLPgbFM7BZdaw",
+      "title": "Proposed changes in response to Yaron's review",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/48",
+      "state": "OPEN",
+      "author": "thomwiggers",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "cf. https://mailarchive.ietf.org/arch/msg/pqc/KCw0uFBKj4cffdyhRC65mvLvOQk/",
+      "createdAt": "2026-02-04T08:03:38Z",
+      "updatedAt": "2026-02-04T13:51:07Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "a8618ba9e73d837f1f95ca7610d03840b60d2380",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "yaron-review",
+      "headRefOid": "95ba5c34aac5777807e009dfb95f6e2b270cefa2",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7floyU",
+          "commit": {
+            "abbreviatedOid": "95ba5c3"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "This looks very good to me, thanks for putting this together Thom!",
+          "createdAt": "2026-02-04T13:51:07Z",
+          "updatedAt": "2026-02-04T13:51:07Z",
           "comments": []
         }
       ]
