@@ -1066,7 +1066,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Wiggers, et al.</td>
-<td class="center">Expires 7 August 2026</td>
+<td class="center">Expires 11 August 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1079,12 +1079,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-pquip-hbs-state-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-02-03" class="published">3 February 2026</time>
+<time datetime="2026-02-07" class="published">7 February 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Informational</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-08-07">7 August 2026</time></dd>
+<dd class="expires"><time datetime="2026-08-11">11 August 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1161,7 +1161,7 @@ before certain approaches should be considered.<a href="#section-abstract-2" cla
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 7 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 11 August 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1291,13 +1291,13 @@ well understood and depends only on the security of the underlying hash
 function. As such, Stateful HBS can serve as an important building block for
 quantum-resistant information and communication technology. Stateful HBS are
 specified in <span>[<a href="#RFC8391" class="cite xref">RFC8391</a>]</span>, <span>[<a href="#RFC8554" class="cite xref">RFC8554</a>]</span>, and NIST <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span>.<a href="#section-1-1" class="pilcrow">¶</a></p>
-<p id="section-1-2">The private key of an Stateful HBS is a finite collection of OTS keys and an
-associated data structure which keeps track of which OTS keys have been used.
-This data structure is typically a simple counter and often called an index; we
-refer to it as the <strong>state</strong> of the private key. Each Stateful HBS private key can be
-used to sign a finite number of messages, and the state must be updated with
-each generated signature.<a href="#section-1-2" class="pilcrow">¶</a></p>
-<p id="section-1-3">One must not reuse any OTS key that is part of an Stateful HBS private key. If
+<p id="section-1-2">The private key of a Stateful HBS is a finite collection of OTS keys (typically
+generated on-demand from a seed) and an associated data structure which keeps
+track of which OTS keys have been used. This data structure is typically a
+simple counter and often called an index; we refer to it as the <strong>state</strong> of the
+private key. Each Stateful HBS private key can be used to sign a finite number
+of messages, and the state must be updated with each generated signature.<a href="#section-1-2" class="pilcrow">¶</a></p>
+<p id="section-1-3">One must not reuse any OTS key that is part of a Stateful HBS private key. If
 an attacker is able to obtain signatures for two different messages created
 using the same OTS key, it is computationally feasible for that attacker to
 create forgeries <span>[<a href="#BH16" class="cite xref">BH16</a>]</span> <span>[<a href="#Fluhrer23" class="cite xref">Fluhrer23</a>]</span>. As noted in
@@ -1347,8 +1347,8 @@ assumptions, such as ML-DSA <span>[<a href="#FIPS204" class="cite xref">FIPS204<
 size, or signature or key sizes of stateless alternatives are prohibitive, and the
 specific use case allows a very tight control of the signing environment, using
 Stateful HBS may be an appropriate solution. It seems likely that in many
-scenarios, this will only be possible when using purpose-designed hardware, such
-as hardware-security modules.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
+scenarios, it is only possible to meet the requirements set out in <a href="#req-state" class="auto internal xref">Section 4</a>
+when using purpose-designed hardware, such as hardware-security modules.<a href="#section-1.1-1" class="pilcrow">¶</a></p>
 <p id="section-1.1-2">Stateful HBS are already profiled or discussed in several deployment-focused specifications and guidance documents. For example, <span>[<a href="#RFC9802" class="cite xref">RFC9802</a>]</span> discusses suitable use cases for stateful HBS in X.509 (including firmware/software signing and CA certificates). The SUIT Mandatory-to-Implement algorithms specification <span>[<a href="#I-D.draft-ietf-suit-mti" class="cite xref">I-D.draft-ietf-suit-mti</a>]</span> defines an asymmetric profile that uses HSS-LMS, providing an interoperability target for software/firmware update IoT ecosystems. Additionally, the NSA <span>[<a href="#CNSA2.0" class="cite xref">CNSA2.0</a>]</span> allows LMS (and XMSS) in specific application scenarios such as firmware/software signing.<a href="#section-1.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1405,7 +1405,7 @@ of the state of the private key.<a href="#section-2.2-1" class="pilcrow">¶</a><
             <p id="section-2.2-3.1.1">to securely update the state before the signature is released,<a href="#section-2.2-3.1.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.2-3.2">
-            <p id="section-2.2-3.2.1">to set up Stateful HBS with a split state and/or private key, so that signatures can
+            <p id="section-2.2-3.2.1">to set up Stateful HBS where the state is separated in distinct, non-overlapping parts, so that signatures can
 be generated from either part without risk of state reuse,<a href="#section-2.2-3.2.1" class="pilcrow">¶</a></p>
 </li>
           <li class="normal" id="section-2.2-3.3">
@@ -1571,7 +1571,7 @@ system is operating in an offline mode that makes delivering these additional
 capabilities all the more complicated and expensive.<a href="#section-3-6" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="requirements-for-secure-state-management">
+<div id="req-state">
 <section id="section-4">
       <h2 id="name-requirements-for-secure-sta">
 <a href="#section-4" class="section-number selfRef">4. </a><a href="#name-requirements-for-secure-sta" class="section-name selfRef">Requirements for Secure State Management</a>
@@ -1668,16 +1668,18 @@ describes a number of approaches and their potential advantages/disadvantages.<a
         <h3 id="name-multiple-public-keys-sp-800">
 <a href="#section-5.1" class="section-number selfRef">5.1. </a><a href="#name-multiple-public-keys-sp-800" class="section-name selfRef">Multiple Public Keys (SP-800-208)</a>
         </h3>
-<p id="section-5.1-1"><span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> proposes generating multiple Stateful HBS keypairs and configuring
-devices and clients to accept signatures created by any of these keys.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
-<p id="section-5.1-2">This negatively impacts one of the advantages of using Stateful HBS by
-increasing the public key footprint within the client, which can be problematic
-if it has limited public key storage capacity. (Though public keys are typically
-equivalently sized to ECDSA rather than larger classical RSA keys often
-currently found.) <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> addresses storage capacity concerns by suggesting
-using a mechanism such as that proposed in <span>[<a href="#RFC8649" class="cite xref">RFC8649</a>]</span> to update the stored
-public key by having the current key endorse the next key that is to be
-installed. Unfortunately, for many constrained devices the public key is
+<p id="section-5.1-1"><span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> proposes generating multiple Stateful HBS keypairs and
+configuring devices and clients to accept signatures created by any of these
+keys. Secondary Stateful HBS keys can be kept in storage until the first keypair
+is exhausted or lost.<a href="#section-5.1-1" class="pilcrow">¶</a></p>
+<p id="section-5.1-2">Accepting multiple public keys negatively impacts one of the advantages of using
+Stateful HBS by increasing the public key footprint within the client, which can
+be problematic if it has limited public key storage capacity. (Though public
+keys are typically equivalently sized to ECDSA rather than larger classical RSA
+keys often currently found.) <span>[<a href="#SP-800-208" class="cite xref">SP-800-208</a>]</span> addresses storage capacity concerns
+by suggesting using a mechanism such as that proposed in <span>[<a href="#RFC8649" class="cite xref">RFC8649</a>]</span> to update
+the stored public key by having the current key endorse the next key that is to
+be installed. Unfortunately, for many constrained devices the public key is
 embedded in immutable ROM or fuses due to security reasons, so it cannot be
 updated in this manner.<a href="#section-5.1-2" class="pilcrow">¶</a></p>
 <p id="section-5.1-3">The proposal of using multiple Stateful HBS keypairs for a single instance also
