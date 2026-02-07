@@ -200,14 +200,14 @@ function. As such, Stateful HBS can serve as an important building block for
 quantum-resistant information and communication technology. Stateful HBS are
 specified in {{?RFC8391}}, {{?RFC8554}}, and NIST {{SP-800-208}}.
 
-The private key of an Stateful HBS is a finite collection of OTS keys and an
-associated data structure which keeps track of which OTS keys have been used.
-This data structure is typically a simple counter and often called an index; we
-refer to it as the __state__ of the private key. Each Stateful HBS private key can be
-used to sign a finite number of messages, and the state must be updated with
-each generated signature.
+The private key of a Stateful HBS is a finite collection of OTS keys (typically
+generated on-demand from a seed) and an associated data structure which keeps
+track of which OTS keys have been used. This data structure is typically a
+simple counter and often called an index; we refer to it as the __state__ of the
+private key. Each Stateful HBS private key can be used to sign a finite number
+of messages, and the state must be updated with each generated signature.
 
-One must not reuse any OTS key that is part of an Stateful HBS private key. If
+One must not reuse any OTS key that is part of a Stateful HBS private key. If
 an attacker is able to obtain signatures for two different messages created
 using the same OTS key, it is computationally feasible for that attacker to
 create forgeries {{BH16}} {{Fluhrer23}}. As noted in
@@ -251,8 +251,8 @@ assumptions, such as ML-DSA {{FIPS204}}, instead. However, if run time, implemen
 size, or signature or key sizes of stateless alternatives are prohibitive, and the
 specific use case allows a very tight control of the signing environment, using
 Stateful HBS may be an appropriate solution. It seems likely that in many
-scenarios, this will only be possible when using purpose-designed hardware, such
-as hardware-security modules.
+scenarios, it is only possible to meet the requirements set out in {{req-state}}
+when using purpose-designed hardware, such as hardware-security modules.
 
 Stateful HBS are already profiled or discussed in several deployment-focused specifications and guidance documents. For example, [RFC9802] discusses suitable use cases for stateful HBS in X.509 (including firmware/software signing and CA certificates). The SUIT Mandatory-to-Implement algorithms specification [I-D.draft-ietf-suit-mti] defines an asymmetric profile that uses HSS-LMS, providing an interoperability target for software/firmware update IoT ecosystems. Additionally, the NSA [CNSA2.0] allows LMS (and XMSS) in specific application scenarios such as firmware/software signing.
 
@@ -292,7 +292,7 @@ This includes mechanisms, which aim:
 
 - to securely update the state before the signature is released,
 
-- to set up Stateful HBS with a split state and/or private key, so that signatures can
+- to set up Stateful HBS where the state is separated in distinct, non-overlapping parts, so that signatures can
   be generated from either part without risk of state reuse,
 
 - to enable partial transfer of unused signature capacity between devices, and optionally merging state fragments without overlap,
@@ -436,7 +436,7 @@ attestation facilities, etc.) must be accounted for as well, particularly if a
 system is operating in an offline mode that makes delivering these additional
 capabilities all the more complicated and expensive.
 
-# Requirements for Secure State Management
+# Requirements for Secure State Management {#req-state}
 
 A system deploying Stateful HBS should fulfill certain requirements to allow securely
 handling the state. The system must ensure that no two signing operations can
@@ -520,17 +520,19 @@ describes a number of approaches and their potential advantages/disadvantages.
 
 ## Multiple Public Keys (SP-800-208)
 
-{{SP-800-208}} proposes generating multiple Stateful HBS keypairs and configuring
-devices and clients to accept signatures created by any of these keys.
+{{SP-800-208}} proposes generating multiple Stateful HBS keypairs and
+configuring devices and clients to accept signatures created by any of these
+keys. Secondary Stateful HBS keys can be kept in storage until the first keypair
+is exhausted or lost.
 
-This negatively impacts one of the advantages of using Stateful HBS by
-increasing the public key footprint within the client, which can be problematic
-if it has limited public key storage capacity. (Though public keys are typically
-equivalently sized to ECDSA rather than larger classical RSA keys often
-currently found.) {{SP-800-208}} addresses storage capacity concerns by suggesting
-using a mechanism such as that proposed in {{?RFC8649}} to update the stored
-public key by having the current key endorse the next key that is to be
-installed. Unfortunately, for many constrained devices the public key is
+Accepting multiple public keys negatively impacts one of the advantages of using
+Stateful HBS by increasing the public key footprint within the client, which can
+be problematic if it has limited public key storage capacity. (Though public
+keys are typically equivalently sized to ECDSA rather than larger classical RSA
+keys often currently found.) {{SP-800-208}} addresses storage capacity concerns
+by suggesting using a mechanism such as that proposed in {{?RFC8649}} to update
+the stored public key by having the current key endorse the next key that is to
+be installed. Unfortunately, for many constrained devices the public key is
 embedded in immutable ROM or fuses due to security reasons, so it cannot be
 updated in this manner.
 
