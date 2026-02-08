@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-05T00:59:45.436997+00:00",
+  "timestamp": "2026-02-08T01:17:03.892764+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -2587,24 +2587,26 @@
       "id": "PR_kwDOLPgbFM7BZdaw",
       "title": "Proposed changes in response to Yaron's review",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/48",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "thomwiggers",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "cf. https://mailarchive.ietf.org/arch/msg/pqc/KCw0uFBKj4cffdyhRC65mvLvOQk/",
       "createdAt": "2026-02-04T08:03:38Z",
-      "updatedAt": "2026-02-04T13:51:07Z",
+      "updatedAt": "2026-02-07T08:18:15Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "a8618ba9e73d837f1f95ca7610d03840b60d2380",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "yaron-review",
       "headRefOid": "95ba5c34aac5777807e009dfb95f6e2b270cefa2",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-07T08:18:13Z",
+      "mergedAt": "2026-02-07T08:18:13Z",
+      "mergedBy": "thomwiggers",
+      "mergeCommit": {
+        "oid": "3bf7abb5de06b1e90125e251493dcf6b3ea3f4f7"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2618,6 +2620,19 @@
           "body": "This looks very good to me, thanks for putting this together Thom!",
           "createdAt": "2026-02-04T13:51:07Z",
           "updatedAt": "2026-02-04T13:51:07Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7gf4NK",
+          "commit": {
+            "abbreviatedOid": "95ba5c3"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM. Thank you!",
+          "createdAt": "2026-02-07T06:41:16Z",
+          "updatedAt": "2026-02-07T06:41:16Z",
           "comments": []
         }
       ]
