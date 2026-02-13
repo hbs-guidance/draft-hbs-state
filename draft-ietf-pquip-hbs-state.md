@@ -308,7 +308,7 @@ This includes mechanisms, which aim:
 Note that in particular implementations of Stateful HBS, or in alternative
 signature mechanisms, the state and private key might be inseparable. For
 example, puncturable schemes {{BSW16}} represent such an alternative; they are
-research-level constructions and are not (at the time of writting) standardized or deployed in
+research-level constructions and are not (at the time of writing) standardized or deployed in
 practice. However, even in these scenarios, this document's guidance should
 still apply.
 
