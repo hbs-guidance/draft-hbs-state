@@ -63,7 +63,7 @@ informative:
   # RFC8391:
   # RFC8554:
   RFC9802:
-  I-D.draft-ietf-suit-mti:
+  I-D.ietf-suit-mti:
 
   CNSA2.0:
     target: https://media.defense.gov/2022/Sep/07/2003071834/-1/-1/0/CSA_CNSA_2.0_ALGORITHMS_.PDF
@@ -173,7 +173,8 @@ informative:
 
 --- abstract
 
-Stateful Hash-Based Signature Schemes (Stateful HBS) such as LMS, HSS, XMSS and
+Stateful Hash-Based Signature Schemes (Stateful HBS) such as Leighton-Micali
+Signature (LMS), Hierarchical Signature System (HSS), eXtended Merkle Signature Scheme (XMSS) and
 XMSS<sup>MT</sup> combine Merkle trees with One-Time Signatures (OTS) to
 provide signatures that are resistant against attacks using large-scale quantum
 computers. Unlike conventional stateless digital signature schemes, Stateful HBS have
@@ -191,7 +192,8 @@ before certain approaches should be considered.
 
 # Introduction
 
-Stateful Hash-Based Signature Schemes (Stateful HBS) such as LMS, HSS, XMSS and
+Stateful Hash-Based Signature Schemes (Stateful HBS) such as Leighton-Micali
+Signature (LMS), Hierarchical Signature System (HSS), eXtended Merkle Signature Scheme (XMSS) and
 XMSS<sup>MT</sup> combine Merkle trees with One-Time Signatures (OTS) in order
 to provide digital signature schemes that remain secure even when large-scale
 quantum computers become available. The theoretic security of Stateful HBS is
@@ -203,7 +205,7 @@ specified in {{?RFC8391}}, {{?RFC8554}}, and NIST {{SP-800-208}}.
 The private key of a Stateful HBS is a finite collection of OTS keys (typically
 generated on-demand from a seed) and an associated data structure which keeps
 track of which OTS keys have been used. This data structure is typically a
-simple counter and often called an index; we refer to it as the __state__ of the
+simple counter and often called an index; this document refers to it as the __state__ of the
 private key. Each Stateful HBS private key can be used to sign a finite number
 of messages, and the state must be updated with each generated signature.
 
@@ -218,7 +220,7 @@ proposes architectural strategies such as a reservation approach, and
 {{ETSI-TR-103-692}} provides a broad analysis of state management challenges and
 risks, this document complements both by cataloging concrete operational
 patterns in {{pot-sol}} and by addressing backup and recovery considerations
-{{alt-backup-mgmt}} not covered in prior work.
+({{alt-backup-mgmt}}) not covered in prior work.
 
 In particular, the challenges below highlight why careful state and backup
 management are essential in Stateful HBS:
@@ -254,11 +256,11 @@ Stateful HBS may be an appropriate solution. It seems likely that in many
 scenarios, it is only possible to meet the requirements set out in {{req-state}}
 when using purpose-designed hardware, such as hardware-security modules.
 
-Stateful HBS are already profiled or discussed in several deployment-focused specifications and guidance documents. For example, [RFC9802] discusses suitable use cases for stateful HBS in X.509 (including firmware/software signing and CA certificates). The SUIT Mandatory-to-Implement algorithms specification [I-D.draft-ietf-suit-mti] defines an asymmetric profile that uses HSS-LMS, providing an interoperability target for software/firmware update IoT ecosystems. Additionally, the NSA [CNSA2.0] allows LMS (and XMSS) in specific application scenarios such as firmware/software signing.
+Stateful HBS are already profiled or discussed in several deployment-focused specifications and guidance documents. For example, [RFC9802] discusses suitable use cases for stateful HBS in X.509 (including firmware/software signing and CA certificates). The Cryptographic Algorithms for Internet of Things (IoT) Devices specification {{I-D.ietf-suit-mti}} defines an asymmetric profile that uses HSS-LMS, providing an interoperability target for software/firmware update IoT ecosystems. Additionally, the NSA [CNSA2.0] allows LMS (and XMSS) in specific application scenarios such as firmware/software signing.
 
 # Specific Terminology in the Context of Stateful HBS
 
-In this section we specify certain notions which are important in the
+This section defines key notions that are important in the
 context of Stateful HBS.
 
 ## Private Key Components
@@ -266,12 +268,12 @@ context of Stateful HBS.
 This section describes the two conceptual components that make up the private
 key material used in Stateful HBS.
 
-private key
+private key:
 : the static, long-lived secret(s) from which OTS private keys are derived.
 This material is stateless: given the scheme parameters, it deterministically
 defines the set of OTS private keys but does not change over time.
 
-state
+state:
 : the dynamically updated data structure that records which OTS key indices
 have been consumed (often a monotone counter). This material is mutable and
 must change on every successful signature.
@@ -298,7 +300,7 @@ This includes mechanisms, which aim:
 - to enable partial transfer of unused signature capacity between devices, and optionally merging state fragments without overlap,
 
 - to enable effective but secure handling of private key and state backup
-  material,
+  material, and
 
 - to guarantee the availability of both the private key and its state across
   the lifetime of the key.
@@ -306,7 +308,7 @@ This includes mechanisms, which aim:
 Note that in particular implementations of Stateful HBS, or in alternative
 signature mechanisms, the state and private key might be inseparable. For
 example, puncturable schemes {{BSW16}} represent such an alternative; they are
-research-level constructions and are not currently standardized or deployed in
+research-level constructions and are not (at the time of writting) standardized or deployed in
 practice. However, even in these scenarios, this document's guidance should
 still apply.
 
@@ -327,30 +329,30 @@ These mechanisms include procedures and protocols, which aim:
   signing device,
 
 - to import an externally stored private key and state to a newly initiated
-  signing device,
+  signing device, and
 
 - allow practicing with backup recovery and to ensure backups are valid.
 
-Backup management can be viewed as a more specific type of state management; we
-make this distinction to clarify the aims of our recommendations.
+Backup management can be viewed as a more specific type of state management. The document
+makes this distinction to clarify the aims of our recommendations.
 
 ## Key Export, Key Import and Key Transfer {#keymovement}
 
-As part of state and backup management, we will discuss mechanisms to export,
-import or transfer private key and state material. In order to avoid
-misunderstandings we now specify these notions more precisely.
+As part of state and backup management, this section discusses mechanisms to export,
+import, or transfer private key and state material. In order to avoid
+misunderstandings, these notions are specified more precisely.
 
-key export
-: mechanism of exporting secret data, which yields (partial) private
+key export:
+: A mechanism of exporting secret data, which yields (partial) private
 key and state material, from the signing device to external storage. This
 external storage may be given in digital or non-digital form.
 
-key import
-: mechanism of importing secret data, which loads (partial) private
+key import:
+: A mechanism of importing secret data, which loads (partial) private
 key and state material, from external storage to the signing device.
 
-key transfer
-: a cryptographically protected transfer of ownership of private key and
+key transfer:
+: A cryptographically protected transfer of ownership of private key and
 state material from one signing device to another.
 
 Systems and architectures relying on key transfer are generally expected to
@@ -360,67 +362,88 @@ reuse.
 Note that, at times, secure variants of the aforementioned primitives may be
 required (e.g., securely importing/exporting the key). In these situations
 cryptographic mechanisms should be utilized to provide assurances related to
-the confidentiality (e.g., utilizing symmetric/asymmetric encryption
+the confidentiality (e.g., utilizing symmetric or asymmetric encryption
 mechanisms) and/or integrity/authenticity (e.g., utilizing digital signatures,
 hash functions, and keyed message authentication codes) of the associated
 operations.
 
 # Operational Considerations
 
+## Assessing Operational Costs
+
 An important aspect of the evaluation of various HBS state and
 backup management options is to consider the operational costs associated with
-the option(s) being evaluated. In the past, a traditional trust infrastructure
+the options being evaluated.
+
+In the past, a conventional trust infrastructure
 solution could utilize straightforward archival procedures to make copies of
-the keys, which could then be distributed geographically to ensure their
+the keys, which may then be distributed geographically to ensure their
 availability and deliver a sufficiently resilient solution, all the while
 enforcing whatever security protocols and procedures were required.
 Unfortunately, Stateful HBS introduce an additional
 constraint in that they need to ensure the state is never re-used. Hence,
-archival procedures used for traditional trust infrastructures have to be
-amended/redesigned to be used as viable options.
+archival procedures used for conventional trust infrastructures have to be
+amended (including redesigned) to be used as viable options.
+
+## Ensuring Long-lived Resilient Solutions
 
 One of the most problematic aspects of providing a long-lived resilient
 solution is simply managing the physical media on which the keys/state are
 stored externally (i.e., outside of the signing device) throughout the course
-of their lifetime. Physical media/devices degrade over time, and the more
+of their lifetime.
+
+Physical media/devices degrade over time, and the more
 complex the media/device, the more likely it is to fail at some point in time
 (e.g., data stored on a CD vs. data stored on a USB drive vs. data stored in a
-Hardware Security Module). Combine that fact with the long lifetimes associated
+Hardware Security Module). Combine that with the long lifetimes associated
 with Stateful HBS keys (e.g., 10-20+ years) and the
 difficulties associated with transferring keys between devices, and one finds
 them self with a perplexing set of challenges that needs to be accounted for in
 any state selection process of a proper state and backup management solution.
-Compounding these complexities is the fact any resilient state management
+
+Compounding these complexities is that any resilient state management
 system should also provide some means to verify the integrity of these
 long-lived backups to ensure they will be valid when they are required, and to
-ensure the operators know how to execute the necessary recovery procedure(s).
+ensure the operators know how to execute the necessary recovery procedures.
 
-Similarly, many of the prescribed state management options require a high
+## Training and Skills
+
+Many of the prescribed state management options require a high
 degree of operator involvement which means one should consider the costs
-associated with training the operator element to ensure processes and procedures
+associated with training the operator element. This is needed to ensure processes and procedures
 are adhered to and failures caught early and corrected before a catastrophic
 loss of security can occur (e.g., accidentally instantiating multiple instances
-of a Stateful HBS key/state). Note that training is not a
+of a Stateful HBS key/state).
+
+Note that training is not a
 fixed one-time cost either as long lifetimes will necessitate succession
 planning amongst the operator element, and training of each successive generation
 of participants. Mechanisms also should be put in place to mitigate the
 ever-present insider threat via mechanisms such as M-of-N controls, ensuring
 least-privileges amongst participants, and enforcing a segregation of duties to
 ensure multiple parties are required to collude to undermine a solution's
-security. Note that the segregation of duties must persist across successive
+security. The segregation of duties must persist across successive
 generations to ensure participants do not acquire multiple roles over time,
 thereby undermining the intended segregation.
 
+## Configurable Warning Thresholds
+
 In addition to the state management, implementers may consider implementing
-mechanisms to prevent abrupt signature exhaustion. Implementations may
+mechanisms to prevent abrupt signature exhaustion.
+
+Implementations may
 consider providing a configurable warning threshold, M, which is triggered
 when M signatures remain. When the number of available signatures reaches
 this threshold, the system should return a 'signatures nearing exhaustion' warning.
 This warning condition should require explicit acknowledgment from the user
 through a mechanism that cannot be trivially skipped.
 
+## Selection of Appropriate Parameter Set
+
 Another important consideration in deploying Stateful HBS is
-the selection of an appropriate parameter set. Given the flexibility of these
+the selection of an appropriate parameter set.
+
+Given the flexibility of these
 schemes — such as adjustable tree heights or Winternitz parameters — there
 exists a large variety of possible configurations. The availability of these
 different configurations offers many trade-offs between signature
@@ -429,7 +452,9 @@ careful attention during the design phase is essential to ensure that the chosen
 parameter set aligns optimally with the specific requirements of the intended
 use case.
 
-Lastly, costs associated with any external dependencies required by a
+## External Dependecies
+
+Costs associated with any external dependencies required by a
 particular solution (e.g., access to a public ledger or transparency log,
 providing accurate time references and synchronization mechanisms, access to
 attestation facilities, etc.) must be accounted for as well, particularly if a
@@ -466,16 +491,16 @@ These requirements impose significant restrictions on the underlying technical
 approach and a careful implementation of how the state will be updated or
 synchronized. The abstraction layers of modern systems can make it particularly
 difficult to guarantee that no two versions of the same state are present. The
-main concerns here are
+main concerns are as follows:
 
 - how the actual storage for the state is implemented,
 
-- how it is modified,
+- how it is modified, and
 
 - how an accidental/intentional failure/glitch might affect the state security.
 
 A system may have a version of the private key stored in non-volatile memory
-(e.g. a disk) and will load it into volatile memory (e.g. RAM) while processing.
+(e.g., a disk) and will load it into volatile memory (e.g., RAM) while processing.
 Here, an implementer must ensure that these are always perfectly synchronized
 {{MCGREW}}, meaning that no parts of the system are allowed to read any version of
 the key during procedures which load, write or modify keys. This can be
@@ -506,7 +531,7 @@ In practice, this can be done if the verifier has access to all signatures
 issued by the signer. As the signatures contain the index of the OTS key used,
 detecting if an index was used more than once becomes trivial. In practice,
 such a (public) data structure which contains all signatures may already be
-present in some use cases (e.g. certificate transparency {{?RFC9162}}) or could
+present in some use cases (e.g., Certificate Transparency {{?RFC9162}}) or could
 be built. It is worth noting that while trusting the signer to not re-use the
 state is a strong assumption, other signature schemes like ECDSA introduce
 similar assumptions for the verifier, by requiring the signer to never re-use
@@ -516,7 +541,7 @@ the nonce.
 
 A variety of potential solutions have been proposed both within the
 {{SP-800-208}} specification, as well as from external sources. This section
-describes a number of approaches and their potential advantages/disadvantages.
+describes a number of approaches and their potential advantages and disadvantages.
 
 ## Multiple Public Keys (SP-800-208)
 
@@ -702,7 +727,7 @@ a use case may be software signing. This solution basically externalizes the
 state management to the to-be signed messages.
 
 Expanding on the given example, for software that is released with strictly
-increasing, simple single-position version numbers (i.e., versions 1, 2, 3...),
+increasing, simple single-position version numbers (i.e., versions 1, 2, 3, ...),
 this can be trivially implemented. As versions have a one-to-one correspondence
 to a Stateful HBS signing state, operators must ensure that versions can only be
 minted a single time. This may require skipping version numbers if a release
@@ -794,7 +819,7 @@ considerations.
 
 ## Interval-based Approaches
 
-The State Reservation Strategy described in section 5 of {{MCGREW}} provides
+The State Reservation Strategy described in Section 5 of {{MCGREW}} provides
 another means of managing the state by allowing users to reserve intervals of
 the signing space, marking the interval's associated OTS keys as being used in
 the overall HBS state, which is then written back to non-volatile memory prior
@@ -822,8 +847,7 @@ given interval, either in part or in whole.
 
 # Backup Management Beyond NIST SP-800-208 {#alt-backup-mgmt}
 
-In this section, an alternative backup mechanism for Stateful HBS is presented in a
-generic form, which makes the strategy applicable for both multi-tree instances
+This section presents in a generic form an alternative backup mechanism for Stateful HBS, which makes the strategy applicable for both multi-tree instances
 XMSS<sup>MT</sup> and HSS.  However, following the same arguments as in
 [](#sectorization), with minor modifications, the presented strategy is also
 applicable for single-tree instances such as XMSS and LMS.
@@ -844,7 +868,7 @@ In this new strategy, after the completed key generation procedure from the
 multi-tree variant approach from {{SP-800-208}}, further bottom-level trees are
 generated, one by one, in one of the hardware modules.  These new  bottom-level
 trees are each generated from a different seed, which is chosen uniformly at
-random.  For the sake of clarity, let us introduce some notation:
+random.  The following notations are introduced for the sake of clarity:
 
 - S denotes the number of these newly generated bottom-level trees.  Note that
   at most 2<sup>h<sub>0</sub></sup> - R new bottom-level trees can be
@@ -866,15 +890,15 @@ steps must be performed:
   used to generate the bottom-level tree,
 
 - export the signature of the root node, the corresponding OTS key index and
-  finally the hash of the seed, using appropriate domain separation (i.e.
+  finally the hash of the seed, using appropriate domain separation (i.e.,
   ensuring there is no domain overlap with the hashes in the Stateful HBS scheme, and
   the hash of the seed includes the public key and leaf index to mitigate
-  multi-target attacks),
+  multi-target attacks), and
 
 - irreversibly delete the seed and the bottom-level tree from the hardware
   module.
 
-The newly generated bottom-level trees (i.e. those bottom-level trees, whose
+The newly generated bottom-level trees (i.e., those bottom-level trees, whose
 indices belong to I<sub>new</sub>) are only used in order to guarantee
 availability in the _worst-case scenario_, where at the same time both
 
@@ -889,21 +913,21 @@ This scenario may, for example, happen if all hardware modules are broken at
 the same time.
 
 As soon as this worst-case scenario occurs, the newly generated bottom-level
-trees (i.e. those bottom-level trees, whose indices belong to I<sub>new</sub>)
+trees (i.e., those bottom-level trees, whose indices belong to I<sub>new</sub>)
 need to be initiated in order to ensure availability. In order to do this the
 following steps must be performed:
 
-- initiate a new hardware module
+- initiate a new hardware module,
 
 - securely _key import_ (as decribed in [](#keymovement)) the first unused seed
-  into this hardware module
+  into this hardware module,
 
-- generate the bottom-level tree corresponding to the seed
+- generate the bottom-level tree corresponding to the seed,
 
-- irreversibly delete the seed from the backup medium
+- irreversibly delete the seed from the backup medium, and
 
 - perform a correctness check by letting the hardware module output the hash of
-  the seed
+  the seed.
 
 Now this bottom-level tree can be used to sign messages. As soon as no more OTS
 on the bottom-level tree are available or as soon as the hardware module is
