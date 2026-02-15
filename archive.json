@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-08T01:17:03.892764+00:00",
+  "timestamp": "2026-02-15T01:04:08.105229+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -2633,6 +2633,165 @@
           "body": "LGTM. Thank you!",
           "createdAt": "2026-02-07T06:41:16Z",
           "updatedAt": "2026-02-07T06:41:16Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 49,
+      "id": "PR_kwDOLPgbFM7DfUcQ",
+      "title": "nits and minor edits  from Med's IESG review",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/49",
+      "state": "OPEN",
+      "author": "boucadair",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2026-02-13T07:56:30Z",
+      "updatedAt": "2026-02-13T16:40:52Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "3bf7abb5de06b1e90125e251493dcf6b3ea3f4f7",
+      "headRepository": "boucadair/draft-hbs-state",
+      "headRefName": "patch-1",
+      "headRefOid": "312aa7ada2b6b6fdd8eba422cdfc0d34b3b5d329",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7iQK8P",
+          "commit": {
+            "abbreviatedOid": "7ada8c7"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Looks good, appreciate it!",
+          "createdAt": "2026-02-13T08:59:04Z",
+          "updatedAt": "2026-02-13T08:59:04Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7iYdHm",
+          "commit": {
+            "abbreviatedOid": "7ada8c7"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-13T15:58:23Z",
+          "updatedAt": "2026-02-13T15:58:23Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "```suggestion\nSignatures (LMS), Hierarchical Signature System (HSS), eXtended Merkle Signature Scheme (XMSS) and\n```\nI think it should be plural when looking at RFC8554.",
+              "createdAt": "2026-02-13T15:58:23Z",
+              "updatedAt": "2026-02-13T15:58:23Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7iYdXM",
+          "commit": {
+            "abbreviatedOid": "7ada8c7"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-13T15:58:37Z",
+          "updatedAt": "2026-02-13T15:58:37Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "```suggestion\nSignatures (LMS), Hierarchical Signature System (HSS), eXtended Merkle Signature Scheme (XMSS) and\n```",
+              "createdAt": "2026-02-13T15:58:37Z",
+              "updatedAt": "2026-02-13T15:58:37Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7iYd4e",
+          "commit": {
+            "abbreviatedOid": "7ada8c7"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-13T15:59:04Z",
+          "updatedAt": "2026-02-13T15:59:05Z",
+          "comments": [
+            {
+              "originalPosition": 90,
+              "body": "```suggestion\nresearch-level constructions and are not (at the time of writing) standardized or deployed in\n```\nTypo",
+              "createdAt": "2026-02-13T15:59:04Z",
+              "updatedAt": "2026-02-13T15:59:05Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7iYho3",
+          "commit": {
+            "abbreviatedOid": "7ada8c7"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "CHANGES_REQUESTED",
+          "body": "Apart from some minor typos, great!\nThank you for the thorough review.",
+          "createdAt": "2026-02-13T16:02:23Z",
+          "updatedAt": "2026-02-13T16:02:23Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7iYhxf",
+          "commit": {
+            "abbreviatedOid": "7ada8c7"
+          },
+          "author": "boucadair",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-13T16:02:29Z",
+          "updatedAt": "2026-02-13T16:02:30Z",
+          "comments": [
+            {
+              "originalPosition": 15,
+              "body": "Feel free to commit the change, but that RFC has the following:\r\n\r\n> In this note, we describe the Leighton-Micali Signature (LMS)",
+              "createdAt": "2026-02-13T16:02:29Z",
+              "updatedAt": "2026-02-13T16:02:30Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7iZRTp",
+          "commit": {
+            "abbreviatedOid": "312aa7a"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "LGTM",
+          "createdAt": "2026-02-13T16:40:31Z",
+          "updatedAt": "2026-02-13T16:40:31Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7iZR41",
+          "commit": {
+            "abbreviatedOid": "312aa7a"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2026-02-13T16:40:52Z",
+          "updatedAt": "2026-02-13T16:40:52Z",
           "comments": []
         }
       ]
