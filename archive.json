@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-15T01:04:08.105229+00:00",
+  "timestamp": "2026-02-24T00:59:13.118701+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -2642,24 +2642,26 @@
       "id": "PR_kwDOLPgbFM7DfUcQ",
       "title": "nits and minor edits  from Med's IESG review",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/49",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "boucadair",
-      "authorAssociation": "NONE",
+      "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2026-02-13T07:56:30Z",
-      "updatedAt": "2026-02-13T16:40:52Z",
+      "updatedAt": "2026-02-22T05:53:26Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "3bf7abb5de06b1e90125e251493dcf6b3ea3f4f7",
       "headRepository": "boucadair/draft-hbs-state",
       "headRefName": "patch-1",
       "headRefOid": "312aa7ada2b6b6fdd8eba422cdfc0d34b3b5d329",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2026-02-22T05:53:25Z",
+      "mergedAt": "2026-02-22T05:53:25Z",
+      "mergedBy": "fluppe2",
+      "mergeCommit": {
+        "oid": "e7a5d7ee617c562a46910551409835bf7962cb12"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2754,7 +2756,7 @@
             "abbreviatedOid": "7ada8c7"
           },
           "author": "boucadair",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-13T16:02:29Z",
@@ -2792,6 +2794,46 @@
           "body": "",
           "createdAt": "2026-02-13T16:40:52Z",
           "updatedAt": "2026-02-13T16:40:52Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 50,
+      "id": "PR_kwDOLPgbFM7Fbkay",
+      "title": "Address Gen-ART review (Peter Yee) \u2013 editorial fixes and clarifications",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/50",
+      "state": "OPEN",
+      "author": "fluppe2",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses all comments/nits of https://mailarchive.ietf.org/arch/msg/pqc/uy4xgZbym93aFh7Ngg2Pmla8Hrc/",
+      "createdAt": "2026-02-22T08:03:42Z",
+      "updatedAt": "2026-02-23T00:22:24Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "e7a5d7ee617c562a46910551409835bf7962cb12",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "peter-yee-review",
+      "headRefOid": "e5103145be179bb74babf2d47c20d5ca9d8b15c8",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7kzmK9",
+          "commit": {
+            "abbreviatedOid": "e510314"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "I disagree with Peter's comments that affected the changes in lines 308 (remove comma after \"HBS\") and 753 (adding comma after \"simple\"), but I'll defer to the majority on those as they're minor nitpicks.\n\nWe should also change lines 448-449 to add a hyphen so that it reads \"centrally-managed\".\n\nOtherwise, this looks great.  Thanks!",
+          "createdAt": "2026-02-23T00:22:24Z",
+          "updatedAt": "2026-02-23T00:22:24Z",
           "comments": []
         }
       ]
