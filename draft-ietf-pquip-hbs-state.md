@@ -200,7 +200,7 @@ quantum computers become available. The theoretic security of Stateful HBS is
 well understood and depends only on the security of the underlying hash
 function. As such, Stateful HBS can serve as an important building block for
 quantum-resistant information and communication technology. Stateful HBS are
-specified in {{!RFC8391}}, {{!RFC8554}}, and NIST {{SP.800-208}}.
+specified in {{!RFC8391}}, {{!RFC8554}}, and NIST {{SP.800-208}}, and we recommend Sec. 1 and 3 of {{SP.800-208}} as background for this document.
 
 The private key of a Stateful HBS is a finite collection of OTS keys (typically
 generated on-demand from a seed) and an associated data structure which keeps
