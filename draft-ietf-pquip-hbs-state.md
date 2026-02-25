@@ -58,6 +58,25 @@ author:
 # Thom notes: you can handle RFCs implicitly by using {?RFC1234} (informative) and {!RFC1234} (normative)
 normative:
 
+  SP.800-208:
+    target: https://doi.org/10.6028/NIST.SP.800-208
+    title: "NIST SP 800-208: Recommendation for Stateful Hash-Based Signature Schemes"
+    author:
+      - ins: D. Cooper
+        name: David Cooper
+      - ins: D. Apon
+        name: David Apon
+      - ins: Q. Dang
+        name: Quynh Dang
+      - ins: M. Davidson
+        name: Michael Davidson
+      - ins: M. Dworkin
+        name: Morris Dworkin
+      - ins: C. Miller
+        name: Carl Miller
+    date: October 2020
+    seriesinfo: NIST Special Publication
+
 informative:
   # I-D.draft-fluhrer-lms-more-parm-sets:
   # RFC8391:
@@ -85,25 +104,6 @@ informative:
       - ins: J. Buchmann
     date: 2016-11-02
     seriesinfo: Security Standardization Research 2016
-
-  SP.800-208:
-    target: https://doi.org/10.6028/NIST.SP.800-208
-    title: "NIST SP 800-208: Recommendation for Stateful Hash-Based Signature Schemes"
-    author:
-      - ins: D. Cooper
-        name: David Cooper
-      - ins: D. Apon
-        name: David Apon
-      - ins: Q. Dang
-        name: Quynh Dang
-      - ins: M. Davidson
-        name: Michael Davidson
-      - ins: M. Dworkin
-        name: Morris Dworkin
-      - ins: C. Miller
-        name: Carl Miller
-    date: October 2020
-    seriesinfo: NIST Special Publication
 
   FIPS204:
     target: https://doi.org/10.6028/NIST.FIPS.204
@@ -200,7 +200,7 @@ quantum computers become available. The theoretic security of Stateful HBS is
 well understood and depends only on the security of the underlying hash
 function. As such, Stateful HBS can serve as an important building block for
 quantum-resistant information and communication technology. Stateful HBS are
-specified in {{?RFC8391}}, {{?RFC8554}}, and NIST {{SP.800-208}}.
+specified in {{!RFC8391}}, {{!RFC8554}}, and NIST {{SP.800-208}}.
 
 The private key of a Stateful HBS is a finite collection of OTS keys (typically
 generated on-demand from a seed) and an associated data structure which keeps
@@ -269,7 +269,7 @@ This section describes the two conceptual components that make up the private
 key material used in Stateful HBS.
 
 **private key:**
-the static, long-lived secret(s) from which OTS private keys are derived.
+the static, long-lived secret(s) from which the underlying OTS private keys are derived.
 This material is stateless: given the scheme parameters, it deterministically
 defines the set of OTS private keys but does not change over time.
 
@@ -320,7 +320,7 @@ associated states should be considered as part of a security architecture.
 
 In this document, _backup management_ refers to all mechanisms surrounding the
 goal to guarantee the availability of the private key and state, but with
-special care to avoid state reuse by rolling back to a state in which
+special care to avoid state reuse by not rolling back to a state in which
 already-used OTS keys are still available.
 
 These mechanisms include procedures and protocols that aim to:
@@ -515,8 +515,8 @@ main concerns are as follows:
 A system may have a version of the private key stored in non-volatile memory
 (e.g., a disk) and will load it into volatile memory (e.g., RAM) while processing.
 Here, an implementer must ensure that these are always perfectly synchronized
-{{MCGREW}}, meaning that no parts of the system are allowed to read any version of
-the key during procedures which load, write, or modify keys. This can be
+{{MCGREW}}, meaning that no other parts of the system are allowed to read any version of
+the key during procedures which are currently loading, writing, or modifying keys. This can be
 particularly challenging if there are additional abstraction layers present in
 the system, like additional caches which may affect reading/writing the state
 and its potential existence in multiple locations.
@@ -547,7 +547,7 @@ such a (public) data structure which contains all signatures may already be
 present in some use cases (e.g., Certificate Transparency {{?RFC9162}}) or could
 be built. It is worth noting that while trusting the signer to not re-use the
 state is a strong assumption, other signature schemes like ECDSA introduce
-similar assumptions for the verifier, by requiring the signer to never re-use
+similar assumptions, by requiring the signer to never re-use
 the nonce.
 
 # Potential State Management Approaches {#pot-sol}
@@ -632,7 +632,8 @@ system operators to rely on devices well beyond their expected lifetimes of
 Distributed multi-trees attempt to partition a Stateful HBS signing space
 amongst multiple cryptographic modules by breaking up the signing space along
 the boundaries of the subordinate trees generated during the multi-tree key
-generation process. An alternative approach would be to use only a single tree,
+generation process. An alternative approach based on the state reservation concept
+described in Section 5 of {{MCGREW}} would be to use only a single tree,
 and partition its signature space along some power-of-2 less than the total
 number of leaves in the tree (e.g., 2<sup>s</sup> for a tree of height h > s),
 creating N = 2<sup>h-s</sup> partitions or sectors, which are instantiated as N
@@ -967,7 +968,7 @@ signature over the complete tree.
 
 Security considerations are given throughout this document. Further security
 considerations, which are not already covered in this document, are given in
-{{SP.800-208}}, {{MCGREW}}, {{FIPS205}}, {{?RFC8391}} and {{?RFC8554}}.
+{{SP.800-208}}, {{MCGREW}}, {{FIPS205}}, {{!RFC8391}} and {{!RFC8554}}.
 
 # IANA Considerations
 
