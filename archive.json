@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-24T00:59:13.118701+00:00",
+  "timestamp": "2026-02-26T00:58:01.923648+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -2803,25 +2803,42 @@
       "id": "PR_kwDOLPgbFM7Fbkay",
       "title": "Address Gen-ART review (Peter Yee) \u2013 editorial fixes and clarifications",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/50",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "fluppe2",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses all comments/nits of https://mailarchive.ietf.org/arch/msg/pqc/uy4xgZbym93aFh7Ngg2Pmla8Hrc/",
       "createdAt": "2026-02-22T08:03:42Z",
-      "updatedAt": "2026-02-23T00:22:24Z",
+      "updatedAt": "2026-02-25T14:47:28Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "e7a5d7ee617c562a46910551409835bf7962cb12",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "peter-yee-review",
       "headRefOid": "e5103145be179bb74babf2d47c20d5ca9d8b15c8",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
-      "comments": [],
+      "closedAt": "2026-02-25T14:47:26Z",
+      "mergedAt": "2026-02-25T14:47:26Z",
+      "mergedBy": "crypto4a",
+      "mergeCommit": {
+        "oid": "bcd437be5a30bced4b29019adc91b2dbc487e6e9"
+      },
+      "comments": [
+        {
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "> I disagree with Peter's comments that affected the changes in lines 308 (remove comma after \"HBS\") and 753 (adding comma after \"simple\"), but I'll defer to the majority on those as they're minor nitpicks.\r\n> \r\n> We should also change lines 448-449 to add a hyphen so that it reads \"centrally-managed\".\r\n> \r\n> Otherwise, this looks great. Thanks!\r\n\r\nMy naive german/greek mind/feeling is:\r\n\r\nI think that deleting the comma after \"HBS\" in line 308 is correct as we have a parallel coordination of two alternatives and not a listing.\r\n\r\nAlso I think that Peter is correct requesting a comma after \"simple\" in 753 as we could interprete \"simple\" as being a third adjective for \"version numbers\". I think we can permute those three adjectives and/or insert an \"and\", so that would qualify for inserting a comma after \"simple\". If we instead meant \"simple single-position\" in conjunction, than we should delete \"simple\" as it seems to me to be redundant (what would \"complicated single-position\" be?).\r\n\r\nDon't know...",
+          "createdAt": "2026-02-25T08:16:01Z",
+          "updatedAt": "2026-02-25T08:16:01Z"
+        },
+        {
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "body": "Hi Stavros, thanks for taking the time to consider my feedback! I'm fine with leaving things as written as I'm no English major so it's very likely I'm mistaken.",
+          "createdAt": "2026-02-25T12:53:12Z",
+          "updatedAt": "2026-02-25T12:53:12Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOLPgbFM7kzmK9",
@@ -2835,6 +2852,112 @@
           "createdAt": "2026-02-23T00:22:24Z",
           "updatedAt": "2026-02-23T00:22:24Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7luvPR",
+          "commit": {
+            "abbreviatedOid": "e510314"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Thanks for actioning",
+          "createdAt": "2026-02-25T13:20:14Z",
+          "updatedAt": "2026-02-25T13:20:14Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7lvvKn",
+          "commit": {
+            "abbreviatedOid": "e510314"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Thanks for considering my concerns Stavros, I'm fine with leaving things as you've suggested based on your feedback.",
+          "createdAt": "2026-02-25T14:08:04Z",
+          "updatedAt": "2026-02-25T14:08:04Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7lwJoJ",
+          "commit": {
+            "abbreviatedOid": "e510314"
+          },
+          "author": "BashiriK",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "Looks good to me, tjhank you for your efforts. ",
+          "createdAt": "2026-02-25T14:25:17Z",
+          "updatedAt": "2026-02-25T14:25:17Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 51,
+      "id": "PR_kwDOLPgbFM7GRFik",
+      "title": "Address SECDIR review (Yaron Sheffer) and Deb Cooley's comments ",
+      "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/51",
+      "state": "OPEN",
+      "author": "crypto4a",
+      "authorAssociation": "CONTRIBUTOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Addresses all comments/nits of two reviews:\r\n- Yaron Sheffer's SECDIR review: https://mailarchive.ietf.org/arch/msg/pqc/hcUWbpOZz3WW3hShZypDp9ZNVJc/\r\n- Deb Cooley's review: https://mailarchive.ietf.org/arch/msg/pqc/-YjPtIPPu1DeCS7O3SqLnYkM0uM/",
+      "createdAt": "2026-02-25T15:39:23Z",
+      "updatedAt": "2026-02-25T19:49:11Z",
+      "baseRepository": "hbs-guidance/draft-hbs-state",
+      "baseRefName": "main",
+      "baseRefOid": "bcd437be5a30bced4b29019adc91b2dbc487e6e9",
+      "headRepository": "hbs-guidance/draft-hbs-state",
+      "headRefName": "yaron-deb-review",
+      "headRefOid": "7130ce03e63d05e1d8da872d7ad6f5251a9f9472",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOLPgbFM7l1Dxj",
+          "commit": {
+            "abbreviatedOid": "1bac1ce"
+          },
+          "author": "yaronf",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-25T17:58:33Z",
+          "updatedAt": "2026-02-25T17:58:34Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "```suggestion\nspecified in {{!RFC8391}}, {{!RFC8554}}, and NIST {{SP.800-208}}, and we recommend Sec. 1 and 3 of {{SP.800-208}} as background for this document.\n```",
+              "createdAt": "2026-02-25T17:58:33Z",
+              "updatedAt": "2026-02-25T17:58:34Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7l3amw",
+          "commit": {
+            "abbreviatedOid": "1bac1ce"
+          },
+          "author": "crypto4a",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2026-02-25T19:48:12Z",
+          "updatedAt": "2026-02-25T19:48:12Z",
+          "comments": [
+            {
+              "originalPosition": 57,
+              "body": "Thanks Yaron, this is a good addition to the text which we'll incorporate.",
+              "createdAt": "2026-02-25T19:48:12Z",
+              "updatedAt": "2026-02-25T19:48:12Z"
+            }
+          ]
         }
       ]
     }
