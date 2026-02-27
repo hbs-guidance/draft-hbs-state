@@ -5,14 +5,14 @@
 Post-Quantum Use In Protocols                                 T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 29 August 2026                                              BSI
+Expires: 31 August 2026                                              BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                        25 February 2026
+                                                        27 February 2026
 
 
            Hash-based Signatures: State and Backup Management
@@ -69,7 +69,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 August 2026.
+   This Internet-Draft will expire on 31 August 2026.
 
 Copyright Notice
 
@@ -115,7 +115,9 @@ Table of Contents
    6.  Backup Management Beyond NIST SP 800-208
    7.  Security Considerations
    8.  IANA Considerations
-   9.  Informative References
+   9.  References
+     9.1.  Normative References
+     9.2.  Informative References
    Acknowledgments
    Contributors
    Authors' Addresses
@@ -132,7 +134,8 @@ Table of Contents
    hash function.  As such, Stateful HBS can serve as an important
    building block for quantum-resistant information and communication
    technology.  Stateful HBS are specified in [RFC8391], [RFC8554], and
-   NIST [SP.800-208].
+   NIST [SP.800-208], and we recommend Sections 1 and 3 of [SP.800-208]
+   as background for this document.
 
    The private key of a Stateful HBS is a finite collection of OTS keys
    (typically generated on-demand from a seed) and an associated data
@@ -221,10 +224,10 @@ Table of Contents
    This section describes the two conceptual components that make up the
    private key material used in Stateful HBS.
 
-   *private key:* the static, long-lived secret(s) from which OTS
-   private keys are derived.  This material is stateless: given the
-   scheme parameters, it deterministically defines the set of OTS
-   private keys but does not change over time.
+   *private key:* the static, long-lived secret(s) from which the
+   underlying OTS private keys are derived.  This material is stateless:
+   given the scheme parameters, it deterministically defines the set of
+   OTS private keys but does not change over time.
 
    *state:* the dynamically updated data structure that records which
    OTS key indices have been consumed (often a monotone counter).  This
@@ -276,8 +279,8 @@ Table of Contents
 
    In this document, _backup management_ refers to all mechanisms
    surrounding the goal to guarantee the availability of the private key
-   and state, but with special care to avoid state reuse by rolling back
-   to a state in which already-used OTS keys are still available.
+   and state, but with special care to avoid state reuse by not rolling
+   back to a state in which already-used OTS keys are still available.
 
    These mechanisms include procedures and protocols that aim to:
 
@@ -302,14 +305,12 @@ Table of Contents
    specified more precisely.
 
    *key export:* A mechanism of exporting secret data, which yields
-   (partial) private key and state material, from the signing device to
-   external storage.  This material may represent the entire key/state
-   or only a fragment thereof (e.g., in distributed deployments).  The
-   external storage may be given in digital or non-digital form.
+   private key and state material, from the signing device to external
+   storage.
 
    *key import:* A mechanism of importing secret data, which loads
-   (partial) private key and state material, from external storage to
-   the signing device.
+   private key and state material, from external storage to the signing
+   device.
 
    *key transfer:* A cryptographically protected transfer of ownership
    of private key and state material from one signing device to another.
@@ -482,13 +483,13 @@ Table of Contents
    A system may have a version of the private key stored in non-volatile
    memory (e.g., a disk) and will load it into volatile memory (e.g.,
    RAM) while processing.  Here, an implementer must ensure that these
-   are always perfectly synchronized [MCGREW], meaning that no parts of
-   the system are allowed to read any version of the key during
-   procedures which load, write, or modify keys.  This can be
-   particularly challenging if there are additional abstraction layers
-   present in the system, like additional caches which may affect
-   reading/writing the state and its potential existence in multiple
-   locations.
+   are always perfectly synchronized [MCGREW], meaning that no other
+   parts of the system are allowed to read any version of the key during
+   procedures which are currently loading, writing, or modifying keys.
+   This can be particularly challenging if there are additional
+   abstraction layers present in the system, like additional caches
+   which may affect reading/writing the state and its potential
+   existence in multiple locations.
 
    Cloning is another concern, as it can easily lead to re-using the
    same state.  This can happen for instance if a process which issues a
@@ -519,8 +520,8 @@ Table of Contents
    (e.g., Certificate Transparency [RFC9162]) or could be built.  It is
    worth noting that while trusting the signer to not re-use the state
    is a strong assumption, other signature schemes like ECDSA introduce
-   similar assumptions for the verifier, by requiring the signer to
-   never re-use the nonce.
+   similar assumptions, by requiring the signer to never re-use the
+   nonce.
 
 5.  Potential State Management Approaches
 
@@ -617,17 +618,19 @@ Table of Contents
    space amongst multiple cryptographic modules by breaking up the
    signing space along the boundaries of the subordinate trees generated
    during the multi-tree key generation process.  An alternative
-   approach would be to use only a single tree, and partition its
-   signature space along some power-of-2 less than the total number of
-   leaves in the tree (e.g., 2^s for a tree of height h > s), creating N
-   = 2^(h-s) partitions or sectors, which are instantiated as N height-s
-   Merkle trees whose root nodes are considered interior nodes of the
-   overall height-h Merkle tree.  Hence, there is no additional OTS
-   required to sign their root nodes; their values are used as-is in the
-   tree ascent mechanism of the underlying Stateful HBS scheme, yielding
-   a common public key (i.e., root node) for all sectors.  Care must be
-   taken to ensure that each sector uses the same root tree identifier
-   (i.e., the "I" value for HSS/LMS and "root" value for XMSS/XMSS^MT).
+   approach based on the state reservation concept described in
+   Section 5 of [MCGREW] would be to use only a single tree, and
+   partition its signature space along some power-of-2 less than the
+   total number of leaves in the tree (e.g., 2^s for a tree of height h
+   > s), creating N = 2^(h-s) partitions or sectors, which are
+   instantiated as N height-s Merkle trees whose root nodes are
+   considered interior nodes of the overall height-h Merkle tree.
+   Hence, there is no additional OTS required to sign their root nodes;
+   their values are used as-is in the tree ascent mechanism of the
+   underlying Stateful HBS scheme, yielding a common public key (i.e.,
+   root node) for all sectors.  Care must be taken to ensure that each
+   sector uses the same root tree identifier (i.e., the "I" value for
+   HSS/LMS and "root" value for XMSS/XMSS^MT).
 
    Each of the N sectors' OTS private key values can be generated
    pseudo-randomly from a unique seed value generated from an
@@ -993,7 +996,27 @@ Table of Contents
 
    This document has no IANA actions.
 
-9.  Informative References
+9.  References
+
+9.1.  Normative References
+
+   [RFC8391]  Huelsing, A., Butin, D., Gazdag, S., Rijneveld, J., and A.
+              Mohaisen, "XMSS: eXtended Merkle Signature Scheme",
+              RFC 8391, DOI 10.17487/RFC8391, May 2018,
+              <https://www.rfc-editor.org/rfc/rfc8391>.
+
+   [RFC8554]  McGrew, D., Curcio, M., and S. Fluhrer, "Leighton-Micali
+              Hash-Based Signatures", RFC 8554, DOI 10.17487/RFC8554,
+              April 2019, <https://www.rfc-editor.org/rfc/rfc8554>.
+
+   [SP.800-208]
+              Cooper, D., Apon, D., Dang, Q., Davidson, M., Dworkin, M.,
+              and C. Miller, "NIST SP 800-208: Recommendation for
+              Stateful Hash-Based Signature Schemes", NIST Special
+              Publication , October 2020,
+              <https://doi.org/10.6028/NIST.SP.800-208>.
+
+9.2.  Informative References
 
    [BH16]     Bruinderink, L. and A. Hülsing, "Oops, I did it again –
               Security of One-Time Signatures under Two-Message
@@ -1051,19 +1074,10 @@ Table of Contents
               2016 , 2 November 2016,
               <https://eprint.iacr.org/2016/357.pdf>.
 
-   [RFC8391]  Huelsing, A., Butin, D., Gazdag, S., Rijneveld, J., and A.
-              Mohaisen, "XMSS: eXtended Merkle Signature Scheme",
-              RFC 8391, DOI 10.17487/RFC8391, May 2018,
-              <https://www.rfc-editor.org/rfc/rfc8391>.
-
    [RFC8411]  Schaad, J. and R. Andrews, "IANA Registration for the
               Cryptographic Algorithm Object Identifier Range",
               RFC 8411, DOI 10.17487/RFC8411, August 2018,
               <https://www.rfc-editor.org/rfc/rfc8411>.
-
-   [RFC8554]  McGrew, D., Curcio, M., and S. Fluhrer, "Leighton-Micali
-              Hash-Based Signatures", RFC 8554, DOI 10.17487/RFC8554,
-              April 2019, <https://www.rfc-editor.org/rfc/rfc8554>.
 
    [RFC8649]  Housley, R., "Hash Of Root Key Certificate Extension",
               RFC 8649, DOI 10.17487/RFC8649, August 2019,
@@ -1078,13 +1092,6 @@ Table of Contents
               Algorithms in Internet X.509 Public Key Infrastructure",
               RFC 9802, DOI 10.17487/RFC9802, June 2025,
               <https://www.rfc-editor.org/rfc/rfc9802>.
-
-   [SP.800-208]
-              Cooper, D., Apon, D., Dang, Q., Davidson, M., Dworkin, M.,
-              and C. Miller, "NIST SP 800-208: Recommendation for
-              Stateful Hash-Based Signature Schemes", NIST Special
-              Publication , October 2020,
-              <https://doi.org/10.6028/NIST.SP.800-208>.
 
    [TIMEFALSEHOODS]
               Visée, T., "Falsehoods programmers believe about time",
