@@ -343,7 +343,7 @@ import, or transfer private key and state material. In order to avoid
 misunderstandings, these notions are specified more precisely.
 
 **key export:**
-A mechanism of exporting secret data, which yields 
+A mechanism of exporting secret data, which yields
 private key and state material, from the signing device to external storage.
 
 **key import:**
