@@ -200,7 +200,7 @@ quantum computers become available. The theoretic security of Stateful HBS is
 well understood and depends only on the security of the underlying hash
 function. As such, Stateful HBS can serve as an important building block for
 quantum-resistant information and communication technology. Stateful HBS are
-specified in {{!RFC8391}}, {{!RFC8554}}, and NIST {{SP.800-208}}, and we recommend Sec. 1 and 3 of {{SP.800-208}} as background for this document.
+specified in {{!RFC8391}}, {{!RFC8554}}, and NIST {{SP.800-208}}, and we recommend Sections 1 and 3 of {{SP.800-208}} as background for this document.
 
 The private key of a Stateful HBS is a finite collection of OTS keys (typically
 generated on-demand from a seed) and an associated data structure which keeps
@@ -343,14 +343,11 @@ import, or transfer private key and state material. In order to avoid
 misunderstandings, these notions are specified more precisely.
 
 **key export:**
-A mechanism of exporting secret data, which yields (partial)
+A mechanism of exporting secret data, which yields 
 private key and state material, from the signing device to external storage.
-This material may represent the entire key/state or only a fragment thereof
-(e.g., in distributed deployments). The external storage may be given in
-digital or non-digital form.
 
 **key import:**
-A mechanism of importing secret data, which loads (partial) private
+A mechanism of importing secret data, which loads private
 key and state material, from external storage to the signing device.
 
 **key transfer:**
