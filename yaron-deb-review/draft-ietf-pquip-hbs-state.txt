@@ -5,14 +5,14 @@
 Post-Quantum Use In Protocols                                 T. Wiggers
 Internet-Draft                                                  PQShield
 Intended status: Informational                                K. Bashiri
-Expires: 29 August 2026                                              BSI
+Expires: 31 August 2026                                              BSI
                                                                 S. Kölbl
                                                                   Google
                                                               J. Goodman
                                                    Crypto4A Technologies
                                                              S. Kousidis
                                                                      BSI
-                                                        25 February 2026
+                                                        27 February 2026
 
 
            Hash-based Signatures: State and Backup Management
@@ -69,7 +69,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 29 August 2026.
+   This Internet-Draft will expire on 31 August 2026.
 
 Copyright Notice
 
@@ -134,8 +134,8 @@ Table of Contents
    hash function.  As such, Stateful HBS can serve as an important
    building block for quantum-resistant information and communication
    technology.  Stateful HBS are specified in [RFC8391], [RFC8554], and
-   NIST [SP.800-208], and we recommend Sec. 1 and 3 of [SP.800-208] as
-   background for this document.
+   NIST [SP.800-208], and we recommend Sections 1 and 3 of [SP.800-208]
+   as background for this document.
 
    The private key of a Stateful HBS is a finite collection of OTS keys
    (typically generated on-demand from a seed) and an associated data
@@ -305,14 +305,12 @@ Table of Contents
    specified more precisely.
 
    *key export:* A mechanism of exporting secret data, which yields
-   (partial) private key and state material, from the signing device to
-   external storage.  This material may represent the entire key/state
-   or only a fragment thereof (e.g., in distributed deployments).  The
-   external storage may be given in digital or non-digital form.
+   private key and state material, from the signing device to external
+   storage.
 
    *key import:* A mechanism of importing secret data, which loads
-   (partial) private key and state material, from external storage to
-   the signing device.
+   private key and state material, from external storage to the signing
+   device.
 
    *key transfer:* A cryptographically protected transfer of ownership
    of private key and state material from one signing device to another.
