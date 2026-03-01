@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2026-02-26T00:58:01.923648+00:00",
+  "timestamp": "2026-03-01T01:06:37.019984+00:00",
   "repo": "hbs-guidance/draft-hbs-state",
   "labels": [
     {
@@ -2899,24 +2899,26 @@
       "id": "PR_kwDOLPgbFM7GRFik",
       "title": "Address SECDIR review (Yaron Sheffer) and Deb Cooley's comments ",
       "url": "https://github.com/hbs-guidance/draft-hbs-state/pull/51",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "crypto4a",
       "authorAssociation": "CONTRIBUTOR",
       "assignees": [],
       "labels": [],
       "body": "Addresses all comments/nits of two reviews:\r\n- Yaron Sheffer's SECDIR review: https://mailarchive.ietf.org/arch/msg/pqc/hcUWbpOZz3WW3hShZypDp9ZNVJc/\r\n- Deb Cooley's review: https://mailarchive.ietf.org/arch/msg/pqc/-YjPtIPPu1DeCS7O3SqLnYkM0uM/",
       "createdAt": "2026-02-25T15:39:23Z",
-      "updatedAt": "2026-02-25T19:49:11Z",
+      "updatedAt": "2026-02-27T18:18:22Z",
       "baseRepository": "hbs-guidance/draft-hbs-state",
       "baseRefName": "main",
       "baseRefOid": "bcd437be5a30bced4b29019adc91b2dbc487e6e9",
       "headRepository": "hbs-guidance/draft-hbs-state",
       "headRefName": "yaron-deb-review",
-      "headRefOid": "7130ce03e63d05e1d8da872d7ad6f5251a9f9472",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "486e2baced53233230e3906aa75d2e47d0f7dd91",
+      "closedAt": "2026-02-27T18:18:20Z",
+      "mergedAt": "2026-02-27T18:18:20Z",
+      "mergedBy": "crypto4a",
+      "mergeCommit": {
+        "oid": "4ee80a2845bee9f77e6f877ddf89fea407dec5c0"
+      },
       "comments": [],
       "reviews": [
         {
@@ -2925,7 +2927,7 @@
             "abbreviatedOid": "1bac1ce"
           },
           "author": "yaronf",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2026-02-25T17:58:33Z",
@@ -2958,6 +2960,32 @@
               "updatedAt": "2026-02-25T19:48:12Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7mi5G8",
+          "commit": {
+            "abbreviatedOid": "486e2ba"
+          },
+          "author": "thomwiggers",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "thanks!",
+          "createdAt": "2026-02-27T16:37:46Z",
+          "updatedAt": "2026-02-27T16:37:46Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOLPgbFM7mjFXT",
+          "commit": {
+            "abbreviatedOid": "486e2ba"
+          },
+          "author": "fluppe2",
+          "authorAssociation": "CONTRIBUTOR",
+          "state": "APPROVED",
+          "body": "LGTM. Thank you.",
+          "createdAt": "2026-02-27T16:46:36Z",
+          "updatedAt": "2026-02-27T16:46:37Z",
+          "comments": []
         }
       ]
     }
